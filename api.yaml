@@ -1,0 +1,2316 @@
+openapi: 3.0.0
+info:
+  title: GovStack Consent BB Service APIs
+  version: 1.0.0
+  contact:
+    name: iGrant.io Support
+    url: 'https://igrant.io'
+    email: support@igrant.io
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+servers:
+  - url: 'https://staging-consent-bb-api.igrant.io/v1'
+    description: Staging
+  - url: 'https://demo-consent-bb-api.igrant.io/v1'
+    description: Demo
+  - url: 'https://api.bb-consent.dev/v1'
+    description: Development
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Audit
+  - name: Service
+  - name: Config
+  - name: Onboarding
+paths:
+  '/organizations/{organizationId}/logs':
+    get:
+      tags:
+        - Audit
+      summary: Get org logs
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+      x-stoplight:
+        id: oifptjgmphhru
+    parameters: []
+  '/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
+    patch:
+      tags:
+        - Service
+      summary: Update purpose attribute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                consented: Allow
+                days: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae01e8267e930001609aa7
+        - name: attributeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae01ee267e930001609aa8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
+    patch:
+      tags:
+        - Service
+      summary: Update purpose all consents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                consentattributes:
+                  - attributeid: 5dae01ee267e930001609aa8
+                  - attributeid: 5dae01f4267e930001609aa9
+                  - attributeid: 5dae106ba1215e00012103d9
+                consented: Allow
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae1058a1215e00012103d8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get consent purpose by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae01e8267e930001609aa7
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
+    post:
+      tags:
+        - Service
+      summary: Update purpose all consents v2 (Currently used)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                consented: Allow
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae01e8267e930001609aa7
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get purpose all consent status
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae01e8267e930001609aa7
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/global-policy-configuration':
+    get:
+      tags:
+        - Config
+      summary: Get global policy configurations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Config
+      summary: Update global policy configurations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                policyurl: 'https://igrant.io/policy.html'
+                retentionperiod: 0
+                jurisdiction: 'London, GB'
+                disclosure: 'false'
+                typeid: 6114c697a9629d00014da203
+                restriction: ''
+                shared3pp: false
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/purposes':
+    post:
+      tags:
+        - Onboarding
+      summary: Update organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: ZXY Company
+      security: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: ApiKey eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2MTAzYWYyNjhlYjdlMDAwMDE1ZDBjNzEiLCJvcmdpZCI6IiIsImV4cCI6MTY1OTE4ODc2Mn0.BipKwBMYSbGPCcx7INlK7HPIkErpyuL9Z6ZivtqVKSA
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get consent agreements
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/purposes/{purposeId}':
+    delete:
+      tags:
+        - Config
+      summary: Delete consent agreement by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 64a56c9da2d3520001cf3272
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Config
+      summary: Update consent agreement by id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Research use of data
+                description: Research use of data
+                lawfulbasisofprocessing: 0
+                policyurl: 'https://igrant.io/policy.html'
+                attributetype: 1
+                jurisdiction: Sweden
+                disclosure: 'true'
+                industryscope: Healthcare
+                dataretention:
+                  RetentionPeriod: 36000
+                  Enabled: true
+                restriction: Sweden
+                shared3pp: true
+                ssiid: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6467894a4c87080001242a24
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get consent agreement by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 64a563616bcbbe00018b80ed
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/templates':
+    post:
+      tags:
+        - Config
+      summary: Add data attributes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                templates:
+                  - consent: Age
+                    description: example
+                    purposeids:
+                      - 64a56d08a2d3520001cf3275
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get data attributes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/purposes/{purposeId}/templates':
+    delete:
+      tags:
+        - Config
+      summary: Delete data attributes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: A
+          in: header
+          schema:
+            type: string
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 60644a0684445500018d7a85
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/templates/{templateId}':
+    get:
+      tags:
+        - Config
+      summary: Get data attribute by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: templateId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5c150a405430460001af6235
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+      x-stoplight:
+        id: l9skcvsynmsre
+    put:
+      tags:
+        - Config
+      summary: Update data attribute by id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                Consent: Age
+                PurposeIDs:
+                  - 5f1c9298fd59960001434c6d
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: templateId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5f1c9d87fd59960001434c70
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Config
+      summary: Delete data attribute by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: templateId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 64a56c9da2d3520001cf3273
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationID}/idp/open-id':
+    post:
+      tags:
+        - Config
+      summary: Add identity provider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                authorizationUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/auth'
+                tokenUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/token'
+                logoutUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/logout'
+                clientId: idp-client
+                clientSecret: 0654b48b-41c2-4887-ade5-fdb98d3fd13c
+                jwksUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/certs'
+                validateSignature: true
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Config
+      summary: Update identity provider
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                authorizationUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/auth'
+                tokenUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/token'
+                logoutUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/logout'
+                clientId: idp-client
+                clientSecret: 0654b48b-41c2-4887-ade5-fdb98d3fd13c
+                jwksUrl: 'https://iam.igrant.io/auth/realms/thirdparty-demo/protocol/openid-connect/certs'
+                validateSignature: true
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Config
+      summary: Delete identity provider
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get identity provider
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: organizationID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscription/enable':
+    post:
+      tags:
+        - Config
+      summary: Enable organization for subscription
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscription/disable':
+    post:
+      tags:
+        - Config
+      summary: Disable organization for subscription
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscribe-method':
+    get:
+      tags:
+        - Config
+      summary: Get subscribe method
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Config
+      summary: Set subscribe method
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                subscribemethodid: 1
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /organizations/subscribe-methods:
+    get:
+      tags:
+        - Config
+      summary: Get subscribe methods
+      security: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscribe-key':
+    get:
+      tags:
+        - Config
+      summary: Get subscribe key
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscribe-key/renew':
+    post:
+      tags:
+        - Config
+      summary: Renew subscribe key
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/users/count':
+    get:
+      tags:
+        - Config
+      summary: Get organization users count
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/subscription':
+    get:
+      tags:
+        - Config
+      summary: Get organization subscription status (enable/disable)
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgId}/users/{userId}/consents':
+    get:
+      tags:
+        - Config
+      summary: Get consents
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 60753c253086e7000114f170
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgId}/users/{userId}/consents/{consentId}':
+    get:
+      tags:
+        - Config
+      summary: Get consent by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dbc02ecb99fd0000157547a
+        - name: consentId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5e4e91036c7aa200012aa9da
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
+    get:
+      tags:
+        - Config
+      summary: Get all users consented to attribute
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: ApiKey eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI1ZGIwM2Y2ZjI0MjU4ODAwMDFkYjNmN2IiLCJleHAiOjE2MDM5MTE4NTR9.lM9DmiT81F1ArWJMJAqs0a5DUG7RKviHWEn4uoV7hOk
+        - name: orgID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae1058a1215e00012103d8
+        - name: attributeID
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae106ba1215e00012103d9
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{orgId}/purposes/{purposeId}/consented/users':
+    get:
+      tags:
+        - Config
+      summary: Get all users consented to a purpose
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: orgId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: purposeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5dae1058a1215e00012103d8
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/users':
+    post:
+      tags:
+        - Config
+      summary: Add user to organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                userid: 5dbc02ecb99fd0000157547a
+                subscribekey: GBDL-SQPR-QN1O
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get organization users
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: 3
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/users/{userId}':
+    delete:
+      tags:
+        - Config
+      summary: Delete user from organization
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: userId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{user-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/apikey:
+    post:
+      tags:
+        - Config
+      summary: Create api key
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Config
+      summary: Get api key
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/apikey/revoke:
+    delete:
+      tags:
+        - Config
+      summary: Delete api key
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /organizations/types:
+    get:
+      tags:
+        - Onboarding
+      summary: Get organization types
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Onboarding
+      summary: Add organization type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                type: Healthcare
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/types/{typeId}':
+    get:
+      tags:
+        - Onboarding
+      summary: Get organization type by id
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: typeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5d17cc114dacb40001b29094
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Onboarding
+      summary: Delete organization type
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: typeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5f1c77f1fd59960001434c5c
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - Onboarding
+      summary: Update organization type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                type: Sports
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: typeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5f1c77f1fd59960001434c5c
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/types/{typeId}/image':
+    post:
+      tags:
+        - Onboarding
+      summary: Update organization type image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                orgtypeicon:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded
+        - name: typeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6103b0378eb7e000015d0c72
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Onboarding
+      summary: 'Get organization type image '
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: typeId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5daf11f2a531350001afc7b5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /organizations:
+    post:
+      tags:
+        - Onboarding
+      summary: Add Organization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Retail GMBH
+                location: Sweden
+                typeid: 603e67e669dd720001c74f91
+                HlcSupport: false
+                Description: For queries about how we are managing your data please contact the Data Protection Officer.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/javascript
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}':
+    get:
+      tags:
+        - Onboarding
+      summary: Get organization by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 638dd3b12f5d1700014431ec
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/coverimage':
+    post:
+      tags:
+        - Onboarding
+      summary: Update organization cover image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                orgimage:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/logoimage':
+    post:
+      tags:
+        - Onboarding
+      summary: Update organization logo image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                orgimage:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/image/{imageId}':
+    get:
+      tags:
+        - Onboarding
+      summary: Get organization image
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+        - name: imageId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 5d95a5c0a67c8800012f27d2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/eulaURL':
+    post:
+      tags:
+        - Onboarding
+      summary: Update organization EULA url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                eulaurl: 'https://igrant.io/eula.html'
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Onboarding
+      summary: Delete organization EULA url
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/organizations/{organizationId}/admins':
+    post:
+      tags:
+        - Onboarding
+      summary: Add org admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                userid: 5f5a94dbc67001000100fa2f
+                roleid: 1
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Onboarding
+      summary: Get org admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Onboarding
+      summary: Delete org admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: organizationId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{company-id}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /organizations/roles:
+    get:
+      tags:
+        - Onboarding
+      summary: Get organization roles
+      security: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/admin/login:
+    post:
+      tags:
+        - Onboarding
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: admin@retailgmbh.com
+                password: demor2023
+      parameters:
+        - name: ''
+          in: header
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/login:
+    post:
+      tags:
+        - Onboarding
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: george@yopmail.com
+                password: qwerty123
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: ''
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v1.1/users/login:
+    post:
+      tags:
+        - Onboarding
+      summary: Login v1.1 (Used in privacy dashboard)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: admin@retailgmbh.com
+                password: demor2023
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/validate/email:
+    post:
+      tags:
+        - Onboarding
+      summary: Validate email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: george@igrant.io
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/validate/phone:
+    post:
+      tags:
+        - Onboarding
+      summary: Validate phone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phone: '+918848245047'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/verify/phone:
+    post:
+      tags:
+        - Onboarding
+      summary: Verify phonenumber
+      description: For OTP verification of the given phone number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: george@yopmail.com
+                phone: '+918848245047'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/verify/otp:
+    post:
+      tags:
+        - Onboarding
+      summary: Verify OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phone: '+918848245047'
+                otp: '224480'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/password/reset:
+    put:
+      tags:
+        - Onboarding
+      summary: Reset Password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: demor2023
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: '{{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/password/forgot:
+    put:
+      tags:
+        - Onboarding
+      summary: Forgot Password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: george@yopmail.com
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/logout:
+    post:
+      tags:
+        - Onboarding
+      summary: Logout user
+      description: Logs out a user from the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                clientid: igrant-ios-app
+                refreshtoken: eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZWIzYmYwYS1mM2ZjLTQ0NmYtYjU1NC0yOTE3OTk1Yzk2MjgifQ.eyJleHAiOjE2OTI4MDIwMjIsImlhdCI6MTY5MjgwMDIyMiwianRpIjoiN2ZlMGYzZGItYWZiNC00MzEwLThkNzYtZDcxZWZmNTA5NWM1IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWNvbnNlbnQtYmItaWFtLmlncmFudC5pby9hdXRoL3JlYWxtcy9CQi1Db25zZW50LVVzZXJzIiwiYXVkIjoiaHR0cHM6Ly9zdGFnaW5nLWNvbnNlbnQtYmItaWFtLmlncmFudC5pby9hdXRoL3JlYWxtcy9CQi1Db25zZW50LVVzZXJzIiwic3ViIjoiODI1ODNhZDItNjUzYi00M2M0LTg3MDgtODk0YzEzNTNmM2Q4IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImlncmFudC1pb3MtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjMyMDUwNzczLTVkNzEtNDE0Zi1iMjNlLWJiNWZjYmRkZjlkMiIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCJ9.8OOmfUELs4CQFXjt8EKrYeDekwDWEHDxp_JgpJqBC04
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: '{{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/token:
+    post:
+      tags:
+        - Onboarding
+      summary: Refreshing token
+      description: Refreshing access token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                refreshtoken: eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZWIzYmYwYS1mM2ZjLTQ0NmYtYjU1NC0yOTE3OTk1Yzk2MjgifQ.eyJleHAiOjE2OTI4MDIwODQsImlhdCI6MTY5MjgwMDI4NCwianRpIjoiYTRiMjUzMDAtMWM3NS00MzQ5LWJhNWMtYjE3MGU3ZTA3YTgzIiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWNvbnNlbnQtYmItaWFtLmlncmFudC5pby9hdXRoL3JlYWxtcy9CQi1Db25zZW50LVVzZXJzIiwiYXVkIjoiaHR0cHM6Ly9zdGFnaW5nLWNvbnNlbnQtYmItaWFtLmlncmFudC5pby9hdXRoL3JlYWxtcy9CQi1Db25zZW50LVVzZXJzIiwic3ViIjoiODI1ODNhZDItNjUzYi00M2M0LTg3MDgtODk0YzEzNTNmM2Q4IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImlncmFudC1pb3MtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjE0OTA4ZTY1LTZhZDAtNGY3My05ZjI1LWRmMzY5NzJkYzM5ZSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCJ9.Vq9lfphhygg_lkKQ_zGdnoGMawuzJDGpxaVnHFk7Osc
+                clientid: igrant-ios-app
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/register:
+    post:
+      tags:
+        - Onboarding
+      summary: Create user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: george@yopmail.com
+                name: Georges AB
+                password: demor2023
+                phone: '+46706853041'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/unregister:
+    post:
+      tags:
+        - Onboarding
+      summary: Unregister users
+      description: Individual can delete their account from the privacy dashboard.
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{temp-access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/register/android:
+    post:
+      tags:
+        - Onboarding
+      summary: User client register (android)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                devicetoken: ''
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/register/ios:
+    post:
+      tags:
+        - Onboarding
+      summary: User client register (ios)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                devicetoken: ''
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  '/user/image/{imageId}':
+    delete:
+      tags:
+        - Onboarding
+      summary: Delete my image
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: imageId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Onboarding
+      summary: Get my image
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: imageId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/image:
+    post:
+      tags:
+        - Onboarding
+      summary: Update my image
+      requestBody:
+        content: {}
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user:
+    patch:
+      tags:
+        - Onboarding
+      summary: Update current user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: George J Padayatti
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Onboarding
+      summary: Get current user
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: 'Bearer {{access-token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
