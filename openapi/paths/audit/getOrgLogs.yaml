@@ -1,6 +1,11 @@
 get:
   parameters:
-    - $ref: "../../parameters/OrganisationID.yaml"
+    - name: orgId
+      description: Organisation ID
+      in: path
+      required: true
+      schema:
+        type: string
   tags:
     - audit
   security:
@@ -12,4 +17,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/OrganisationLog.yaml"
+            $ref: "../../definitions/audit/OrganisationLog.yaml"

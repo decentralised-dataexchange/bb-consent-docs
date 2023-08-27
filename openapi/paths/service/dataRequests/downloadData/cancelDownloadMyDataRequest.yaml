@@ -1,0 +1,26 @@
+post:
+  tags:
+    - service
+  summary: Cancel download my data request
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: dataReqId
+      in: path
+      description: ""
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../definitions/service/dataRequests/downloadData/CancelDownloadMyDataRequest.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

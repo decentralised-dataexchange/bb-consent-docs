@@ -4,6 +4,7 @@ properties:
   self:
     description: Link to the current page
     type: string
+    example: https://staging-api.igrant.io/v1/users/638de3302f5d1700014431f3/consenthistory?limit=1024
   next:
     description: Link to the next page
     type: string

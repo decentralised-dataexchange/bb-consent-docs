@@ -1,0 +1,8 @@
+required:
+  - consented
+type: object
+properties:
+  consented:
+    type: string
+example:
+  consented: Allow

@@ -28,4 +28,4 @@ properties:
           type: string
   Links:
     description: Pagination links
-    $ref: "../definitions/PaginationLinks.yaml"
+    $ref: "../PaginationLinks.yaml"

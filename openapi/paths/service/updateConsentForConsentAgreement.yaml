@@ -1,0 +1,41 @@
+post:
+  tags:
+    - service
+  summary: Update consent for consent agreement
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: consentId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: purposeId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../definitions/service/UpdateConsentForConsentAgreementRequest.yaml"
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/service/UpdateConsentForConsentAgreementResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

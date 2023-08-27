@@ -1,0 +1,33 @@
+get:
+  tags:
+    - service
+  summary: Get consents for all consent agreements
+  parameters:
+    - name: orgId
+      in: path
+      description: "Organisation ID"
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      description: "Individual ID"
+      required: true
+      schema:
+        type: string
+    - name: consentId
+      in: path
+      description: "Consent record ID"
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/service/GetConsentsForAllConsentAgreements.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
