@@ -16,7 +16,7 @@ services:
   web:
     image: nginx:alpine
     volumes:
-      - .:/usr/share/nginx/html:ro
+      - ./openapi:/usr/share/nginx/html:ro
     ports:
       - "8080:80"
     environment:
