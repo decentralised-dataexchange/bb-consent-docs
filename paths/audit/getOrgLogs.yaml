@@ -1,0 +1,20 @@
+parameters:
+  - name: organizationId
+    description: Organization ID
+    in: path
+    required: true
+    schema:
+      type: string
+get:
+  tags:
+    - audit
+  security:
+    - BearerAuth: []
+  summary: Get action logs
+  responses:
+    "200":
+      description: Action logs for the organisation
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/OrganisationLog.yaml"

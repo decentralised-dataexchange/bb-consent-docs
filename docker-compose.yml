@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./resources/ssl/development/scripts/docker-proxy/certs:/etc/nginx/certs:ro
+      - ./resources/ssl/development/scripts/docker-proxy/vhost.d:/etc/nginx/vhost.d:ro
+      - ./resources/ssl/development/scripts/docker-proxy/proxy.conf:/etc/nginx/proxy.conf:ro
+
+  web:
+    image: nginx:alpine
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    environment:
+      - VIRTUAL_HOST=swagger.bb-consent.dev
+    depends_on:
+      - nginx-proxy
