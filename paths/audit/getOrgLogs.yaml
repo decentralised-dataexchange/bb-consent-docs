@@ -1,11 +1,6 @@
-parameters:
-  - name: organizationId
-    description: Organization ID
-    in: path
-    required: true
-    schema:
-      type: string
 get:
+  parameters:
+    - $ref: "../../parameters/OrganisationID.yaml"
   tags:
     - audit
   security:

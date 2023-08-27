@@ -10,6 +10,13 @@ info:
     personal data. The Consent Building Block is a process-oriented GovStack Building Block 
     facilitating auditable bilateral agreements within a multi-agent environment that 
     integrates with most other Building Blocks.
+  contact:
+    email: support@igrant.io
+    name: iGrant.io
+    url: https://igrant.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
   - url: https://api.bb-consent.dev/v1
     description: Development server (v1)
@@ -36,6 +43,9 @@ paths:
   /organizations/{organizationId}/logs:
     $ref: "paths/audit/getOrgLogs.yaml"
 components:
+  parameters:
+    OrganisationID:
+      $ref: "./parameters/OrganisationID.yaml"
   schemas:
     OrganisationLog:
       $ref: "./definitions/OrganisationLog.yaml"
