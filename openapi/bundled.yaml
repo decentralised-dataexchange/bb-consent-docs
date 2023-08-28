@@ -1088,7 +1088,7 @@ paths:
                 example:
                   msg: User created successfully
       deprecated: false
-  /organizations/types:
+  /v1/organizations/types:
     get:
       tags:
         - onboarding
@@ -1161,7 +1161,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/types/{typeId}':
+  '/v1/organizations/types/{typeId}':
     get:
       tags:
         - onboarding
@@ -1261,7 +1261,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/types/{typeId}/image':
+  '/v1/organizations/types/{typeId}/image':
     post:
       tags:
         - onboarding
@@ -1308,7 +1308,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /organizations:
+  /v1/organizations:
     post:
       tags:
         - onboarding
@@ -1352,7 +1352,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}':
+  '/v1/organizations/{organizationId}':
     get:
       tags:
         - onboarding
@@ -1415,7 +1415,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}/coverimage':
+  '/v1/organizations/{organizationId}/coverimage':
     post:
       tags:
         - onboarding
@@ -1454,7 +1454,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}/logoimage':
+  '/v1/organizations/{organizationId}/logoimage':
     post:
       tags:
         - onboarding
@@ -1493,7 +1493,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}/image/{imageId}':
+  '/v1/organizations/{organizationId}/image/{imageId}':
     get:
       tags:
         - onboarding
@@ -1515,7 +1515,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}/eulaURL':
+  '/v1/organizations/{organizationId}/eulaURL':
     post:
       tags:
         - onboarding
@@ -1561,7 +1561,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/organizations/{organizationId}/admins':
+  '/v1/organizations/{organizationId}/admins':
     post:
       tags:
         - onboarding
@@ -1657,7 +1657,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /organizations/roles:
+  /v1/organizations/roles:
     get:
       tags:
         - onboarding
@@ -1682,7 +1682,7 @@ paths:
                     Role:
                       type: string
       deprecated: false
-  /users/unregister:
+  /v1/users/unregister:
     post:
       tags:
         - onboarding
@@ -1719,7 +1719,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user/register/android:
+  /v1/user/register/android:
     post:
       tags:
         - onboarding
@@ -1751,7 +1751,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user/register/ios:
+  /v1/user/register/ios:
     post:
       tags:
         - onboarding
@@ -1783,7 +1783,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/user/image/{imageId}':
+  '/v1/user/image/{imageId}':
     delete:
       tags:
         - onboarding
@@ -1817,7 +1817,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user/image:
+  /v1/user/image:
     post:
       tags:
         - onboarding
@@ -1851,7 +1851,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user:
+  /v1/user:
     patch:
       tags:
         - onboarding
@@ -1906,7 +1906,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user/apikey:
+  /v1/user/apikey:
     post:
       tags:
         - onboarding
@@ -1953,7 +1953,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /user/apikey/revoke:
+  /v1/user/apikey/revoke:
     delete:
       tags:
         - onboarding
