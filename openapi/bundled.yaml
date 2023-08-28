@@ -1,0 +1,2831 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: GovStack Consent BB APIs
+  description: |
+    The Consent Building Block enables services for individuals to approve the use  of their personal data by defining the principles, functions, and architecture  of an information system. For organisations that process personal data, it  provides the ability to know the individual's will and legitimately process such  personal data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating auditable bilateral agreements within a multi-agent environment that  integrates with most other Building Blocks.
+  contact:
+    email: support@igrant.io
+    name: iGrant.io
+    url: 'https://igrant.io'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+servers:
+  - url: 'https://api.bb-consent.dev/'
+    description: Development server
+  - url: 'https://staging-consent-bb-api.igrant.io/'
+    description: Staging server
+  - url: 'https://demo-consent-bb-api.igrant.io/'
+    description: Demo server
+tags:
+  - name: audit
+    description: |
+      These API(s) allow managing and viewing the consents and their audit trails. The audit trails  of consent management are vital to individuals and organisations in case of disputes or for  other reasons where it is necessary to ascertain a transaction's validity.
+  - name: config
+    description: |
+      The Organisational API(s) allow administrators to configure consent-related aspects  from an organisational perspective. The notification APIs using webhooks are also part  of this category. E.g. These are used for notifications and callbacks to organisation's  IT systems. The administrators configure these, and the notifications may be towards the  organisation's IT system or towards individual users.
+  - name: service
+    description: |
+      These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
+  - name: onboarding
+    description: |
+      These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs. 
+paths:
+  '/v1/organizations/{orgId}/logs':
+    get:
+      parameters:
+        - name: orgId
+          description: Organisation ID
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - audit
+      security:
+        - BearerAuth: []
+      description: Get action logs
+      responses:
+        '200':
+          description: Action logs for the organisation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisationLog'
+  '/v1/users/{userId}/consenthistory':
+    get:
+      tags:
+        - service
+      description: Get consent history for an individual
+      parameters:
+        - name: orgid
+          in: query
+          description: Organisation ID
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Number of consent histories to be fetched
+          required: false
+          schema:
+            type: integer
+            format: int32
+            example: 1024
+        - name: userId
+          in: path
+          description: Individual ID
+          required: true
+          schema:
+            type: string
+            example: 646236ee61e48900014efb9c
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserConsentHistory'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
+    get:
+      tags:
+        - service
+      description: Get consents by consent agreement ID
+      parameters:
+        - name: orgId
+          in: path
+          description: Organisation ID
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: Individual ID
+          required: true
+          schema:
+            type: string
+        - name: consentId
+          in: path
+          description: Consent record ID
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          description: Consent agreement ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}':
+    get:
+      tags:
+        - service
+      description: Get consents for all consent agreements
+      parameters:
+        - name: orgId
+          in: path
+          description: Organisation ID
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: Individual ID
+          required: true
+          schema:
+            type: string
+        - name: consentId
+          in: path
+          description: Consent record ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConsentsForAllConsentAgreements'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/users/{userId}/consents':
+    get:
+      tags:
+        - service
+      description: Get all consents
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConsents'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
+    post:
+      tags:
+        - service
+      description: Update consent for consent agreement
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConsentForConsentAgreementRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConsentForConsentAgreementResponse'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
+    patch:
+      tags:
+        - service
+      description: Update consent for data attribute
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: attributeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConsentForDataAttributeRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConsentForDataAttributeResponse'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-status':
+    get:
+      tags:
+        - service
+      description: List all data requests
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAllDataRequests'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-delete':
+    get:
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - service
+      description: Get all delete my data requests
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetAllDeleteMyDataRequests'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - service
+      description: Delete my data
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-delete/status':
+    get:
+      tags:
+        - service
+      description: Get delete my data request status
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeleteMyDataRequestStatus'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel':
+    post:
+      tags:
+        - service
+      description: Cancel delete my data request
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dataReqId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelDeleteMyDataRequest'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-download':
+    post:
+      tags:
+        - service
+      description: Send download my data request
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendDownloadMyDataRequestError'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - service
+      description: Get all download my data requests
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetAllDownloadMyDataRequests'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-download/status':
+    get:
+      tags:
+        - service
+      description: Get download my data request status
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDownloadMyDataRequestStatus'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel':
+    post:
+      tags:
+        - service
+      description: Cancel download my data request
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dataReqId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelDownloadMyDataRequest'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/users/admin/login:
+    post:
+      tags:
+        - onboarding
+      description: Login as organisation admin
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - access_token
+                  - expires_in
+                  - refresh_expires_in
+                  - refresh_token
+                  - token_type
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+                    format: int32
+                  refresh_expires_in:
+                    type: integer
+                    format: int32
+                  refresh_token:
+                    type: string
+                  token_type:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                required:
+                  - error
+                  - error_description
+                type: object
+                properties:
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  error: invalid_grant
+                  error_description: Invalid user credentials
+      deprecated: false
+  /v1/users/login:
+    post:
+      tags:
+        - onboarding
+      description: Login as individual
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - access_token
+                  - expires_in
+                  - refresh_expires_in
+                  - refresh_token
+                  - token_type
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+                    format: int32
+                  refresh_expires_in:
+                    type: integer
+                    format: int32
+                  refresh_token:
+                    type: string
+                  token_type:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                required:
+                  - error
+                  - error_description
+                type: object
+                properties:
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  error: invalid_grant
+                  error_description: Invalid user credentials
+      deprecated: false
+  /v1.1/users/login:
+    post:
+      tags:
+        - onboarding
+      description: Login as individual
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                  - Token
+                type: object
+                properties:
+                  User:
+                    required:
+                      - ID
+                      - Name
+                      - IamID
+                      - Email
+                      - Phone
+                      - ImageID
+                      - ImageURL
+                      - LastVisit
+                      - Client
+                      - Orgs
+                      - APIKey
+                      - Roles
+                      - IncompleteProfile
+                    type: object
+                    properties:
+                      ID:
+                        type: string
+                      Name:
+                        type: string
+                      IamID:
+                        type: string
+                      Email:
+                        type: string
+                      Phone:
+                        type: string
+                      ImageID:
+                        type: string
+                      ImageURL:
+                        type: string
+                      LastVisit:
+                        type: string
+                      Client:
+                        required:
+                          - Token
+                          - Type
+                        type: object
+                        properties:
+                          Token:
+                            type: string
+                          Type:
+                            type: integer
+                            format: int32
+                      Orgs:
+                        type: array
+                        items:
+                          required:
+                            - OrgID
+                            - Name
+                            - Location
+                            - Type
+                            - TypeID
+                            - EulaAccepted
+                          type: object
+                          properties:
+                            OrgID:
+                              type: string
+                            Name:
+                              type: string
+                            Location:
+                              type: string
+                            Type:
+                              type: string
+                            TypeID:
+                              type: string
+                            EulaAccepted:
+                              type: boolean
+                      APIKey:
+                        type: string
+                      Roles:
+                        type: array
+                        items:
+                          required:
+                            - RoleID
+                            - OrgID
+                          type: object
+                          properties:
+                            RoleID:
+                              type: integer
+                              format: int32
+                            OrgID:
+                              type: string
+                      IncompleteProfile:
+                        type: boolean
+                  Token:
+                    required:
+                      - access_token
+                      - expires_in
+                      - refresh_expires_in
+                      - refresh_token
+                      - token_type
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                      expires_in:
+                        type: integer
+                        format: int32
+                      refresh_expires_in:
+                        type: integer
+                        format: int32
+                      refresh_token:
+                        type: string
+                      token_type:
+                        type: string
+      deprecated: false
+  /v1/users/validate/email:
+    post:
+      tags:
+        - onboarding
+      description: Validate email
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+              type: object
+              properties:
+                email:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Result
+                  - Message
+                type: object
+                properties:
+                  Result:
+                    type: boolean
+                  Message:
+                    type: string
+                example:
+                  Result: true
+                  Message: Email address is valid and not in use in our system
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/users/validate/phone:
+    post:
+      tags:
+        - onboarding
+      description: Validate phone
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - phone
+              type: object
+              properties:
+                phone:
+                  type: string
+              example:
+                phone: '+918848245047'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Result
+                  - Message
+                type: object
+                properties:
+                  Result:
+                    type: boolean
+                  Message:
+                    type: string
+                example:
+                  Result: false
+                  Message: Phone number is in use
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/users/verify/phone:
+    post:
+      tags:
+        - onboarding
+      description: For OTP verification of the given phone number
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+                - phone
+              type: object
+              properties:
+                email:
+                  type: string
+                phone:
+                  type: string
+              example:
+                email: george@yopmail.com
+                phone: '+918848245047'
+        required: true
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+      servers:
+        - url: 'http://example.com'
+          variables: {}
+  /v1/users/verify/otp:
+    post:
+      tags:
+        - onboarding
+      description: Verify OTP
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - phone
+                - otp
+              type: object
+              properties:
+                phone:
+                  type: string
+                otp:
+                  type: string
+              example:
+                phone: '+918848245047'
+                otp: '333363'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Result
+                  - Message
+                type: object
+                properties:
+                  Result:
+                    type: boolean
+                  Message:
+                    type: string
+                example:
+                  Result: true
+                  Message: Otp validatiation Succeeded
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/user/password/reset:
+    put:
+      tags:
+        - onboarding
+      description: Reset Password
+      operationId: ResetPassword
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - password
+              type: object
+              properties:
+                password:
+                  type: string
+              example:
+                password: qwerty123
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - msg
+                type: object
+                properties:
+                  msg:
+                    type: string
+                example:
+                  msg: User password resetted successfully
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/user/password/forgot:
+    put:
+      tags:
+        - onboarding
+      description: Forgot Password
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+              type: object
+              properties:
+                username:
+                  type: string
+        required: true
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                required:
+                  - Code
+                  - Message
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    format: int32
+                  Message:
+                    type: string
+      deprecated: false
+  /v1/users/logout:
+    post:
+      tags:
+        - onboarding
+      description: Logs out a user from the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - clientid
+                - refreshtoken
+              type: object
+              properties:
+                clientid:
+                  type: string
+                refreshtoken:
+                  type: string
+        required: true
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security: []
+  /v1/users/token:
+    post:
+      tags:
+        - onboarding
+      description: Refresh access token
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - refreshtoken
+                - clientid
+              type: object
+              properties:
+                refreshtoken:
+                  type: string
+                clientid:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - access_token
+                  - expires_in
+                  - refresh_expires_in
+                  - refresh_token
+                  - token_type
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+                    format: int32
+                  refresh_expires_in:
+                    type: integer
+                    format: int32
+                  refresh_token:
+                    type: string
+                  token_type:
+                    type: string
+      deprecated: false
+      security: []
+  /v1/users/register:
+    post:
+      tags:
+        - onboarding
+      description: Register individual
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - name
+                - password
+                - phone
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                password:
+                  type: string
+                phone:
+                  type: string
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - msg
+                type: object
+                properties:
+                  msg:
+                    type: string
+                example:
+                  msg: User created successfully
+      deprecated: false
+  /organizations/types:
+    get:
+      tags:
+        - onboarding
+      description: Get organization types
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - Type
+                    - ImageID
+                    - ImageURL
+                  type: object
+                  properties:
+                    ID:
+                      type: string
+                    Type:
+                      type: string
+                    ImageID:
+                      type: string
+                    ImageURL:
+                      type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - onboarding
+      description: Add organization type
+      operationId: Addorganizationtype
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              type: object
+              properties:
+                type:
+                  type: string
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - Type
+                  - ImageID
+                  - ImageURL
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  Type:
+                    type: string
+                  ImageID:
+                    type: string
+                  ImageURL:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/types/{typeId}':
+    get:
+      tags:
+        - onboarding
+      description: Get organization type by id
+      parameters:
+        - name: typeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - Type
+                  - ImageID
+                  - ImageURL
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  Type:
+                    type: string
+                  ImageID:
+                    type: string
+                  ImageURL:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - onboarding
+      description: Delete organization type
+      operationId: Deleteorganizationtype
+      parameters:
+        - name: typeId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 64ec54ede2f6a8000142c66e
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    patch:
+      tags:
+        - onboarding
+      description: Update organization type
+      operationId: Updateorganizationtype
+      parameters:
+        - name: typeId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              type: object
+              properties:
+                type:
+                  type: string
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - Type
+                  - ImageID
+                  - ImageURL
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  Type:
+                    type: string
+                  ImageID:
+                    type: string
+                  ImageURL:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/types/{typeId}/image':
+    post:
+      tags:
+        - onboarding
+      description: Update organization type image
+      parameters:
+        - name: typeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - orgtypeicon
+              type: object
+              properties:
+                orgtypeicon:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: OK
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - onboarding
+      description: Get organization type image
+      parameters:
+        - name: typeId
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /organizations:
+    post:
+      tags:
+        - onboarding
+      description: Add Organization
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - location
+                - typeid
+                - HlcSupport
+                - Description
+              type: object
+              properties:
+                name:
+                  type: string
+                location:
+                  type: string
+                typeid:
+                  type: string
+                HlcSupport:
+                  type: boolean
+                Description:
+                  type: string
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    required:
+                      - ID
+                      - Name
+                      - CoverImageID
+                      - CoverImageURL
+                      - LogoImageID
+                      - LogoImageURL
+                      - Location
+                      - Type
+                      - Jurisdiction
+                      - Disclosure
+                      - Restriction
+                      - Shared3PP
+                      - Description
+                      - Enabled
+                      - PolicyURL
+                      - EulaURL
+                      - Templates
+                      - Purposes
+                      - Admins
+                      - BillingInfo
+                      - Subs
+                      - HlcSupport
+                      - PrivacyDashboard
+                      - AriesCloudAgentDeployment
+                      - DataRetention
+                      - IdentityProviderRepresentation
+                      - KeycloakOpenIDClient
+                      - ExternalIdentityProviderAvailable
+                    type: object
+                    properties:
+                      ID:
+                        type: string
+                      Name:
+                        type: string
+                      CoverImageID:
+                        type: string
+                      CoverImageURL:
+                        type: string
+                      LogoImageID:
+                        type: string
+                      LogoImageURL:
+                        type: string
+                      Location:
+                        type: string
+                      Type:
+                        required:
+                          - ID
+                          - Type
+                          - ImageID
+                          - ImageURL
+                        type: object
+                        properties:
+                          ID:
+                            type: string
+                          Type:
+                            type: string
+                          ImageID:
+                            type: string
+                          ImageURL:
+                            type: string
+                      Jurisdiction:
+                        type: string
+                      Disclosure:
+                        type: string
+                      Restriction:
+                        type: string
+                      Shared3PP:
+                        type: boolean
+                      Description:
+                        type: string
+                      Enabled:
+                        type: boolean
+                      PolicyURL:
+                        type: string
+                      EulaURL:
+                        type: string
+                      Templates:
+                        type: string
+                        nullable: true
+                      Purposes:
+                        type: string
+                        nullable: true
+                      Admins:
+                        type: array
+                        items:
+                          required:
+                            - UserID
+                            - RoleID
+                          type: object
+                          properties:
+                            UserID:
+                              type: string
+                            RoleID:
+                              type: integer
+                              format: int32
+                      Subs:
+                        required:
+                          - Method
+                          - Key
+                        type: object
+                        properties:
+                          Method:
+                            type: integer
+                            format: int32
+                          Key:
+                            type: string
+                      HlcSupport:
+                        type: boolean
+                      PrivacyDashboard:
+                        required:
+                          - HostName
+                          - Version
+                        type: object
+                        properties:
+                          HostName:
+                            type: string
+                          Version:
+                            type: string
+                      DataRetention:
+                        required:
+                          - RetentionPeriod
+                          - Enabled
+                        type: object
+                        properties:
+                          RetentionPeriod:
+                            type: integeru
+                            format: int32
+                          Enabled:
+                            type: boolean
+                        example:
+                          RetentionPeriod: 0
+                          Enabled: false
+                      IdentityProviderRepresentation:
+                        required:
+                          - providerId
+                          - config
+                          - alias
+                          - storeToken
+                          - addReadTokenRoleOnCreate
+                          - enabled
+                          - firstBrokerLoginFlowAlias
+                          - linkOnly
+                          - postBrokerLoginFlowAlias
+                          - trustEmail
+                          - authenticateByDefault
+                        type: object
+                        properties:
+                          providerId:
+                            type: string
+                          config:
+                            required:
+                              - authorizationUrl
+                              - tokenUrl
+                              - logoutUrl
+                              - clientAuthMethod
+                              - syncMode
+                              - clientId
+                              - clientSecret
+                              - jwksUrl
+                              - userInfoUrl
+                              - defaultScope
+                              - validateSignature
+                              - backchannelSupported
+                              - disableUserInfo
+                              - hideOnLoginPage
+                              - issuer
+                              - useJwksUrl
+                            type: object
+                            properties:
+                              authorizationUrl:
+                                type: string
+                              tokenUrl:
+                                type: string
+                              logoutUrl:
+                                type: string
+                              clientAuthMethod:
+                                type: string
+                              syncMode:
+                                type: string
+                              clientId:
+                                type: string
+                              clientSecret:
+                                type: string
+                              jwksUrl:
+                                type: string
+                              userInfoUrl:
+                                type: string
+                              defaultScope:
+                                type: string
+                              validateSignature:
+                                type: boolean
+                              backchannelSupported:
+                                type: boolean
+                              disableUserInfo:
+                                type: boolean
+                              hideOnLoginPage:
+                                type: boolean
+                              issuer:
+                                type: string
+                              useJwksUrl:
+                                type: boolean
+                            example:
+                              authorizationUrl: ''
+                              tokenUrl: ''
+                              logoutUrl: ''
+                              clientAuthMethod: ''
+                              syncMode: ''
+                              clientId: ''
+                              clientSecret: ''
+                              jwksUrl: ''
+                              userInfoUrl: ''
+                              defaultScope: ''
+                              validateSignature: false
+                              backchannelSupported: false
+                              disableUserInfo: false
+                              hideOnLoginPage: false
+                              issuer: ''
+                              useJwksUrl: false
+                          alias:
+                            type: string
+                          storeToken:
+                            type: boolean
+                          addReadTokenRoleOnCreate:
+                            type: boolean
+                          enabled:
+                            type: boolean
+                          firstBrokerLoginFlowAlias:
+                            type: string
+                          linkOnly:
+                            type: boolean
+                          postBrokerLoginFlowAlias:
+                            type: string
+                          trustEmail:
+                            type: boolean
+                          authenticateByDefault:
+                            type: boolean
+                        example:
+                          providerId: ''
+                          config:
+                            authorizationUrl: ''
+                            tokenUrl: ''
+                            logoutUrl: ''
+                            clientAuthMethod: ''
+                            syncMode: ''
+                            clientId: ''
+                            clientSecret: ''
+                            jwksUrl: ''
+                            userInfoUrl: ''
+                            defaultScope: ''
+                            validateSignature: false
+                            backchannelSupported: false
+                            disableUserInfo: false
+                            hideOnLoginPage: false
+                            issuer: ''
+                            useJwksUrl: false
+                          alias: ''
+                          storeToken: false
+                          addReadTokenRoleOnCreate: false
+                          enabled: false
+                          firstBrokerLoginFlowAlias: ''
+                          linkOnly: false
+                          postBrokerLoginFlowAlias: ''
+                          trustEmail: false
+                          authenticateByDefault: false
+                      KeycloakOpenIDClient:
+                        required:
+                          - clientId
+                          - surrogateAuthRequired
+                          - enabled
+                          - alwaysDisplayInConsole
+                          - clientAuthenticatorType
+                          - redirectUris
+                          - webOrigins
+                          - notBefore
+                          - bearerOnly
+                          - consentRequired
+                          - standardFlowEnabled
+                          - implicitFlowEnabled
+                          - directAccessGrantsEnabled
+                          - serviceAccountsEnabled
+                          - publicClient
+                          - frontchannelLogout
+                          - protocol
+                          - attributes
+                          - authenticationFlowBindingOverrides
+                          - fullScopeAllowed
+                          - nodeReRegistrationTimeout
+                          - defaultClientScopes
+                          - optionalClientScopes
+                          - access
+                        type: object
+                        properties:
+                          clientId:
+                            type: string
+                          surrogateAuthRequired:
+                            type: boolean
+                          enabled:
+                            type: boolean
+                          alwaysDisplayInConsole:
+                            type: boolean
+                          clientAuthenticatorType:
+                            type: string
+                          redirectUris:
+                            type: string
+                            nullable: true
+                          webOrigins:
+                            type: string
+                            nullable: true
+                          notBefore:
+                            type: integer
+                            format: int32
+                          bearerOnly:
+                            type: boolean
+                          consentRequired:
+                            type: boolean
+                          standardFlowEnabled:
+                            type: boolean
+                          implicitFlowEnabled:
+                            type: boolean
+                          directAccessGrantsEnabled:
+                            type: boolean
+                          serviceAccountsEnabled:
+                            type: boolean
+                          publicClient:
+                            type: boolean
+                          frontchannelLogout:
+                            type: boolean
+                          protocol:
+                            type: string
+                          attributes:
+                            required:
+                              - saml.assertion.signature
+                              - saml.force.post.binding
+                              - saml.multivalued.roles
+                              - saml.encrypt
+                              - backchannel.logout.revoke.offline.tokens
+                              - saml.server.signature
+                              - saml.server.signature.keyinfo.ext
+                              - exclude.session.state.from.auth.response
+                              - backchannel.logout.session.required
+                              - backchannel.logout.url
+                              - client_credentials.use_refresh_token
+                              - saml_force_name_id_format
+                              - saml.client.signature
+                              - tls.client.certificate.bound.access.tokens
+                              - saml.authnstatement
+                              - display.on.consent.screen
+                              - saml.onetimeuse.condition
+                            type: object
+                            properties:
+                              saml.assertion.signature:
+                                type: string
+                              saml.force.post.binding:
+                                type: string
+                              saml.multivalued.roles:
+                                type: string
+                              saml.encrypt:
+                                type: string
+                              backchannel.logout.revoke.offline.tokens:
+                                type: string
+                              saml.server.signature:
+                                type: string
+                              saml.server.signature.keyinfo.ext:
+                                type: string
+                              exclude.session.state.from.auth.response:
+                                type: string
+                              backchannel.logout.session.required:
+                                type: string
+                              backchannel.logout.url:
+                                type: string
+                              client_credentials.use_refresh_token:
+                                type: string
+                              saml_force_name_id_format:
+                                type: string
+                              saml.client.signature:
+                                type: string
+                              tls.client.certificate.bound.access.tokens:
+                                type: string
+                              saml.authnstatement:
+                                type: string
+                              display.on.consent.screen:
+                                type: string
+                              saml.onetimeuse.condition:
+                                type: string
+                          authenticationFlowBindingOverrides:
+                            required:
+                              - direct_grant
+                              - browser
+                            type: object
+                            properties:
+                              direct_grant:
+                                type: string
+                              browser:
+                                type: string
+                          fullScopeAllowed:
+                            type: boolean
+                          nodeReRegistrationTimeout:
+                            type: integer
+                            format: int32
+                          defaultClientScopes:
+                            type: string
+                            nullable: true
+                          optionalClientScopes:
+                            type: string
+                            nullable: true
+                          access:
+                            required:
+                              - view
+                              - configure
+                              - manage
+                            type: object
+                            properties:
+                              view:
+                                type: boolean
+                              configure:
+                                type: boolean
+                              manage:
+                                type: boolean
+                      ExternalIdentityProviderAvailable:
+                        type: boolean
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}':
+    get:
+      tags:
+        - onboarding
+      description: Get organization by ID
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    patch:
+      tags:
+        - onboarding
+      description: Update organization
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - location
+                - description
+                - policyurl
+              type: object
+              properties:
+                name:
+                  type: string
+                location:
+                  type: string
+                description:
+                  type: string
+                policyurl:
+                  type: string
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}/coverimage':
+    post:
+      tags:
+        - onboarding
+      description: Update organization cover image
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - orgimage
+              type: object
+              properties:
+                orgimage:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}/logoimage':
+    post:
+      tags:
+        - onboarding
+      description: Update organization logo image
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - orgimage
+              type: object
+              properties:
+                orgimage:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}/image/{imageId}':
+    get:
+      tags:
+        - onboarding
+      description: Get organization image
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          headers: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}/eulaURL':
+    post:
+      tags:
+        - onboarding
+      description: Update organization EULA url
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - eulaurl
+              type: object
+              properties:
+                eulaurl:
+                  type: string
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - onboarding
+      description: Delete organization EULA url
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Accepted
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/organizations/{organizationId}/admins':
+    post:
+      tags:
+        - onboarding
+      description: Add org admin
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - userid
+                - roleid
+              type: object
+              properties:
+                userid:
+                  type: string
+                roleid:
+                  type: integer
+                  format: int32
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - onboarding
+      description: Get org admin
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                    - UserID
+                    - Role
+                  type: object
+                  properties:
+                    UserID:
+                      type: string
+                    Role:
+                      type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - onboarding
+      description: Delete org admin
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /organizations/roles:
+    get:
+      tags:
+        - onboarding
+      description: Get organization roles
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - Role
+                  type: object
+                  properties:
+                    ID:
+                      type: integer
+                      format: int32
+                    Role:
+                      type: string
+      deprecated: false
+components:
+  schemas:
+    OrganisationLog:
+      type: object
+      required:
+        - message
+      properties:
+        Logs:
+          description: A human readable error message
+          type: array
+          items:
+            type: object
+            properties:
+              ID:
+                type: string
+                description: ID for organisation log
+              Type:
+                type: integer
+                description: Type integer for organisation log
+              TypeStr:
+                type: string
+                description: Type string for organisation log
+              UserID:
+                type: string
+                description: User ID
+              UserName:
+                type: string
+              TimeStamp:
+                type: string
+              Log:
+                type: string
+        Links:
+          description: Pagination links
+          $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+    GetUserConsentHistory:
+      required:
+        - ConsentHistory
+        - Links
+      type: object
+      properties:
+        ConsentHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentHistory'
+          description: List of consent history
+        Links:
+          $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+          description: Pagination links
+    ConsentHistory:
+      required:
+        - ID
+        - OrgID
+        - PurposeID
+        - Log
+        - TimeStamp
+      type: object
+      properties:
+        ID:
+          type: string
+          description: Consent history ID
+        OrgID:
+          type: string
+          description: Organisation ID
+        PurposeID:
+          type: string
+          description: Consent agreement ID
+        Log:
+          type: string
+          description: Log string
+        TimeStamp:
+          type: string
+          description: Timestamp in ISO 8601 date time format
+      example:
+        ID: 64e91591e2f6a8000142c665
+        OrgID: 603e683c69dd720001c74f93
+        PurposeID: 61e183127c81650001f97d43
+        Log: Updated consent value to <Allow> for the purpose <Customer Loyalty Card Issuance> in organization <The Retail Company (Germany)>
+        TimeStamp: '2023-08-25T20:56:49Z'
+    GetConsentsByConsentAgreementId:
+      required:
+        - ID
+        - ConsentID
+        - OrgID
+        - UserID
+        - Consents
+        - DataRetention
+      type: object
+      properties:
+        ID:
+          type: string
+        ConsentID:
+          type: string
+        OrgID:
+          type: string
+        UserID:
+          type: string
+        DataRetention:
+          required:
+            - Expiry
+          type: object
+          properties:
+            Expiry:
+              type: string
+        Consents:
+          required:
+            - Purpose
+            - Count
+            - Consents
+          type: object
+          properties:
+            Purpose:
+              required:
+                - ID
+                - Name
+                - Description
+                - LawfulUsage
+                - LawfulBasisOfProcessing
+                - PolicyURL
+                - AttributeType
+                - Jurisdiction
+                - Disclosure
+                - IndustryScope
+                - DataRetention
+                - Restriction
+                - Shared3PP
+                - Version
+                - PublishFlag
+              type: object
+              properties:
+                ID:
+                  type: string
+                Name:
+                  type: string
+                Description:
+                  type: string
+                LawfulUsage:
+                  type: boolean
+                LawfulBasisOfProcessing:
+                  type: integer
+                  format: int32
+                PolicyURL:
+                  type: string
+                AttributeType:
+                  type: integer
+                  format: int32
+                Jurisdiction:
+                  type: string
+                Disclosure:
+                  type: string
+                IndustryScope:
+                  type: string
+                DataRetention:
+                  required:
+                    - RetentionPeriod
+                    - Enabled
+                  type: object
+                  properties:
+                    RetentionPeriod:
+                      type: integer
+                      format: int32
+                    Enabled:
+                      type: boolean
+                Restriction:
+                  type: string
+                Shared3PP:
+                  type: boolean
+                Version:
+                  type: string
+                PublishFlag:
+                  type: boolean
+            Count:
+              required:
+                - Total
+                - Consented
+              type: object
+              properties:
+                Total:
+                  type: integer
+                  format: int32
+                Consented:
+                  type: integer
+                  format: int32
+            Consents:
+              type: array
+              items:
+                required:
+                  - ID
+                  - Description
+                  - Value
+                  - Status
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  Description:
+                    type: string
+                  Value:
+                    type: string
+                  Status:
+                    required:
+                      - Consented
+                      - TimeStamp
+                      - Days
+                      - Remaining
+                    type: object
+                    properties:
+                      Consented:
+                        type: string
+                      TimeStamp:
+                        type: string
+                      Days:
+                        type: integer
+                        format: int32
+                      Remaining:
+                        type: integer
+                        format: int32
+    GetConsentsForAllConsentAgreements:
+      required:
+        - ID
+        - OrgID
+        - UserID
+        - ConsentsAndPurposes
+      type: object
+      properties:
+        ID:
+          type: string
+        OrgID:
+          type: string
+        UserID:
+          type: string
+        ConsentsAndPurposes:
+          type: array
+          items:
+            required:
+              - Purpose
+              - Count
+              - Consents
+            type: object
+            properties:
+              Purpose:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+              Count:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
+              Consents:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
+    GetConsents:
+      required:
+        - ID
+        - OrgID
+        - UserID
+        - ConsentsAndPurposes
+      type: object
+      properties:
+        ID:
+          type: string
+        OrgID:
+          type: string
+        UserID:
+          type: string
+        ConsentsAndPurposes:
+          type: array
+          items:
+            required:
+              - Purpose
+              - Count
+              - Consents
+              - DataRetention
+            type: object
+            properties:
+              Purpose:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+              Count:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
+              Consents:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
+              DataRetention:
+                required:
+                  - Expiry
+                type: object
+                properties:
+                  Expiry:
+                    type: string
+    UpdateConsentForConsentAgreementRequest:
+      required:
+        - consented
+      type: object
+      properties:
+        consented:
+          type: string
+      example:
+        consented: Allow
+    UpdateConsentForConsentAgreementResponse:
+      required:
+        - ID
+        - OrgID
+        - UserID
+        - ConsentsAndPurposes
+      type: object
+      properties:
+        ID:
+          type: string
+        OrgID:
+          type: string
+        UserID:
+          type: string
+        ConsentsAndPurposes:
+          type: array
+          items:
+            required:
+              - Purpose
+              - Count
+              - Consents
+              - DataRetention
+            type: object
+            properties:
+              Purpose:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+              Count:
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
+              Consents:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
+              DataRetention:
+                required:
+                  - Expiry
+                type: object
+                properties:
+                  Expiry:
+                    type: string
+    UpdateConsentForDataAttributeRequest:
+      required:
+        - consented
+        - days
+      type: object
+      properties:
+        consented:
+          type: string
+        days:
+          type: integer
+          format: int32
+      example:
+        consented: Allow
+        days: 0
+    UpdateConsentForDataAttributeResponse:
+      required:
+        - Msg
+        - Status
+      type: object
+      properties:
+        Msg:
+          type: string
+        Status:
+          type: integer
+          format: int32
+      example:
+        Msg: Consent updated successfully
+        Status: 200
+    ListAllDataRequests:
+      required:
+        - DataRequests
+        - IsRequestsOngoing
+        - IsDataDeleteRequestOngoing
+        - IsDataDownloadRequestOngoing
+        - Links
+      type: object
+      properties:
+        DataRequests:
+          type: array
+          items:
+            required:
+              - ID
+              - UserID
+              - UserName
+              - OrgID
+              - Type
+              - TypeStr
+              - State
+              - RequestedDate
+              - ClosedDate
+              - StateStr
+              - Comment
+            type: object
+            properties:
+              ID:
+                type: string
+              UserID:
+                type: string
+              UserName:
+                type: string
+              OrgID:
+                type: string
+              Type:
+                type: integer
+                format: int32
+              TypeStr:
+                type: string
+              State:
+                type: integer
+                format: int32
+              RequestedDate:
+                type: string
+              ClosedDate:
+                type: string
+              StateStr:
+                type: string
+              Comment:
+                type: string
+            example:
+              ID: 64eb3999e2f6a8000142c666
+              UserID: 638de3302f5d1700014431f3
+              UserName: johndoe@yopmail.com
+              OrgID: 603e683c69dd720001c74f93
+              Type: 1
+              TypeStr: Delete Data
+              State: 7
+              RequestedDate: '2023-08-27 11:55:05 +0000 UTC'
+              ClosedDate: '2023-08-27 11:56:45.307 +0000 UTC'
+              StateStr: Request processed with action
+              Comment: ''
+        IsRequestsOngoing:
+          type: boolean
+        IsDataDeleteRequestOngoing:
+          type: boolean
+        IsDataDownloadRequestOngoing:
+          type: boolean
+        Links:
+          description: Pagination links
+          type: object
+          properties:
+            self:
+              description: Link to the current page
+              type: string
+              example: 'https://staging-api.igrant.io/v1/users/638de3302f5d1700014431f3/consenthistory?limit=1024'
+            next:
+              description: Link to the next page
+              type: string
+    GetAllDeleteMyDataRequests:
+      required:
+        - ID
+        - UserID
+        - UserName
+        - OrgID
+        - Type
+        - TypeStr
+        - State
+        - RequestedDate
+        - ClosedDate
+        - StateStr
+        - Comment
+      type: object
+      properties:
+        ID:
+          type: string
+        UserID:
+          type: string
+        UserName:
+          type: string
+        OrgID:
+          type: string
+        Type:
+          type: integer
+          format: int32
+        TypeStr:
+          type: string
+        State:
+          type: integer
+          format: int32
+        RequestedDate:
+          type: string
+        ClosedDate:
+          type: string
+        StateStr:
+          type: string
+        Comment:
+          type: string
+      example:
+        ID: 64eb3999e2f6a8000142c666
+        UserID: 638de3302f5d1700014431f3
+        UserName: johndoe@yopmail.com
+        OrgID: 603e683c69dd720001c74f93
+        Type: 1
+        TypeStr: Delete Data
+        State: 7
+        RequestedDate: '2023-08-27 11:55:05 +0000 UTC'
+        ClosedDate: '2023-08-27 11:56:45.307 +0000 UTC'
+        StateStr: Request processed with action
+        Comment: ''
+    GetDeleteMyDataRequestStatus:
+      required:
+        - RequestOngoing
+        - ID
+        - State
+        - StateStr
+        - RequestedDate
+      type: object
+      properties:
+        RequestOngoing:
+          type: boolean
+        ID:
+          type: string
+        State:
+          type: integer
+          format: int32
+        StateStr:
+          type: string
+        RequestedDate:
+          type: string
+      example:
+        RequestOngoing: true
+        ID: 64eba692e2f6a8000142c668
+        State: 1
+        StateStr: Request initiated
+        RequestedDate: '2023-08-27 19:40:02 +0000 UTC'
+    CancelDeleteMyDataRequest:
+      required:
+        - ID
+        - UserID
+        - UserName
+        - OrgID
+        - Type
+        - TypeStr
+        - State
+        - RequestedDate
+        - ClosedDate
+        - StateStr
+        - Comment
+      type: object
+      properties:
+        ID:
+          type: string
+        UserID:
+          type: string
+        UserName:
+          type: string
+        OrgID:
+          type: string
+        Type:
+          type: integer
+          format: int32
+        TypeStr:
+          type: string
+        State:
+          type: integer
+          format: int32
+        RequestedDate:
+          type: string
+        ClosedDate:
+          type: string
+        StateStr:
+          type: string
+        Comment:
+          type: string
+      example:
+        ID: 64eba692e2f6a8000142c668
+        UserID: 638de3302f5d1700014431f3
+        UserName: johndoe@yopmail.com
+        OrgID: 603e683c69dd720001c74f93
+        Type: 1
+        TypeStr: Delete Data
+        State: 8
+        RequestedDate: '2023-08-27 19:40:02 +0000 UTC'
+        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
+        StateStr: Request cancelled by user
+        Comment: ''
+    SendDownloadMyDataRequestError:
+      required:
+        - Code
+        - Message
+      type: object
+      properties:
+        Code:
+          type: integer
+          format: int32
+        Message:
+          type: string
+      example:
+        Code: 400
+        Message: 'Request (Download Data) ongoing for user: 638de3302f5d1700014431f3 organization: 603e683c69dd720001c74f93'
+    GetAllDownloadMyDataRequests:
+      required:
+        - ID
+        - UserID
+        - UserName
+        - OrgID
+        - Type
+        - TypeStr
+        - State
+        - RequestedDate
+        - ClosedDate
+        - StateStr
+        - Comment
+      type: object
+      properties:
+        ID:
+          type: string
+        UserID:
+          type: string
+        UserName:
+          type: string
+        OrgID:
+          type: string
+        Type:
+          type: integer
+          format: int32
+        TypeStr:
+          type: string
+        State:
+          type: integer
+          format: int32
+        RequestedDate:
+          type: string
+        ClosedDate:
+          type: string
+        StateStr:
+          type: string
+        Comment:
+          type: string
+      example:
+        ID: 64ebb1a7e2f6a8000142c669
+        UserID: 638de3302f5d1700014431f3
+        UserName: johndoe@yopmail.com
+        OrgID: 603e683c69dd720001c74f93
+        Type: 2
+        TypeStr: Download Data
+        State: 1
+        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
+        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
+        StateStr: Request initiated
+        Comment: ''
+    GetDownloadMyDataRequestStatus:
+      required:
+        - RequestOngoing
+        - ID
+        - State
+        - StateStr
+        - RequestedDate
+      type: object
+      properties:
+        RequestOngoing:
+          type: boolean
+        ID:
+          type: string
+        State:
+          type: integer
+          format: int32
+        StateStr:
+          type: string
+        RequestedDate:
+          type: string
+      example:
+        RequestOngoing: true
+        ID: 64ebb1a7e2f6a8000142c669
+        State: 1
+        StateStr: Request initiated
+        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
+    CancelDownloadMyDataRequest:
+      required:
+        - ID
+        - UserID
+        - UserName
+        - OrgID
+        - Type
+        - TypeStr
+        - State
+        - RequestedDate
+        - ClosedDate
+        - StateStr
+        - Comment
+      type: object
+      properties:
+        ID:
+          type: string
+        UserID:
+          type: string
+        UserName:
+          type: string
+        OrgID:
+          type: string
+        Type:
+          type: integer
+          format: int32
+        TypeStr:
+          type: string
+        State:
+          type: integer
+          format: int32
+        RequestedDate:
+          type: string
+        ClosedDate:
+          type: string
+        StateStr:
+          type: string
+        Comment:
+          type: string
+      example:
+        ID: 64ebb1a7e2f6a8000142c669
+        UserID: 638de3302f5d1700014431f3
+        UserName: johndoe@yopmail.com
+        OrgID: 603e683c69dd720001c74f93
+        Type: 2
+        TypeStr: Download Data
+        State: 8
+        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
+        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
+        StateStr: Request cancelled by user
+        Comment: ''
+  securitySchemes:
+    BearerAuth:
+      description: Access token passed with Bearer prefix in Authorization header
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

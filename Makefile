@@ -19,4 +19,4 @@ down: ## Stop the nginx server
 	docker-compose down
 
 bundle: check-swagger-cli ## Bundles swagger files
-	swagger-cli bundle ./openapi/index.yaml -o bundled.yaml -t yaml
+	swagger-cli bundle ./openapi/index.yaml -o ./openapi/bundled.yaml -t yaml
