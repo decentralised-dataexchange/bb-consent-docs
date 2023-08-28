@@ -18,18 +18,12 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: https://api.bb-consent.dev/v1
-    description: Development server (v1)
-  - url: https://staging-consent-bb-api.igrant.io/v1
-    description: Staging server (v1)
-  - url: https://demo-consent-bb-api.igrant.io/v1
-    description: Demo server (v1)
-  - url: https://api.bb-consent.dev/v1.1
-    description: Development server (v1.1)
-  - url: https://staging-consent-bb-api.igrant.io/v1.1
-    description: Staging server (v1.1)
-  - url: https://demo-consent-bb-api.igrant.io/v1.1
-    description: Demo server (v1.1)
+  - url: https://api.bb-consent.dev/
+    description: Development server
+  - url: https://staging-consent-bb-api.igrant.io/
+    description: Staging server
+  - url: https://demo-consent-bb-api.igrant.io/
+    description: Demo server
 tags:
   - name: audit
     description: Audit-related operations
@@ -40,34 +34,58 @@ tags:
   - name: onboarding
     description: Onboarding users and organisations operations
 paths:
-  /organizations/{orgId}/logs:
+  /v1/organizations/{orgId}/logs:
     $ref: "./paths/audit/getOrgLogs.yaml"
-  /users/{userId}/consenthistory:
+  /v1/users/{userId}/consenthistory:
     $ref: "./paths/service/getConsentHistory.yaml"
-  /organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}:
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}:
     $ref: "./paths/service/getConsentsByConsentAgreementId.yaml"
-  /organizations/{orgId}/users/{userId}/consents/{consentId}:
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}:
     $ref: "./paths/service/getConsentsForAllConsentAgreements.yaml"
-  /organizations/{orgId}/users/{userId}/consents:
+  /v1/organizations/{orgId}/users/{userId}/consents:
     $ref: "./paths/service/getConsents.yaml"
-  /organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status:
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status:
     $ref: "./paths/service/updateConsentForConsentAgreement.yaml"
-  /organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}:
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}:
     $ref: "./paths/service/updateConsentForDataAttribute.yaml"
-  /user/organizations/{orgId}/data-status:
+  /v1/user/organizations/{orgId}/data-status:
     $ref: "./paths/service/dataRequests/listAllDataRequests.yaml"
-  /user/organizations/{orgId}/data-delete:
+  /v1/user/organizations/{orgId}/data-delete:
     $ref: "./paths/service/dataRequests/deleteData/sendAndGetAllDeleteMyDataRequests.yaml"
-  /user/organizations/{orgId}/data-delete/status:
+  /v1/user/organizations/{orgId}/data-delete/status:
     $ref: "./paths/service/dataRequests/deleteData/getDeleteMyDataRequestStatus.yaml"
-  /user/organizations/{orgId}/data-delete/{dataReqId}/cancel:
+  /v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel:
     $ref: "./paths/service/dataRequests/deleteData/cancelDeleteMyDataRequest.yaml"
-  /user/organizations/{orgId}/data-download:
+  /v1/user/organizations/{orgId}/data-download:
     $ref: "./paths/service/dataRequests/downloadData/sendAndGetAllDownloadMyDataRequests.yaml"
-  /user/organizations/{orgId}/data-download/status:
+  /v1/user/organizations/{orgId}/data-download/status:
     $ref: "./paths/service/dataRequests/downloadData/getDownloadMyDataRequestStatus.yaml"
-  /user/organizations/{orgId}/data-download/{dataReqId}/cancel:
+  /v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel:
     $ref: "./paths/service/dataRequests/downloadData/cancelDownloadMyDataRequest.yaml"
+  /v1/users/admin/login:
+    $ref: "./paths/onboarding/authentication/organisationAdmin/loginAsOrganisationAdmin.yaml"
+  /v1/users/login:
+    $ref: "./paths/onboarding/authentication/individual/loginAsIndividual.yaml"
+  /v1.1/users/login:
+    $ref: "./paths/onboarding/authentication/individual/loginAsIndividualV11.yaml"
+  /v1/users/validate/email:
+    $ref: "./paths/onboarding/authentication/validation/validateEmail.yaml"
+  /v1/users/validate/phone:
+    $ref: "./paths/onboarding/authentication/validation/validatePhone.yaml"
+  /v1/users/verify/phone:
+    $ref: "./paths/onboarding/authentication/validation/verifyPhone.yaml"
+  /v1/users/verify/otp:
+    $ref: "./paths/onboarding/authentication/validation/verifyOTP.yaml"
+  /v1/user/password/reset:
+    $ref: "./paths/onboarding/authentication/resetPassword.yaml"
+  /v1/user/password/forgot:
+    $ref: "./paths/onboarding/authentication/forgotPassword.yaml"
+  /v1/users/logout:
+    $ref: "./paths/onboarding/authentication/logout.yaml"
+  /v1/users/token:
+    $ref: "./paths/onboarding/authentication/refreshToken.yaml"
+  /v1/users/register:
+    $ref: "./paths/onboarding/authentication/register.yaml"
 components:
   schemas:
     OrganisationLog:

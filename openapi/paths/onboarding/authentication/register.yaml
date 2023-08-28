@@ -1,0 +1,40 @@
+post:
+  tags:
+    - onboarding
+  summary: Register individual
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - username
+            - name
+            - password
+            - phone
+          type: object
+          properties:
+            username:
+              type: string
+            name:
+              type: string
+            password:
+              type: string
+            phone:
+              type: string
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - msg
+            type: object
+            properties:
+              msg:
+                type: string
+            example:
+              msg: User created successfully
+  deprecated: false
