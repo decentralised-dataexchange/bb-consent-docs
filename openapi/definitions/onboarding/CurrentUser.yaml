@@ -14,42 +14,42 @@ required:
   - IncompleteProfile
 type: object
 properties:
-ID:
-  type: string
-Name:
-  type: string
-IamID:
-  type: string
-Email:
-  type: string
-Phone:
-  type: string
-ImageID:
-  type: string
-ImageURL:
-  type: string
-LastVisit:
-  type: string
-Client:
-  required:
-    - Token
-    - Type
-  type: object
-  properties:
-    Token:
+  ID:
+    type: string
+  Name:
+    type: string
+  IamID:
+    type: string
+  Email:
+    type: string
+  Phone:
+    type: string
+  ImageID:
+    type: string
+  ImageURL:
+    type: string
+  LastVisit:
+    type: string
+  Client:
+    required:
+      - Token
+      - Type
+    type: object
+    properties:
+      Token:
+        type: string
+      Type:
+        type: integer
+        format: int32
+  Orgs:
+    type: array
+    items:
       type: string
-    Type:
-      type: integer
-      format: int32
-Orgs:
-  type: array
-  items:
+  APIKey:
     type: string
-APIKey:
-  type: string
-Roles:
-  type: array
-  items:
-    type: string
-IncompleteProfile:
-  type: boolean
+  Roles:
+    type: array
+    items:
+      type: string
+  IncompleteProfile:
+    type: boolean
