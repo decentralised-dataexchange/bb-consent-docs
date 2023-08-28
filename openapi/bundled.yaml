@@ -1686,8 +1686,7 @@ paths:
     post:
       tags:
         - onboarding
-      summary: Unregister users
-      description: Individual can delete their account from the privacy dashboard.
+      description: Unregister users
       parameters: []
       responses:
         '200':
@@ -1723,7 +1722,7 @@ paths:
     post:
       tags:
         - onboarding
-      summary: User client register (android)
+      description: User client register (android)
       parameters: []
       requestBody:
         content:
@@ -1755,7 +1754,7 @@ paths:
     post:
       tags:
         - onboarding
-      summary: User client register (ios)
+      description: User client register (ios)
       parameters: []
       requestBody:
         content:
@@ -1787,7 +1786,7 @@ paths:
     delete:
       tags:
         - onboarding
-      summary: Delete my image
+      description: Delete my image
       parameters:
         - name: imageId
           in: path
@@ -1804,7 +1803,7 @@ paths:
     get:
       tags:
         - onboarding
-      summary: Get my image
+      description: Get my image
       parameters:
         - name: imageId
           in: path
@@ -1821,7 +1820,7 @@ paths:
     post:
       tags:
         - onboarding
-      summary: Update my image
+      description: Update my image
       parameters: []
       requestBody:
         content:
@@ -1855,7 +1854,7 @@ paths:
     patch:
       tags:
         - onboarding
-      summary: Update current user
+      description: Update current user
       parameters: []
       requestBody:
         content:
@@ -1889,7 +1888,7 @@ paths:
     get:
       tags:
         - onboarding
-      summary: Get current user
+      description: Get current user
       parameters: []
       responses:
         '200':
@@ -1910,7 +1909,7 @@ paths:
     post:
       tags:
         - onboarding
-      summary: Create api key
+      description: Create api key
       parameters: []
       responses:
         '200':
@@ -1933,7 +1932,7 @@ paths:
     get:
       tags:
         - onboarding
-      summary: Get api key
+      description: Get api key
       parameters: []
       responses:
         '200':
@@ -1957,12 +1956,363 @@ paths:
     delete:
       tags:
         - onboarding
-      summary: Delete api key
+      description: Delete api key
       parameters: []
       responses:
         '200':
           description: OK
           content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/global-policy-configuration':
+    get:
+      tags:
+        - config
+      description: Get global policy configurations
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - PolicyURL
+                  - DataRetention
+                  - Jurisdiction
+                  - Disclosure
+                  - Type
+                  - Restriction
+                  - Shared3PP
+                type: object
+                properties:
+                  PolicyURL:
+                    type: string
+                  DataRetention:
+                    required:
+                      - RetentionPeriod
+                      - Enabled
+                    type: object
+                    properties:
+                      RetentionPeriod:
+                        type: integer
+                        format: int32
+                      Enabled:
+                        type: boolean
+                  Jurisdiction:
+                    type: string
+                  Disclosure:
+                    type: string
+                  Type:
+                    required:
+                      - ID
+                      - Type
+                      - ImageID
+                      - ImageURL
+                    type: object
+                    properties:
+                      ID:
+                        type: string
+                      Type:
+                        type: string
+                      ImageID:
+                        type: string
+                      ImageURL:
+                        type: string
+                  Restriction:
+                    type: string
+                  Shared3PP:
+                    type: boolean
+      deprecated: false
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - config
+      description: Update global policy configurations
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - policyurl
+                - retentionperiod
+                - jurisdiction
+                - disclosure
+                - typeid
+                - restriction
+                - shared3pp
+              type: object
+              properties:
+                policyurl:
+                  type: string
+                retentionperiod:
+                  type: integer
+                  format: int32
+                jurisdiction:
+                  type: string
+                disclosure:
+                  type: string
+                typeid:
+                  type: string
+                restriction:
+                  type: string
+                shared3pp:
+                  type: boolean
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - PolicyURL
+                  - DataRetention
+                  - Jurisdiction
+                  - Disclosure
+                  - Type
+                  - Restriction
+                  - Shared3PP
+                type: object
+                properties:
+                  PolicyURL:
+                    type: string
+                  DataRetention:
+                    required:
+                      - RetentionPeriod
+                      - Enabled
+                    type: object
+                    properties:
+                      RetentionPeriod:
+                        type: integer
+                        format: int32
+                      Enabled:
+                        type: boolean
+                  Jurisdiction:
+                    type: string
+                  Disclosure:
+                    type: string
+                  Type:
+                    required:
+                      - ID
+                      - Type
+                      - ImageID
+                      - ImageURL
+                    type: object
+                    properties:
+                      ID:
+                        type: string
+                      Type:
+                        type: string
+                      ImageID:
+                        type: string
+                      ImageURL:
+                        type: string
+                  Restriction:
+                    type: string
+                  Shared3PP:
+                    type: boolean
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/purposes':
+    post:
+      tags:
+        - config
+      description: Add consent agreement
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - purposes
+              type: object
+              properties:
+                purposes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConsentAgreement'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - config
+      description: Get consent agreements
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - OrgID
+                  - Purposes
+                type: object
+                properties:
+                  OrgID:
+                    type: string
+                  Purposes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConsentAgreement'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/purposes/{purposeId}':
+    delete:
+      tags:
+        - config
+      description: Delete consent agreement by id
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                required:
+                  - Code
+                  - Message
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    format: int32
+                  Message:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    put:
+      tags:
+        - config
+      description: Update consent agreement by id
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentAgreement'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - config
+      description: Get consent agreement by id
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Purpose
+                  - Templates
+                type: object
+                properties:
+                  Purpose:
+                    $ref: '#/components/schemas/ConsentAgreement'
+                  Templates:
+                    type: string
+                    nullable: true
       deprecated: false
       security:
         - BearerAuth: []
@@ -2815,8 +3165,9 @@ components:
           type: string
           nullable: true
         Purposes:
-          type: string
-          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentAgreement'
         Admins:
           type: array
           items:
@@ -3154,6 +3505,66 @@ components:
                 manage:
                   type: boolean
         ExternalIdentityProviderAvailable:
+          type: boolean
+    ConsentAgreement:
+      required:
+        - ID
+        - Name
+        - Description
+        - LawfulUsage
+        - LawfulBasisOfProcessing
+        - PolicyURL
+        - AttributeType
+        - Jurisdiction
+        - Disclosure
+        - IndustryScope
+        - DataRetention
+        - Restriction
+        - Shared3PP
+        - Version
+        - PublishFlag
+      type: object
+      properties:
+        ID:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        LawfulUsage:
+          type: boolean
+        LawfulBasisOfProcessing:
+          type: integer
+          format: int32
+        PolicyURL:
+          type: string
+        AttributeType:
+          type: integer
+          format: int32
+        Jurisdiction:
+          type: string
+        Disclosure:
+          type: string
+        IndustryScope:
+          type: string
+        DataRetention:
+          required:
+            - RetentionPeriod
+            - Enabled
+          type: object
+          properties:
+            RetentionPeriod:
+              type: integer
+              format: int32
+            Enabled:
+              type: boolean
+        Restriction:
+          type: string
+        Shared3PP:
+          type: boolean
+        Version:
+          type: string
+        PublishFlag:
           type: boolean
   securitySchemes:
     BearerAuth:

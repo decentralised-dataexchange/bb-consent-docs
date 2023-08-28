@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Create api key
+  description: Create api key
   parameters: []
   responses:
     "200":
@@ -24,7 +24,7 @@ post:
 get:
   tags:
     - onboarding
-  summary: Get api key
+  description: Get api key
   parameters: []
   responses:
     "200":

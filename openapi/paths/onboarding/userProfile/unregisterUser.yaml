@@ -1,8 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Unregister users
-  description: Individual can delete their account from the privacy dashboard.
+  description: Unregister users
   parameters: []
   responses:
     "200":

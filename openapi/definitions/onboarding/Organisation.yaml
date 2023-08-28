@@ -65,8 +65,9 @@ properties:
     type: string
     nullable: true
   Purposes:
-    type: string
-    nullable: true
+    type: array
+    items:
+      $ref: "../config/ConsentAgreement.yaml"
   Admins:
     type: array
     items:

@@ -1,7 +1,7 @@
 delete:
   tags:
     - onboarding
-  summary: Delete api key
+  description: Delete api key
   parameters: []
   responses:
     "200":

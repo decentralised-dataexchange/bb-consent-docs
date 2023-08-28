@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: User client register (ios)
+  description: User client register (ios)
   parameters: []
   requestBody:
     content:

@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: User client register (android)
+  description: User client register (android)
   parameters: []
   requestBody:
     content:

@@ -1,7 +1,7 @@
 delete:
   tags:
     - onboarding
-  summary: Delete my image
+  description: Delete my image
   parameters:
     - name: imageId
       in: path
@@ -18,7 +18,7 @@ delete:
 get:
   tags:
     - onboarding
-  summary: Get my image
+  description: Get my image
   parameters:
     - name: imageId
       in: path

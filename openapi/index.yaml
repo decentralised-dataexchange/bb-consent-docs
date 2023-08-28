@@ -135,6 +135,12 @@ paths:
     $ref: "./paths/onboarding/developer/getAndCreateAPIKey.yaml"
   /v1/user/apikey/revoke:
     $ref: "./paths/onboarding/developer/deleteAPIKey.yaml"
+  /v1/organizations/{organizationId}/global-policy-configuration:
+    $ref: "./paths/config/consentAgreements/globalPolicyConfigurations/getAndUpdateGlobalPolicyConfiguration.yaml"
+  /v1/organizations/{organizationId}/purposes:
+    $ref: "./paths/config/consentAgreements/getAndAddConsentAgreements.yaml"
+  /v1/organizations/{organizationId}/purposes/{purposeId}:
+    $ref: "./paths/config/consentAgreements/getDeleteUpdateConsentAgreementByID.yaml"
 components:
   schemas:
     OrganisationLog:
@@ -177,6 +183,8 @@ components:
       $ref: "./definitions/onboarding/CurrentUser.yaml"
     Organisation:
       $ref: "./definitions/onboarding/Organisation.yaml"
+    ConsentAgreement:
+      $ref: "./definitions/config/ConsentAgreement.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

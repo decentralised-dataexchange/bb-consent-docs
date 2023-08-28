@@ -1,7 +1,7 @@
 patch:
   tags:
     - onboarding
-  summary: Update current user
+  description: Update current user
   parameters: []
   requestBody:
     content:
@@ -35,7 +35,7 @@ patch:
 get:
   tags:
     - onboarding
-  summary: Get current user
+  description: Get current user
   parameters: []
   responses:
     "200":

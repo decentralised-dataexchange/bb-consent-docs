@@ -1,0 +1,59 @@
+required:
+  - ID
+  - Name
+  - Description
+  - LawfulUsage
+  - LawfulBasisOfProcessing
+  - PolicyURL
+  - AttributeType
+  - Jurisdiction
+  - Disclosure
+  - IndustryScope
+  - DataRetention
+  - Restriction
+  - Shared3PP
+  - Version
+  - PublishFlag
+type: object
+properties:
+  ID:
+    type: string
+  Name:
+    type: string
+  Description:
+    type: string
+  LawfulUsage:
+    type: boolean
+  LawfulBasisOfProcessing:
+    type: integer
+    format: int32
+  PolicyURL:
+    type: string
+  AttributeType:
+    type: integer
+    format: int32
+  Jurisdiction:
+    type: string
+  Disclosure:
+    type: string
+  IndustryScope:
+    type: string
+  DataRetention:
+    required:
+      - RetentionPeriod
+      - Enabled
+    type: object
+    properties:
+      RetentionPeriod:
+        type: integer
+        format: int32
+      Enabled:
+        type: boolean
+  Restriction:
+    type: string
+  Shared3PP:
+    type: boolean
+  Version:
+    type: string
+  PublishFlag:
+    type: boolean
