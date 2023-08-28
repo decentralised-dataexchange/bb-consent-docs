@@ -36,7 +36,6 @@ post:
   operationId: Addorganizationtype
   parameters: []
   requestBody:
-    description: ""
     content:
       application/json:
         schema:

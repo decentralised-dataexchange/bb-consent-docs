@@ -1,19 +1,21 @@
 post:
   tags:
     - onboarding
-  description: Validate email
+  summary: Update my image
   parameters: []
   requestBody:
     content:
-      application/json:
+      multipart/form-data:
+        encoding: {}
         schema:
           required:
-            - email
+            - userimage
           type: object
           properties:
-            email:
+            userimage:
               type: string
-    required: true
+              format: binary
+    required: false
   responses:
     "200":
       description: OK
@@ -21,17 +23,11 @@ post:
         application/json:
           schema:
             required:
-              - Result
-              - Message
+              - User
             type: object
             properties:
-              Result:
-                type: boolean
-              Message:
-                type: string
-            example:
-              Result: true
-              Message: Email address is valid and not in use in our system
+              User:
+                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
   deprecated: false
   security:
     - BearerAuth: []

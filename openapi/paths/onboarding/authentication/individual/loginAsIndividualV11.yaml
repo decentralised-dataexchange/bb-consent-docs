@@ -4,7 +4,7 @@ post:
   description: Login as individual
   parameters: []
   requestBody:
-    description: ""
+    
     content:
       application/json:
         schema:

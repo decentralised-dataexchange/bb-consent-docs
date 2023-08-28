@@ -30,7 +30,7 @@ tags:
       These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
   - name: onboarding
     description: |
-      These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs. 
+      These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
   '/v1/organizations/{orgId}/logs':
     get:
@@ -467,7 +467,6 @@ paths:
             type: string
         - name: dataReqId
           in: path
-          description: ''
           required: true
           schema:
             type: string
@@ -615,7 +614,6 @@ paths:
       description: Login as individual
       parameters: []
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
@@ -754,7 +752,6 @@ paths:
       description: Validate email
       parameters: []
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
@@ -1130,7 +1127,6 @@ paths:
       operationId: Addorganizationtype
       parameters: []
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
@@ -1227,13 +1223,10 @@ paths:
       parameters:
         - name: typeId
           in: path
-          description: ''
           required: true
-          style: simple
           schema:
             type: string
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
@@ -1306,13 +1299,11 @@ paths:
       parameters:
         - name: typeId
           in: path
-          description: ''
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: ''
           headers: {}
       deprecated: false
       security:
@@ -1357,427 +1348,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    required:
-                      - ID
-                      - Name
-                      - CoverImageID
-                      - CoverImageURL
-                      - LogoImageID
-                      - LogoImageURL
-                      - Location
-                      - Type
-                      - Jurisdiction
-                      - Disclosure
-                      - Restriction
-                      - Shared3PP
-                      - Description
-                      - Enabled
-                      - PolicyURL
-                      - EulaURL
-                      - Templates
-                      - Purposes
-                      - Admins
-                      - BillingInfo
-                      - Subs
-                      - HlcSupport
-                      - PrivacyDashboard
-                      - AriesCloudAgentDeployment
-                      - DataRetention
-                      - IdentityProviderRepresentation
-                      - KeycloakOpenIDClient
-                      - ExternalIdentityProviderAvailable
-                    type: object
-                    properties:
-                      ID:
-                        type: string
-                      Name:
-                        type: string
-                      CoverImageID:
-                        type: string
-                      CoverImageURL:
-                        type: string
-                      LogoImageID:
-                        type: string
-                      LogoImageURL:
-                        type: string
-                      Location:
-                        type: string
-                      Type:
-                        required:
-                          - ID
-                          - Type
-                          - ImageID
-                          - ImageURL
-                        type: object
-                        properties:
-                          ID:
-                            type: string
-                          Type:
-                            type: string
-                          ImageID:
-                            type: string
-                          ImageURL:
-                            type: string
-                      Jurisdiction:
-                        type: string
-                      Disclosure:
-                        type: string
-                      Restriction:
-                        type: string
-                      Shared3PP:
-                        type: boolean
-                      Description:
-                        type: string
-                      Enabled:
-                        type: boolean
-                      PolicyURL:
-                        type: string
-                      EulaURL:
-                        type: string
-                      Templates:
-                        type: string
-                        nullable: true
-                      Purposes:
-                        type: string
-                        nullable: true
-                      Admins:
-                        type: array
-                        items:
-                          required:
-                            - UserID
-                            - RoleID
-                          type: object
-                          properties:
-                            UserID:
-                              type: string
-                            RoleID:
-                              type: integer
-                              format: int32
-                      Subs:
-                        required:
-                          - Method
-                          - Key
-                        type: object
-                        properties:
-                          Method:
-                            type: integer
-                            format: int32
-                          Key:
-                            type: string
-                      HlcSupport:
-                        type: boolean
-                      PrivacyDashboard:
-                        required:
-                          - HostName
-                          - Version
-                        type: object
-                        properties:
-                          HostName:
-                            type: string
-                          Version:
-                            type: string
-                      DataRetention:
-                        required:
-                          - RetentionPeriod
-                          - Enabled
-                        type: object
-                        properties:
-                          RetentionPeriod:
-                            type: integeru
-                            format: int32
-                          Enabled:
-                            type: boolean
-                        example:
-                          RetentionPeriod: 0
-                          Enabled: false
-                      IdentityProviderRepresentation:
-                        required:
-                          - providerId
-                          - config
-                          - alias
-                          - storeToken
-                          - addReadTokenRoleOnCreate
-                          - enabled
-                          - firstBrokerLoginFlowAlias
-                          - linkOnly
-                          - postBrokerLoginFlowAlias
-                          - trustEmail
-                          - authenticateByDefault
-                        type: object
-                        properties:
-                          providerId:
-                            type: string
-                          config:
-                            required:
-                              - authorizationUrl
-                              - tokenUrl
-                              - logoutUrl
-                              - clientAuthMethod
-                              - syncMode
-                              - clientId
-                              - clientSecret
-                              - jwksUrl
-                              - userInfoUrl
-                              - defaultScope
-                              - validateSignature
-                              - backchannelSupported
-                              - disableUserInfo
-                              - hideOnLoginPage
-                              - issuer
-                              - useJwksUrl
-                            type: object
-                            properties:
-                              authorizationUrl:
-                                type: string
-                              tokenUrl:
-                                type: string
-                              logoutUrl:
-                                type: string
-                              clientAuthMethod:
-                                type: string
-                              syncMode:
-                                type: string
-                              clientId:
-                                type: string
-                              clientSecret:
-                                type: string
-                              jwksUrl:
-                                type: string
-                              userInfoUrl:
-                                type: string
-                              defaultScope:
-                                type: string
-                              validateSignature:
-                                type: boolean
-                              backchannelSupported:
-                                type: boolean
-                              disableUserInfo:
-                                type: boolean
-                              hideOnLoginPage:
-                                type: boolean
-                              issuer:
-                                type: string
-                              useJwksUrl:
-                                type: boolean
-                            example:
-                              authorizationUrl: ''
-                              tokenUrl: ''
-                              logoutUrl: ''
-                              clientAuthMethod: ''
-                              syncMode: ''
-                              clientId: ''
-                              clientSecret: ''
-                              jwksUrl: ''
-                              userInfoUrl: ''
-                              defaultScope: ''
-                              validateSignature: false
-                              backchannelSupported: false
-                              disableUserInfo: false
-                              hideOnLoginPage: false
-                              issuer: ''
-                              useJwksUrl: false
-                          alias:
-                            type: string
-                          storeToken:
-                            type: boolean
-                          addReadTokenRoleOnCreate:
-                            type: boolean
-                          enabled:
-                            type: boolean
-                          firstBrokerLoginFlowAlias:
-                            type: string
-                          linkOnly:
-                            type: boolean
-                          postBrokerLoginFlowAlias:
-                            type: string
-                          trustEmail:
-                            type: boolean
-                          authenticateByDefault:
-                            type: boolean
-                        example:
-                          providerId: ''
-                          config:
-                            authorizationUrl: ''
-                            tokenUrl: ''
-                            logoutUrl: ''
-                            clientAuthMethod: ''
-                            syncMode: ''
-                            clientId: ''
-                            clientSecret: ''
-                            jwksUrl: ''
-                            userInfoUrl: ''
-                            defaultScope: ''
-                            validateSignature: false
-                            backchannelSupported: false
-                            disableUserInfo: false
-                            hideOnLoginPage: false
-                            issuer: ''
-                            useJwksUrl: false
-                          alias: ''
-                          storeToken: false
-                          addReadTokenRoleOnCreate: false
-                          enabled: false
-                          firstBrokerLoginFlowAlias: ''
-                          linkOnly: false
-                          postBrokerLoginFlowAlias: ''
-                          trustEmail: false
-                          authenticateByDefault: false
-                      KeycloakOpenIDClient:
-                        required:
-                          - clientId
-                          - surrogateAuthRequired
-                          - enabled
-                          - alwaysDisplayInConsole
-                          - clientAuthenticatorType
-                          - redirectUris
-                          - webOrigins
-                          - notBefore
-                          - bearerOnly
-                          - consentRequired
-                          - standardFlowEnabled
-                          - implicitFlowEnabled
-                          - directAccessGrantsEnabled
-                          - serviceAccountsEnabled
-                          - publicClient
-                          - frontchannelLogout
-                          - protocol
-                          - attributes
-                          - authenticationFlowBindingOverrides
-                          - fullScopeAllowed
-                          - nodeReRegistrationTimeout
-                          - defaultClientScopes
-                          - optionalClientScopes
-                          - access
-                        type: object
-                        properties:
-                          clientId:
-                            type: string
-                          surrogateAuthRequired:
-                            type: boolean
-                          enabled:
-                            type: boolean
-                          alwaysDisplayInConsole:
-                            type: boolean
-                          clientAuthenticatorType:
-                            type: string
-                          redirectUris:
-                            type: string
-                            nullable: true
-                          webOrigins:
-                            type: string
-                            nullable: true
-                          notBefore:
-                            type: integer
-                            format: int32
-                          bearerOnly:
-                            type: boolean
-                          consentRequired:
-                            type: boolean
-                          standardFlowEnabled:
-                            type: boolean
-                          implicitFlowEnabled:
-                            type: boolean
-                          directAccessGrantsEnabled:
-                            type: boolean
-                          serviceAccountsEnabled:
-                            type: boolean
-                          publicClient:
-                            type: boolean
-                          frontchannelLogout:
-                            type: boolean
-                          protocol:
-                            type: string
-                          attributes:
-                            required:
-                              - saml.assertion.signature
-                              - saml.force.post.binding
-                              - saml.multivalued.roles
-                              - saml.encrypt
-                              - backchannel.logout.revoke.offline.tokens
-                              - saml.server.signature
-                              - saml.server.signature.keyinfo.ext
-                              - exclude.session.state.from.auth.response
-                              - backchannel.logout.session.required
-                              - backchannel.logout.url
-                              - client_credentials.use_refresh_token
-                              - saml_force_name_id_format
-                              - saml.client.signature
-                              - tls.client.certificate.bound.access.tokens
-                              - saml.authnstatement
-                              - display.on.consent.screen
-                              - saml.onetimeuse.condition
-                            type: object
-                            properties:
-                              saml.assertion.signature:
-                                type: string
-                              saml.force.post.binding:
-                                type: string
-                              saml.multivalued.roles:
-                                type: string
-                              saml.encrypt:
-                                type: string
-                              backchannel.logout.revoke.offline.tokens:
-                                type: string
-                              saml.server.signature:
-                                type: string
-                              saml.server.signature.keyinfo.ext:
-                                type: string
-                              exclude.session.state.from.auth.response:
-                                type: string
-                              backchannel.logout.session.required:
-                                type: string
-                              backchannel.logout.url:
-                                type: string
-                              client_credentials.use_refresh_token:
-                                type: string
-                              saml_force_name_id_format:
-                                type: string
-                              saml.client.signature:
-                                type: string
-                              tls.client.certificate.bound.access.tokens:
-                                type: string
-                              saml.authnstatement:
-                                type: string
-                              display.on.consent.screen:
-                                type: string
-                              saml.onetimeuse.condition:
-                                type: string
-                          authenticationFlowBindingOverrides:
-                            required:
-                              - direct_grant
-                              - browser
-                            type: object
-                            properties:
-                              direct_grant:
-                                type: string
-                              browser:
-                                type: string
-                          fullScopeAllowed:
-                            type: boolean
-                          nodeReRegistrationTimeout:
-                            type: integer
-                            format: int32
-                          defaultClientScopes:
-                            type: string
-                            nullable: true
-                          optionalClientScopes:
-                            type: string
-                            nullable: true
-                          access:
-                            required:
-                              - view
-                              - configure
-                              - manage
-                            type: object
-                            properties:
-                              view:
-                                type: boolean
-                              configure:
-                                type: boolean
-                              manage:
-                                type: boolean
-                      ExternalIdentityProviderAvailable:
-                        type: boolean
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1803,7 +1374,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1879,7 +1450,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1918,7 +1489,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2027,7 +1598,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2069,7 +1640,6 @@ paths:
         - name: organizationId
           in: path
           required: true
-          style: simple
           schema:
             type: string
       responses:
@@ -2083,7 +1653,7 @@ paths:
                 type: object
                 properties:
                   Organization:
-                    $ref: '#/paths/~1organizations/post/responses/201/content/application~1json/schema/properties/Organization'
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2112,6 +1682,290 @@ paths:
                     Role:
                       type: string
       deprecated: false
+  /users/unregister:
+    post:
+      tags:
+        - onboarding
+      summary: Unregister users
+      description: Individual can delete their account from the privacy dashboard.
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - msg
+                type: object
+                properties:
+                  msg:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                required:
+                  - Code
+                  - Message
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    format: int32
+                  Message:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user/register/android:
+    post:
+      tags:
+        - onboarding
+      summary: User client register (android)
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - devicetoken
+              type: object
+              properties:
+                devicetoken:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/CurrentUser'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user/register/ios:
+    post:
+      tags:
+        - onboarding
+      summary: User client register (ios)
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - devicetoken
+              type: object
+              properties:
+                devicetoken:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/CurrentUser'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/user/image/{imageId}':
+    delete:
+      tags:
+        - onboarding
+      summary: Delete my image
+      parameters:
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - onboarding
+      summary: Get my image
+      parameters:
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          headers: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user/image:
+    post:
+      tags:
+        - onboarding
+      summary: Update my image
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - userimage
+              type: object
+              properties:
+                userimage:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/CurrentUser'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user:
+    patch:
+      tags:
+        - onboarding
+      summary: Update current user
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - phone
+              type: object
+              properties:
+                name:
+                  type: string
+                phone:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/CurrentUser'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - onboarding
+      summary: Get current user
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/CurrentUser'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user/apikey:
+    post:
+      tags:
+        - onboarding
+      summary: Create api key
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                  - APIKey
+                type: object
+                properties:
+                  User:
+                    type: string
+                  APIKey:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - onboarding
+      summary: Get api key
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                  - APIKey
+                type: object
+                properties:
+                  User:
+                    type: string
+                  APIKey:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /user/apikey/revoke:
+    delete:
+      tags:
+        - onboarding
+      summary: Delete api key
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
 components:
   schemas:
     OrganisationLog:
@@ -2823,6 +2677,484 @@ components:
         ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
         StateStr: Request cancelled by user
         Comment: ''
+    CurrentUser:
+      required:
+        - ID
+        - Name
+        - IamID
+        - Email
+        - Phone
+        - ImageID
+        - ImageURL
+        - LastVisit
+        - Client
+        - Orgs
+        - APIKey
+        - Roles
+        - IncompleteProfile
+      type: object
+      properties: null
+      ID:
+        type: string
+      Name:
+        type: string
+      IamID:
+        type: string
+      Email:
+        type: string
+      Phone:
+        type: string
+      ImageID:
+        type: string
+      ImageURL:
+        type: string
+      LastVisit:
+        type: string
+      Client:
+        required:
+          - Token
+          - Type
+        type: object
+        properties:
+          Token:
+            type: string
+          Type:
+            type: integer
+            format: int32
+      Orgs:
+        type: array
+        items:
+          type: string
+      APIKey:
+        type: string
+      Roles:
+        type: array
+        items:
+          type: string
+      IncompleteProfile:
+        type: boolean
+    Organisation:
+      required:
+        - ID
+        - Name
+        - CoverImageID
+        - CoverImageURL
+        - LogoImageID
+        - LogoImageURL
+        - Location
+        - Type
+        - Jurisdiction
+        - Disclosure
+        - Restriction
+        - Shared3PP
+        - Description
+        - Enabled
+        - PolicyURL
+        - EulaURL
+        - Templates
+        - Purposes
+        - Admins
+        - BillingInfo
+        - Subs
+        - HlcSupport
+        - PrivacyDashboard
+        - AriesCloudAgentDeployment
+        - DataRetention
+        - IdentityProviderRepresentation
+        - KeycloakOpenIDClient
+        - ExternalIdentityProviderAvailable
+      type: object
+      properties:
+        ID:
+          type: string
+        Name:
+          type: string
+        CoverImageID:
+          type: string
+        CoverImageURL:
+          type: string
+        LogoImageID:
+          type: string
+        LogoImageURL:
+          type: string
+        Location:
+          type: string
+        Type:
+          required:
+            - ID
+            - Type
+            - ImageID
+            - ImageURL
+          type: object
+          properties:
+            ID:
+              type: string
+            Type:
+              type: string
+            ImageID:
+              type: string
+            ImageURL:
+              type: string
+        Jurisdiction:
+          type: string
+        Disclosure:
+          type: string
+        Restriction:
+          type: string
+        Shared3PP:
+          type: boolean
+        Description:
+          type: string
+        Enabled:
+          type: boolean
+        PolicyURL:
+          type: string
+        EulaURL:
+          type: string
+        Templates:
+          type: string
+          nullable: true
+        Purposes:
+          type: string
+          nullable: true
+        Admins:
+          type: array
+          items:
+            required:
+              - UserID
+              - RoleID
+            type: object
+            properties:
+              UserID:
+                type: string
+              RoleID:
+                type: integer
+                format: int32
+        Subs:
+          required:
+            - Method
+            - Key
+          type: object
+          properties:
+            Method:
+              type: integer
+              format: int32
+            Key:
+              type: string
+        HlcSupport:
+          type: boolean
+        PrivacyDashboard:
+          required:
+            - HostName
+            - Version
+          type: object
+          properties:
+            HostName:
+              type: string
+            Version:
+              type: string
+        DataRetention:
+          required:
+            - RetentionPeriod
+            - Enabled
+          type: object
+          properties:
+            RetentionPeriod:
+              type: integeru
+              format: int32
+            Enabled:
+              type: boolean
+          example:
+            RetentionPeriod: 0
+            Enabled: false
+        IdentityProviderRepresentation:
+          required:
+            - providerId
+            - config
+            - alias
+            - storeToken
+            - addReadTokenRoleOnCreate
+            - enabled
+            - firstBrokerLoginFlowAlias
+            - linkOnly
+            - postBrokerLoginFlowAlias
+            - trustEmail
+            - authenticateByDefault
+          type: object
+          properties:
+            providerId:
+              type: string
+            config:
+              required:
+                - authorizationUrl
+                - tokenUrl
+                - logoutUrl
+                - clientAuthMethod
+                - syncMode
+                - clientId
+                - clientSecret
+                - jwksUrl
+                - userInfoUrl
+                - defaultScope
+                - validateSignature
+                - backchannelSupported
+                - disableUserInfo
+                - hideOnLoginPage
+                - issuer
+                - useJwksUrl
+              type: object
+              properties:
+                authorizationUrl:
+                  type: string
+                tokenUrl:
+                  type: string
+                logoutUrl:
+                  type: string
+                clientAuthMethod:
+                  type: string
+                syncMode:
+                  type: string
+                clientId:
+                  type: string
+                clientSecret:
+                  type: string
+                jwksUrl:
+                  type: string
+                userInfoUrl:
+                  type: string
+                defaultScope:
+                  type: string
+                validateSignature:
+                  type: boolean
+                backchannelSupported:
+                  type: boolean
+                disableUserInfo:
+                  type: boolean
+                hideOnLoginPage:
+                  type: boolean
+                issuer:
+                  type: string
+                useJwksUrl:
+                  type: boolean
+              example:
+                authorizationUrl: ''
+                tokenUrl: ''
+                logoutUrl: ''
+                clientAuthMethod: ''
+                syncMode: ''
+                clientId: ''
+                clientSecret: ''
+                jwksUrl: ''
+                userInfoUrl: ''
+                defaultScope: ''
+                validateSignature: false
+                backchannelSupported: false
+                disableUserInfo: false
+                hideOnLoginPage: false
+                issuer: ''
+                useJwksUrl: false
+            alias:
+              type: string
+            storeToken:
+              type: boolean
+            addReadTokenRoleOnCreate:
+              type: boolean
+            enabled:
+              type: boolean
+            firstBrokerLoginFlowAlias:
+              type: string
+            linkOnly:
+              type: boolean
+            postBrokerLoginFlowAlias:
+              type: string
+            trustEmail:
+              type: boolean
+            authenticateByDefault:
+              type: boolean
+          example:
+            providerId: ''
+            config:
+              authorizationUrl: ''
+              tokenUrl: ''
+              logoutUrl: ''
+              clientAuthMethod: ''
+              syncMode: ''
+              clientId: ''
+              clientSecret: ''
+              jwksUrl: ''
+              userInfoUrl: ''
+              defaultScope: ''
+              validateSignature: false
+              backchannelSupported: false
+              disableUserInfo: false
+              hideOnLoginPage: false
+              issuer: ''
+              useJwksUrl: false
+            alias: ''
+            storeToken: false
+            addReadTokenRoleOnCreate: false
+            enabled: false
+            firstBrokerLoginFlowAlias: ''
+            linkOnly: false
+            postBrokerLoginFlowAlias: ''
+            trustEmail: false
+            authenticateByDefault: false
+        KeycloakOpenIDClient:
+          required:
+            - clientId
+            - surrogateAuthRequired
+            - enabled
+            - alwaysDisplayInConsole
+            - clientAuthenticatorType
+            - redirectUris
+            - webOrigins
+            - notBefore
+            - bearerOnly
+            - consentRequired
+            - standardFlowEnabled
+            - implicitFlowEnabled
+            - directAccessGrantsEnabled
+            - serviceAccountsEnabled
+            - publicClient
+            - frontchannelLogout
+            - protocol
+            - attributes
+            - authenticationFlowBindingOverrides
+            - fullScopeAllowed
+            - nodeReRegistrationTimeout
+            - defaultClientScopes
+            - optionalClientScopes
+            - access
+          type: object
+          properties:
+            clientId:
+              type: string
+            surrogateAuthRequired:
+              type: boolean
+            enabled:
+              type: boolean
+            alwaysDisplayInConsole:
+              type: boolean
+            clientAuthenticatorType:
+              type: string
+            redirectUris:
+              type: string
+              nullable: true
+            webOrigins:
+              type: string
+              nullable: true
+            notBefore:
+              type: integer
+              format: int32
+            bearerOnly:
+              type: boolean
+            consentRequired:
+              type: boolean
+            standardFlowEnabled:
+              type: boolean
+            implicitFlowEnabled:
+              type: boolean
+            directAccessGrantsEnabled:
+              type: boolean
+            serviceAccountsEnabled:
+              type: boolean
+            publicClient:
+              type: boolean
+            frontchannelLogout:
+              type: boolean
+            protocol:
+              type: string
+            attributes:
+              required:
+                - saml.assertion.signature
+                - saml.force.post.binding
+                - saml.multivalued.roles
+                - saml.encrypt
+                - backchannel.logout.revoke.offline.tokens
+                - saml.server.signature
+                - saml.server.signature.keyinfo.ext
+                - exclude.session.state.from.auth.response
+                - backchannel.logout.session.required
+                - backchannel.logout.url
+                - client_credentials.use_refresh_token
+                - saml_force_name_id_format
+                - saml.client.signature
+                - tls.client.certificate.bound.access.tokens
+                - saml.authnstatement
+                - display.on.consent.screen
+                - saml.onetimeuse.condition
+              type: object
+              properties:
+                saml.assertion.signature:
+                  type: string
+                saml.force.post.binding:
+                  type: string
+                saml.multivalued.roles:
+                  type: string
+                saml.encrypt:
+                  type: string
+                backchannel.logout.revoke.offline.tokens:
+                  type: string
+                saml.server.signature:
+                  type: string
+                saml.server.signature.keyinfo.ext:
+                  type: string
+                exclude.session.state.from.auth.response:
+                  type: string
+                backchannel.logout.session.required:
+                  type: string
+                backchannel.logout.url:
+                  type: string
+                client_credentials.use_refresh_token:
+                  type: string
+                saml_force_name_id_format:
+                  type: string
+                saml.client.signature:
+                  type: string
+                tls.client.certificate.bound.access.tokens:
+                  type: string
+                saml.authnstatement:
+                  type: string
+                display.on.consent.screen:
+                  type: string
+                saml.onetimeuse.condition:
+                  type: string
+            authenticationFlowBindingOverrides:
+              required:
+                - direct_grant
+                - browser
+              type: object
+              properties:
+                direct_grant:
+                  type: string
+                browser:
+                  type: string
+            fullScopeAllowed:
+              type: boolean
+            nodeReRegistrationTimeout:
+              type: integer
+              format: int32
+            defaultClientScopes:
+              type: string
+              nullable: true
+            optionalClientScopes:
+              type: string
+              nullable: true
+            access:
+              required:
+                - view
+                - configure
+                - manage
+              type: object
+              properties:
+                view:
+                  type: boolean
+                configure:
+                  type: boolean
+                manage:
+                  type: boolean
+        ExternalIdentityProviderAvailable:
+          type: boolean
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

@@ -1,0 +1,54 @@
+patch:
+  tags:
+    - onboarding
+  summary: Update current user
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - name
+            - phone
+          type: object
+          properties:
+            name:
+              type: string
+            phone:
+              type: string
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+get:
+  tags:
+    - onboarding
+  summary: Get current user
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

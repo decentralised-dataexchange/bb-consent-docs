@@ -1,0 +1,36 @@
+post:
+  tags:
+    - onboarding
+  summary: Unregister users
+  description: Individual can delete their account from the privacy dashboard.
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - msg
+            type: object
+            properties:
+              msg:
+                type: string
+    "401":
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            required:
+              - Code
+              - Message
+            type: object
+            properties:
+              Code:
+                type: integer
+                format: int32
+              Message:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []

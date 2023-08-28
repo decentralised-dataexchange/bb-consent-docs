@@ -59,13 +59,10 @@ patch:
   parameters:
     - name: typeId
       in: path
-      description: ""
       required: true
-      style: simple
       schema:
         type: string
   requestBody:
-    description: ""
     content:
       application/json:
         schema:

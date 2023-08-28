@@ -43,7 +43,7 @@ tags:
   - name: onboarding
     description: >
       These are used for onboarding the organisation, organisation admin and individual users to the system. 
-      It also deals with all authentication and authorisation APIs that can be configured towards external IDPs. 
+      It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
   /v1/organizations/{orgId}/logs:
     $ref: "./paths/audit/getOrgLogs.yaml"
@@ -119,6 +119,22 @@ paths:
     $ref: "./paths/onboarding/configureOrganisation/addGetDeleteOrganisationAdmin.yaml"
   /organizations/roles:
     $ref: "./paths/onboarding/configureOrganisation/getOrganisationRoles.yaml"
+  /users/unregister:
+    $ref: "./paths/onboarding/userProfile/unregisterUser.yaml"
+  /user/register/android:
+    $ref: "./paths/onboarding/userProfile/userClientRegisterAndroid.yaml"
+  /user/register/ios:
+    $ref: "./paths/onboarding/userProfile/userClientRegisteriOS.yaml"
+  /user/image/{imageId}:
+    $ref: "./paths/onboarding/userProfile/getAndDeleteUserImageByID.yaml"
+  /user/image:
+    $ref: "./paths/onboarding/userProfile/updateUserImage.yaml"
+  /user:
+    $ref: "./paths/onboarding/userProfile/getAndUpdateUserProfile.yaml"
+  /user/apikey:
+    $ref: "./paths/onboarding/developer/getAndCreateAPIKey.yaml"
+  /user/apikey/revoke:
+    $ref: "./paths/onboarding/developer/deleteAPIKey.yaml"
 components:
   schemas:
     OrganisationLog:
@@ -157,6 +173,10 @@ components:
       $ref: "./definitions/service/dataRequests/downloadData/GetDownloadMyDataRequestStatus.yaml"
     CancelDownloadMyDataRequest:
       $ref: "./definitions/service/dataRequests/downloadData/CancelDownloadMyDataRequest.yaml"
+    CurrentUser:
+      $ref: "./definitions/onboarding/CurrentUser.yaml"
+    Organisation:
+      $ref: "./definitions/onboarding/Organisation.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

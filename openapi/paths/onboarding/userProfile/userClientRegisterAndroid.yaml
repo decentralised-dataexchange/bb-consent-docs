@@ -1,17 +1,17 @@
 post:
   tags:
     - onboarding
-  description: Validate email
+  summary: User client register (android)
   parameters: []
   requestBody:
     content:
       application/json:
         schema:
           required:
-            - email
+            - devicetoken
           type: object
           properties:
-            email:
+            devicetoken:
               type: string
     required: true
   responses:
@@ -21,17 +21,11 @@ post:
         application/json:
           schema:
             required:
-              - Result
-              - Message
+              - User
             type: object
             properties:
-              Result:
-                type: boolean
-              Message:
-                type: string
-            example:
-              Result: true
-              Message: Email address is valid and not in use in our system
+              User:
+                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
   deprecated: false
   security:
     - BearerAuth: []

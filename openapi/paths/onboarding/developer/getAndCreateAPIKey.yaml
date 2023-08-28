@@ -1,0 +1,46 @@
+post:
+  tags:
+    - onboarding
+  summary: Create api key
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+              - APIKey
+            type: object
+            properties:
+              User:
+                type: string
+              APIKey:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []
+get:
+  tags:
+    - onboarding
+  summary: Get api key
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+              - APIKey
+            type: object
+            properties:
+              User:
+                type: string
+              APIKey:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []

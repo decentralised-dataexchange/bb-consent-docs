@@ -35,13 +35,11 @@ get:
   parameters:
     - name: typeId
       in: path
-      description: ""
       required: true
       schema:
         type: string
   responses:
     "200":
-      description: ""
       headers: {}
   deprecated: false
   security:

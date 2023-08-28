@@ -76,7 +76,6 @@ delete:
     - name: organizationId
       in: path
       required: true
-      style: simple
       schema:
         type: string
   responses:

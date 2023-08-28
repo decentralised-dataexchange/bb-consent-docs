@@ -1,0 +1,33 @@
+delete:
+  tags:
+    - onboarding
+  summary: Delete my image
+  parameters:
+    - name: imageId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+get:
+  tags:
+    - onboarding
+  summary: Get my image
+  parameters:
+    - name: imageId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      headers: {}
+  deprecated: false
+  security:
+    - BearerAuth: []

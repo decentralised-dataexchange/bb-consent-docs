@@ -10,7 +10,6 @@ post:
         type: string
     - name: dataReqId
       in: path
-      description: ""
       required: true
       schema:
         type: string
