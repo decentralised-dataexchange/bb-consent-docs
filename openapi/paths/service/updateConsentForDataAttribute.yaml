@@ -1,7 +1,7 @@
 patch:
   tags:
     - service
-  summary: Update consent for data attribute
+  description: Update consent for data attribute
   parameters:
     - name: orgId
       in: path

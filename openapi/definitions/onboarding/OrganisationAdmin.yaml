@@ -1,0 +1,10 @@
+required:
+  - UserID
+  - RoleID
+type: object
+properties:
+  UserID:
+    type: string
+  RoleID:
+    type: integer
+    format: int32

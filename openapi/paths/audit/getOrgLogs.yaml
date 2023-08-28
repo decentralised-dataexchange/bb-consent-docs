@@ -10,7 +10,7 @@ get:
     - audit
   security:
     - BearerAuth: []
-  summary: Get action logs
+  description: Get action logs
   responses:
     "200":
       description: Action logs for the organisation

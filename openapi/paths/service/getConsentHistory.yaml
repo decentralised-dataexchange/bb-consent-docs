@@ -1,7 +1,7 @@
 get:
   tags:
     - service
-  summary: Get consent history for an individual
+  description: Get consent history for an individual
   parameters:
     - name: orgid
       in: query

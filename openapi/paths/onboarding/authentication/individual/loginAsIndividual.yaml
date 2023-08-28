@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Login as individual
+  description: Login as individual
   requestBody:
     content:
       application/json:

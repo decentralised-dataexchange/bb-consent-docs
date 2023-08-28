@@ -1,26 +1,29 @@
 post:
   tags:
     - onboarding
-  description: Register individual
+  description: Add Organization
   parameters: []
   requestBody:
     content:
       application/json:
         schema:
           required:
-            - username
             - name
-            - password
-            - phone
+            - location
+            - typeid
+            - HlcSupport
+            - Description
           type: object
           properties:
-            username:
-              type: string
             name:
               type: string
-            password:
+            location:
               type: string
-            phone:
+            typeid:
+              type: string
+            HlcSupport:
+              type: boolean
+            Description:
               type: string
     required: true
   responses:
@@ -30,11 +33,11 @@ post:
         application/json:
           schema:
             required:
-              - msg
+              - Organization
             type: object
             properties:
-              msg:
-                type: string
-            example:
-              msg: User created successfully
+              Organization:
+                $ref: "../../../definitions/onboarding/Organisation.yaml"
   deprecated: false
+  security:
+    - BearerAuth: []

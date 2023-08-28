@@ -26,13 +26,24 @@ servers:
     description: Demo server
 tags:
   - name: audit
-    description: Audit-related operations
+    description: >
+      These API(s) allow managing and viewing the consents and their audit trails. The audit trails 
+      of consent management are vital to individuals and organisations in case of disputes or for 
+      other reasons where it is necessary to ascertain a transaction's validity.
   - name: config
-    description: Organisation admin operations
+    description: >
+      The Organisational API(s) allow administrators to configure consent-related aspects 
+      from an organisational perspective. The notification APIs using webhooks are also part 
+      of this category. E.g. These are used for notifications and callbacks to organisation's 
+      IT systems. The administrators configure these, and the notifications may be towards the 
+      organisation's IT system or towards individual users.
   - name: service
-    description: Individual operations
+    description: >
+      These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
   - name: onboarding
-    description: Onboarding users and organisations operations
+    description: >
+      These are used for onboarding the organisation, organisation admin and individual users to the system. 
+      It also deals with all authentication and authorisation APIs that can be configured towards external IDPs. 
 paths:
   /v1/organizations/{orgId}/logs:
     $ref: "./paths/audit/getOrgLogs.yaml"
@@ -86,6 +97,28 @@ paths:
     $ref: "./paths/onboarding/authentication/refreshToken.yaml"
   /v1/users/register:
     $ref: "./paths/onboarding/authentication/register.yaml"
+  /organizations/types:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getAndAddOrganisationTypes.yaml"
+  /organizations/types/{typeId}:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getDeleteUpdateOrganisationTypeById.yaml"
+  /organizations/types/{typeId}/image:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getAndUpdateOrganisationTypeImage.yaml"
+  /organizations:
+    $ref: "./paths/onboarding/configureOrganisation/addOrganisation.yaml"
+  /organizations/{organizationId}:
+    $ref: "./paths/onboarding/configureOrganisation/getAndUpdateOrganisation.yaml"
+  /organizations/{organizationId}/coverimage:
+    $ref: "./paths/onboarding/configureOrganisation/updateOrganisationCoverImage.yaml"
+  /organizations/{organizationId}/logoimage:
+    $ref: "./paths/onboarding/configureOrganisation/updateOrganisationLogoImage.yaml"
+  /organizations/{organizationId}/image/{imageId}:
+    $ref: "./paths/onboarding/configureOrganisation/getOrganisationImageById.yaml"
+  /organizations/{organizationId}/eulaURL:
+    $ref: "./paths/onboarding/configureOrganisation/updateAndDeleteOrganisationEULAURL.yaml"
+  /organizations/{organizationId}/admins:
+    $ref: "./paths/onboarding/configureOrganisation/addGetDeleteOrganisationAdmin.yaml"
+  /organizations/roles:
+    $ref: "./paths/onboarding/configureOrganisation/getOrganisationRoles.yaml"
 components:
   schemas:
     OrganisationLog:

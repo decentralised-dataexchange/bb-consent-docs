@@ -1,7 +1,7 @@
 get:
   tags:
     - service
-  summary: List all data requests
+  description: List all data requests
   parameters:
     - name: orgId
       in: path

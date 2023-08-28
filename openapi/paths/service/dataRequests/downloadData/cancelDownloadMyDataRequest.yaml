@@ -1,7 +1,7 @@
 post:
   tags:
     - service
-  summary: Cancel download my data request
+  description: Cancel download my data request
   parameters:
     - name: orgId
       in: path

@@ -7,7 +7,7 @@ get:
         type: string
   tags:
     - service
-  summary: Get all delete my data requests
+  description: Get all delete my data requests
   responses:
     "200":
       description: OK
@@ -23,7 +23,7 @@ get:
 post:
   tags:
     - service
-  summary: Delete my data
+  description: Delete my data
   parameters:
     - name: orgId
       in: path

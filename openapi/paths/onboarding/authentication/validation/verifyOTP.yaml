@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Verify OTP
+  description: Verify OTP
   parameters: []
   requestBody:
     content:

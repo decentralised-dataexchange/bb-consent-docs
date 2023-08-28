@@ -1,25 +1,21 @@
 get:
   tags:
-    - service
-  description: Get all consents
+    - onboarding
+  description: Get organization image
   parameters:
-    - name: orgId
+    - name: organizationId
       in: path
       required: true
       schema:
         type: string
-    - name: userId
+    - name: imageId
       in: path
       required: true
       schema:
         type: string
   responses:
     "200":
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: "../../definitions/service/GetConsents.yaml"
+      headers: {}
   deprecated: false
   security:
     - BearerAuth: []

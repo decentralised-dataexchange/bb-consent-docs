@@ -1,7 +1,7 @@
 get:
   tags:
     - service
-  summary: Get consents for all consent agreements
+  description: Get consents for all consent agreements
   parameters:
     - name: orgId
       in: path

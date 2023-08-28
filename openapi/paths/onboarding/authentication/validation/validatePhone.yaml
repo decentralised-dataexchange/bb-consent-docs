@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Validate phone
+  description: Validate phone
   parameters: []
   requestBody:
     content:

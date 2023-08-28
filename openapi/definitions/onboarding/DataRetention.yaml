@@ -1,0 +1,13 @@
+required:
+  - RetentionPeriod
+  - Enabled
+type: object
+properties:
+  RetentionPeriod:
+    type: integeru
+    format: int32
+  Enabled:
+    type: boolean
+example:
+  RetentionPeriod: 0
+  Enabled: false

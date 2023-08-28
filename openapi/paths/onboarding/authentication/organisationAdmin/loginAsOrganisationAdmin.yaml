@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Login as organisation admin
+  description: Login as organisation admin
   parameters: []
   requestBody:
     content:

@@ -1,0 +1,45 @@
+post:
+  tags:
+    - onboarding
+  description: Update organization EULA url
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - eulaurl
+          type: object
+          properties:
+            eulaurl:
+              type: string
+    required: true
+  responses:
+    "202":
+      description: Accepted
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+delete:
+  tags:
+    - onboarding
+  description: Delete organization EULA url
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "202":
+      description: Accepted
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []

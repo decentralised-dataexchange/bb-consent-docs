@@ -1,7 +1,7 @@
 post:
   tags:
     - service
-  summary: Update consent for consent agreement
+  description: Update consent for consent agreement
   parameters:
     - name: orgId
       in: path

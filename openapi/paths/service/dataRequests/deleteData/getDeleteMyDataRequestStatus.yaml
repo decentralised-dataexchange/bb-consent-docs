@@ -1,7 +1,7 @@
 get:
   tags:
     - service
-  summary: Get delete my data request status
+  description: Get delete my data request status
   parameters:
     - name: orgId
       in: path

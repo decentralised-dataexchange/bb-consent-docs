@@ -1,7 +1,7 @@
 post:
   tags:
     - service
-  summary: Send download my data request
+  description: Send download my data request
   parameters:
     - name: orgId
       in: path
@@ -24,7 +24,7 @@ post:
 get:
   tags:
     - service
-  summary: Get all download my data requests
+  description: Get all download my data requests
   parameters:
     - name: orgId
       in: path

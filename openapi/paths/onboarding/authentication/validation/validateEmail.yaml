@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  summary: Validate email
+  description: Validate email
   parameters: []
   requestBody:
     description: ""

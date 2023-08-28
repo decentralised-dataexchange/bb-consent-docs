@@ -1,7 +1,7 @@
 get:
   tags:
     - service
-  summary: Get download my data request status
+  description: Get download my data request status
   parameters:
     - name: orgId
       in: path

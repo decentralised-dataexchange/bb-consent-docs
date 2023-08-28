@@ -1,7 +1,7 @@
 post:
   tags:
     - onboarding
-  description: Logs out a user from the system.
+  description: Logs out a user from the system
   requestBody:
     content:
       application/json:
