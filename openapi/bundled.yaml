@@ -20,15 +20,19 @@ servers:
     description: Demo server
 tags:
   - name: audit
+    x-tag-expanded: false
     description: |
       These API(s) allow managing and viewing the consents and their audit trails. The audit trails  of consent management are vital to individuals and organisations in case of disputes or for  other reasons where it is necessary to ascertain a transaction's validity.
   - name: config
+    x-tag-expanded: false
     description: |
       The Organisational API(s) allow administrators to configure consent-related aspects  from an organisational perspective. The notification APIs using webhooks are also part  of this category. E.g. These are used for notifications and callbacks to organisation's  IT systems. The administrators configure these, and the notifications may be towards the  organisation's IT system or towards individual users.
   - name: service
+    x-tag-expanded: false
     description: |
       These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
   - name: onboarding
+    x-tag-expanded: false
     description: |
       These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
