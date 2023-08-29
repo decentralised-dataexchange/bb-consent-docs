@@ -1,0 +1,111 @@
+post:
+  tags:
+    - config
+  summary: Add user to organization
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - userid
+            - subscribekey
+          type: object
+          properties:
+            userid:
+              type: string
+            subscribekey:
+              type: string
+          example:
+            userid: 64ecd1bae2f6a8000142c675
+            subscribekey: LDXM-9BJB-0DAS
+    required: true
+  responses:
+    "400":
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            required:
+              - Code
+              - Message
+            type: object
+            properties:
+              Code:
+                type: integer
+                format: int32
+              Message:
+                type: string
+            example:
+              Code: 400
+              Message: Can not subscribe, Invalid subscription token, organization:64ec561de2f6a8000142c671
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../../definitions/onboarding/Individual.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+get:
+  tags:
+    - config
+  summary: Get organization users
+  parameters:
+    - name: limit
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 1024
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Users
+              - Links
+            type: object
+            properties:
+              Users:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - Name
+                    - Phone
+                    - Email
+                  type: object
+                  properties:
+                    ID:
+                      type: string
+                    Name:
+                      type: string
+                    Phone:
+                      type: string
+                    Email:
+                      type: string
+              Links:
+                $ref: "../../../definitions/PaginationLinks.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

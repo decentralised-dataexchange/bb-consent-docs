@@ -28,7 +28,7 @@ patch:
             type: object
             properties:
               User:
-                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
+                $ref: "../../../definitions/onboarding/Individual.yaml"
   deprecated: false
   security:
     - BearerAuth: []
@@ -48,7 +48,7 @@ get:
             type: object
             properties:
               User:
-                $ref: "../../../definitions/onboarding/CurrentUser.yaml"
+                $ref: "../../../definitions/onboarding/Individual.yaml"
   deprecated: false
   security:
     - BearerAuth: []

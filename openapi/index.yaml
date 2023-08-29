@@ -171,6 +171,14 @@ paths:
     $ref: "./paths/config/manageIndividuals/subscription/getOrganisationUsersCount.yaml"
   /v1/organizations/{organizationId}/subscription:
     $ref: "./paths/config/manageIndividuals/subscription/getOrganisationSubscriptionStatus.yaml"
+  /v1/organizations/{organizationId}/users:
+    $ref: "./paths/config/manageIndividuals/addAndGetOrganisationUsers.yaml"
+  /v1/organizations/{organizationId}/users/{userId}:
+    $ref: "./paths/config/manageIndividuals/deleteUserFromOrganisation.yaml"
+  /v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users:
+    $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAttribute.yaml"
+  /v1/organizations/{orgId}/purposes/{purposeId}/consented/users:
+    $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAgreement.yaml"
 components:
   schemas:
     OrganisationLog:
@@ -209,8 +217,8 @@ components:
       $ref: "./definitions/service/dataRequests/downloadData/GetDownloadMyDataRequestStatus.yaml"
     CancelDownloadMyDataRequest:
       $ref: "./definitions/service/dataRequests/downloadData/CancelDownloadMyDataRequest.yaml"
-    CurrentUser:
-      $ref: "./definitions/onboarding/CurrentUser.yaml"
+    Individual:
+      $ref: "./definitions/onboarding/Individual.yaml"
     Organisation:
       $ref: "./definitions/onboarding/Organisation.yaml"
     ConsentAgreement:

@@ -1,19 +1,18 @@
-post:
+delete:
   tags:
-    - onboarding
-  description: User client register (ios)
-  parameters: []
-  requestBody:
-    content:
-      application/json:
-        schema:
-          required:
-            - devicetoken
-          type: object
-          properties:
-            devicetoken:
-              type: string
-    required: true
+    - config
+  summary: Delete user from organization
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: string
   responses:
     "200":
       description: OK

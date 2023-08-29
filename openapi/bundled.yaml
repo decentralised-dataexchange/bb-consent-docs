@@ -1750,7 +1750,7 @@ paths:
                 type: object
                 properties:
                   User:
-                    $ref: '#/components/schemas/CurrentUser'
+                    $ref: '#/components/schemas/Individual'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1782,7 +1782,7 @@ paths:
                 type: object
                 properties:
                   User:
-                    $ref: '#/components/schemas/CurrentUser'
+                    $ref: '#/components/schemas/Individual'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1850,7 +1850,7 @@ paths:
                 type: object
                 properties:
                   User:
-                    $ref: '#/components/schemas/CurrentUser'
+                    $ref: '#/components/schemas/Individual'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1885,7 +1885,7 @@ paths:
                 type: object
                 properties:
                   User:
-                    $ref: '#/components/schemas/CurrentUser'
+                    $ref: '#/components/schemas/Individual'
       deprecated: false
       security:
         - BearerAuth: []
@@ -1905,7 +1905,7 @@ paths:
                 type: object
                 properties:
                   User:
-                    $ref: '#/components/schemas/CurrentUser'
+                    $ref: '#/components/schemas/Individual'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3007,6 +3007,254 @@ paths:
                 example:
                   Enabled: false
       deprecated: false
+  '/v1/organizations/{organizationId}/users':
+    post:
+      tags:
+        - config
+      summary: Add user to organization
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - userid
+                - subscribekey
+              type: object
+              properties:
+                userid:
+                  type: string
+                subscribekey:
+                  type: string
+              example:
+                userid: 64ecd1bae2f6a8000142c675
+                subscribekey: LDXM-9BJB-0DAS
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/Individual'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                required:
+                  - Code
+                  - Message
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    format: int32
+                  Message:
+                    type: string
+                example:
+                  Code: 400
+                  Message: 'Can not subscribe, Invalid subscription token, organization:64ec561de2f6a8000142c671'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - config
+      summary: Get organization users
+      parameters:
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example: 1024
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Users
+                  - Links
+                type: object
+                properties:
+                  Users:
+                    type: array
+                    items:
+                      required:
+                        - ID
+                        - Name
+                        - Phone
+                        - Email
+                      type: object
+                      properties:
+                        ID:
+                          type: string
+                        Name:
+                          type: string
+                        Phone:
+                          type: string
+                        Email:
+                          type: string
+                  Links:
+                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/users/{userId}':
+    delete:
+      tags:
+        - config
+      summary: Delete user from organization
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - User
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/Individual'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
+    get:
+      tags:
+        - config
+      summary: Get all users consented to data attribute
+      parameters:
+        - name: orgID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: attributeID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Users
+                  - Links
+                type: object
+                properties:
+                  Users:
+                    type: array
+                    items:
+                      required:
+                        - ID
+                        - Name
+                        - Phone
+                        - Email
+                      type: object
+                      properties:
+                        ID:
+                          type: string
+                        Name:
+                          type: string
+                        Phone:
+                          type: string
+                        Email:
+                          type: string
+                  Links:
+                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/purposes/{purposeId}/consented/users':
+    get:
+      tags:
+        - config
+      summary: Get all users consented to a data agreement
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Users
+                  - Links
+                type: object
+                properties:
+                  Users:
+                    type: array
+                    items:
+                      required:
+                        - ID
+                        - Name
+                        - Phone
+                        - Email
+                      type: object
+                      properties:
+                        ID:
+                          type: string
+                        Name:
+                          type: string
+                        Phone:
+                          type: string
+                        Email:
+                          type: string
+                  Links:
+                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+      deprecated: false
+      security:
+        - BearerAuth: []
 components:
   schemas:
     OrganisationLog:
@@ -3718,7 +3966,7 @@ components:
         ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
         StateStr: Request cancelled by user
         Comment: ''
-    CurrentUser:
+    Individual:
       required:
         - ID
         - Name
