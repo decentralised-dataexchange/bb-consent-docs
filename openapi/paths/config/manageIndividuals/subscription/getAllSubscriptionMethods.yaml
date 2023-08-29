@@ -1,0 +1,37 @@
+get:
+  tags:
+    - config
+  summary: Get subscribe methods
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Methods
+            type: object
+            properties:
+              Methods:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - Method
+                  type: object
+                  properties:
+                    ID:
+                      type: integer
+                      format: int32
+                    Method:
+                      type: string
+            example:
+              Methods:
+                - ID: 0
+                  Method: Undefined
+                - ID: 1
+                  Method: Key-Based
+                - ID: 2
+                  Method: OpenID-Connect
+  deprecated: false

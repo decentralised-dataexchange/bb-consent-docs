@@ -153,6 +153,24 @@ paths:
     $ref: "./paths/config/dataAttributes/deleteMultipleDataAttributes.yaml"
   /v1/organizations/{organizationID}/templates/{templateID}:
     $ref: "./paths/config/dataAttributes/getDataAttributeByID.yaml"
+  /v1/organizations/{organizationID}/idp/open-id:
+    $ref: "./paths/config/manageIndividuals/subscription/addGetUpdateAndDeleteIdentityProvider.yaml"
+  /v1/organizations/{organizationId}/subscription/enable:
+    $ref: "./paths/config/manageIndividuals/subscription/enableOrganisationForSubscription.yaml"
+  /v1/organizations/{organizationId}/subscription/disable:
+    $ref: "./paths/config/manageIndividuals/subscription/disableOrganisationForSubscription.yaml"
+  /v1/organizations/{organizationId}/subscribe-method:
+    $ref: "./paths/config/manageIndividuals/subscription/getAndSetSubscriptionMethod.yaml"
+  /v1/organizations/subscribe-methods:
+    $ref: "./paths/config/manageIndividuals/subscription/getAllSubscriptionMethods.yaml"
+  /v1/organizations/{organizationId}/subscribe-key:
+    $ref: "./paths/config/manageIndividuals/subscription/getCurrentSubscriptionKey.yaml"
+  /v1/organizations/{organizationId}/subscribe-key/renew:
+    $ref: "./paths/config/manageIndividuals/subscription/renewSubscriptionKey.yaml"
+  /v1/organizations/{organizationId}/users/count:
+    $ref: "./paths/config/manageIndividuals/subscription/getOrganisationUsersCount.yaml"
+  /v1/organizations/{organizationId}/subscription:
+    $ref: "./paths/config/manageIndividuals/subscription/getOrganisationSubscriptionStatus.yaml"
 components:
   schemas:
     OrganisationLog:

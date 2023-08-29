@@ -1,0 +1,26 @@
+get:
+  tags:
+    - config
+  summary: Get organization subscription status (enable/disable)
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Enabled
+            type: object
+            properties:
+              Enabled:
+                type: boolean
+            example:
+              Enabled: false
+  deprecated: false

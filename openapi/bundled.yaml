@@ -2530,6 +2530,483 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  '/v1/organizations/{organizationID}/idp/open-id':
+    post:
+      tags:
+        - config
+      summary: Add identity provider
+      parameters:
+        - name: organizationID
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '{{company-id}}'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/requestBody/content/application~1json/schemas'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    put:
+      tags:
+        - config
+      summary: Update identity provider
+      parameters:
+        - name: organizationID
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '{{company-id}}'
+      requestBody:
+        content:
+          application/json:
+            schemas:
+              required:
+                - authorizationUrl
+                - tokenUrl
+                - logoutUrl
+                - clientId
+                - clientSecret
+                - jwksUrl
+                - validateSignature
+                - disableuserinfo
+                - issuer
+                - defaultscope
+              type: object
+              properties:
+                authorizationUrl:
+                  type: string
+                tokenUrl:
+                  type: string
+                logoutUrl:
+                  type: string
+                clientId:
+                  type: string
+                clientSecret:
+                  type: string
+                jwksUrl:
+                  type: string
+                validateSignature:
+                  type: boolean
+                disableuserinfo:
+                  type: boolean
+                issuer:
+                  type: string
+                defaultscope:
+                  type: string
+              example:
+                authorizationUrl: 'https://iam.abc.io/auth'
+                tokenUrl: 'https://iam.abc.io/token'
+                logoutUrl: 'https://iam.abc.io/logout'
+                clientId: idp-client
+                clientSecret: 0654b48b-41c2-4887-ade5-fdb98d3fd13c
+                jwksUrl: 'https://iam.abc.io/certs'
+                validateSignature: true
+                disableuserinfo: false
+                issuer: 'https://iam.abc.io'
+                defaultscope: openid
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - authorizationUrl
+                  - tokenUrl
+                  - logoutUrl
+                  - clientAuthMethod
+                  - syncMode
+                  - clientId
+                  - clientSecret
+                  - jwksUrl
+                  - userInfoUrl
+                  - defaultScope
+                  - validateSignature
+                  - backchannelSupported
+                  - disableUserInfo
+                  - hideOnLoginPage
+                  - issuer
+                  - useJwksUrl
+                type: object
+                properties:
+                  authorizationUrl:
+                    type: string
+                  tokenUrl:
+                    type: string
+                  logoutUrl:
+                    type: string
+                  clientAuthMethod:
+                    type: string
+                  syncMode:
+                    type: string
+                  clientId:
+                    type: string
+                  clientSecret:
+                    type: string
+                  jwksUrl:
+                    type: string
+                  userInfoUrl:
+                    type: string
+                  defaultScope:
+                    type: string
+                  validateSignature:
+                    type: boolean
+                  backchannelSupported:
+                    type: boolean
+                  disableUserInfo:
+                    type: boolean
+                  hideOnLoginPage:
+                    type: boolean
+                  issuer:
+                    type: string
+                  useJwksUrl:
+                    type: boolean
+                example:
+                  authorizationUrl: 'https://iam.abc.io/auth'
+                  tokenUrl: 'https://iam.abc.io/token'
+                  logoutUrl: 'https://iam.abc.io/logout'
+                  clientAuthMethod: client_secret_post
+                  syncMode: IMPORT
+                  clientId: idp-client
+                  clientSecret: 0654b48b-41c2-4887-ade5-fdb98d3fd13c
+                  jwksUrl: 'https://iam.abc.io/certs'
+                  userInfoUrl: ''
+                  defaultScope: openid
+                  validateSignature: true
+                  backchannelSupported: true
+                  disableUserInfo: false
+                  hideOnLoginPage: true
+                  issuer: 'https://iam.abc.io'
+                  useJwksUrl: true
+      deprecated: false
+      security:
+        - BearerAuth: []
+    delete:
+      tags:
+        - config
+      summary: Delete identity provider
+      parameters:
+        - name: organizationID
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '{{company-id}}'
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    get:
+      tags:
+        - config
+      summary: Get identity provider
+      parameters:
+        - name: organizationID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/subscription/enable':
+    post:
+      tags:
+        - config
+      summary: Enable organization for subscription
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/subscription/disable':
+    post:
+      tags:
+        - config
+      summary: Disable organization for subscription
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/subscribe-method':
+    get:
+      tags:
+        - config
+      summary: Get subscribe method
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - Method
+                type: object
+                properties:
+                  ID:
+                    type: integer
+                    format: int32
+                  Method:
+                    type: string
+                example:
+                  ID: 1
+                  Method: Key-Based
+      deprecated: false
+      security:
+        - BearerAuth: []
+    post:
+      tags:
+        - config
+      summary: Set subscribe method
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - subscribemethodid
+              type: object
+              properties:
+                subscribemethodid:
+                  type: integer
+                  format: int32
+              example:
+                subscribemethodid: 1
+        required: true
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /v1/organizations/subscribe-methods:
+    get:
+      tags:
+        - config
+      summary: Get subscribe methods
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Methods
+                type: object
+                properties:
+                  Methods:
+                    type: array
+                    items:
+                      required:
+                        - ID
+                        - Method
+                      type: object
+                      properties:
+                        ID:
+                          type: integer
+                          format: int32
+                        Method:
+                          type: string
+                example:
+                  Methods:
+                    - ID: 0
+                      Method: Undefined
+                    - ID: 1
+                      Method: Key-Based
+                    - ID: 2
+                      Method: OpenID-Connect
+      deprecated: false
+  '/v1/organizations/{organizationId}/subscribe-key':
+    get:
+      tags:
+        - config
+      summary: Get subscribe key
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - SubscribeKey
+                  - SubscribeMethod
+                type: object
+                properties:
+                  SubscribeKey:
+                    type: string
+                  SubscribeMethod:
+                    type: string
+                example:
+                  SubscribeKey: CORC-SAHT-7ZKC
+                  SubscribeMethod: Key-Based
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/subscribe-key/renew':
+    post:
+      tags:
+        - config
+      summary: Renew subscribe key
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - SubscribeKey
+                  - SubscribeMethod
+                type: object
+                properties:
+                  SubscribeKey:
+                    type: string
+                  SubscribeMethod:
+                    type: string
+                example:
+                  SubscribeKey: LDXM-9BJB-0DAS
+                  SubscribeMethod: Key-Based
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/users/count':
+    get:
+      tags:
+        - config
+      summary: Get organization users count
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - SubscribeUserCount
+                type: object
+                properties:
+                  SubscribeUserCount:
+                    type: integer
+                    format: int32
+                example:
+                  SubscribeUserCount: 0
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationId}/subscription':
+    get:
+      tags:
+        - config
+      summary: Get organization subscription status (enable/disable)
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '{{company-id}}'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Enabled
+                type: object
+                properties:
+                  Enabled:
+                    type: boolean
+                example:
+                  Enabled: false
+      deprecated: false
 components:
   schemas:
     OrganisationLog:
