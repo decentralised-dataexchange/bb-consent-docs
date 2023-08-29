@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="GovStack Consent BB APIs"
-  />
-  <title>GovStack Consent BB APIs</title>
-  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@4.5.0/swagger-ui.css" />
-</head>
-<body>
-<div id="swagger-ui"></div>
-<script src="https://unpkg.com/swagger-ui-dist@4.5.0/swagger-ui-bundle.js" crossorigin></script>
-<script>
-  window.onload = () => {
-    window.ui = SwaggerUIBundle({
-      url: './index.yaml',
-      dom_id: '#swagger-ui',
-    });
-  };
-</script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GovStack Consent BB APIs" />
+    <title>GovStack Consent BB APIs</title>
+    <script
+      type="module"
+      src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
+    ></script>
+  </head>
+  <body>
+    <rapi-doc
+      spec-url="./index.yaml"
+      theme="light"
+      show-header="false"
+      nav-bg-color="#0a065e"
+      nav-text-color="#fff"
+      primary-color="#0a065e"
+      persist-auth="true"
+    >
+      <img slot="nav-logo" src="./resources/logo.svg" />
+    </rapi-doc>
+  </body>
 </html>
