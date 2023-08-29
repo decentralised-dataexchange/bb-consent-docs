@@ -9,9 +9,22 @@
       type="module"
       src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
     ></script>
+    <script>
+      // JavaScript to modify render-style based on screen width
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const rapiDocElement = document.querySelector("rapi-doc");
+        if (window.innerWidth <= 768) {
+          // Assuming 768px as the breakpoint for tablet size
+          rapiDocElement.setAttribute("render-style", "read"); // for sizes less than a tablet
+        } else {
+          rapiDocElement.setAttribute("render-style", "focused"); // for sizes greater than a tablet
+        }
+      });
+    </script>
   </head>
   <body>
     <rapi-doc
+      render-style="focused"
       spec-url="./index.yaml"
       theme="light"
       show-header="false"
