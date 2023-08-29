@@ -2342,7 +2342,7 @@ paths:
                 templates:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Organisation/properties/Templates/items'
+                    $ref: '#/components/schemas/DataAttribute'
         required: true
       responses:
         '201':
@@ -2385,7 +2385,7 @@ paths:
                   Templates:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Organisation/properties/Templates/items'
+                      $ref: '#/components/schemas/DataAttribute'
       deprecated: false
       security:
         - bearer: []
@@ -2526,7 +2526,7 @@ paths:
                   OrgID:
                     type: string
                   Template:
-                    $ref: '#/components/schemas/Organisation/properties/Templates/items'
+                    $ref: '#/components/schemas/DataAttribute'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3378,25 +3378,7 @@ components:
         Templates:
           type: array
           items:
-            required:
-              - consent
-              - description
-              - purposeids
-            type: object
-            properties:
-              consent:
-                type: string
-              description:
-                type: string
-              purposeids:
-                type: array
-                items:
-                  type: string
-            example:
-              consent: Age
-              description: example
-              purposeids:
-                - 64ecf184e2f6a8000142c678
+            $ref: '#/components/schemas/DataAttribute'
         Purposes:
           type: array
           items:
@@ -3799,6 +3781,26 @@ components:
           type: string
         PublishFlag:
           type: boolean
+    DataAttribute:
+      required:
+        - consent
+        - description
+        - purposeids
+      type: object
+      properties:
+        consent:
+          type: string
+        description:
+          type: string
+        purposeids:
+          type: array
+          items:
+            type: string
+      example:
+        consent: Age
+        description: example
+        purposeids:
+          - 64ecf184e2f6a8000142c678
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

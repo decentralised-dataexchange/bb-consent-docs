@@ -197,6 +197,8 @@ components:
       $ref: "./definitions/onboarding/Organisation.yaml"
     ConsentAgreement:
       $ref: "./definitions/config/ConsentAgreement.yaml"
+    DataAttribute:
+      $ref: "./definitions/config/DataAttribute.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header
