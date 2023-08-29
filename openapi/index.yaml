@@ -179,6 +179,12 @@ paths:
     $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAttribute.yaml"
   /v1/organizations/{orgId}/purposes/{purposeId}/consented/users:
     $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAgreement.yaml"
+  /v1/organizations/data-requests:
+    $ref: "./paths/config/dataRequests/getAvailableDataRequestStatuses.yaml"
+  /v1/organizations/{orgId}/data-requests:
+    $ref: "./paths/config/dataRequests/getOpenAndCloseDataRequests.yaml"
+  /v1/organizations/{orgId}/data-requests/{dataReqId}:
+    $ref: "./paths/config/dataRequests/getAndUpdateDataRequestByID.yaml"
 components:
   schemas:
     OrganisationLog:
@@ -225,6 +231,8 @@ components:
       $ref: "./definitions/config/ConsentAgreement.yaml"
     DataAttribute:
       $ref: "./definitions/config/DataAttribute.yaml"
+    DataRequest:
+      $ref: "./definitions/config/DataRequest.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

@@ -3255,6 +3255,148 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  /v1/organizations/data-requests:
+    get:
+      tags:
+        - config
+      summary: Get available data request statuses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - Str
+                  type: object
+                  properties:
+                    ID:
+                      type: integer
+                      format: int32
+                    Str:
+                      type: string
+                  example:
+                    ID: 1
+                    Str: Request initiated
+      deprecated: false
+  '/v1/organizations/{orgId}/data-requests':
+    get:
+      tags:
+        - config
+      summary: Get open and close data requests
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: string
+            example: open
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - DataRequests
+                  - IsRequestsOngoing
+                  - IsDataDeleteRequestOngoing
+                  - IsDataDownloadRequestOngoing
+                  - Links
+                type: object
+                properties:
+                  DataRequests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataRequest'
+                  IsRequestsOngoing:
+                    type: boolean
+                  IsDataDeleteRequestOngoing:
+                    type: boolean
+                  IsDataDownloadRequestOngoing:
+                    type: boolean
+                  Links:
+                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{orgId}/data-requests/{dataReqId}':
+    get:
+      tags:
+        - config
+      summary: Get data request
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dataReqId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataRequest'
+      deprecated: false
+      security:
+        - BearerAuth: []
+    patch:
+      tags:
+        - config
+      summary: Update data request
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dataReqId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - state
+                - comment
+              type: object
+              properties:
+                state:
+                  type: integer
+                  format: int32
+                comment:
+                  type: string
+              example:
+                state: 7
+                comment: Request processed
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataRequest'
+      deprecated: false
+      security:
+        - BearerAuth: []
 components:
   schemas:
     OrganisationLog:
@@ -4526,6 +4668,57 @@ components:
         description: example
         purposeids:
           - 64ecf184e2f6a8000142c678
+    DataRequest:
+      required:
+        - ID
+        - UserID
+        - UserName
+        - OrgID
+        - Type
+        - TypeStr
+        - State
+        - RequestedDate
+        - ClosedDate
+        - StateStr
+        - Comment
+      type: object
+      properties:
+        ID:
+          type: string
+        UserID:
+          type: string
+        UserName:
+          type: string
+        OrgID:
+          type: string
+        Type:
+          type: integer
+          format: int32
+        TypeStr:
+          type: string
+        State:
+          type: integer
+          format: int32
+        RequestedDate:
+          type: string
+        ClosedDate:
+          type: string
+        StateStr:
+          type: string
+        Comment:
+          type: string
+      example:
+        ID: 64ee6e86e2f6a8000142c68f
+        UserID: 638de3302f5d1700014431f3
+        UserName: george@igrant.io
+        OrgID: 64ec561de2f6a8000142c671
+        Type: 2
+        TypeStr: Download Data
+        State: 1
+        RequestedDate: '2023-08-29 22:17:42 +0000 UTC'
+        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
+        StateStr: Request initiated
+        Comment: ''
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header
