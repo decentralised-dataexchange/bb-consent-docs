@@ -62,8 +62,9 @@ properties:
   EulaURL:
     type: string
   Templates:
-    type: string
-    nullable: true
+    type: array
+    items:
+      $ref: "../config/DataAttribute.yaml"
   Purposes:
     type: array
     items:

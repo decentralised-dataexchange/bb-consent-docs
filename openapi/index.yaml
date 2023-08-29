@@ -145,6 +145,14 @@ paths:
     $ref: "./paths/config/consentAgreements/getAndAddConsentAgreements.yaml"
   /v1/organizations/{organizationId}/purposes/{purposeId}:
     $ref: "./paths/config/consentAgreements/getDeleteUpdateConsentAgreementByID.yaml"
+  /v1/organizations/{organizationId}/templates:
+    $ref: "./paths/config/dataAttributes/getAndAddDataAttributes.yaml"
+  /v1/organizations/{organizationId}/templates/{templateId}:
+    $ref: "./paths/config/dataAttributes/updateAndDeleteDataAttributeByID.yaml"
+  /v1/organizations/{organizationId}/purposes/{purposeId}/templates:
+    $ref: "./paths/config/dataAttributes/deleteMultipleDataAttributes.yaml"
+  /v1/organizations/{organizationID}/templates/{templateID}:
+    $ref: "./paths/config/dataAttributes/getDataAttributeByID.yaml"
 components:
   schemas:
     OrganisationLog:
