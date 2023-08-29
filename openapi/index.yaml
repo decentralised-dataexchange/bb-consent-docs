@@ -185,6 +185,22 @@ paths:
     $ref: "./paths/config/dataRequests/getOpenAndCloseDataRequests.yaml"
   /v1/organizations/{orgId}/data-requests/{dataReqId}:
     $ref: "./paths/config/dataRequests/getAndUpdateDataRequestByID.yaml"
+  /v1/organizations/webhooks/event-types:
+    $ref: "./paths/config/webhooks/getAvailableWebhookEventTypes.yaml"
+  /v1/organizations/webhooks/payload/content-types:
+    $ref: "./paths/config/webhooks/getAvailableWebhookPayloadTypes.yaml"
+  /v1/organizations/{organizationId}/webhooks:
+    $ref: "./paths/config/webhooks/createAndGetAllWebhooks.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}:
+    $ref: "./paths/config/webhooks/getDeleteAndUpdateWebhookByID.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/ping:
+    $ref: "./paths/config/webhooks/pingWebhook.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery:
+    $ref: "./paths/config/webhooks/getRecentWebhookDeliveries.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}:
+    $ref: "./paths/config/webhooks/getRecentWebhookDeliveryByID.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
+    $ref: "./paths/config/webhooks/redeliverWebhook.yaml"
 components:
   schemas:
     OrganisationLog:

@@ -1,0 +1,62 @@
+get:
+  tags:
+    - config
+  description: Get recent webhook deliveries
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    - name: webhookId
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - WebhookDeliveries
+              - Links
+            type: object
+            properties:
+              WebhookDeliveries:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - WebhookID
+                    - ResponseStatusCode
+                    - ResponseStatusStr
+                    - TimeStamp
+                    - Status
+                    - StatusDescription
+                  type: object
+                  properties:
+                    ID:
+                      type: string
+                    WebhookID:
+                      type: string
+                    ResponseStatusCode:
+                      type: integer
+                      format: int32
+                    ResponseStatusStr:
+                      type: string
+                    TimeStamp:
+                      type: string
+                    Status:
+                      type: string
+                    StatusDescription:
+                      type: string
+
+              Links:
+                $ref: "../../../definitions/PaginationLinks.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
