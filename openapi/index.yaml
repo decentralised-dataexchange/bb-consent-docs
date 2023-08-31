@@ -77,6 +77,8 @@ paths:
     $ref: "./paths/service/dataRequests/downloadData/getDownloadMyDataRequestStatus.yaml"
   /v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel:
     $ref: "./paths/service/dataRequests/downloadData/cancelDownloadMyDataRequest.yaml"
+  /v1/GetUserOrgsAndConsents:
+    $ref: "./paths/service/getUserOrgAndConsent.yaml"
   /v1/users/admin/login:
     $ref: "./paths/onboarding/authentication/organisationAdmin/loginAsOrganisationAdmin.yaml"
   /v1/users/login:

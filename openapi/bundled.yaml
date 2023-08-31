@@ -484,6 +484,58 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  /v1/GetUserOrgsAndConsents:
+    get:
+      tags:
+        - service
+      description: Get user org and consents
+      parameters:
+        - name: orgID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                  - ConsentID
+                  - PurposeConsents
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+                  ConsentID:
+                    type: string
+                  PurposeConsents:
+                    type: array
+                    items:
+                      required:
+                        - Purpose
+                        - Count
+                      type: object
+                      properties:
+                        Purpose:
+                          $ref: '#/components/schemas/ConsentAgreement'
+                        Count:
+                          required:
+                            - Total
+                            - Consented
+                          type: object
+                          properties:
+                            Total:
+                              type: integer
+                              format: int32
+                            Consented:
+                              type: integer
+                              format: int32
+      deprecated: false
+      security:
+        - BearerAuth: []
   /v1/users/admin/login:
     post:
       tags:

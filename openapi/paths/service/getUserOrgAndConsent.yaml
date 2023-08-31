@@ -1,0 +1,51 @@
+get:
+  tags:
+    - service
+  description: Get user org and consents
+  parameters:
+    - name: orgID
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+              - ConsentID
+              - PurposeConsents
+            type: object
+            properties:
+              Organization:
+                $ref: "../../definitions/onboarding/Organisation.yaml"
+              ConsentID:
+                type: string
+              PurposeConsents:
+                type: array
+                items:
+                  required:
+                    - Purpose
+                    - Count
+                  type: object
+                  properties:
+                    Purpose:
+                      $ref: "../../definitions/config/ConsentAgreement.yaml"
+                    Count:
+                      required:
+                        - Total
+                        - Consented
+                      type: object
+                      properties:
+                        Total:
+                          type: integer
+                          format: int32
+                        Consented:
+                          type: integer
+                          format: int32
+  deprecated: false
+  security:
+    - BearerAuth: []
