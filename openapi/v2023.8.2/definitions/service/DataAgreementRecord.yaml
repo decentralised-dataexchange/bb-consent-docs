@@ -1,0 +1,222 @@
+title: Data Agreement Record
+type: object
+properties:
+  "@context":
+    type: object
+    properties:
+      "@vocab":
+        type: string
+      dpv:
+        type: string
+      dpv-gdpr:
+        type: string
+      dct:
+        type: string
+      foaf:
+        type: string
+      ex:
+        type: string
+    required:
+      - "@vocab"
+      - dpv
+      - dpv-gdpr
+      - dct
+      - foaf
+      - ex
+  "@id":
+    type: string
+  "@type":
+    type: string
+  dct:conformsTo:
+    type: string
+  dct:subject:
+    type: object
+    properties:
+      "@id":
+        type: string
+      "@type":
+        type: string
+      hasPersonalDataHandling:
+        title: "hasPersonalDataHandling"
+        type: object
+        properties:
+          hasNotice:
+            type: object
+            properties:
+              "@id":
+                type: string
+            required:
+              - "@id"
+          hasAuthority:
+            type: object
+            properties:
+              "@id":
+                type: string
+            required:
+              - "@id"
+          hasPurpose:
+            type: array
+            items:
+              type: object
+              properties:
+                dct:title:
+                  type: string
+                "@type":
+                  type: string
+                hasLegalBasis:
+                  type: object
+                  properties:
+                    "@id":
+                      type: string
+                  required:
+                    - "@id"
+                hasPersonalData:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      "@type":
+                        type: string
+                      hasContext:
+                        type: string
+                    required:
+                      - "@type"
+                      - hasContext
+                hasDataController:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      "@id":
+                        type: string
+                    required:
+                      - "@id"
+                hasStorageCondition:
+                  type: object
+                  properties:
+                    hasLocation:
+                      type: string
+                    hasDuration:
+                      type: number
+                  required:
+                    - hasLocation
+                    - hasDuration
+                hasJurisdiction:
+                  type: string
+                dct:subject:
+                  type: array
+                  items:
+                    type: string
+                hasRecipient:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      "@id":
+                        type: string
+                    required:
+                      - "@id"
+                hasRight:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      "@type":
+                        type: array
+                        items:
+                          type: string
+                      isExercisedAt:
+                        type: string
+                    required:
+                      - "@type"
+                      - isExercisedAt
+                hasOrganisationalMeasure:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      "@id":
+                        type: string
+                      "@type":
+                        type: string
+                    required:
+                      - "@id"
+                      - "@type"
+              required:
+                - dct:title
+                - "@type"
+                - hasLegalBasis
+                - hasPersonalData
+                - hasDataController
+                - hasStorageCondition
+                - hasJurisdiction
+                - dct:subject
+                - hasRecipient
+                - hasRight
+                - hasOrganisationalMeasure
+        required:
+          - hasNotice
+          - hasAuthority
+          - hasPurpose
+      hasEntity:
+        type: array
+        items:
+          type: object
+          properties:
+            "@id":
+              type: string
+            foaf:mbox:
+              type: string
+            foaf:page:
+              type: string
+            foaf:name:
+              type: string
+            "@type":
+              type: array
+              items:
+                type: string
+            foaf:OnlineAccount:
+              type: object
+              properties:
+                foaf:name:
+                  type: string
+                foaf:accountName:
+                  type: string
+              required:
+                - foaf:name
+                - foaf:accountName
+          required:
+            - "@id"
+            - foaf:page
+            - foaf:name
+            - "@type"
+      dct:hasPart:
+        type: array
+        items:
+          type: object
+          properties:
+            dct:date:
+              type: string
+            hasDuration:
+              type: number
+            "@type":
+              type: string
+            hasConsentStatus:
+              type: string
+          required:
+            - dct:date
+            - hasDuration
+            - "@type"
+            - hasConsentStatus
+    required:
+      - "@id"
+      - "@type"
+      - hasPersonalDataHandling
+      - hasEntity
+      - dct:hasPart
+required:
+  - "@context"
+  - "@id"
+  - "@type"
+  - dct:conformsTo
+  - dct:subject

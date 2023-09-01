@@ -1,86 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="GovStack Consent BB APIs" />
     <title>GovStack Consent BB APIs</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Hind:wght@400;700&amp;family=Roboto+Mono&amp;display=swap"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <script
-      type="module"
-      src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
-    ></script>
+  </head>
+
+  <body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="relative inline-block text-left">
+      <div>
+        <button
+          type="button"
+          class="inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          id="dropdownToggle"
+        >
+          Choose API specification version:
+          <svg
+            class="-mr-1 ml-2 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden"
+        id="dropdownMenu"
+      >
+        <div class="py-1">
+          <a
+            href="./v2023.8.1/index.html"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+            >2023.8.1</a
+          >
+          <a
+            href="./v2023.8.2/index.html"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+            >2023.8.2</a
+          >
+        </div>
+      </div>
+    </div>
     <script>
-      // JavaScript to modify render-style based on screen width
-      window.addEventListener("DOMContentLoaded", (event) => {
-        const rapiDocElement = document.querySelector("rapi-doc");
-        if (window.innerWidth <= 768) {
-          // Assuming 768px as the breakpoint for tablet size
-          rapiDocElement.setAttribute("render-style", "read"); // for sizes less than a tablet
+      const dropdownToggle = document.getElementById("dropdownToggle");
+      const dropdownMenu = document.getElementById("dropdownMenu");
 
-          // Function to apply the style when the element is available
-          const applyStyleToApiInfo = () => {
-            const mainContentElement =
-              rapiDocElement.shadowRoot.querySelector(".main-content");
-            const apiInfoElement =
-              rapiDocElement.shadowRoot.querySelector("#api-info");
-            const labelOperationPathElements =
-              rapiDocElement.shadowRoot.querySelectorAll(
-                "[part*='section-operation-webhook-method']"
-              );
-
-            if (
-              apiInfoElement &&
-              labelOperationPathElements &&
-              mainContentElement
-            ) {
-              mainContentElement.style.padding = "10px";
-              apiInfoElement.style.marginLeft = "0";
-              labelOperationPathElements.forEach(function (element) {
-                element.style.overflowX = "scroll";
-              });
-              observer.disconnect(); // Stop observing once style is applied
-            }
-          };
-
-          // Observe changes in the Shadow DOM
-          const observer = new MutationObserver(applyStyleToApiInfo);
-          if (rapiDocElement.shadowRoot) {
-            observer.observe(rapiDocElement.shadowRoot, {
-              childList: true,
-              subtree: true,
-            });
-            applyStyleToApiInfo(); // Try applying the style immediately in case the element is already there
-          }
+      dropdownToggle.addEventListener("click", () => {
+        if (dropdownMenu.classList.contains("hidden")) {
+          dropdownMenu.classList.remove("hidden");
         } else {
-          rapiDocElement.setAttribute("render-style", "focused"); // for sizes greater than a tablet
+          dropdownMenu.classList.add("hidden");
+        }
+      });
+
+      // Optional: Close dropdown when clicking outside
+      document.addEventListener("click", (event) => {
+        if (
+          !dropdownToggle.contains(event.target) &&
+          !dropdownMenu.contains(event.target)
+        ) {
+          dropdownMenu.classList.add("hidden");
         }
       });
     </script>
-  </head>
-  <body>
-    <rapi-doc
-      render-style="focused"
-      spec-url="./index.yaml"
-      theme="light"
-      show-header="false"
-      nav-bg-color="#0a065e"
-      nav-text-color="#fff"
-      primary-color="#0a065e"
-      persist-auth="true"
-      show-method-in-nav-bar="as-colored-block"
-      show-components="true"
-      allow-spec-file-download="true"
-      show-curl-before-try="true"
-      schema-style="table"
-      regular-font="Hind"
-      font-size="large"
-      mono-font="Roboto Mono"
-    >
-      <img slot="nav-logo" src="./resources/logo.svg" />
-    </rapi-doc>
   </body>
 </html>

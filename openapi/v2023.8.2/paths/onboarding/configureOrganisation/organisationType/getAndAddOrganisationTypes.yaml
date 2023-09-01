@@ -1,0 +1,72 @@
+get:
+  tags:
+    - onboarding
+  description: Get organization types
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              required:
+                - ID
+                - Type
+                - ImageID
+                - ImageURL
+              type: object
+              properties:
+                ID:
+                  type: string
+                Type:
+                  type: string
+                ImageID:
+                  type: string
+                ImageURL:
+                  type: string
+  deprecated: false
+  security:
+    - BearerAuth: []
+post:
+  tags:
+    - onboarding
+  description: Add organization type
+  operationId: Addorganizationtype
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - type
+          type: object
+          properties:
+            type:
+              type: string
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - ID
+              - Type
+              - ImageID
+              - ImageURL
+            type: object
+            properties:
+              ID:
+                type: string
+              Type:
+                type: string
+              ImageID:
+                type: string
+              ImageURL:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []

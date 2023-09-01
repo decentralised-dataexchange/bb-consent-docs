@@ -1,0 +1,31 @@
+post:
+  tags:
+    - onboarding
+  description: User client register (android)
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - devicetoken
+          type: object
+          properties:
+            devicetoken:
+              type: string
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../../definitions/onboarding/Individual.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

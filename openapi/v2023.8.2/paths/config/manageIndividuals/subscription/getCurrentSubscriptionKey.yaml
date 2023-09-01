@@ -1,0 +1,31 @@
+get:
+  tags:
+    - config
+  summary: Get subscribe key
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - SubscribeKey
+              - SubscribeMethod
+            type: object
+            properties:
+              SubscribeKey:
+                type: string
+              SubscribeMethod:
+                type: string
+            example:
+              SubscribeKey: CORC-SAHT-7ZKC
+              SubscribeMethod: Key-Based
+  deprecated: false
+  security:
+    - BearerAuth: []

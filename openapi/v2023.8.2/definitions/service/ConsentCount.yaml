@@ -1,0 +1,13 @@
+required:
+  - Total
+  - Consented
+type: object
+
+properties:
+  Total:
+    type: integer
+    format: int32
+
+  Consented:
+    type: integer
+    format: int32

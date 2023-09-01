@@ -1,0 +1,68 @@
+get:
+  tags:
+    - config
+  summary: Get data request
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: dataReqId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../definitions/config/DataRequest.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+patch:
+  tags:
+    - config
+  summary: Update data request
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: dataReqId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - state
+            - comment
+          type: object
+          properties:
+            state:
+              type: integer
+              format: int32
+            comment:
+              type: string
+          example:
+            state: 7
+            comment: Request processed
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../definitions/config/DataRequest.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

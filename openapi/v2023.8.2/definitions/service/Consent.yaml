@@ -1,0 +1,39 @@
+required:
+  - ID
+  - Description
+  - Value
+  - Status
+type: object
+
+properties:
+  ID:
+    type: string
+
+  Description:
+    type: string
+
+  Value:
+    type: string
+
+  Status:
+    required:
+      - Consented
+      - TimeStamp
+      - Days
+      - Remaining
+    type: object
+
+    properties:
+      Consented:
+        type: string
+
+      TimeStamp:
+        type: string
+
+      Days:
+        type: integer
+        format: int32
+
+      Remaining:
+        type: integer
+        format: int32

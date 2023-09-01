@@ -1,0 +1,13 @@
+required:
+  - Msg
+  - Status
+type: object
+properties:
+  Msg:
+    type: string
+  Status:
+    type: integer
+    format: int32
+example:
+  Msg: Consent updated successfully
+  Status: 200

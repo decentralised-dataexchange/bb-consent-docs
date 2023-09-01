@@ -1,0 +1,36 @@
+get:
+  tags:
+    - service
+  description: Get consent history for an individual
+  parameters:
+    - name: orgid
+      in: query
+      description: "Organisation ID"
+      required: false
+      schema:
+        type: string
+    - name: limit
+      in: query
+      description: "Number of consent histories to be fetched"
+      required: false
+      schema:
+        type: integer
+        format: int32
+        example: 1024
+    - name: userId
+      in: path
+      description: "Individual ID"
+      required: true
+      schema:
+        type: string
+        example: "646236ee61e48900014efb9c"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/service/GetUserConsentHistory.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

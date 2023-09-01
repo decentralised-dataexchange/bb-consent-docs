@@ -1,0 +1,25 @@
+get:
+  tags:
+    - service
+  description: Get all consents
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/service/GetConsents.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

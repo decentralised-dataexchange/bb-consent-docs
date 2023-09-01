@@ -1,0 +1,20 @@
+get:
+  tags:
+    - service
+  description: List all data requests
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../definitions/service/dataRequests/ListAllDataRequests.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

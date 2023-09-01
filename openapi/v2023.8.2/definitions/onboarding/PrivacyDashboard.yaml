@@ -1,0 +1,9 @@
+required:
+  - HostName
+  - Version
+type: object
+properties:
+  HostName:
+    type: string
+  Version:
+    type: string

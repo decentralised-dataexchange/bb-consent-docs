@@ -1,0 +1,68 @@
+post:
+  tags:
+    - config
+  description: Add data attributes
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - templates
+          type: object
+          properties:
+            templates:
+              type: array
+              items:
+                $ref: "../../../definitions/config/DataAttribute.yaml"
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboarding/Organisation.yaml"
+  deprecated: false
+  security:
+    - bearer: []
+get:
+  tags:
+    - config
+  description: Get data attributes
+  parameters:
+    - name: organizationId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - OrgID
+              - Templates
+            type: object
+            properties:
+              OrgID:
+                type: string
+              Templates:
+                type: array
+                items:
+                  $ref: "../../../definitions/config/DataAttribute.yaml"
+  deprecated: false
+  security:
+    - bearer: []

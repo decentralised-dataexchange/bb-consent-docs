@@ -1,0 +1,259 @@
+openapi: "3.0.0"
+info:
+  version: "2023.8.1"
+  title: "GovStack Consent BB APIs"
+  description: >
+    The Consent Building Block enables services for individuals to approve the use 
+    of their personal data by defining the principles, functions, and architecture 
+    of an information system. For organisations that process personal data, it 
+    provides the ability to know the individual's will and legitimately process such 
+    personal data. The Consent Building Block is a process-oriented GovStack Building Block 
+    facilitating auditable bilateral agreements within a multi-agent environment that 
+    integrates with most other Building Blocks.
+  contact:
+    email: support@igrant.io
+    name: iGrant.io
+    url: https://igrant.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://api.bb-consent.dev/
+    description: Development server
+  - url: https://staging-consent-bb-api.igrant.io/
+    description: Staging server
+  - url: https://demo-consent-bb-api.igrant.io/
+    description: Demo server
+tags:
+  - name: audit
+    x-tag-expanded: false
+    description: >
+      These API(s) allow managing and viewing the consents and their audit trails. The audit trails 
+      of consent management are vital to individuals and organisations in case of disputes or for 
+      other reasons where it is necessary to ascertain a transaction's validity.
+  - name: config
+    x-tag-expanded: false
+    description: >
+      The Organisational API(s) allow administrators to configure consent-related aspects 
+      from an organisational perspective. The notification APIs using webhooks are also part 
+      of this category. E.g. These are used for notifications and callbacks to organisation's 
+      IT systems. The administrators configure these, and the notifications may be towards the 
+      organisation's IT system or towards individual users.
+  - name: service
+    x-tag-expanded: false
+    description: >
+      These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
+  - name: onboarding
+    x-tag-expanded: false
+    description: >
+      These are used for onboarding the organisation, organisation admin and individual users to the system. 
+      It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
+paths:
+  /v1/organizations/{orgId}/logs:
+    $ref: "./paths/audit/getOrgLogs.yaml"
+  /v1/users/{userId}/consenthistory:
+    $ref: "./paths/service/getConsentHistory.yaml"
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}:
+    $ref: "./paths/service/getConsentsByConsentAgreementId.yaml"
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}:
+    $ref: "./paths/service/getConsentsForAllConsentAgreements.yaml"
+  /v1/organizations/{orgId}/users/{userId}/consents:
+    $ref: "./paths/service/getConsents.yaml"
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status:
+    $ref: "./paths/service/updateConsentForConsentAgreement.yaml"
+  /v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}:
+    $ref: "./paths/service/updateConsentForDataAttribute.yaml"
+  /v1/user/organizations/{orgId}/data-status:
+    $ref: "./paths/service/dataRequests/listAllDataRequests.yaml"
+  /v1/user/organizations/{orgId}/data-delete:
+    $ref: "./paths/service/dataRequests/deleteData/sendAndGetAllDeleteMyDataRequests.yaml"
+  /v1/user/organizations/{orgId}/data-delete/status:
+    $ref: "./paths/service/dataRequests/deleteData/getDeleteMyDataRequestStatus.yaml"
+  /v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel:
+    $ref: "./paths/service/dataRequests/deleteData/cancelDeleteMyDataRequest.yaml"
+  /v1/user/organizations/{orgId}/data-download:
+    $ref: "./paths/service/dataRequests/downloadData/sendAndGetAllDownloadMyDataRequests.yaml"
+  /v1/user/organizations/{orgId}/data-download/status:
+    $ref: "./paths/service/dataRequests/downloadData/getDownloadMyDataRequestStatus.yaml"
+  /v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel:
+    $ref: "./paths/service/dataRequests/downloadData/cancelDownloadMyDataRequest.yaml"
+  /v1/GetUserOrgsAndConsents:
+    $ref: "./paths/service/getUserOrgAndConsent.yaml"
+  /v1/users/admin/login:
+    $ref: "./paths/onboarding/authentication/organisationAdmin/loginAsOrganisationAdmin.yaml"
+  /v1/users/login:
+    $ref: "./paths/onboarding/authentication/individual/loginAsIndividual.yaml"
+  /v1.1/users/login:
+    $ref: "./paths/onboarding/authentication/individual/loginAsIndividualV11.yaml"
+  /v1/users/validate/email:
+    $ref: "./paths/onboarding/authentication/validation/validateEmail.yaml"
+  /v1/users/validate/phone:
+    $ref: "./paths/onboarding/authentication/validation/validatePhone.yaml"
+  /v1/users/verify/phone:
+    $ref: "./paths/onboarding/authentication/validation/verifyPhone.yaml"
+  /v1/users/verify/otp:
+    $ref: "./paths/onboarding/authentication/validation/verifyOTP.yaml"
+  /v1/user/password/reset:
+    $ref: "./paths/onboarding/authentication/resetPassword.yaml"
+  /v1/user/password/forgot:
+    $ref: "./paths/onboarding/authentication/forgotPassword.yaml"
+  /v1/users/logout:
+    $ref: "./paths/onboarding/authentication/logout.yaml"
+  /v1/users/token:
+    $ref: "./paths/onboarding/authentication/refreshToken.yaml"
+  /v1/users/register:
+    $ref: "./paths/onboarding/authentication/register.yaml"
+  /v1/organizations/types:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getAndAddOrganisationTypes.yaml"
+  /v1/organizations/types/{typeId}:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getDeleteUpdateOrganisationTypeById.yaml"
+  /v1/organizations/types/{typeId}/image:
+    $ref: "./paths/onboarding/configureOrganisation/organisationType/getAndUpdateOrganisationTypeImage.yaml"
+  /v1/organizations:
+    $ref: "./paths/onboarding/configureOrganisation/addOrganisation.yaml"
+  /v1/organizations/{organizationId}:
+    $ref: "./paths/onboarding/configureOrganisation/getAndUpdateOrganisation.yaml"
+  /v1/organizations/{organizationId}/coverimage:
+    $ref: "./paths/onboarding/configureOrganisation/updateOrganisationCoverImage.yaml"
+  /v1/organizations/{organizationId}/logoimage:
+    $ref: "./paths/onboarding/configureOrganisation/updateOrganisationLogoImage.yaml"
+  /v1/organizations/{organizationId}/image/{imageId}:
+    $ref: "./paths/onboarding/configureOrganisation/getOrganisationImageById.yaml"
+  /v1/organizations/{organizationId}/eulaURL:
+    $ref: "./paths/onboarding/configureOrganisation/updateAndDeleteOrganisationEULAURL.yaml"
+  /v1/organizations/{organizationId}/admins:
+    $ref: "./paths/onboarding/configureOrganisation/addGetDeleteOrganisationAdmin.yaml"
+  /v1/organizations/roles:
+    $ref: "./paths/onboarding/configureOrganisation/getOrganisationRoles.yaml"
+  /v1/users/unregister:
+    $ref: "./paths/onboarding/userProfile/unregisterUser.yaml"
+  /v1/user/register/android:
+    $ref: "./paths/onboarding/userProfile/userClientRegisterAndroid.yaml"
+  /v1/user/register/ios:
+    $ref: "./paths/onboarding/userProfile/userClientRegisteriOS.yaml"
+  /v1/user/image/{imageId}:
+    $ref: "./paths/onboarding/userProfile/getAndDeleteUserImageByID.yaml"
+  /v1/user/image:
+    $ref: "./paths/onboarding/userProfile/updateUserImage.yaml"
+  /v1/user:
+    $ref: "./paths/onboarding/userProfile/getAndUpdateUserProfile.yaml"
+  /v1/user/apikey:
+    $ref: "./paths/onboarding/developer/getAndCreateAPIKey.yaml"
+  /v1/user/apikey/revoke:
+    $ref: "./paths/onboarding/developer/deleteAPIKey.yaml"
+  /v1/organizations/{organizationId}/global-policy-configuration:
+    $ref: "./paths/config/consentAgreements/globalPolicyConfigurations/getAndUpdateGlobalPolicyConfiguration.yaml"
+  /v1/organizations/{organizationId}/purposes:
+    $ref: "./paths/config/consentAgreements/getAndAddConsentAgreements.yaml"
+  /v1/organizations/{organizationId}/purposes/{purposeId}:
+    $ref: "./paths/config/consentAgreements/getDeleteUpdateConsentAgreementByID.yaml"
+  /v1/organizations/{organizationId}/templates:
+    $ref: "./paths/config/dataAttributes/getAndAddDataAttributes.yaml"
+  /v1/organizations/{organizationId}/templates/{templateId}:
+    $ref: "./paths/config/dataAttributes/updateAndDeleteDataAttributeByID.yaml"
+  /v1/organizations/{organizationId}/purposes/{purposeId}/templates:
+    $ref: "./paths/config/dataAttributes/deleteMultipleDataAttributes.yaml"
+  /v1/organizations/{organizationID}/templates/{templateID}:
+    $ref: "./paths/config/dataAttributes/getDataAttributeByID.yaml"
+  /v1/organizations/{organizationID}/idp/open-id:
+    $ref: "./paths/config/manageIndividuals/subscription/addGetUpdateAndDeleteIdentityProvider.yaml"
+  /v1/organizations/{organizationId}/subscription/enable:
+    $ref: "./paths/config/manageIndividuals/subscription/enableOrganisationForSubscription.yaml"
+  /v1/organizations/{organizationId}/subscription/disable:
+    $ref: "./paths/config/manageIndividuals/subscription/disableOrganisationForSubscription.yaml"
+  /v1/organizations/{organizationId}/subscribe-method:
+    $ref: "./paths/config/manageIndividuals/subscription/getAndSetSubscriptionMethod.yaml"
+  /v1/organizations/subscribe-methods:
+    $ref: "./paths/config/manageIndividuals/subscription/getAllSubscriptionMethods.yaml"
+  /v1/organizations/{organizationId}/subscribe-key:
+    $ref: "./paths/config/manageIndividuals/subscription/getCurrentSubscriptionKey.yaml"
+  /v1/organizations/{organizationId}/subscribe-key/renew:
+    $ref: "./paths/config/manageIndividuals/subscription/renewSubscriptionKey.yaml"
+  /v1/organizations/{organizationId}/users/count:
+    $ref: "./paths/config/manageIndividuals/subscription/getOrganisationUsersCount.yaml"
+  /v1/organizations/{organizationId}/subscription:
+    $ref: "./paths/config/manageIndividuals/subscription/getOrganisationSubscriptionStatus.yaml"
+  /v1/organizations/{organizationId}/users:
+    $ref: "./paths/config/manageIndividuals/addAndGetOrganisationUsers.yaml"
+  /v1/organizations/{organizationId}/users/{userId}:
+    $ref: "./paths/config/manageIndividuals/deleteUserFromOrganisation.yaml"
+  /v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users:
+    $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAttribute.yaml"
+  /v1/organizations/{orgId}/purposes/{purposeId}/consented/users:
+    $ref: "./paths/config/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAgreement.yaml"
+  /v1/organizations/data-requests:
+    $ref: "./paths/config/dataRequests/getAvailableDataRequestStatuses.yaml"
+  /v1/organizations/{orgId}/data-requests:
+    $ref: "./paths/config/dataRequests/getOpenAndCloseDataRequests.yaml"
+  /v1/organizations/{orgId}/data-requests/{dataReqId}:
+    $ref: "./paths/config/dataRequests/getAndUpdateDataRequestByID.yaml"
+  /v1/organizations/webhooks/event-types:
+    $ref: "./paths/config/webhooks/getAvailableWebhookEventTypes.yaml"
+  /v1/organizations/webhooks/payload/content-types:
+    $ref: "./paths/config/webhooks/getAvailableWebhookPayloadTypes.yaml"
+  /v1/organizations/{organizationId}/webhooks:
+    $ref: "./paths/config/webhooks/createAndGetAllWebhooks.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}:
+    $ref: "./paths/config/webhooks/getDeleteAndUpdateWebhookByID.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/ping:
+    $ref: "./paths/config/webhooks/pingWebhook.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery:
+    $ref: "./paths/config/webhooks/getRecentWebhookDeliveries.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}:
+    $ref: "./paths/config/webhooks/getRecentWebhookDeliveryByID.yaml"
+  /v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
+    $ref: "./paths/config/webhooks/redeliverWebhook.yaml"
+components:
+  schemas:
+    OrganisationLog:
+      $ref: "./definitions/audit/OrganisationLog.yaml"
+    GetUserConsentHistory:
+      $ref: "./definitions/service/GetUserConsentHistory.yaml"
+    ConsentHistory:
+      $ref: "./definitions/service/ConsentHistory.yaml"
+    GetConsentsByConsentAgreementId:
+      $ref: "./definitions/service/GetConsentsByConsentAgreementId.yaml"
+    GetConsentsForAllConsentAgreements:
+      $ref: "./definitions/service/GetConsentsForAllConsentAgreements.yaml"
+    GetConsents:
+      $ref: "./definitions/service/GetConsents.yaml"
+    UpdateConsentForConsentAgreementRequest:
+      $ref: "./definitions/service/UpdateConsentForConsentAgreementRequest.yaml"
+    UpdateConsentForConsentAgreementResponse:
+      $ref: "./definitions/service/UpdateConsentForConsentAgreementResponse.yaml"
+    UpdateConsentForDataAttributeRequest:
+      $ref: "./definitions/service/UpdateConsentForDataAttributeRequest.yaml"
+    UpdateConsentForDataAttributeResponse:
+      $ref: "./definitions/service/UpdateConsentForDataAttributeResponse.yaml"
+    ListAllDataRequests:
+      $ref: "./definitions/service/dataRequests/ListAllDataRequests.yaml"
+    GetAllDeleteMyDataRequests:
+      $ref: "./definitions/service/dataRequests/deleteData/GetAllDeleteMyDataRequests.yaml"
+    GetDeleteMyDataRequestStatus:
+      $ref: "./definitions/service/dataRequests/deleteData/GetDeleteMyDataRequestStatus.yaml"
+    CancelDeleteMyDataRequest:
+      $ref: "./definitions/service/dataRequests/deleteData/CancelDeleteMyDataRequest.yaml"
+    SendDownloadMyDataRequestError:
+      $ref: "./definitions/service/dataRequests/downloadData/SendDownloadMyDataRequestError.yaml"
+    GetAllDownloadMyDataRequests:
+      $ref: "./definitions/service/dataRequests/downloadData/GetAllDownloadMyDataRequests.yaml"
+    GetDownloadMyDataRequestStatus:
+      $ref: "./definitions/service/dataRequests/downloadData/GetDownloadMyDataRequestStatus.yaml"
+    CancelDownloadMyDataRequest:
+      $ref: "./definitions/service/dataRequests/downloadData/CancelDownloadMyDataRequest.yaml"
+    Individual:
+      $ref: "./definitions/onboarding/Individual.yaml"
+    Organisation:
+      $ref: "./definitions/onboarding/Organisation.yaml"
+    ConsentAgreement:
+      $ref: "./definitions/config/ConsentAgreement.yaml"
+    DataAttribute:
+      $ref: "./definitions/config/DataAttribute.yaml"
+    DataRequest:
+      $ref: "./definitions/config/DataRequest.yaml"
+  securitySchemes:
+    BearerAuth:
+      description: Access token passed with Bearer prefix in Authorization header
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

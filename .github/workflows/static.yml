@@ -34,7 +34,7 @@ jobs:
       # Added step to run sed command to modify the index.html
       - name: Modify index.html
         run: |
-          sed -i 's/index.yaml/bundled.yaml/g' openapi/index.html
+          find openapi -name 'index.html' -type f -exec sed -i 's/index.yaml/bundled.yaml/g' {} \;
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

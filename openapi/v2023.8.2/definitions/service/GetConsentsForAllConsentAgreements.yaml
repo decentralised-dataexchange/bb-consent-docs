@@ -1,0 +1,30 @@
+required:
+  - ID
+  - OrgID
+  - UserID
+  - ConsentsAndPurposes
+type: object
+properties:
+  ID:
+    type: string
+  OrgID:
+    type: string
+  UserID:
+    type: string
+  ConsentsAndPurposes:
+    type: array
+    items:
+      required:
+        - Purpose
+        - Count
+        - Consents
+      type: object
+      properties:
+        Purpose:
+          $ref: "./ConsentAgreement.yaml"
+        Count:
+          $ref: "./ConsentCount.yaml"
+        Consents:
+          type: array
+          items:
+            $ref: "./Consent.yaml"

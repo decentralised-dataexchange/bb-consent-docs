@@ -1,0 +1,10 @@
+required:
+  - Method
+  - Key
+type: object
+properties:
+  Method:
+    type: integer
+    format: int32
+  Key:
+    type: string

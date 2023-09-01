@@ -1,0 +1,50 @@
+required:
+  - ID
+  - UserID
+  - UserName
+  - OrgID
+  - Type
+  - TypeStr
+  - State
+  - RequestedDate
+  - ClosedDate
+  - StateStr
+  - Comment
+type: object
+properties:
+  ID:
+    type: string
+  UserID:
+    type: string
+  UserName:
+    type: string
+  OrgID:
+    type: string
+  Type:
+    type: integer
+    format: int32
+  TypeStr:
+    type: string
+  State:
+    type: integer
+    format: int32
+  RequestedDate:
+    type: string
+  ClosedDate:
+    type: string
+  StateStr:
+    type: string
+  Comment:
+    type: string
+example:
+  ID: 64ee6e86e2f6a8000142c68f
+  UserID: 638de3302f5d1700014431f3
+  UserName: george@igrant.io
+  OrgID: 64ec561de2f6a8000142c671
+  Type: 2
+  TypeStr: Download Data
+  State: 1
+  RequestedDate: 2023-08-29 22:17:42 +0000 UTC
+  ClosedDate: 0001-01-01 00:00:00 +0000 UTC
+  StateStr: Request initiated
+  Comment: ""
