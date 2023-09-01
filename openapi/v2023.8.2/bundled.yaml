@@ -4115,7 +4115,17 @@ components:
             Purpose:
               $ref: '#/components/schemas/DataAgreement'
             Count:
-              $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
+              required:
+                - Total
+                - Consented
+              type: object
+              properties:
+                Total:
+                  type: integer
+                  format: int32
+                Consented:
+                  type: integer
+                  format: int32
             Consents:
               type: array
               items:
@@ -4146,7 +4156,7 @@ components:
               Purpose:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
-                $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
               Consents:
                 type: array
                 items:
@@ -4178,7 +4188,7 @@ components:
               Purpose:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
-                $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
+                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
               Consents:
                 type: array
                 items:
@@ -4229,21 +4239,14 @@ components:
       type: object
       properties:
         Purpose:
+          description: Data agreement
           $ref: '#/components/schemas/DataAgreement'
         Count:
-          required:
-            - Total
-            - Consented
-          type: object
-          properties:
-            Total:
-              type: integer
-              format: int32
-            Consented:
-              type: integer
-              format: int32
+          description: Count of data attributes for which consent has to be obtained
+          $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
         Consents:
           type: array
+          description: Count of data attributes for which consent has to be obtained
           items:
             required:
               - ID
@@ -4253,10 +4256,13 @@ components:
             type: object
             properties:
               ID:
+                description: Identifier for the consent
                 type: string
               Description:
+                description: Description of the data attribute
                 type: string
               Value:
+                description: Name of the data attribute
                 type: string
               Status:
                 required:
@@ -4268,23 +4274,36 @@ components:
                 properties:
                   Consented:
                     type: string
+                    enum:
+                      - Allow
+                      - Disallow
+                    description: Status of the consent for e.g. Allow/Disallow
                   TimeStamp:
                     type: string
+                    description: UTC timestamp of when the consent was recorded
                   Days:
                     type: integer
                     format: int32
+                    description: No of days the consent should be remembered for.
                   Remaining:
                     type: integer
                     format: int32
+                    description: No of days the consent will expire in.
         DataRetention:
           required:
             - Expiry
           type: object
+          description: Data retention settings
           properties:
             Expiry:
               type: string
+              description: Data retention expiry in UTC timestamp
         DataAgreementRecordRevision:
           $ref: '#/components/schemas/DataAgreementRecordRevision'
+          description: |
+            A *generic* revision model captures the serialized contents of any shema's single row. 
+            This is then subject to 1) cryptographic signature and 2) auditing. Aside from \"successor\" column, a 
+            revision should be considered locked.
     DataAgreementRecordRevision:
       type: object
       description: |-
@@ -4300,16 +4319,22 @@ components:
       properties:
         id:
           type: string
+          description: Revision identifier
         object_id:
           type: string
+          description: Consent identifier
         serialized_snapshot:
           type: string
+          description: Snapshot of the revision
         timestamp:
           type: string
+          description: UTC timestamp of when the revision was created
         authorized_by_individual:
           $ref: '#/components/schemas/Individual'
+          description: Reference to the individual that consented
         authorized_by_other:
           $ref: '#/components/schemas/Individual'
+          description: Reference to an admin user that has created this revision
         successor:
           $ref: '#/components/schemas/DataAgreementRecordRevision'
         predecessor_hash:
@@ -5180,16 +5205,24 @@ components:
       type: object
       properties:
         attributeId:
+          description: Identifier for the attribute.
           type: string
         attributeName:
+          description: Name of the attribute
           type: string
         attributeSensitive:
+          description: |
+            Indicates that personal data is sensitive or belongs to a 
+            special category as per a regulations, typically requiring additional measures of handling.
           type: boolean
         attributeCategory:
+          description: A category of personal data
           type: string
         attributeDescription:
+          description: Description for the attribute
           type: string
         dataAgreementIds:
+          description: Identifiers for the associated data agreements
           type: array
           items:
             type: string
@@ -5253,40 +5286,69 @@ components:
     DataAgreement:
       title: Data agreement
       type: object
+      description: |
+        The Data Agreement Vocabulary provides terms to describe and represent information related to 
+        processing of personal data based on established requirements such as for the EU General Data 
+        Protection Regulation (GDPR).
       properties:
         language:
           type: string
+          description: Language code for e.g. en-gb
         version:
           type: string
+          description: Version number of the data agreement
         dataControllerName:
           type: string
+          description: An organisation constituted as a legally defined entity in any jurisdiction.
         dataControllerUrl:
           type: string
+          description: Organisation or data controller URL.
         dataPolicy:
+          description: Encapsulate the data policies used in the use of personal data.
           $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
         purpose:
+          description: |
+            Describes the purpose for which a data controller (Data Source or Data Using Service) uses personal data for. 
+            This is also the purpose for which the data agreeent is being formulated
           type: string
         purposeDescription:
+          description: |
+            Provides description of the purpose for which the personal data us used, 
+            comprehensive to the individual whose data is being used by the data controller.
           type: string
         lawfulBasis:
+          description: |
+            An organization processing personal data to have a valid lawful basis for that personal data processing activity. GDPR, 
+            for e.g., consent, legal_obligation, contract, vital_interest, public_task and legitimate_interest.
           type: string
         methodOfUse:
+          description: |
+            This is used to describe whether controller is using personal data for internal purposes of for data exchange towards an external third party. 
+            Data exchange could be for exposing data (as a Data Source) or consuming data as a Data Using Service.
           type: string
         dataAttributes:
+          description: |
+            Encapsulates the attributes used for the the usage purpose defined. 
+            Its an array of personal data attributes.
           type: array
           items:
             $ref: '#/components/schemas/DataAttribute'
         dpia:
+          description: Encapsulate the organisation performing the Data Protection Impact Assessment
           type: object
           properties:
             dpiaDate:
+              description: The date on which the DPIA report is generated after a DPIA.
               type: string
             dpiaSummaryUrl:
+              description: |
+                The URl providing the DPIA result reports, summary etc that can be verified by any interested parties.
               type: string
           required:
             - dpiaDate
             - dpiaSummaryUrl
         isPublished:
+          description: Is the data agreement published towards individuals or not
           type: boolean
         proof:
           $ref: '#/components/schemas/Signature'
@@ -5308,20 +5370,34 @@ components:
       type: object
       properties:
         policyUrl:
+          description: Policy URL for the organisation
           type: string
         jurisdiction:
+          description: |
+            Indicates a legal jurisdiction, e.g. of some legislation, or where some government service is based.
           type: string
         industrySectorId:
+          description: |
+            Identifier for the industry sector
           type: string
         industrySector:
+          description: |
+            Indicate or restrict scope for interpretation and application of purpose in a domain.
           type: string
         dataRetentionPeriod:
+          description: 'The amount of time that an organization holds onto any personal data, in seconds.'
           type: number
         geographicRestriction:
+          description: The geographic restrictions required or followed regarding storage of data.
           type: string
         storageLocation:
+          description: The geographic location where the personal data is stored
           type: string
         thirdPartyDataSharing:
+          description: |
+            This is a boolean value to indicate that the DA is used for third party data disclosures. 
+            This indicates that some data disclosures will happen and is used to release personal data 
+            to DUS based on an agreement
           type: boolean
       required:
         - policyUrl
@@ -5337,15 +5413,20 @@ components:
       properties:
         id:
           type: string
+          description: Identifier of the proof
         type:
           type: string
         created:
+          description: Type of the proof
           type: string
         verificationMethod:
+          description: Method of verification for the proof
           type: string
         proofPurpose:
+          description: Purpose of the proof
           type: string
         proofValue:
+          description: Value of the proof (Signature digest)
           type: string
       required:
         - id

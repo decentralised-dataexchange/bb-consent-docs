@@ -2,16 +2,24 @@ title: Data Attribute
 type: object
 properties:
   attributeId:
+    description: Identifier for the attribute.
     type: string
   attributeName:
+    description: Name of the attribute
     type: string
   attributeSensitive:
+    description: |
+      Indicates that personal data is sensitive or belongs to a 
+      special category as per a regulations, typically requiring additional measures of handling.
     type: boolean
   attributeCategory:
+    description: A category of personal data
     type: string
   attributeDescription:
+    description: Description for the attribute
     type: string
   dataAgreementIds:
+    description: Identifiers for the associated data agreements
     type: array
     items:
       type: string

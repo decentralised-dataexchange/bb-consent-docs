@@ -7,14 +7,14 @@ type: object
 
 properties:
   ID:
+    description: Identifier for the consent
     type: string
-
   Description:
+    description: Description of the data attribute
     type: string
-
   Value:
+    description: Name of the data attribute
     type: string
-
   Status:
     required:
       - Consented
@@ -22,18 +22,21 @@ properties:
       - Days
       - Remaining
     type: object
-
     properties:
       Consented:
         type: string
-
+        enum:
+          - Allow
+          - Disallow
+        description: Status of the consent for e.g. Allow/Disallow
       TimeStamp:
         type: string
-
+        description: UTC timestamp of when the consent was recorded
       Days:
         type: integer
         format: int32
-
+        description: No of days the consent should be remembered for.
       Remaining:
         type: integer
         format: int32
+        description: No of days the consent will expire in.
