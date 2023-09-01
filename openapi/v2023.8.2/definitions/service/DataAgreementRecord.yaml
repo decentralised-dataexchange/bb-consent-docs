@@ -4,6 +4,7 @@ required:
   - Consents
   - DataRetention
 type: object
+description: Data agreement record captures the individual consents for an agreement
 properties:
   Purpose:
     description: Data agreement

@@ -1,4 +1,5 @@
 type: object
+description: Digital signature to secure the integrity of the consent agreement
 properties:
   id:
     type: string

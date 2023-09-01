@@ -4,6 +4,7 @@ required:
   - UserID
   - ConsentsAndPurposes
 type: object
+description: A list of data agreement records
 properties:
   ID:
     type: string
