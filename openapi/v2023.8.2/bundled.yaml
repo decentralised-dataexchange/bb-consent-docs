@@ -5421,8 +5421,9 @@ components:
           description: Identifier of the proof
         type:
           type: string
-        created:
           description: Type of the proof
+        created:
+          description: Creation time in UTC timestamp
           type: string
         verificationMethod:
           description: Method of verification for the proof
