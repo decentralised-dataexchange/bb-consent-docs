@@ -4115,51 +4115,11 @@ components:
             Purpose:
               $ref: '#/components/schemas/DataAgreement'
             Count:
-              required:
-                - Total
-                - Consented
-              type: object
-              properties:
-                Total:
-                  type: integer
-                  format: int32
-                Consented:
-                  type: integer
-                  format: int32
+              $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
             Consents:
               type: array
               items:
-                required:
-                  - ID
-                  - Description
-                  - Value
-                  - Status
-                type: object
-                properties:
-                  ID:
-                    type: string
-                  Description:
-                    type: string
-                  Value:
-                    type: string
-                  Status:
-                    required:
-                      - Consented
-                      - TimeStamp
-                      - Days
-                      - Remaining
-                    type: object
-                    properties:
-                      Consented:
-                        type: string
-                      TimeStamp:
-                        type: string
-                      Days:
-                        type: integer
-                        format: int32
-                      Remaining:
-                        type: integer
-                        format: int32
+                $ref: '#/components/schemas/DataAgreementRecord/properties/Consents/items'
     GetConsentsForAllConsentAgreements:
       required:
         - ID
@@ -4186,11 +4146,11 @@ components:
               Purpose:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
+                $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
               Consents:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
+                  $ref: '#/components/schemas/DataAgreementRecord/properties/Consents/items'
     GetConsents:
       required:
         - ID
@@ -4218,11 +4178,11 @@ components:
               Purpose:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
+                $ref: '#/components/schemas/DataAgreementRecord/properties/Count'
               Consents:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
+                  $ref: '#/components/schemas/DataAgreementRecord/properties/Consents/items'
               DataRetention:
                 required:
                   - Expiry
@@ -4259,30 +4219,72 @@ components:
         ConsentsAndPurposes:
           type: array
           items:
+            $ref: '#/components/schemas/DataAgreementRecord'
+    DataAgreementRecord:
+      required:
+        - Purpose
+        - Count
+        - Consents
+        - DataRetention
+      type: object
+      properties:
+        Purpose:
+          $ref: '#/components/schemas/DataAgreement'
+        Count:
+          required:
+            - Total
+            - Consented
+          type: object
+          properties:
+            Total:
+              type: integer
+              format: int32
+            Consented:
+              type: integer
+              format: int32
+        Consents:
+          type: array
+          items:
             required:
-              - Purpose
-              - Count
-              - Consents
-              - DataRetention
+              - ID
+              - Description
+              - Value
+              - Status
             type: object
             properties:
-              Purpose:
-                $ref: '#/components/schemas/DataAgreement'
-              Count:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
-              Consents:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
-              DataRetention:
+              ID:
+                type: string
+              Description:
+                type: string
+              Value:
+                type: string
+              Status:
                 required:
-                  - Expiry
+                  - Consented
+                  - TimeStamp
+                  - Days
+                  - Remaining
                 type: object
                 properties:
-                  Expiry:
+                  Consented:
                     type: string
-              DataAgreementRecordRevision:
-                $ref: '#/components/schemas/DataAgreementRecordRevision'
+                  TimeStamp:
+                    type: string
+                  Days:
+                    type: integer
+                    format: int32
+                  Remaining:
+                    type: integer
+                    format: int32
+        DataRetention:
+          required:
+            - Expiry
+          type: object
+          properties:
+            Expiry:
+              type: string
+        DataAgreementRecordRevision:
+          $ref: '#/components/schemas/DataAgreementRecordRevision'
     DataAgreementRecordRevision:
       type: object
       description: |-
