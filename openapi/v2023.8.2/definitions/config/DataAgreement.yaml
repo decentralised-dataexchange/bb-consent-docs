@@ -1,189 +1,69 @@
-title: Data Agreement
+title: Data agreement
 type: object
 properties:
-  record:
+  language:
+    type: string
+  version:
+    type: string
+  dataControllerName:
+    type: string
+  dataControllerUrl:
+    type: string
+  dataPolicy:
+    $ref: "./GlobalDataPolicyConfiguration.yaml"
+  purpose:
+    type: string
+  purposeDescription:
+    type: string
+  lawfulBasis:
+    type: string
+  methodOfUse:
+    type: string
+  dpia:
     type: object
     properties:
-      schema_version:
+      dpiaDate:
         type: string
-      record_id:
-        type: string
-      pii_principal_id:
+      dpiaSummaryUrl:
         type: string
     required:
-      - schema_version
-      - record_id
-      - pii_principal_id
-  pii_processing:
+      - dpiaDate
+      - dpiaSummaryUrl
+  isPublished:
+    type: boolean
+  proof:
     type: object
     properties:
-      privacy_notice:
+      id:
         type: string
-      language:
+      type:
         type: string
-      purposes:
-        type: array
-        items:
-          type: object
-          properties:
-            purpose:
-              type: string
-            purpose_type:
-              type: string
-            lawful_basis:
-              type: string
-            pii_information:
-              type: array
-              items:
-                type: object
-                properties:
-                  pii_type:
-                    type: string
-                  pii_optional:
-                    type: boolean
-                  sensitive_pii_category:
-                    type: boolean
-                  special_pii_category:
-                    type: boolean
-                required:
-                  - pii_type
-                  - pii_optional
-                  - sensitive_pii_category
-                  - special_pii_category
-            pii_controllers:
-              type: array
-              items:
-                type: string
-            collection_method:
-              type: array
-              items:
-                type: string
-            processing_method:
-              type: array
-              items:
-                type: string
-            storage_locations:
-              type: array
-              items:
-                type: string
-            retention_period:
-              type: number
-            processing_locations:
-              type: array
-              items:
-                type: string
-            geographic_restrictions:
-              type: array
-              items:
-                type: string
-            services:
-              type: array
-              items:
-                type: string
-            jurisdiction:
-              type: string
-            recipient_third_parties:
-              type: array
-              items:
-                type: string
-            withdrawal_method:
-              type: string
-            privacy_rights:
-              type: object
-              properties:
-                Right to Object:
-                  type: string
-                Data Portability:
-                  type: string
-              required:
-                - Right to Object
-                - Data Portability
-            codes_of_conduct:
-              type: string
-            impact_assessment:
-              type: string
-            authority_party:
-              type: string
-          required:
-            - purpose
-            - purpose_type
-            - lawful_basis
-            - pii_information
-            - pii_controllers
-            - collection_method
-            - processing_method
-            - storage_locations
-            - retention_period
-            - processing_locations
-            - geographic_restrictions
-            - services
-            - jurisdiction
-            - recipient_third_parties
-            - withdrawal_method
-            - privacy_rights
-            - codes_of_conduct
-            - impact_assessment
-            - authority_party
+      created:
+        type: string
+      verificationMethod:
+        type: string
+      proofPurpose:
+        type: string
+      proofValue:
+        type: string
     required:
-      - privacy_notice
-      - language
-      - purposes
-  party_identification:
-    type: array
-    items:
-      type: object
-      properties:
-        party_id:
-          type: string
-        party_address:
-          type: string
-        party_email:
-          type: string
-        party_url:
-          type: string
-        party_name:
-          type: string
-        party_role:
-          type: string
-        party_contact:
-          type: object
-          properties:
-            SocialMedia:
-              type: string
-          required:
-            - SocialMedia
-        party_type:
-          type: string
-      required:
-        - party_id
-        - party_address
-        - party_url
-        - party_name
-        - party_role
-        - party_type
-  event:
-    type: array
-    items:
-      type: object
-      properties:
-        event_time:
-          type: string
-        validity_duration:
-          type: number
-        entity_id:
-          type: string
-        event_type:
-          type: string
-        event_state:
-          type: string
-      required:
-        - event_time
-        - validity_duration
-        - entity_id
-        - event_type
-        - event_state
+      - id
+      - type
+      - created
+      - verificationMethod
+      - proofPurpose
+      - proofValue
 required:
-  - record
-  - pii_processing
-  - party_identification
-  - event
+  - language
+  - version
+  - dataControllerName
+  - dataControllerUrl
+  - dataPolicy
+  - purpose
+  - purposeDescription
+  - lawfulBasis
+  - methodOfUse
+  - dpia
+  - dataSubjectDid
+  - proof
+  - isPublished

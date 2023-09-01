@@ -1,19 +1,23 @@
-required:
-  - consent
-  - description
-  - purposeids
+title: Data Attribute
 type: object
 properties:
-  consent:
+  attributeId:
     type: string
-  description:
+  attributeName:
     type: string
-  purposeids:
+  attributeSensitive:
+    type: boolean
+  attributeCategory:
+    type: string
+  attributeDescription:
+    type: string
+  dataAgreementIds:
     type: array
     items:
       type: string
-example:
-  consent: Age
-  description: example
-  purposeids:
-    - 64ecf184e2f6a8000142c678
+required:
+  - attributeId
+  - attributeName
+  - attributeSensitive
+  - attributeCategory
+  - attributeDescription

@@ -21,7 +21,7 @@ properties:
       type: object
       properties:
         Purpose:
-          $ref: "./ConsentAgreement.yaml"
+          $ref: "../config/DataAgreement.yaml"
         Count:
           $ref: "./ConsentCount.yaml"
         Consents:

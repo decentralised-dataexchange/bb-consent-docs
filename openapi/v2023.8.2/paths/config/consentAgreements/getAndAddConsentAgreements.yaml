@@ -19,7 +19,7 @@ post:
             purposes:
               type: array
               items:
-                $ref: "../../../definitions/config/ConsentAgreement.yaml"
+                $ref: "../../../definitions/config/DataAgreement.yaml"
     required: true
   responses:
     "201":
@@ -62,7 +62,7 @@ get:
               Purposes:
                 type: array
                 items:
-                  $ref: "../../../definitions/config/ConsentAgreement.yaml"
+                  $ref: "../../../definitions/config/DataAgreement.yaml"
   deprecated: false
   security:
     - BearerAuth: []

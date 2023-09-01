@@ -1,0 +1,27 @@
+type: object
+properties:
+  policyUrl:
+    type: string
+  jurisdiction:
+    type: string
+  industrySectorId:
+    type: string
+  industrySector:
+    type: string
+  dataRetentionPeriod:
+    type: number
+  geographicRestriction:
+    type: string
+  storageLocation:
+    type: string
+  thirdPartyDataSharing:
+    type: boolean
+required:
+  - policyUrl
+  - jurisdiction
+  - industrySectorId
+  - industrySector
+  - dataRetentionPeriod
+  - geographicRestriction
+  - storageLocation
+  - thirdPartyDataSharing

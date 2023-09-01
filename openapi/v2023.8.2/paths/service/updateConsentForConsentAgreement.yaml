@@ -27,7 +27,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../definitions/service/UpdateConsentForConsentAgreementRequest.yaml"
+          $ref: "../../definitions/service/UpdateDataAgreementRecord.yaml"
     required: true
   responses:
     "200":
@@ -35,7 +35,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/UpdateConsentForConsentAgreementResponse.yaml"
+            $ref: "../../definitions/service/DataAgreementRecord.yaml"
   deprecated: false
   security:
     - BearerAuth: []

@@ -33,7 +33,7 @@ get:
                   type: object
                   properties:
                     Purpose:
-                      $ref: "../../definitions/config/ConsentAgreement.yaml"
+                      $ref: "../../definitions/config/DataAgreement.yaml"
                     Count:
                       required:
                         - Total

@@ -14,53 +14,7 @@ get:
       content:
         application/json:
           schema:
-            required:
-              - PolicyURL
-              - DataRetention
-              - Jurisdiction
-              - Disclosure
-              - Type
-              - Restriction
-              - Shared3PP
-            type: object
-            properties:
-              PolicyURL:
-                type: string
-              DataRetention:
-                required:
-                  - RetentionPeriod
-                  - Enabled
-                type: object
-                properties:
-                  RetentionPeriod:
-                    type: integer
-                    format: int32
-                  Enabled:
-                    type: boolean
-              Jurisdiction:
-                type: string
-              Disclosure:
-                type: string
-              Type:
-                required:
-                  - ID
-                  - Type
-                  - ImageID
-                  - ImageURL
-                type: object
-                properties:
-                  ID:
-                    type: string
-                  Type:
-                    type: string
-                  ImageID:
-                    type: string
-                  ImageURL:
-                    type: string
-              Restriction:
-                type: string
-              Shared3PP:
-                type: boolean
+            $ref: "../../../../definitions/config/GlobalDataPolicyConfiguration.yaml"
   deprecated: false
   security:
     - BearerAuth: []
@@ -78,31 +32,7 @@ post:
     content:
       application/json:
         schema:
-          required:
-            - policyurl
-            - retentionperiod
-            - jurisdiction
-            - disclosure
-            - typeid
-            - restriction
-            - shared3pp
-          type: object
-          properties:
-            policyurl:
-              type: string
-            retentionperiod:
-              type: integer
-              format: int32
-            jurisdiction:
-              type: string
-            disclosure:
-              type: string
-            typeid:
-              type: string
-            restriction:
-              type: string
-            shared3pp:
-              type: boolean
+          $ref: "../../../../definitions/config/GlobalDataPolicyConfiguration.yaml"
     required: true
   responses:
     "200":
@@ -110,53 +40,7 @@ post:
       content:
         application/json:
           schema:
-            required:
-              - PolicyURL
-              - DataRetention
-              - Jurisdiction
-              - Disclosure
-              - Type
-              - Restriction
-              - Shared3PP
-            type: object
-            properties:
-              PolicyURL:
-                type: string
-              DataRetention:
-                required:
-                  - RetentionPeriod
-                  - Enabled
-                type: object
-                properties:
-                  RetentionPeriod:
-                    type: integer
-                    format: int32
-                  Enabled:
-                    type: boolean
-              Jurisdiction:
-                type: string
-              Disclosure:
-                type: string
-              Type:
-                required:
-                  - ID
-                  - Type
-                  - ImageID
-                  - ImageURL
-                type: object
-                properties:
-                  ID:
-                    type: string
-                  Type:
-                    type: string
-                  ImageID:
-                    type: string
-                  ImageURL:
-                    type: string
-              Restriction:
-                type: string
-              Shared3PP:
-                type: boolean
+            $ref: "../../../../definitions/config/GlobalDataPolicyConfiguration.yaml"
   deprecated: false
   security:
     - BearerAuth: []

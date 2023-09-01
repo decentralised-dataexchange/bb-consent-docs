@@ -224,7 +224,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateConsentForConsentAgreementRequest'
+              $ref: '#/components/schemas/UpdateDataAgreementRecord'
         required: true
       responses:
         '200':
@@ -232,7 +232,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateConsentForConsentAgreementResponse'
+                $ref: '#/components/schemas/DataAgreementRecord'
       deprecated: false
       security:
         - BearerAuth: []
@@ -520,7 +520,7 @@ paths:
                       type: object
                       properties:
                         Purpose:
-                          $ref: '#/components/schemas/ConsentAgreement'
+                          $ref: '#/components/schemas/DataAgreement'
                         Count:
                           required:
                             - Total
@@ -2038,53 +2038,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - PolicyURL
-                  - DataRetention
-                  - Jurisdiction
-                  - Disclosure
-                  - Type
-                  - Restriction
-                  - Shared3PP
-                type: object
-                properties:
-                  PolicyURL:
-                    type: string
-                  DataRetention:
-                    required:
-                      - RetentionPeriod
-                      - Enabled
-                    type: object
-                    properties:
-                      RetentionPeriod:
-                        type: integer
-                        format: int32
-                      Enabled:
-                        type: boolean
-                  Jurisdiction:
-                    type: string
-                  Disclosure:
-                    type: string
-                  Type:
-                    required:
-                      - ID
-                      - Type
-                      - ImageID
-                      - ImageURL
-                    type: object
-                    properties:
-                      ID:
-                        type: string
-                      Type:
-                        type: string
-                      ImageID:
-                        type: string
-                      ImageURL:
-                        type: string
-                  Restriction:
-                    type: string
-                  Shared3PP:
-                    type: boolean
+                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2102,31 +2056,7 @@ paths:
         content:
           application/json:
             schema:
-              required:
-                - policyurl
-                - retentionperiod
-                - jurisdiction
-                - disclosure
-                - typeid
-                - restriction
-                - shared3pp
-              type: object
-              properties:
-                policyurl:
-                  type: string
-                retentionperiod:
-                  type: integer
-                  format: int32
-                jurisdiction:
-                  type: string
-                disclosure:
-                  type: string
-                typeid:
-                  type: string
-                restriction:
-                  type: string
-                shared3pp:
-                  type: boolean
+              $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
         required: true
       responses:
         '200':
@@ -2134,53 +2064,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - PolicyURL
-                  - DataRetention
-                  - Jurisdiction
-                  - Disclosure
-                  - Type
-                  - Restriction
-                  - Shared3PP
-                type: object
-                properties:
-                  PolicyURL:
-                    type: string
-                  DataRetention:
-                    required:
-                      - RetentionPeriod
-                      - Enabled
-                    type: object
-                    properties:
-                      RetentionPeriod:
-                        type: integer
-                        format: int32
-                      Enabled:
-                        type: boolean
-                  Jurisdiction:
-                    type: string
-                  Disclosure:
-                    type: string
-                  Type:
-                    required:
-                      - ID
-                      - Type
-                      - ImageID
-                      - ImageURL
-                    type: object
-                    properties:
-                      ID:
-                        type: string
-                      Type:
-                        type: string
-                      ImageID:
-                        type: string
-                      ImageURL:
-                        type: string
-                  Restriction:
-                    type: string
-                  Shared3PP:
-                    type: boolean
+                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2206,7 +2090,7 @@ paths:
                 purposes:
                   type: array
                   items:
-                    $ref: '#/components/schemas/ConsentAgreement'
+                    $ref: '#/components/schemas/DataAgreement'
         required: true
       responses:
         '201':
@@ -2249,7 +2133,7 @@ paths:
                   Purposes:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ConsentAgreement'
+                      $ref: '#/components/schemas/DataAgreement'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2320,7 +2204,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ConsentAgreement'
+              $ref: '#/components/schemas/DataAgreement'
         required: true
       responses:
         '201':
@@ -2365,7 +2249,7 @@ paths:
                 type: object
                 properties:
                   Purpose:
-                    $ref: '#/components/schemas/ConsentAgreement'
+                    $ref: '#/components/schemas/DataAgreement'
                   Templates:
                     type: string
                     nullable: true
@@ -4227,65 +4111,7 @@ components:
           type: object
           properties:
             Purpose:
-              required:
-                - ID
-                - Name
-                - Description
-                - LawfulUsage
-                - LawfulBasisOfProcessing
-                - PolicyURL
-                - AttributeType
-                - Jurisdiction
-                - Disclosure
-                - IndustryScope
-                - DataRetention
-                - Restriction
-                - Shared3PP
-                - Version
-                - PublishFlag
-              type: object
-              properties:
-                ID:
-                  type: string
-                Name:
-                  type: string
-                Description:
-                  type: string
-                LawfulUsage:
-                  type: boolean
-                LawfulBasisOfProcessing:
-                  type: integer
-                  format: int32
-                PolicyURL:
-                  type: string
-                AttributeType:
-                  type: integer
-                  format: int32
-                Jurisdiction:
-                  type: string
-                Disclosure:
-                  type: string
-                IndustryScope:
-                  type: string
-                DataRetention:
-                  required:
-                    - RetentionPeriod
-                    - Enabled
-                  type: object
-                  properties:
-                    RetentionPeriod:
-                      type: integer
-                      format: int32
-                    Enabled:
-                      type: boolean
-                Restriction:
-                  type: string
-                Shared3PP:
-                  type: boolean
-                Version:
-                  type: string
-                PublishFlag:
-                  type: boolean
+              $ref: '#/components/schemas/DataAgreement'
             Count:
               required:
                 - Total
@@ -4356,7 +4182,7 @@ components:
             type: object
             properties:
               Purpose:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+                $ref: '#/components/schemas/DataAgreement'
               Count:
                 $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
               Consents:
@@ -4388,7 +4214,7 @@ components:
             type: object
             properties:
               Purpose:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+                $ref: '#/components/schemas/DataAgreement'
               Count:
                 $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
               Consents:
@@ -4402,16 +4228,19 @@ components:
                 properties:
                   Expiry:
                     type: string
-    UpdateConsentForConsentAgreementRequest:
+    UpdateDataAgreementRecord:
       required:
         - consented
       type: object
       properties:
         consented:
           type: string
+          enum:
+            - Allow
+            - DisAllow
       example:
         consented: Allow
-    UpdateConsentForConsentAgreementResponse:
+    DataAgreementRecord:
       required:
         - ID
         - OrgID
@@ -4436,7 +4265,7 @@ components:
             type: object
             properties:
               Purpose:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Purpose'
+                $ref: '#/components/schemas/DataAgreement'
               Count:
                 $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
               Consents:
@@ -4450,6 +4279,39 @@ components:
                 properties:
                   Expiry:
                     type: string
+              DataAgreementRecordRevision:
+                type: object
+                description: |-
+                  A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
+
+                  Aside from "successor" column, a revision should be considered locked.
+                required:
+                  - id
+                  - schema_name
+                  - object_id
+                  - serialized_snapshot
+                  - timestamp
+                properties:
+                  id:
+                    type: string
+                  object_id:
+                    type: string
+                  serialized_snapshot:
+                    type: string
+                  timestamp:
+                    type: string
+                  authorized_by_individual:
+                    $ref: '#/components/schemas/Individual'
+                  authorized_by_other:
+                    $ref: '#/components/schemas/Individual'
+                  successor:
+                    $ref: '#/components/schemas/DataAgreementRecord/properties/ConsentsAndPurposes/items/properties/DataAgreementRecordRevision'
+                  predecessor_hash:
+                    type: string
+                    description: Tamper-resistent artifact from previous record
+                  predecessor_signature:
+                    type: string
+                    description: Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)
     UpdateConsentForDataAttributeRequest:
       required:
         - consented
@@ -4968,7 +4830,7 @@ components:
         Purposes:
           type: array
           items:
-            $ref: '#/components/schemas/ConsentAgreement'
+            $ref: '#/components/schemas/DataAgreement'
         Admins:
           type: array
           items:
@@ -5307,86 +5169,30 @@ components:
                   type: boolean
         ExternalIdentityProviderAvailable:
           type: boolean
-    ConsentAgreement:
-      required:
-        - ID
-        - Name
-        - Description
-        - LawfulUsage
-        - LawfulBasisOfProcessing
-        - PolicyURL
-        - AttributeType
-        - Jurisdiction
-        - Disclosure
-        - IndustryScope
-        - DataRetention
-        - Restriction
-        - Shared3PP
-        - Version
-        - PublishFlag
-      type: object
-      properties:
-        ID:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        LawfulUsage:
-          type: boolean
-        LawfulBasisOfProcessing:
-          type: integer
-          format: int32
-        PolicyURL:
-          type: string
-        AttributeType:
-          type: integer
-          format: int32
-        Jurisdiction:
-          type: string
-        Disclosure:
-          type: string
-        IndustryScope:
-          type: string
-        DataRetention:
-          required:
-            - RetentionPeriod
-            - Enabled
-          type: object
-          properties:
-            RetentionPeriod:
-              type: integer
-              format: int32
-            Enabled:
-              type: boolean
-        Restriction:
-          type: string
-        Shared3PP:
-          type: boolean
-        Version:
-          type: string
-        PublishFlag:
-          type: boolean
     DataAttribute:
-      required:
-        - consent
-        - description
-        - purposeids
+      title: Data Attribute
       type: object
       properties:
-        consent:
+        attributeId:
           type: string
-        description:
+        attributeName:
           type: string
-        purposeids:
+        attributeSensitive:
+          type: boolean
+        attributeCategory:
+          type: string
+        attributeDescription:
+          type: string
+        dataAgreementIds:
           type: array
           items:
             type: string
-      example:
-        consent: Age
-        description: example
-        purposeids:
-          - 64ecf184e2f6a8000142c678
+      required:
+        - attributeId
+        - attributeName
+        - attributeSensitive
+        - attributeCategory
+        - attributeDescription
     DataRequest:
       required:
         - ID
@@ -5439,418 +5245,103 @@ components:
         StateStr: Request initiated
         Comment: ''
     DataAgreement:
-      title: Data Agreement
+      title: Data agreement
       type: object
       properties:
-        record:
+        language:
+          type: string
+        version:
+          type: string
+        dataControllerName:
+          type: string
+        dataControllerUrl:
+          type: string
+        dataPolicy:
+          $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
+        purpose:
+          type: string
+        purposeDescription:
+          type: string
+        lawfulBasis:
+          type: string
+        methodOfUse:
+          type: string
+        dpia:
           type: object
           properties:
-            schema_version:
+            dpiaDate:
               type: string
-            record_id:
-              type: string
-            pii_principal_id:
+            dpiaSummaryUrl:
               type: string
           required:
-            - schema_version
-            - record_id
-            - pii_principal_id
-        pii_processing:
+            - dpiaDate
+            - dpiaSummaryUrl
+        isPublished:
+          type: boolean
+        proof:
           type: object
           properties:
-            privacy_notice:
+            id:
               type: string
-            language:
+            type:
               type: string
-            purposes:
-              type: array
-              items:
-                type: object
-                properties:
-                  purpose:
-                    type: string
-                  purpose_type:
-                    type: string
-                  lawful_basis:
-                    type: string
-                  pii_information:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        pii_type:
-                          type: string
-                        pii_optional:
-                          type: boolean
-                        sensitive_pii_category:
-                          type: boolean
-                        special_pii_category:
-                          type: boolean
-                      required:
-                        - pii_type
-                        - pii_optional
-                        - sensitive_pii_category
-                        - special_pii_category
-                  pii_controllers:
-                    type: array
-                    items:
-                      type: string
-                  collection_method:
-                    type: array
-                    items:
-                      type: string
-                  processing_method:
-                    type: array
-                    items:
-                      type: string
-                  storage_locations:
-                    type: array
-                    items:
-                      type: string
-                  retention_period:
-                    type: number
-                  processing_locations:
-                    type: array
-                    items:
-                      type: string
-                  geographic_restrictions:
-                    type: array
-                    items:
-                      type: string
-                  services:
-                    type: array
-                    items:
-                      type: string
-                  jurisdiction:
-                    type: string
-                  recipient_third_parties:
-                    type: array
-                    items:
-                      type: string
-                  withdrawal_method:
-                    type: string
-                  privacy_rights:
-                    type: object
-                    properties:
-                      Right to Object:
-                        type: string
-                      Data Portability:
-                        type: string
-                    required:
-                      - Right to Object
-                      - Data Portability
-                  codes_of_conduct:
-                    type: string
-                  impact_assessment:
-                    type: string
-                  authority_party:
-                    type: string
-                required:
-                  - purpose
-                  - purpose_type
-                  - lawful_basis
-                  - pii_information
-                  - pii_controllers
-                  - collection_method
-                  - processing_method
-                  - storage_locations
-                  - retention_period
-                  - processing_locations
-                  - geographic_restrictions
-                  - services
-                  - jurisdiction
-                  - recipient_third_parties
-                  - withdrawal_method
-                  - privacy_rights
-                  - codes_of_conduct
-                  - impact_assessment
-                  - authority_party
+            created:
+              type: string
+            verificationMethod:
+              type: string
+            proofPurpose:
+              type: string
+            proofValue:
+              type: string
           required:
-            - privacy_notice
-            - language
-            - purposes
-        party_identification:
-          type: array
-          items:
-            type: object
-            properties:
-              party_id:
-                type: string
-              party_address:
-                type: string
-              party_email:
-                type: string
-              party_url:
-                type: string
-              party_name:
-                type: string
-              party_role:
-                type: string
-              party_contact:
-                type: object
-                properties:
-                  SocialMedia:
-                    type: string
-                required:
-                  - SocialMedia
-              party_type:
-                type: string
-            required:
-              - party_id
-              - party_address
-              - party_url
-              - party_name
-              - party_role
-              - party_type
-        event:
-          type: array
-          items:
-            type: object
-            properties:
-              event_time:
-                type: string
-              validity_duration:
-                type: number
-              entity_id:
-                type: string
-              event_type:
-                type: string
-              event_state:
-                type: string
-            required:
-              - event_time
-              - validity_duration
-              - entity_id
-              - event_type
-              - event_state
+            - id
+            - type
+            - created
+            - verificationMethod
+            - proofPurpose
+            - proofValue
       required:
-        - record
-        - pii_processing
-        - party_identification
-        - event
-    DataAgreementRecord:
-      title: Data Agreement Record
+        - language
+        - version
+        - dataControllerName
+        - dataControllerUrl
+        - dataPolicy
+        - purpose
+        - purposeDescription
+        - lawfulBasis
+        - methodOfUse
+        - dpia
+        - dataSubjectDid
+        - proof
+        - isPublished
+    GlobalDataPolicyConfiguration:
       type: object
       properties:
-        '@context':
-          type: object
-          properties:
-            '@vocab':
-              type: string
-            dpv:
-              type: string
-            dpv-gdpr:
-              type: string
-            dct:
-              type: string
-            foaf:
-              type: string
-            ex:
-              type: string
-          required:
-            - '@vocab'
-            - dpv
-            - dpv-gdpr
-            - dct
-            - foaf
-            - ex
-        '@id':
+        policyUrl:
           type: string
-        '@type':
+        jurisdiction:
           type: string
-        'dct:conformsTo':
+        industrySectorId:
           type: string
-        'dct:subject':
-          type: object
-          properties:
-            '@id':
-              type: string
-            '@type':
-              type: string
-            hasPersonalDataHandling:
-              title: hasPersonalDataHandling
-              type: object
-              properties:
-                hasNotice:
-                  type: object
-                  properties:
-                    '@id':
-                      type: string
-                  required:
-                    - '@id'
-                hasAuthority:
-                  type: object
-                  properties:
-                    '@id':
-                      type: string
-                  required:
-                    - '@id'
-                hasPurpose:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      'dct:title':
-                        type: string
-                      '@type':
-                        type: string
-                      hasLegalBasis:
-                        type: object
-                        properties:
-                          '@id':
-                            type: string
-                        required:
-                          - '@id'
-                      hasPersonalData:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            '@type':
-                              type: string
-                            hasContext:
-                              type: string
-                          required:
-                            - '@type'
-                            - hasContext
-                      hasDataController:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            '@id':
-                              type: string
-                          required:
-                            - '@id'
-                      hasStorageCondition:
-                        type: object
-                        properties:
-                          hasLocation:
-                            type: string
-                          hasDuration:
-                            type: number
-                        required:
-                          - hasLocation
-                          - hasDuration
-                      hasJurisdiction:
-                        type: string
-                      'dct:subject':
-                        type: array
-                        items:
-                          type: string
-                      hasRecipient:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            '@id':
-                              type: string
-                          required:
-                            - '@id'
-                      hasRight:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            '@type':
-                              type: array
-                              items:
-                                type: string
-                            isExercisedAt:
-                              type: string
-                          required:
-                            - '@type'
-                            - isExercisedAt
-                      hasOrganisationalMeasure:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            '@id':
-                              type: string
-                            '@type':
-                              type: string
-                          required:
-                            - '@id'
-                            - '@type'
-                    required:
-                      - 'dct:title'
-                      - '@type'
-                      - hasLegalBasis
-                      - hasPersonalData
-                      - hasDataController
-                      - hasStorageCondition
-                      - hasJurisdiction
-                      - 'dct:subject'
-                      - hasRecipient
-                      - hasRight
-                      - hasOrganisationalMeasure
-              required:
-                - hasNotice
-                - hasAuthority
-                - hasPurpose
-            hasEntity:
-              type: array
-              items:
-                type: object
-                properties:
-                  '@id':
-                    type: string
-                  'foaf:mbox':
-                    type: string
-                  'foaf:page':
-                    type: string
-                  'foaf:name':
-                    type: string
-                  '@type':
-                    type: array
-                    items:
-                      type: string
-                  'foaf:OnlineAccount':
-                    type: object
-                    properties:
-                      'foaf:name':
-                        type: string
-                      'foaf:accountName':
-                        type: string
-                    required:
-                      - 'foaf:name'
-                      - 'foaf:accountName'
-                required:
-                  - '@id'
-                  - 'foaf:page'
-                  - 'foaf:name'
-                  - '@type'
-            'dct:hasPart':
-              type: array
-              items:
-                type: object
-                properties:
-                  'dct:date':
-                    type: string
-                  hasDuration:
-                    type: number
-                  '@type':
-                    type: string
-                  hasConsentStatus:
-                    type: string
-                required:
-                  - 'dct:date'
-                  - hasDuration
-                  - '@type'
-                  - hasConsentStatus
-          required:
-            - '@id'
-            - '@type'
-            - hasPersonalDataHandling
-            - hasEntity
-            - 'dct:hasPart'
+        industrySector:
+          type: string
+        dataRetentionPeriod:
+          type: number
+        geographicRestriction:
+          type: string
+        storageLocation:
+          type: string
+        thirdPartyDataSharing:
+          type: boolean
       required:
-        - '@context'
-        - '@id'
-        - '@type'
-        - 'dct:conformsTo'
-        - 'dct:subject'
+        - policyUrl
+        - jurisdiction
+        - industrySectorId
+        - industrySector
+        - dataRetentionPeriod
+        - geographicRestriction
+        - storageLocation
+        - thirdPartyDataSharing
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

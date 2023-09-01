@@ -217,10 +217,10 @@ components:
       $ref: "./definitions/service/GetConsentsForAllConsentAgreements.yaml"
     GetConsents:
       $ref: "./definitions/service/GetConsents.yaml"
-    UpdateConsentForConsentAgreementRequest:
-      $ref: "./definitions/service/UpdateConsentForConsentAgreementRequest.yaml"
-    UpdateConsentForConsentAgreementResponse:
-      $ref: "./definitions/service/UpdateConsentForConsentAgreementResponse.yaml"
+    UpdateDataAgreementRecord:
+      $ref: "./definitions/service/UpdateDataAgreementRecord.yaml"
+    DataAgreementRecord:
+      $ref: "./definitions/service/DataAgreementRecord.yaml"
     UpdateConsentForDataAttributeRequest:
       $ref: "./definitions/service/UpdateConsentForDataAttributeRequest.yaml"
     UpdateConsentForDataAttributeResponse:
@@ -245,16 +245,14 @@ components:
       $ref: "./definitions/onboarding/Individual.yaml"
     Organisation:
       $ref: "./definitions/onboarding/Organisation.yaml"
-    ConsentAgreement:
-      $ref: "./definitions/config/ConsentAgreement.yaml"
     DataAttribute:
       $ref: "./definitions/config/DataAttribute.yaml"
     DataRequest:
       $ref: "./definitions/config/DataRequest.yaml"
     DataAgreement:
       $ref: "./definitions/config/DataAgreement.yaml"
-    DataAgreementRecord:
-      $ref: "./definitions/service/DataAgreementRecord.yaml"
+    GlobalDataPolicyConfiguration:
+      $ref: "./definitions/config/GlobalDataPolicyConfiguration.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

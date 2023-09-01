@@ -68,7 +68,7 @@ properties:
   Purposes:
     type: array
     items:
-      $ref: "../config/ConsentAgreement.yaml"
+      $ref: "../config/DataAgreement.yaml"
   Admins:
     type: array
     items:
