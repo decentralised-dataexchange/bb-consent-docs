@@ -2294,7 +2294,7 @@ paths:
                     $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
-        - bearer: []
+        - BearerAuth: []
     get:
       tags:
         - config
@@ -2324,7 +2324,7 @@ paths:
                       $ref: '#/components/schemas/DataAttribute'
       deprecated: false
       security:
-        - bearer: []
+        - BearerAuth: []
   '/v1/organizations/{organizationId}/templates/{templateId}':
     put:
       tags:
@@ -2362,12 +2362,13 @@ paths:
           description: Created
           content:
             application/json:
-              required:
-                - Organization
-              type: object
-              properties:
-                Organization:
-                  $ref: '#/components/schemas/Organisation'
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3911,8 +3912,6 @@ paths:
                       webhookid:
                         type: string
                   ResponseHeaders:
-                    ResponseHeaders: null
-                    title: ResponseHeaders
                     required:
                       - Cache-Control
                       - Content-Type
@@ -4874,7 +4873,7 @@ components:
           type: object
           properties:
             RetentionPeriod:
-              type: integeru
+              type: integer
               format: int32
             Enabled:
               type: boolean

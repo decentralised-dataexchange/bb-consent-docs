@@ -4,7 +4,7 @@ required:
 type: object
 properties:
   RetentionPeriod:
-    type: integeru
+    type: integer
     format: int32
   Enabled:
     type: boolean

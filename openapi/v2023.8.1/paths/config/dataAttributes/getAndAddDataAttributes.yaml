@@ -35,7 +35,7 @@ post:
                 $ref: "../../../definitions/onboarding/Organisation.yaml"
   deprecated: false
   security:
-    - bearer: []
+    - BearerAuth: []
 get:
   tags:
     - config
@@ -65,4 +65,4 @@ get:
                   $ref: "../../../definitions/config/DataAttribute.yaml"
   deprecated: false
   security:
-    - bearer: []
+    - BearerAuth: []

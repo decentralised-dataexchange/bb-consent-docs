@@ -116,8 +116,6 @@ get:
                   webhookid:
                     type: string
               ResponseHeaders:
-                ResponseHeaders:
-                title: ResponseHeaders
                 required:
                   - Cache-Control
                   - Content-Type

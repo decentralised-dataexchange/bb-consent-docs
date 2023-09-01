@@ -34,12 +34,13 @@ put:
       description: Created
       content:
         application/json:
-          required:
-            - Organization
-          type: object
-          properties:
-            Organization:
-              $ref: "../../../definitions/onboarding/Organisation.yaml"
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboarding/Organisation.yaml"
   deprecated: false
   security:
     - BearerAuth: []
