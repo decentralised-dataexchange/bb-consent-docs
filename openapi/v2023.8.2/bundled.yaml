@@ -1360,6 +1360,7 @@ paths:
             type: string
       responses:
         '200':
+          description: OK
           headers: {}
       deprecated: false
       security:
@@ -1567,6 +1568,7 @@ paths:
             type: string
       responses:
         '200':
+          description: OK
           headers: {}
       deprecated: false
       security:
@@ -1868,6 +1870,7 @@ paths:
             type: string
       responses:
         '200':
+          description: OK
           headers: {}
       deprecated: false
       security:

@@ -27,6 +27,7 @@ get:
         type: string
   responses:
     "200":
+      description: OK
       headers: {}
   deprecated: false
   security:
