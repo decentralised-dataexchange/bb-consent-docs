@@ -40,7 +40,7 @@ get:
         type: string
   responses:
     "200":
-      description: ""
+      description: "OK"
       headers: {}
   deprecated: false
   security:
