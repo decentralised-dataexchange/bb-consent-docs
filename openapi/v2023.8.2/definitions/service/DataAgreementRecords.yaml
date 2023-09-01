@@ -8,10 +8,13 @@ description: A list of data agreement records
 properties:
   ID:
     type: string
+    description: "Consent identifier"
   OrgID:
     type: string
+    description: "Organisation identifier"
   UserID:
     type: string
+    description: "User identifier"
   ConsentsAndPurposes:
     type: array
     items:
