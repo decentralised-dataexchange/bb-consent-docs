@@ -5272,6 +5272,10 @@ components:
           type: string
         methodOfUse:
           type: string
+        dataAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataAttribute'
         dpia:
           type: object
           properties:
