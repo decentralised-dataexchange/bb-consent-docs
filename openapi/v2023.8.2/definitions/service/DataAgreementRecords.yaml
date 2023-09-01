@@ -1,0 +1,17 @@
+required:
+  - ID
+  - OrgID
+  - UserID
+  - ConsentsAndPurposes
+type: object
+properties:
+  ID:
+    type: string
+  OrgID:
+    type: string
+  UserID:
+    type: string
+  ConsentsAndPurposes:
+    type: array
+    items:
+      $ref: "./DataAgreementRecord.yaml"

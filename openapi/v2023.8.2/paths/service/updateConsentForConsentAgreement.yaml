@@ -35,7 +35,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/DataAgreementRecord.yaml"
+            $ref: "../../definitions/service/DataAgreementRecords.yaml"
   deprecated: false
   security:
     - BearerAuth: []

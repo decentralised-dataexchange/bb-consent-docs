@@ -232,7 +232,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataAgreementRecord'
+                $ref: '#/components/schemas/DataAgreementRecords'
       deprecated: false
       security:
         - BearerAuth: []
@@ -4242,7 +4242,7 @@ components:
             - DisAllow
       example:
         consented: Allow
-    DataAgreementRecord:
+    DataAgreementRecords:
       required:
         - ID
         - OrgID

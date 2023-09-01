@@ -219,8 +219,8 @@ components:
       $ref: "./definitions/service/GetConsents.yaml"
     UpdateDataAgreementRecord:
       $ref: "./definitions/service/UpdateDataAgreementRecord.yaml"
-    DataAgreementRecord:
-      $ref: "./definitions/service/DataAgreementRecord.yaml"
+    DataAgreementRecords:
+      $ref: "./definitions/service/DataAgreementRecords.yaml"
     DataAgreementRecordRevision:
       $ref: "./definitions/service/DataAgreementRecordRevision.yaml"
     UpdateConsentForDataAttributeRequest:
