@@ -39,7 +39,7 @@ put:
   requestBody:
     content:
       application/json:
-        schemas:
+        schema:
           $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderRequest.yaml"
     required: true
   responses:

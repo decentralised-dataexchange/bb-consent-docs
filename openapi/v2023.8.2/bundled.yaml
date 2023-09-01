@@ -2486,7 +2486,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/requestBody/content/application~1json/schemas'
+              $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
         required: true
       responses:
         '201':
@@ -2512,7 +2512,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schemas:
+            schema:
               required:
                 - authorizationUrl
                 - tokenUrl
