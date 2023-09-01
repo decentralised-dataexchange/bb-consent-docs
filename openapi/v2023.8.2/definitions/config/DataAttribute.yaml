@@ -9,7 +9,7 @@ properties:
     description: Name of the attribute
     type: string
   attributeSensitive:
-    description: |
+    description: >
       Indicates that personal data is sensitive or belongs to a 
       special category as per a regulations, typically requiring additional measures of handling.
     type: boolean

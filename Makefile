@@ -12,10 +12,10 @@ check-swagger-cli:
 bootstrap: resources/ssl/development ## Boostraps development environment
 	make -C resources/ssl/development bootstrap
 
-up: bootstrap ## Run nginx server with swagger ui
+up: bootstrap ## Run nginx server with swagger ui and start watching for changes
 	docker-compose up -d
 
-down: ## Stop the nginx server
+down: ## Stop the nginx server and file watcher
 	docker-compose down
 
 bundle: check-swagger-cli ## Bundles swagger files

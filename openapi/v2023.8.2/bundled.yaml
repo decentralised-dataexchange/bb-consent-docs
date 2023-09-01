@@ -4306,15 +4306,11 @@ components:
         DataAgreementRecordRevision:
           $ref: '#/components/schemas/DataAgreementRecordRevision'
           description: |
-            A *generic* revision model captures the serialized contents of any shema's single row. 
-            This is then subject to 1) cryptographic signature and 2) auditing. Aside from \"successor\" column, a 
-            revision should be considered locked.
+            A generic revision model captures the serialized contents of any shema's single row.  This is then subject to 1) cryptographic signature and 2) auditing. Aside from successor column, a  revision should be considered locked.
     DataAgreementRecordRevision:
       type: object
-      description: |-
-        A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
-
-        Aside from "successor" column, a revision should be considered locked.
+      description: |
+        A generic revision model captures the serialized contents of any schema's single row.  This is then subject to 1) cryptographic signature and 2) auditing. Aside from successor column,  a revision should be considered locked.
       required:
         - id
         - schema_name
@@ -5218,8 +5214,7 @@ components:
           type: string
         attributeSensitive:
           description: |
-            Indicates that personal data is sensitive or belongs to a 
-            special category as per a regulations, typically requiring additional measures of handling.
+            Indicates that personal data is sensitive or belongs to a  special category as per a regulations, typically requiring additional measures of handling.
           type: boolean
         attributeCategory:
           description: A category of personal data
@@ -5293,9 +5288,7 @@ components:
       title: Data agreement
       type: object
       description: |
-        The Data Agreement Vocabulary provides terms to describe and represent information related to 
-        processing of personal data based on established requirements such as for the EU General Data 
-        Protection Regulation (GDPR).
+        The Data Agreement Vocabulary provides terms to describe and represent information related to  processing of personal data based on established requirements such as for the EU General Data  Protection Regulation (GDPR).
       properties:
         language:
           type: string
@@ -5314,28 +5307,23 @@ components:
           $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
         purpose:
           description: |
-            Describes the purpose for which a data controller (Data Source or Data Using Service) uses personal data for. 
-            This is also the purpose for which the data agreeent is being formulated
+            Describes the purpose for which a data controller (Data Source or Data Using Service) uses personal data for.  This is also the purpose for which the data agreeent is being formulated
           type: string
         purposeDescription:
           description: |
-            Provides description of the purpose for which the personal data us used, 
-            comprehensive to the individual whose data is being used by the data controller.
+            Provides description of the purpose for which the personal data us used,  comprehensive to the individual whose data is being used by the data controller.
           type: string
         lawfulBasis:
           description: |
-            An organization processing personal data to have a valid lawful basis for that personal data processing activity. GDPR, 
-            for e.g., consent, legal_obligation, contract, vital_interest, public_task and legitimate_interest.
+            An organization processing personal data to have a valid lawful basis for that personal data processing activity. GDPR,  for e.g., consent, legal_obligation, contract, vital_interest, public_task and legitimate_interest.
           type: string
         methodOfUse:
           description: |
-            This is used to describe whether controller is using personal data for internal purposes of for data exchange towards an external third party. 
-            Data exchange could be for exposing data (as a Data Source) or consuming data as a Data Using Service.
+            This is used to describe whether controller is using personal data for internal purposes of for data exchange towards an external third party.  Data exchange could be for exposing data (as a Data Source) or consuming data as a Data Using Service.
           type: string
         dataAttributes:
           description: |
-            Encapsulates the attributes used for the the usage purpose defined. 
-            Its an array of personal data attributes.
+            Encapsulates the attributes used for the the usage purpose defined.  Its an array of personal data attributes.
           type: array
           items:
             $ref: '#/components/schemas/DataAttribute'
@@ -5402,9 +5390,7 @@ components:
           type: string
         thirdPartyDataSharing:
           description: |
-            This is a boolean value to indicate that the DA is used for third party data disclosures. 
-            This indicates that some data disclosures will happen and is used to release personal data 
-            to DUS based on an agreement
+            This is a boolean value to indicate that the DA is used for third party data disclosures.  This indicates that some data disclosures will happen and is used to release personal data  to DUS based on an agreement
           type: boolean
       required:
         - policyUrl

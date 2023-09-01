@@ -5,15 +5,15 @@ properties:
     description: Policy URL for the organisation
     type: string
   jurisdiction:
-    description: |
+    description: >
       Indicates a legal jurisdiction, e.g. of some legislation, or where some government service is based.
     type: string
   industrySectorId:
-    description: |
+    description: >
       Identifier for the industry sector
     type: string
   industrySector:
-    description: |
+    description: >
       Indicate or restrict scope for interpretation and application of purpose in a domain.
     type: string
   dataRetentionPeriod:
@@ -26,7 +26,7 @@ properties:
     description: The geographic location where the personal data is stored
     type: string
   thirdPartyDataSharing:
-    description: |
+    description: >
       This is a boolean value to indicate that the DA is used for third party data disclosures. 
       This indicates that some data disclosures will happen and is used to release personal data 
       to DUS based on an agreement
