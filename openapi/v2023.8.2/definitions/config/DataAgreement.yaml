@@ -32,27 +32,7 @@ properties:
   isPublished:
     type: boolean
   proof:
-    type: object
-    properties:
-      id:
-        type: string
-      type:
-        type: string
-      created:
-        type: string
-      verificationMethod:
-        type: string
-      proofPurpose:
-        type: string
-      proofValue:
-        type: string
-    required:
-      - id
-      - type
-      - created
-      - verificationMethod
-      - proofPurpose
-      - proofValue
+    $ref: "./Signature.yaml"
 required:
   - language
   - version

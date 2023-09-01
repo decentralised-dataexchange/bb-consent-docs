@@ -221,6 +221,8 @@ components:
       $ref: "./definitions/service/UpdateDataAgreementRecord.yaml"
     DataAgreementRecord:
       $ref: "./definitions/service/DataAgreementRecord.yaml"
+    DataAgreementRecordRevision:
+      $ref: "./definitions/service/DataAgreementRecordRevision.yaml"
     UpdateConsentForDataAttributeRequest:
       $ref: "./definitions/service/UpdateConsentForDataAttributeRequest.yaml"
     UpdateConsentForDataAttributeResponse:
@@ -253,6 +255,8 @@ components:
       $ref: "./definitions/config/DataAgreement.yaml"
     GlobalDataPolicyConfiguration:
       $ref: "./definitions/config/GlobalDataPolicyConfiguration.yaml"
+    Signature:
+      $ref: "./definitions/config/Signature.yaml"
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header

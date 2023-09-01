@@ -25,5 +25,5 @@ properties:
     type: string
     description: "Tamper-resistent artifact from previous record"
   predecessor_signature:
-    type: string
+    $ref: "../config/Signature.yaml"
     description: "Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)"
