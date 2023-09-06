@@ -44,6 +44,9 @@ put:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
 delete:
   tags:
     - config
@@ -74,3 +77,6 @@ delete:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

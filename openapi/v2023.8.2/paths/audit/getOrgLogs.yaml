@@ -10,6 +10,9 @@ get:
     - audit
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
   description: Get action logs
   responses:
     "200":

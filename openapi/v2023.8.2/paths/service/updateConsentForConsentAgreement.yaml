@@ -39,3 +39,44 @@ post:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Individual'
+get:
+  tags:
+    - service
+  description: Get consent for consent agreement
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: consentId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: purposeId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/service/DataAgreementRecords.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Individual'

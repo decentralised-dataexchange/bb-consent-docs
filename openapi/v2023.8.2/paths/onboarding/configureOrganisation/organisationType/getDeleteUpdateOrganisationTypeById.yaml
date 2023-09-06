@@ -32,6 +32,9 @@ get:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'
 delete:
   tags:
     - onboarding
@@ -51,6 +54,9 @@ delete:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
 patch:
   tags:
     - onboarding
@@ -97,3 +103,6 @@ patch:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

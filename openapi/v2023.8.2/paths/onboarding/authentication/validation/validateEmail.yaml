@@ -33,5 +33,4 @@ post:
               Result: true
               Message: Email address is valid and not in use in our system
   deprecated: false
-  security:
-    - BearerAuth: []
+  security: []

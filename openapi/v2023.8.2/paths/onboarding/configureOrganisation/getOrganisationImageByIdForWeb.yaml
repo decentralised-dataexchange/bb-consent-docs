@@ -1,7 +1,7 @@
 get:
   tags:
     - onboarding
-  description: Get organization image
+  description: Get organization image for web
   parameters:
     - name: organizationId
       in: path
@@ -18,8 +18,3 @@ get:
       description: "OK"
       headers: {}
   deprecated: false
-  security:
-    - BearerAuth: []
-  x-badges:
-    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
-      label: 'Authorised roles: Organisation admin'

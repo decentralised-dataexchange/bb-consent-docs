@@ -119,6 +119,8 @@ paths:
     $ref: "./paths/onboarding/configureOrganisation/updateOrganisationLogoImage.yaml"
   /v1/organizations/{organizationId}/image/{imageId}:
     $ref: "./paths/onboarding/configureOrganisation/getOrganisationImageById.yaml"
+  /v1/organizations/{organizationId}/image/{imageId}/web:
+    $ref: "./paths/onboarding/configureOrganisation/getOrganisationImageByIdForWeb.yaml"
   /v1/organizations/{organizationId}/eulaURL:
     $ref: "./paths/onboarding/configureOrganisation/updateAndDeleteOrganisationEULAURL.yaml"
   /v1/organizations/{organizationId}/admins:

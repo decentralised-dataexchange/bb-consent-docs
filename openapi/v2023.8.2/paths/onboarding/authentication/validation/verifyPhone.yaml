@@ -25,8 +25,4 @@ post:
       description: No Content
       content: {}
   deprecated: false
-  security:
-    - BearerAuth: []
-  servers:
-    - url: http://example.com
-      variables: {}
+  security: []

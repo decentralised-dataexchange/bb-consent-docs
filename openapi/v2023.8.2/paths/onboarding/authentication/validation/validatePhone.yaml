@@ -35,5 +35,4 @@ post:
               Result: false
               Message: Phone number is in use
   deprecated: false
-  security:
-    - BearerAuth: []
+  security: []

@@ -12,9 +12,12 @@ delete:
     "204":
       description: No Content
       content: {}
-  deprecated: false
+  deprecated: true
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'
 get:
   tags:
     - onboarding
@@ -29,6 +32,9 @@ get:
     "200":
       description: OK
       headers: {}
-  deprecated: false
+  deprecated: true
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'

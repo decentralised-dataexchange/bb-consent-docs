@@ -39,5 +39,4 @@ post:
               Result: true
               Message: Otp validatiation Succeeded
   deprecated: false
-  security:
-    - BearerAuth: []
+  security: []

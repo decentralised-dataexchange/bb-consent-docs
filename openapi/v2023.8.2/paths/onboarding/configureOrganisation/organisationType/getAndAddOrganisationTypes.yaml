@@ -27,8 +27,7 @@ get:
                 ImageURL:
                   type: string
   deprecated: false
-  security:
-    - BearerAuth: []
+  security: []
 post:
   tags:
     - onboarding
@@ -70,3 +69,6 @@ post:
   deprecated: false
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'

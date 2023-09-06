@@ -49,6 +49,9 @@ paths:
         - audit
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
       description: Get action logs
       responses:
         '200':
@@ -94,6 +97,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
     get:
       tags:
@@ -134,6 +140,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}':
     get:
       tags:
@@ -168,6 +177,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{orgId}/users/{userId}/consents':
     get:
       tags:
@@ -194,6 +206,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
     post:
       tags:
@@ -236,6 +251,47 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
+    get:
+      tags:
+        - service
+      description: Get consent for consent agreement
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAgreementRecords'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
     patch:
       tags:
@@ -283,6 +339,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-status':
     get:
       tags:
@@ -304,6 +363,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-delete':
     get:
       parameters:
@@ -327,6 +389,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
     post:
       tags:
         - service
@@ -344,6 +409,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-delete/status':
     get:
       tags:
@@ -365,6 +433,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel':
     post:
       tags:
@@ -391,6 +462,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-download':
     post:
       tags:
@@ -415,6 +489,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
     get:
       tags:
         - service
@@ -437,6 +514,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-download/status':
     get:
       tags:
@@ -458,6 +538,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel':
     post:
       tags:
@@ -484,6 +567,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   /v1/GetUserOrgsAndConsents:
     get:
       tags:
@@ -536,6 +622,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   /v1/users/admin/login:
     post:
       tags:
@@ -837,8 +926,7 @@ paths:
                   Result: true
                   Message: Email address is valid and not in use in our system
       deprecated: false
-      security:
-        - BearerAuth: []
+      security: []
   /v1/users/validate/phone:
     post:
       tags:
@@ -877,8 +965,7 @@ paths:
                   Result: false
                   Message: Phone number is in use
       deprecated: false
-      security:
-        - BearerAuth: []
+      security: []
   /v1/users/verify/phone:
     post:
       tags:
@@ -907,11 +994,7 @@ paths:
           description: No Content
           content: {}
       deprecated: false
-      security:
-        - BearerAuth: []
-      servers:
-        - url: 'http://example.com'
-          variables: {}
+      security: []
   /v1/users/verify/otp:
     post:
       tags:
@@ -954,8 +1037,7 @@ paths:
                   Result: true
                   Message: Otp validatiation Succeeded
       deprecated: false
-      security:
-        - BearerAuth: []
+      security: []
   /v1/user/password/reset:
     put:
       tags:
@@ -993,6 +1075,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/user/password/forgot:
     put:
       tags:
@@ -1054,7 +1139,11 @@ paths:
           description: No Content
           content: {}
       deprecated: false
-      security: []
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/users/token:
     post:
       tags:
@@ -1174,8 +1263,7 @@ paths:
                     ImageURL:
                       type: string
       deprecated: false
-      security:
-        - BearerAuth: []
+      security: []
     post:
       tags:
         - onboarding
@@ -1217,6 +1305,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   '/v1/organizations/types/{typeId}':
     get:
       tags:
@@ -1252,6 +1343,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
     delete:
       tags:
         - onboarding
@@ -1271,6 +1365,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     patch:
       tags:
         - onboarding
@@ -1317,6 +1414,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/types/{typeId}/image':
     post:
       tags:
@@ -1348,6 +1448,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - onboarding
@@ -1365,6 +1468,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/organizations:
     post:
       tags:
@@ -1409,6 +1515,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/organizations/{organizationId}':
     get:
       tags:
@@ -1435,6 +1544,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
     patch:
       tags:
         - onboarding
@@ -1472,6 +1584,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/coverimage':
     post:
       tags:
@@ -1511,6 +1626,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/logoimage':
     post:
       tags:
@@ -1550,6 +1668,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/image/{imageId}':
     get:
       tags:
@@ -1573,6 +1694,30 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  '/v1/organizations/{organizationId}/image/{imageId}/web':
+    get:
+      tags:
+        - onboarding
+      description: Get organization image for web
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: imageId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          headers: {}
+      deprecated: false
   '/v1/organizations/{organizationId}/eulaURL':
     post:
       tags:
@@ -1602,6 +1747,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     delete:
       tags:
         - onboarding
@@ -1619,6 +1767,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/admins':
     post:
       tags:
@@ -1660,6 +1811,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - onboarding
@@ -1690,6 +1844,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     delete:
       tags:
         - onboarding
@@ -1715,6 +1872,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/organizations/roles:
     get:
       tags:
@@ -1776,6 +1936,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/user/register/android:
     post:
       tags:
@@ -1808,6 +1971,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   /v1/user/register/ios:
     post:
       tags:
@@ -1840,6 +2006,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Individual'
   '/v1/user/image/{imageId}':
     delete:
       tags:
@@ -1855,9 +2024,12 @@ paths:
         '204':
           description: No Content
           content: {}
-      deprecated: false
+      deprecated: true
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
     get:
       tags:
         - onboarding
@@ -1872,9 +2044,12 @@ paths:
         '200':
           description: OK
           headers: {}
-      deprecated: false
+      deprecated: true
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/user/image:
     post:
       tags:
@@ -1906,9 +2081,12 @@ paths:
                 properties:
                   User:
                     $ref: '#/components/schemas/Individual'
-      deprecated: false
+      deprecated: true
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/user:
     patch:
       tags:
@@ -1944,6 +2122,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
     get:
       tags:
         - onboarding
@@ -1964,6 +2145,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin, Individual'
   /v1/user/apikey:
     post:
       tags:
@@ -1988,6 +2172,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - onboarding
@@ -2011,6 +2198,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/user/apikey/revoke:
     delete:
       tags:
@@ -2024,6 +2214,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/global-policy-configuration':
     get:
       tags:
@@ -2045,6 +2238,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     post:
       tags:
         - config
@@ -2071,6 +2267,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/purposes':
     post:
       tags:
@@ -2110,6 +2309,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -2140,6 +2342,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/purposes/{purposeId}':
     delete:
       tags:
@@ -2187,6 +2392,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     put:
       tags:
         - config
@@ -2224,6 +2432,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -2259,6 +2470,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/templates':
     post:
       tags:
@@ -2298,6 +2512,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -2328,6 +2545,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/templates/{templateId}':
     put:
       tags:
@@ -2375,6 +2595,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     delete:
       tags:
         - config
@@ -2405,6 +2628,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/purposes/{purposeId}/templates':
     delete:
       tags:
@@ -2436,6 +2662,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationID}/templates/{templateID}':
     get:
       tags:
@@ -2470,6 +2699,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationID}/idp/open-id':
     post:
       tags:
@@ -2498,6 +2730,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     put:
       tags:
         - config
@@ -2635,6 +2870,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     delete:
       tags:
         - config
@@ -2653,6 +2891,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -2673,6 +2914,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/subscription/enable':
     post:
       tags:
@@ -2699,6 +2943,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/subscription/disable':
     post:
       tags:
@@ -2725,6 +2972,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/subscribe-method':
     get:
       tags:
@@ -2758,6 +3008,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     post:
       tags:
         - config
@@ -2789,6 +3042,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/organizations/subscribe-methods:
     get:
       tags:
@@ -2859,6 +3115,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/subscribe-key/renew':
     post:
       tags:
@@ -2891,6 +3150,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/users/count':
     get:
       tags:
@@ -2920,6 +3182,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/subscription':
     get:
       tags:
@@ -3008,6 +3273,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -3059,6 +3327,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/users/{userId}':
     delete:
       tags:
@@ -3090,6 +3361,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
     get:
       tags:
@@ -3145,6 +3419,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{orgId}/purposes/{purposeId}/consented/users':
     get:
       tags:
@@ -3195,6 +3472,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/organizations/data-requests:
     get:
       tags:
@@ -3268,6 +3548,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{orgId}/data-requests/{dataReqId}':
     get:
       tags:
@@ -3294,6 +3577,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     patch:
       tags:
         - config
@@ -3337,6 +3623,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/organizations/webhooks/event-types:
     get:
       tags:
@@ -3372,6 +3661,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   /v1/organizations/webhooks/payload/content-types:
     get:
       tags:
@@ -3398,6 +3690,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks':
     post:
       tags:
@@ -3479,6 +3774,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     get:
       tags:
         - config
@@ -3519,6 +3817,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks/{webhookId}':
     get:
       tags:
@@ -3578,6 +3879,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     delete:
       tags:
         - config
@@ -3602,6 +3906,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
     put:
       tags:
         - config
@@ -3688,6 +3995,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks/{webhookId}/ping':
     post:
       tags:
@@ -3737,6 +4047,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery':
     get:
       tags:
@@ -3799,6 +4112,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
@@ -3971,6 +4287,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
   '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
@@ -4002,6 +4321,9 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
 components:
   schemas:
     OrganisationLog:

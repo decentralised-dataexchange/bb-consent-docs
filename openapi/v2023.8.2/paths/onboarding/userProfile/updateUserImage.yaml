@@ -28,6 +28,9 @@ post:
             properties:
               User:
                 $ref: "../../../definitions/onboarding/Individual.yaml"
-  deprecated: false
+  deprecated: true
   security:
     - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'
