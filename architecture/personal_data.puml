@@ -1,0 +1,27 @@
+@startuml "Personal data"
+
+@startjson
+{
+    "@context": [
+    "https://raw.githubusercontent.com/decentralised-dataexchange/data-exchange-agreements/main/interface-specs/jsonld/contexts/dexa-context.jsonld",
+    "https://w3id.org/security/v2"
+    ],
+    "@id": "urn:uuid:data-attribute-id",
+    "@type": [
+    "DataAttribute"
+    ],
+    "dataSourceId": "urn:uuid:data-source-id",
+    "attributeId": "f216cb1-aedb-571e-46f7-2fef51dedb54",
+    "attributeName": "Name",
+    "attributeSensitive": true,
+    "attributeCategory": "Name",
+    "attributeDescription": "Name of the individual",
+    "proof": {
+        "type": "Ed25519Signature2018",
+        "created": "2017-06-18T21:19:10Z",
+        "verificationMethod": "did:key:abc",
+        "proofPurpose": "authentication",
+        "proofValue": "x.y.z"
+    }
+}
+@endjson

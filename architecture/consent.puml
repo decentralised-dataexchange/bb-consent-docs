@@ -1,0 +1,27 @@
+@startuml Consent
+@startjson
+{
+    "@context": [
+    "https://raw.githubusercontent.com/decentralised-dataexchange/data-exchange-agreements/main/interface-specs/jsonld/contexts/dexa-context.jsonld",
+    "https://w3id.org/security/v2"
+    ],
+    "@id": "urn:uuid:consent-id",
+    "@type": [
+    "Consent"
+    ],
+    "permission": "<allow/disallow>",
+    "dataSourceId": "urn:uuid:data-source-id",
+    "dataUsingServiceId": "urn:uuid:data-using-service-id",
+    "dataAttributeId": "urn:uuid:data-attribute-id",
+    "dataAgreementId": "urn:uuid:data-agreement-id",
+    "proof": {
+        "type": "Ed25519Signature2018",
+        "created": "2017-06-18T21:19:10Z",
+        "verificationMethod": "did:key:abc",
+        "proofPurpose": "authentication",
+        "proofValue": "x.y.z"
+    }
+}
+@endjson
+
+@enduml
