@@ -3,7 +3,7 @@ get:
     - config
   summary: Get all users consented to data attribute
   parameters:
-    - name: orgID
+    - name: orgId
       in: path
       required: true
       schema:

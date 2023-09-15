@@ -3,7 +3,7 @@ get:
     - config
   summary: Get subscribe key
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

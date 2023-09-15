@@ -3,7 +3,7 @@ get:
     - config
   description: Get global policy configurations
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -69,7 +69,7 @@ post:
     - config
   description: Update global policy configurations
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ get:
     - config
   description: Get data attribute by ID
   parameters:
-    - name: organizationID
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ post:
     - onboarding
   description: Update organization cover image
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

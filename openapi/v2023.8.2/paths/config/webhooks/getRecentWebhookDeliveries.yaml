@@ -3,7 +3,7 @@ get:
     - config
   description: Get recent webhook deliveries
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       style: simple

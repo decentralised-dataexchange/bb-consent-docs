@@ -1518,13 +1518,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/organizations/{organizationId}':
+  '/v1/organizations/{orgId}':
     get:
       tags:
         - onboarding
       description: Get organization by ID
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1552,7 +1552,7 @@ paths:
         - onboarding
       description: Update organization
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1587,13 +1587,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/coverimage':
+  '/v1/organizations/{orgId}/coverimage':
     post:
       tags:
         - onboarding
       description: Update organization cover image
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1629,13 +1629,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/logoimage':
+  '/v1/organizations/{orgId}/logoimage':
     post:
       tags:
         - onboarding
       description: Update organization logo image
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1671,13 +1671,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/image/{imageId}':
+  '/v1/organizations/{orgId}/image/{imageId}':
     get:
       tags:
         - onboarding
       description: Get organization image
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1697,13 +1697,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/image/{imageId}/web':
+  '/v1/organizations/{orgId}/image/{imageId}/web':
     get:
       tags:
         - onboarding
       description: Get organization image for web
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1718,13 +1718,13 @@ paths:
           description: OK
           headers: {}
       deprecated: false
-  '/v1/organizations/{organizationId}/eulaURL':
+  '/v1/organizations/{orgId}/eulaURL':
     post:
       tags:
         - onboarding
       description: Update organization EULA url
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1755,7 +1755,7 @@ paths:
         - onboarding
       description: Delete organization EULA url
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1770,13 +1770,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/admins':
+  '/v1/organizations/{orgId}/admins':
     post:
       tags:
         - onboarding
       description: Add org admin
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1819,7 +1819,7 @@ paths:
         - onboarding
       description: Get org admin
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -1852,7 +1852,7 @@ paths:
         - onboarding
       description: Delete org admin
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2217,13 +2217,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/global-policy-configuration':
+  '/v1/organizations/{orgId}/global-policy-configuration':
     get:
       tags:
         - config
       description: Get global policy configurations
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2246,7 +2246,7 @@ paths:
         - config
       description: Update global policy configurations
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2270,13 +2270,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/purposes':
+  '/v1/organizations/{orgId}/purposes':
     post:
       tags:
         - config
       description: Add consent agreement
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2317,7 +2317,7 @@ paths:
         - config
       description: Get consent agreements
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2345,13 +2345,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/purposes/{purposeId}':
+  '/v1/organizations/{orgId}/purposes/{purposeId}':
     delete:
       tags:
         - config
       description: Delete consent agreement by id
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2400,7 +2400,7 @@ paths:
         - config
       description: Update consent agreement by id
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2440,7 +2440,7 @@ paths:
         - config
       description: Get consent agreement by id
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2473,13 +2473,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/templates':
+  '/v1/organizations/{orgId}/templates':
     post:
       tags:
         - config
       description: Add data attributes
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2520,7 +2520,7 @@ paths:
         - config
       description: Get data attributes
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2548,13 +2548,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/templates/{templateId}':
+  '/v1/organizations/{orgId}/templates/{templateId}':
     put:
       tags:
         - config
       description: Update data attribute by id
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2603,7 +2603,7 @@ paths:
         - config
       description: Delete data attribute by id
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2631,13 +2631,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/purposes/{purposeId}/templates':
+  '/v1/organizations/{orgId}/purposes/{purposeId}/templates':
     delete:
       tags:
         - config
       description: Delete multiple data attributes
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2665,13 +2665,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationID}/templates/{templateID}':
+  '/v1/organizations/{orgId}/templates/{templateID}':
     get:
       tags:
         - config
       description: Get data attribute by ID
       parameters:
-        - name: organizationID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2702,13 +2702,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationID}/idp/open-id':
+  '/v1/organizations/{orgId}/idp/open-id':
     post:
       tags:
         - config
       summary: Add identity provider
       parameters:
-        - name: organizationID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2718,7 +2718,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
+              $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
         required: true
       responses:
         '201':
@@ -2726,7 +2726,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2738,7 +2738,7 @@ paths:
         - config
       summary: Update identity provider
       parameters:
-        - name: organizationID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2878,7 +2878,7 @@ paths:
         - config
       summary: Delete identity provider
       parameters:
-        - name: organizationID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2899,7 +2899,7 @@ paths:
         - config
       summary: Get identity provider
       parameters:
-        - name: organizationID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2910,20 +2910,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/subscription/enable':
+  '/v1/organizations/{orgId}/subscription/enable':
     post:
       tags:
         - config
       summary: Enable organization for subscription
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2946,13 +2946,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/subscription/disable':
+  '/v1/organizations/{orgId}/subscription/disable':
     post:
       tags:
         - config
       summary: Disable organization for subscription
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -2975,13 +2975,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/subscribe-method':
+  '/v1/organizations/{orgId}/subscribe-method':
     get:
       tags:
         - config
       summary: Get subscribe method
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3016,7 +3016,7 @@ paths:
         - config
       summary: Set subscribe method
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3083,13 +3083,13 @@ paths:
                     - ID: 2
                       Method: OpenID-Connect
       deprecated: false
-  '/v1/organizations/{organizationId}/subscribe-key':
+  '/v1/organizations/{orgId}/subscribe-key':
     get:
       tags:
         - config
       summary: Get subscribe key
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3118,13 +3118,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/subscribe-key/renew':
+  '/v1/organizations/{orgId}/subscribe-key/renew':
     post:
       tags:
         - config
       summary: Renew subscribe key
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3153,13 +3153,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/users/count':
+  '/v1/organizations/{orgId}/users/count':
     get:
       tags:
         - config
       summary: Get organization users count
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3185,13 +3185,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/subscription':
+  '/v1/organizations/{orgId}/subscription':
     get:
       tags:
         - config
       summary: Get organization subscription status (enable/disable)
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3212,13 +3212,13 @@ paths:
                 example:
                   Enabled: false
       deprecated: false
-  '/v1/organizations/{organizationId}/users':
+  '/v1/organizations/{orgId}/users':
     post:
       tags:
         - config
       summary: Add user to organization
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3288,7 +3288,7 @@ paths:
             type: integer
             format: int32
             example: 1024
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3330,13 +3330,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/users/{userId}':
+  '/v1/organizations/{orgId}/users/{userId}':
     delete:
       tags:
         - config
       summary: Delete user from organization
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3364,13 +3364,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
+  '/v1/organizations/{orgId}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
     get:
       tags:
         - config
       summary: Get all users consented to data attribute
       parameters:
-        - name: orgID
+        - name: orgId
           in: path
           required: true
           schema:
@@ -3693,13 +3693,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks':
+  '/v1/organizations/{orgId}/webhooks':
     post:
       tags:
         - config
       description: Create webhook
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -3782,7 +3782,7 @@ paths:
         - config
       description: Get all webhooks for an organisation
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -3820,13 +3820,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks/{webhookId}':
+  '/v1/organizations/{orgId}/webhooks/{webhookId}':
     get:
       tags:
         - config
       description: Get a webhook by ID
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -3887,7 +3887,7 @@ paths:
         - config
       description: Delete webhook
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -3914,7 +3914,7 @@ paths:
         - config
       description: Update webhook
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -3998,13 +3998,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks/{webhookId}/ping':
+  '/v1/organizations/{orgId}/webhooks/{webhookId}/ping':
     post:
       tags:
         - config
       description: Ping webhook
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -4050,13 +4050,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery':
+  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery':
     get:
       tags:
         - config
       description: Get recent webhook deliveries
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -4115,13 +4115,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}':
+  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
         - config
       description: Get recent webhook delivery by ID
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple
@@ -4290,13 +4290,13 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
         - config
       description: Redeliver a webhook payload by delivery ID
       parameters:
-        - name: organizationId
+        - name: orgId
           in: path
           required: true
           style: simple

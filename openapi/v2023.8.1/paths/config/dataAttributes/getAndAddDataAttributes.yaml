@@ -3,7 +3,7 @@ post:
     - config
   description: Add data attributes
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -41,7 +41,7 @@ get:
     - config
   description: Get data attributes
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

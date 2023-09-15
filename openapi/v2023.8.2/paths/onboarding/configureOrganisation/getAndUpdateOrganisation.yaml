@@ -3,7 +3,7 @@ get:
     - onboarding
   description: Get organization by ID
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -31,7 +31,7 @@ patch:
     - onboarding
   description: Update organization
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ delete:
     - config
   description: Delete consent agreement by id
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -52,7 +52,7 @@ put:
     - config
   description: Update consent agreement by id
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -92,7 +92,7 @@ get:
     - config
   description: Get consent agreement by id
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

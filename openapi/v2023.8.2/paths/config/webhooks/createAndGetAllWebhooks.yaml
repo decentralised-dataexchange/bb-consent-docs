@@ -3,7 +3,7 @@ post:
     - config
   description: Create webhook
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       style: simple
@@ -86,7 +86,7 @@ get:
     - config
   description: Get all webhooks for an organisation
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       style: simple

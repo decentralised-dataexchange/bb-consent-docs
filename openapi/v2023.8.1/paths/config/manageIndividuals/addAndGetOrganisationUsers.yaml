@@ -3,7 +3,7 @@ post:
     - config
   summary: Add user to organization
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -70,7 +70,7 @@ get:
         type: integer
         format: int32
         example: 1024
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ post:
     - config
   summary: Add identity provider
   parameters:
-    - name: organizationID
+    - name: orgId
       in: path
       required: true
       schema:
@@ -33,7 +33,7 @@ put:
     - config
   summary: Update identity provider
   parameters:
-    - name: organizationID
+    - name: orgId
       in: path
       required: true
       schema:
@@ -63,7 +63,7 @@ delete:
     - config
   summary: Delete identity provider
   parameters:
-    - name: organizationID
+    - name: orgId
       in: path
       required: true
       schema:
@@ -84,7 +84,7 @@ get:
     - config
   summary: Get identity provider
   parameters:
-    - name: organizationID
+    - name: orgId
       in: path
       required: true
       schema:

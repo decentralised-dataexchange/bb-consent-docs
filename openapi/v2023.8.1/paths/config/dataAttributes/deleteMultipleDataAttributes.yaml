@@ -3,7 +3,7 @@ delete:
     - config
   description: Delete multiple data attributes
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

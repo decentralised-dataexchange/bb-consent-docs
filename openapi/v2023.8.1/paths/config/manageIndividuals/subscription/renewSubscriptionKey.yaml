@@ -3,7 +3,7 @@ post:
     - config
   summary: Renew subscribe key
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

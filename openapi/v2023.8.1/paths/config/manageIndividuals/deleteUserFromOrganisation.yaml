@@ -3,7 +3,7 @@ delete:
     - config
   summary: Delete user from organization
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ post:
     - config
   description: Add consent agreement
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -41,7 +41,7 @@ get:
     - config
   description: Get consent agreements
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

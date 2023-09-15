@@ -3,7 +3,7 @@ put:
     - config
   description: Update data attribute by id
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -49,7 +49,7 @@ delete:
     - config
   description: Delete data attribute by id
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

@@ -3,7 +3,7 @@ get:
     - onboarding
   description: Get organization image for web
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

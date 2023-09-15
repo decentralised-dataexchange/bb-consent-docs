@@ -3,7 +3,7 @@ post:
     - onboarding
   description: Add org admin
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -43,7 +43,7 @@ get:
     - onboarding
   description: Get org admin
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -73,7 +73,7 @@ delete:
     - onboarding
   description: Delete org admin
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

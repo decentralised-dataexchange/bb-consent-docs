@@ -3,7 +3,7 @@ get:
     - config
   summary: Get organization subscription status (enable/disable)
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

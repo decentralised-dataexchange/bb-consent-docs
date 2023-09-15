@@ -3,7 +3,7 @@ post:
     - config
   summary: Disable organization for subscription
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:

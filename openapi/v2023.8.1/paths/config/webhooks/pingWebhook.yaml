@@ -3,7 +3,7 @@ post:
     - config
   description: Ping webhook
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       style: simple

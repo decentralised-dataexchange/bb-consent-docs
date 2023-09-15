@@ -3,7 +3,7 @@ post:
     - onboarding
   description: Update organization EULA url
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
@@ -34,7 +34,7 @@ delete:
     - onboarding
   description: Delete organization EULA url
   parameters:
-    - name: organizationId
+    - name: orgId
       in: path
       required: true
       schema:
