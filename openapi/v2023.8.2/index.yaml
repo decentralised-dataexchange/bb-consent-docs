@@ -151,12 +151,10 @@ paths:
     $ref: "./paths/config/consentAgreements/getDeleteUpdateConsentAgreementByID.yaml"
   /v1/organizations/{orgId}/templates:
     $ref: "./paths/config/dataAttributes/getAndAddDataAttributes.yaml"
-  /v1/organizations/{orgId}/templates/{templateId}:
-    $ref: "./paths/config/dataAttributes/updateAndDeleteDataAttributeByID.yaml"
   /v1/organizations/{orgId}/purposes/{purposeId}/templates:
     $ref: "./paths/config/dataAttributes/deleteMultipleDataAttributes.yaml"
   /v1/organizations/{orgId}/templates/{templateID}:
-    $ref: "./paths/config/dataAttributes/getDataAttributeByID.yaml"
+    $ref: "./paths/config/dataAttributes/getUpdateAndDeleteDataAttributeByID.yaml"
   /v1/organizations/{orgId}/idp/open-id:
     $ref: "./paths/config/manageIndividuals/subscription/addGetUpdateAndDeleteIdentityProvider.yaml"
   /v1/organizations/{orgId}/subscription/enable:

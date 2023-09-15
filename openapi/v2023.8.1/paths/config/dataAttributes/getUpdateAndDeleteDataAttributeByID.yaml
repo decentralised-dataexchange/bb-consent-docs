@@ -1,0 +1,109 @@
+get:
+  tags:
+    - config
+  description: Get data attribute by ID
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: templateID
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - OrgID
+              - Template
+            type: object
+            properties:
+              OrgID:
+                type: string
+              Template:
+                $ref: "../../../definitions/config/DataAttribute.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+put:
+  tags:
+    - config
+  description: Update data attribute by id
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: templateId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - Consent
+            - PurposeIDs
+          type: object
+          properties:
+            Consent:
+              type: string
+            PurposeIDs:
+              type: array
+              items:
+                type: string
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboarding/Organisation.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+delete:
+  tags:
+    - config
+  description: Delete data attribute by id
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: templateId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboarding/Organisation.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
