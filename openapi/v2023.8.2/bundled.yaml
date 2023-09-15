@@ -2629,7 +2629,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: templateId
+        - name: templateID
           in: path
           required: true
           schema:
@@ -2678,7 +2678,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: templateId
+        - name: templateID
           in: path
           required: true
           schema:

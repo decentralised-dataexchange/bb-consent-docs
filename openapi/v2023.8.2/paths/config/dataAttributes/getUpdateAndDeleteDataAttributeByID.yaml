@@ -44,7 +44,7 @@ put:
       required: true
       schema:
         type: string
-    - name: templateId
+    - name: templateID
       in: path
       required: true
       schema:
@@ -93,7 +93,7 @@ delete:
       required: true
       schema:
         type: string
-    - name: templateId
+    - name: templateID
       in: path
       required: true
       schema:
