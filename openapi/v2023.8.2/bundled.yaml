@@ -100,7 +100,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}':
     get:
       tags:
         - service
@@ -209,7 +209,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/status':
     post:
       tags:
         - service
@@ -292,7 +292,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -2270,7 +2270,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/purposes':
+  '/v1/organisations/{orgId}/data-agreements':
     post:
       tags:
         - config
@@ -2345,7 +2345,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/purposes/{purposeId}':
+  '/v1/organisations/{orgId}/data-agreements/{purposeId}':
     delete:
       tags:
         - config
@@ -2548,7 +2548,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/purposes/{purposeId}/templates':
+  '/v1/organisations/{orgId}/data-agreements/{purposeId}/templates':
     delete:
       tags:
         - config
@@ -3363,7 +3363,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
+  '/v1/organisations/{orgId}/data-agreements/{purposeID}/attributes/{attributeID}/consented/users':
     get:
       tags:
         - onboard
@@ -3421,7 +3421,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/purposes/{purposeId}/consented/users':
+  '/v1/organisations/{orgId}/data-agreements/{purposeId}/consented/users':
     get:
       tags:
         - onboard
