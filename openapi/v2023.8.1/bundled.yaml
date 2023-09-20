@@ -2024,7 +2024,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/global-policy-configuration':
+  '/v1/organisations/{orgId}/config/policy':
     get:
       tags:
         - config

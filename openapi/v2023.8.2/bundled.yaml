@@ -2217,7 +2217,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/organisations/{orgId}/global-policy-configuration':
+  '/v1/organisations/{orgId}/config/policy':
     get:
       tags:
         - config

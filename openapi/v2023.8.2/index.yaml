@@ -143,7 +143,7 @@ paths:
     $ref: "./paths/onboard/developer/getAndCreateAPIKey.yaml"
   /v1/user/apikey/revoke:
     $ref: "./paths/onboard/developer/deleteAPIKey.yaml"
-  /v1/organisations/{orgId}/global-policy-configuration:
+  /v1/organisations/{orgId}/config/policy:
     $ref: "./paths/config/dataAgreements/globalPolicyConfigurations/getAndUpdateGlobalPolicyConfiguration.yaml"
   /v1/organisations/{orgId}/purposes:
     $ref: "./paths/config/dataAgreements/getAndAddConsentAgreements.yaml"
