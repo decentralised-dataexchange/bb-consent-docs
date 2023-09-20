@@ -23,10 +23,10 @@ properties:
     type: string
     description: "UTC timestamp of when the revision was created"
   authorized_by_individual:
-    $ref: "../onboarding/Individual.yaml"
+    $ref: "../onboard/Individual.yaml"
     description: "Reference to the individual that consented"
   authorized_by_other:
-    $ref: "../onboarding/Individual.yaml"
+    $ref: "../onboard/Individual.yaml"
     description: "Reference to an admin user that has created this revision"
   successor:
     $ref: "../service/DataAgreementRecordRevision.yaml"

@@ -1,0 +1,20 @@
+get:
+  tags:
+    - onboard
+  description: Get organization image for web
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: imageId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: "OK"
+      headers: {}
+  deprecated: false

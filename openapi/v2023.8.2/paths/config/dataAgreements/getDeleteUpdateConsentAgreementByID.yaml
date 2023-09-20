@@ -1,0 +1,127 @@
+delete:
+  tags:
+    - config
+  description: Delete data agreement by id
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: purposeId
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboard/Organisation.yaml"
+    "404":
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            required:
+              - Code
+              - Message
+            type: object
+            properties:
+              Code:
+                type: integer
+                format: int32
+              Message:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
+put:
+  tags:
+    - config
+  description: Update data agreement by id
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: purposeId
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../../definitions/config/DataAgreement.yaml"
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboard/Organisation.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
+get:
+  tags:
+    - config
+  description: Get data agreement by id
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: purposeId
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Purpose
+              - Templates
+            type: object
+            properties:
+              Purpose:
+                $ref: "../../../definitions/config/DataAgreement.yaml"
+              Templates:
+                type: string
+                nullable: true
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

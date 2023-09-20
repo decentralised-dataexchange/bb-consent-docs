@@ -1,0 +1,28 @@
+post:
+  tags:
+    - onboard
+  description: Logs out a user from the system
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - clientid
+            - refreshtoken
+          type: object
+          properties:
+            clientid:
+              type: string
+            refreshtoken:
+              type: string
+    required: true
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'

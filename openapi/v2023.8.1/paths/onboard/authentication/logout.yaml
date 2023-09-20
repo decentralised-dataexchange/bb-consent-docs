@@ -1,0 +1,24 @@
+post:
+  tags:
+    - onboard
+  description: Logs out a user from the system
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - clientid
+            - refreshtoken
+          type: object
+          properties:
+            clientid:
+              type: string
+            refreshtoken:
+              type: string
+    required: true
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security: []

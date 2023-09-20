@@ -1,0 +1,25 @@
+get:
+  tags:
+    - onboard
+  description: Get organization image
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: imageId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: "OK"
+      headers: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

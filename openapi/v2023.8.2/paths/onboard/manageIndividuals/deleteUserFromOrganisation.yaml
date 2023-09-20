@@ -1,0 +1,33 @@
+delete:
+  tags:
+    - onboard
+  summary: Delete user from organization
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../../definitions/onboard/Individual.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

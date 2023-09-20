@@ -1,0 +1,32 @@
+post:
+  tags:
+    - onboard
+  description: For OTP verification of the given phone number
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - email
+            - phone
+          type: object
+          properties:
+            email:
+              type: string
+            phone:
+              type: string
+          example:
+            email: george@yopmail.com
+            phone: "+918848245047"
+    required: true
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+  servers:
+    - url: http://example.com
+      variables: {}

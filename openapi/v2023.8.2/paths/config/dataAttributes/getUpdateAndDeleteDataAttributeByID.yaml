@@ -76,7 +76,7 @@ put:
             type: object
             properties:
               Organization:
-                $ref: "../../../definitions/onboarding/Organisation.yaml"
+                $ref: "../../../definitions/onboard/Organisation.yaml"
   deprecated: false
   security:
     - BearerAuth: []
@@ -109,7 +109,7 @@ delete:
             type: object
             properties:
               Organization:
-                $ref: "../../../definitions/onboarding/Organisation.yaml"
+                $ref: "../../../definitions/onboard/Organisation.yaml"
   deprecated: false
   security:
     - BearerAuth: []

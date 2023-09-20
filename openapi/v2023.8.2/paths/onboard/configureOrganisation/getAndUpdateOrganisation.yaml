@@ -1,0 +1,68 @@
+get:
+  tags:
+    - onboard
+  description: Get organization by ID
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../../definitions/onboard/Organisation.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin, Individual'
+patch:
+  tags:
+    - onboard
+  description: Update organization
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - name
+            - location
+            - description
+            - policyurl
+          type: object
+          properties:
+            name:
+              type: string
+            location:
+              type: string
+            description:
+              type: string
+            policyurl:
+              type: string
+    required: true
+  responses:
+    "202":
+      description: Accepted
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

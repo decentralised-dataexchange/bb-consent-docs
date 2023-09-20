@@ -1,0 +1,99 @@
+get:
+  tags:
+    - onboard
+  description: Get organization type by id
+  parameters:
+    - name: typeId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - ID
+              - Type
+              - ImageID
+              - ImageURL
+            type: object
+            properties:
+              ID:
+                type: string
+              Type:
+                type: string
+              ImageID:
+                type: string
+              ImageURL:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []
+delete:
+  tags:
+    - onboard
+  description: Delete organization type
+  operationId: Deleteorganizationtype
+  parameters:
+    - name: typeId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 64ec54ede2f6a8000142c66e
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+patch:
+  tags:
+    - onboard
+  description: Update organization type
+  operationId: Updateorganizationtype
+  parameters:
+    - name: typeId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - type
+          type: object
+          properties:
+            type:
+              type: string
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            required:
+              - ID
+              - Type
+              - ImageID
+              - ImageURL
+            type: object
+            properties:
+              ID:
+                type: string
+              Type:
+                type: string
+              ImageID:
+                type: string
+              ImageURL:
+                type: string
+  deprecated: false
+  security:
+    - BearerAuth: []

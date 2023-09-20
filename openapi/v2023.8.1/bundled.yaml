@@ -31,12 +31,12 @@ tags:
     x-tag-expanded: false
     description: |
       These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
-  - name: onboarding
+  - name: onboard
     x-tag-expanded: false
     description: |
-      These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
+      These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  '/v1/organizations/{orgId}/logs':
+  '/v1/organisations/{orgId}/logs':
     get:
       parameters:
         - name: orgId
@@ -94,11 +94,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
     get:
       tags:
         - service
-      description: Get consents by consent agreement ID
+      description: Get consents by data agreement ID
       parameters:
         - name: orgId
           in: path
@@ -134,11 +134,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}':
     get:
       tags:
         - service
-      description: Get consents for all consent agreements
+      description: Get consents for all data agreements
       parameters:
         - name: orgId
           in: path
@@ -168,7 +168,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}/consents':
+  '/v1/organisations/{orgId}/users/{userId}/consents':
     get:
       tags:
         - service
@@ -194,11 +194,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
     post:
       tags:
         - service
-      description: Update consent for consent agreement
+      description: Update consent for data agreement
       parameters:
         - name: orgId
           in: path
@@ -236,7 +236,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -283,7 +283,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-status':
+  '/v1/user/organisations/{orgId}/data-status':
     get:
       tags:
         - service
@@ -304,7 +304,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-delete':
+  '/v1/user/organisations/{orgId}/data-delete':
     get:
       parameters:
         - name: orgId
@@ -344,7 +344,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-delete/status':
+  '/v1/user/organisations/{orgId}/data-delete/status':
     get:
       tags:
         - service
@@ -365,7 +365,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel':
+  '/v1/user/organisations/{orgId}/data-delete/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -391,7 +391,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-download':
+  '/v1/user/organisations/{orgId}/data-download':
     post:
       tags:
         - service
@@ -437,7 +437,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-download/status':
+  '/v1/user/organisations/{orgId}/data-download/status':
     get:
       tags:
         - service
@@ -458,7 +458,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel':
+  '/v1/user/organisations/{orgId}/data-download/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -539,7 +539,7 @@ paths:
   /v1/users/admin/login:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Login as organisation admin
       parameters: []
       requestBody:
@@ -603,7 +603,7 @@ paths:
   /v1/users/login:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Login as individual
       requestBody:
         content:
@@ -666,7 +666,7 @@ paths:
   /v1.1/users/login:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Login as individual
       parameters: []
       requestBody:
@@ -804,7 +804,7 @@ paths:
   /v1/users/validate/email:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Validate email
       parameters: []
       requestBody:
@@ -842,7 +842,7 @@ paths:
   /v1/users/validate/phone:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Validate phone
       parameters: []
       requestBody:
@@ -882,7 +882,7 @@ paths:
   /v1/users/verify/phone:
     post:
       tags:
-        - onboarding
+        - onboard
       description: For OTP verification of the given phone number
       parameters: []
       requestBody:
@@ -915,7 +915,7 @@ paths:
   /v1/users/verify/otp:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Verify OTP
       parameters: []
       requestBody:
@@ -959,7 +959,7 @@ paths:
   /v1/user/password/reset:
     put:
       tags:
-        - onboarding
+        - onboard
       description: Reset Password
       operationId: ResetPassword
       parameters: []
@@ -996,7 +996,7 @@ paths:
   /v1/user/password/forgot:
     put:
       tags:
-        - onboarding
+        - onboard
       description: Forgot Password
       parameters: []
       requestBody:
@@ -1033,7 +1033,7 @@ paths:
   /v1/users/logout:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Logs out a user from the system
       requestBody:
         content:
@@ -1058,7 +1058,7 @@ paths:
   /v1/users/token:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Refresh access token
       parameters: []
       requestBody:
@@ -1106,7 +1106,7 @@ paths:
   /v1/users/register:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Register individual
       parameters: []
       requestBody:
@@ -1144,10 +1144,10 @@ paths:
                 example:
                   msg: User created successfully
       deprecated: false
-  /v1/organizations/types:
+  /v1/organisations/types:
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization types
       parameters: []
       responses:
@@ -1178,7 +1178,7 @@ paths:
         - BearerAuth: []
     post:
       tags:
-        - onboarding
+        - onboard
       description: Add organization type
       operationId: Addorganizationtype
       parameters: []
@@ -1217,10 +1217,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/types/{typeId}':
+  '/v1/organisations/types/{typeId}':
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization type by id
       parameters:
         - name: typeId
@@ -1254,7 +1254,7 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboarding
+        - onboard
       description: Delete organization type
       operationId: Deleteorganizationtype
       parameters:
@@ -1273,7 +1273,7 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - onboarding
+        - onboard
       description: Update organization type
       operationId: Updateorganizationtype
       parameters:
@@ -1317,10 +1317,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/types/{typeId}/image':
+  '/v1/organisations/types/{typeId}/image':
     post:
       tags:
-        - onboarding
+        - onboard
       description: Update organization type image
       parameters:
         - name: typeId
@@ -1350,7 +1350,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization type image
       parameters:
         - name: typeId
@@ -1368,7 +1368,7 @@ paths:
   /v1/organizations:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Add Organization
       parameters: []
       requestBody:
@@ -1409,10 +1409,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}':
+  '/v1/organisations/{orgId}':
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization by ID
       parameters:
         - name: orgId
@@ -1437,7 +1437,7 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - onboarding
+        - onboard
       description: Update organization
       parameters:
         - name: orgId
@@ -1472,10 +1472,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/coverimage':
+  '/v1/organisations/{orgId}/coverimage':
     post:
       tags:
-        - onboarding
+        - onboard
       description: Update organization cover image
       parameters:
         - name: orgId
@@ -1511,10 +1511,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/logoimage':
+  '/v1/organisations/{orgId}/logoimage':
     post:
       tags:
-        - onboarding
+        - onboard
       description: Update organization logo image
       parameters:
         - name: orgId
@@ -1550,10 +1550,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/image/{imageId}':
+  '/v1/organisations/{orgId}/image/{imageId}':
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization image
       parameters:
         - name: orgId
@@ -1573,10 +1573,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/eulaURL':
+  '/v1/organisations/{orgId}/eulaURL':
     post:
       tags:
-        - onboarding
+        - onboard
       description: Update organization EULA url
       parameters:
         - name: orgId
@@ -1604,7 +1604,7 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboarding
+        - onboard
       description: Delete organization EULA url
       parameters:
         - name: orgId
@@ -1619,10 +1619,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/admins':
+  '/v1/organisations/{orgId}/admins':
     post:
       tags:
-        - onboarding
+        - onboard
       description: Add org admin
       parameters:
         - name: orgId
@@ -1662,7 +1662,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get org admin
       parameters:
         - name: orgId
@@ -1692,7 +1692,7 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboarding
+        - onboard
       description: Delete org admin
       parameters:
         - name: orgId
@@ -1715,10 +1715,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations/roles:
+  /v1/organisations/roles:
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get organization roles
       parameters: []
       responses:
@@ -1743,7 +1743,7 @@ paths:
   /v1/users/unregister:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Unregister users
       parameters: []
       responses:
@@ -1779,7 +1779,7 @@ paths:
   /v1/user/register/android:
     post:
       tags:
-        - onboarding
+        - onboard
       description: User client register (android)
       parameters: []
       requestBody:
@@ -1811,7 +1811,7 @@ paths:
   /v1/user/register/ios:
     post:
       tags:
-        - onboarding
+        - onboard
       description: User client register (ios)
       parameters: []
       requestBody:
@@ -1843,7 +1843,7 @@ paths:
   '/v1/user/image/{imageId}':
     delete:
       tags:
-        - onboarding
+        - onboard
       description: Delete my image
       parameters:
         - name: imageId
@@ -1860,7 +1860,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get my image
       parameters:
         - name: imageId
@@ -1878,7 +1878,7 @@ paths:
   /v1/user/image:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Update my image
       parameters: []
       requestBody:
@@ -1912,7 +1912,7 @@ paths:
   /v1/user:
     patch:
       tags:
-        - onboarding
+        - onboard
       description: Update current user
       parameters: []
       requestBody:
@@ -1946,7 +1946,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get current user
       parameters: []
       responses:
@@ -1967,7 +1967,7 @@ paths:
   /v1/user/apikey:
     post:
       tags:
-        - onboarding
+        - onboard
       description: Create api key
       parameters: []
       responses:
@@ -1990,7 +1990,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboarding
+        - onboard
       description: Get api key
       parameters: []
       responses:
@@ -2014,7 +2014,7 @@ paths:
   /v1/user/apikey/revoke:
     delete:
       tags:
-        - onboarding
+        - onboard
       description: Delete api key
       parameters: []
       responses:
@@ -2024,7 +2024,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/global-policy-configuration':
+  '/v1/organisations/{orgId}/global-policy-configuration':
     get:
       tags:
         - config
@@ -2187,11 +2187,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/purposes':
+  '/v1/organisations/{orgId}/purposes':
     post:
       tags:
         - config
-      description: Add consent agreement
+      description: Add data agreement
       parameters:
         - name: orgId
           in: path
@@ -2229,7 +2229,7 @@ paths:
     get:
       tags:
         - config
-      description: Get consent agreements
+      description: Get data agreements
       parameters:
         - name: orgId
           in: path
@@ -2256,11 +2256,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/purposes/{purposeId}':
+  '/v1/organisations/{orgId}/purposes/{purposeId}':
     delete:
       tags:
         - config
-      description: Delete consent agreement by id
+      description: Delete data agreement by id
       parameters:
         - name: orgId
           in: path
@@ -2306,7 +2306,7 @@ paths:
     put:
       tags:
         - config
-      description: Update consent agreement by id
+      description: Update data agreement by id
       parameters:
         - name: orgId
           in: path
@@ -2343,7 +2343,7 @@ paths:
     get:
       tags:
         - config
-      description: Get consent agreement by id
+      description: Get data agreement by id
       parameters:
         - name: orgId
           in: path
@@ -2375,7 +2375,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/templates':
+  '/v1/organisations/{orgId}/templates':
     post:
       tags:
         - config
@@ -2444,7 +2444,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/purposes/{purposeId}/templates':
+  '/v1/organisations/{orgId}/purposes/{purposeId}/templates':
     delete:
       tags:
         - config
@@ -2475,7 +2475,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/templates/{templateID}':
+  '/v1/organisations/{orgId}/templates/{templateID}':
     get:
       tags:
         - config
@@ -2585,10 +2585,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/idp/open-id':
+  '/v1/organisations/{orgId}/idp/open-id':
     post:
       tags:
-        - config
+        - onboard
       summary: Add identity provider
       parameters:
         - name: orgId
@@ -2601,7 +2601,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
+              $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
         required: true
       responses:
         '201':
@@ -2609,13 +2609,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
     put:
       tags:
-        - config
+        - onboard
       summary: Update identity provider
       parameters:
         - name: orgId
@@ -2752,7 +2752,7 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - config
+        - onboard
       summary: Delete identity provider
       parameters:
         - name: orgId
@@ -2770,7 +2770,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - config
+        - onboard
       summary: Get identity provider
       parameters:
         - name: orgId
@@ -2784,14 +2784,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organizations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/subscription/enable':
+  '/v1/organisations/{orgId}/subscription/enable':
     post:
       tags:
-        - config
+        - onboard
       summary: Enable organization for subscription
       parameters:
         - name: orgId
@@ -2814,10 +2814,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/subscription/disable':
+  '/v1/organisations/{orgId}/subscription/disable':
     post:
       tags:
-        - config
+        - onboard
       summary: Disable organization for subscription
       parameters:
         - name: orgId
@@ -2840,10 +2840,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/subscribe-method':
+  '/v1/organisations/{orgId}/subscribe-method':
     get:
       tags:
-        - config
+        - onboard
       summary: Get subscribe method
       parameters:
         - name: orgId
@@ -2875,7 +2875,7 @@ paths:
         - BearerAuth: []
     post:
       tags:
-        - config
+        - onboard
       summary: Set subscribe method
       parameters:
         - name: orgId
@@ -2904,10 +2904,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations/subscribe-methods:
+  /v1/organisations/subscribe-methods:
     get:
       tags:
-        - config
+        - onboard
       summary: Get subscribe methods
       parameters: []
       responses:
@@ -2942,10 +2942,10 @@ paths:
                     - ID: 2
                       Method: OpenID-Connect
       deprecated: false
-  '/v1/organizations/{orgId}/subscribe-key':
+  '/v1/organisations/{orgId}/subscribe-key':
     get:
       tags:
-        - config
+        - onboard
       summary: Get subscribe key
       parameters:
         - name: orgId
@@ -2974,10 +2974,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/subscribe-key/renew':
+  '/v1/organisations/{orgId}/subscribe-key/renew':
     post:
       tags:
-        - config
+        - onboard
       summary: Renew subscribe key
       parameters:
         - name: orgId
@@ -3006,10 +3006,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/count':
+  '/v1/organisations/{orgId}/users/count':
     get:
       tags:
-        - config
+        - onboard
       summary: Get organization users count
       parameters:
         - name: orgId
@@ -3035,10 +3035,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/subscription':
+  '/v1/organisations/{orgId}/subscription':
     get:
       tags:
-        - config
+        - onboard
       summary: Get organization subscription status (enable/disable)
       parameters:
         - name: orgId
@@ -3062,10 +3062,10 @@ paths:
                 example:
                   Enabled: false
       deprecated: false
-  '/v1/organizations/{orgId}/users':
+  '/v1/organisations/{orgId}/users':
     post:
       tags:
-        - config
+        - onboard
       summary: Add user to organization
       parameters:
         - name: orgId
@@ -3125,7 +3125,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - config
+        - onboard
       summary: Get organization users
       parameters:
         - name: limit
@@ -3174,10 +3174,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/users/{userId}':
+  '/v1/organisations/{orgId}/users/{userId}':
     delete:
       tags:
-        - config
+        - onboard
       summary: Delete user from organization
       parameters:
         - name: orgId
@@ -3205,10 +3205,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
+  '/v1/organisations/{orgId}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
     get:
       tags:
-        - config
+        - onboard
       summary: Get all users consented to data attribute
       parameters:
         - name: orgId
@@ -3260,10 +3260,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/purposes/{purposeId}/consented/users':
+  '/v1/organisations/{orgId}/purposes/{purposeId}/consented/users':
     get:
       tags:
-        - config
+        - onboard
       summary: Get all users consented to a data agreement
       parameters:
         - name: orgId
@@ -3310,10 +3310,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations/data-requests:
+  /v1/organisations/data-requests:
     get:
       tags:
-        - config
+        - onboard
       summary: Get available data request statuses
       responses:
         '200':
@@ -3337,10 +3337,10 @@ paths:
                     ID: 1
                     Str: Request initiated
       deprecated: false
-  '/v1/organizations/{orgId}/data-requests':
+  '/v1/organisations/{orgId}/data-requests':
     get:
       tags:
-        - config
+        - onboard
       summary: Get open and close data requests
       parameters:
         - name: status
@@ -3383,10 +3383,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/data-requests/{dataReqId}':
+  '/v1/organisations/{orgId}/data-requests/{dataReqId}':
     get:
       tags:
-        - config
+        - onboard
       summary: Get data request
       parameters:
         - name: orgId
@@ -3411,7 +3411,7 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - config
+        - onboard
       summary: Update data request
       parameters:
         - name: orgId
@@ -3452,7 +3452,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations/webhooks/event-types:
+  /v1/organisations/webhooks/event-types:
     get:
       tags:
         - config
@@ -3487,7 +3487,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations/webhooks/payload/content-types:
+  /v1/organisations/webhooks/payload/content-types:
     get:
       tags:
         - config
@@ -3513,7 +3513,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks':
+  '/v1/organisations/{orgId}/webhooks':
     post:
       tags:
         - config
@@ -3634,7 +3634,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks/{webhookId}':
+  '/v1/organisations/{orgId}/webhooks/{webhookId}':
     get:
       tags:
         - config
@@ -3803,7 +3803,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks/{webhookId}/ping':
+  '/v1/organisations/{orgId}/webhooks/{webhookId}/ping':
     post:
       tags:
         - config
@@ -3852,7 +3852,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery':
+  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery':
     get:
       tags:
         - config
@@ -3914,7 +3914,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
+  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
         - config
@@ -4086,7 +4086,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organizations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
         - config
@@ -5023,7 +5023,7 @@ components:
         IdentityProviderRepresentation:
           required:
             - providerId
-            - config
+            - onboard
             - alias
             - storeToken
             - addReadTokenRoleOnCreate

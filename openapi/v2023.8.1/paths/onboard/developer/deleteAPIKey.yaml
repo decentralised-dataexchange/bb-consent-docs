@@ -1,0 +1,12 @@
+delete:
+  tags:
+    - onboard
+  description: Delete api key
+  parameters: []
+  responses:
+    "200":
+      description: OK
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []

@@ -1,0 +1,26 @@
+get:
+  tags:
+    - onboard
+  summary: Get available data request statuses
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              required:
+                - ID
+                - Str
+              type: object
+              properties:
+                ID:
+                  type: integer
+                  format: int32
+                Str:
+                  type: string
+              example:
+                ID: 1
+                Str: Request initiated
+  deprecated: false

@@ -21,7 +21,7 @@ get:
             type: object
             properties:
               Organization:
-                $ref: "../../definitions/onboarding/Organisation.yaml"
+                $ref: "../../definitions/onboard/Organisation.yaml"
               ConsentID:
                 type: string
               PurposeConsents:

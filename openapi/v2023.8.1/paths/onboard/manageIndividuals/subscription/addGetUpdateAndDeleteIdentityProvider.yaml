@@ -1,0 +1,92 @@
+post:
+  tags:
+    - onboard
+  summary: Add identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderRequest.yaml"
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+put:
+  tags:
+    - onboard
+  summary: Update identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderRequest.yaml"
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+delete:
+  tags:
+    - onboard
+  summary: Delete identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+get:
+  tags:
+    - onboard
+  summary: Get identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../../../definitions/config/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []

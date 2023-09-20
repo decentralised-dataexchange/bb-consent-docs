@@ -1,7 +1,7 @@
 post:
   tags:
     - service
-  description: Update consent for consent agreement
+  description: Update consent for data agreement
   parameters:
     - name: orgId
       in: path
@@ -45,7 +45,7 @@ post:
 get:
   tags:
     - service
-  description: Get consent for consent agreement
+  description: Get consent for data agreement
   parameters:
     - name: orgId
       in: path
