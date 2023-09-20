@@ -1365,7 +1365,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organizations:
+  /v1/organisation:
     post:
       tags:
         - onboard

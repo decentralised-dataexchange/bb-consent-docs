@@ -1471,7 +1471,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/organizations:
+  /v1/organisation:
     post:
       tags:
         - onboard
