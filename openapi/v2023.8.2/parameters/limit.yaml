@@ -1,0 +1,7 @@
+name: limit
+in: query
+description: Number of items to return per page
+required: false
+schema:
+  type: integer
+  default: 10

@@ -49,8 +49,11 @@ tags:
       These are used for onboard the organisation, organisation admin and individual users to the system. 
       It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  /v1/audit/logs:
+  # Audit
+  /v1/audit/admin/logs:
     $ref: "./paths/audit/getAdminLogs.yaml"
+
+  # Service
   /v1/users/{userId}/consenthistory:
     $ref: "./paths/service/getConsentHistory.yaml"
   /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}:
@@ -79,6 +82,8 @@ paths:
     $ref: "./paths/service/cancelDownloadMyDataRequest.yaml"
   /v1/GetUserOrgsAndConsents:
     $ref: "./paths/service/getUserOrgAndConsent.yaml"
+
+  # Onboard
   /v1/users/admin/login:
     $ref: "./paths/onboard/loginAsOrganisationAdmin.yaml"
   /v1/users/login:
@@ -187,6 +192,8 @@ paths:
     $ref: "./paths/onboard/getOpenAndCloseDataRequests.yaml"
   /v1/organisations/{orgId}/data-requests/{dataReqId}:
     $ref: "./paths/onboard/getAndUpdateDataRequestByID.yaml"
+
+  # Config
   /v1/organisations/webhooks/event-types:
     $ref: "./paths/config/getAvailableWebhookEventTypes.yaml"
   /v1/organisations/webhooks/payload/content-types:
@@ -205,8 +212,8 @@ paths:
     $ref: "./paths/config/redeliverWebhook.yaml"
 components:
   schemas:
-    OrganisationLog:
-      $ref: "./definitions/OrganisationLog.yaml"
+    Log:
+      $ref: "./definitions/Log.yaml"
     GetUserConsentHistory:
       $ref: "./definitions/GetUserConsentHistory.yaml"
     ConsentHistory:

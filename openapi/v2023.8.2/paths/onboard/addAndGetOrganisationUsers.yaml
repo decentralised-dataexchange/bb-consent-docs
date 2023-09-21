@@ -108,7 +108,7 @@ get:
                     Email:
                       type: string
               Links:
-                $ref: "../../definitions/PaginationLinks.yaml"
+                $ref: "../../definitions/Pagination.yaml"
   deprecated: false
   security:
     - BearerAuth: []

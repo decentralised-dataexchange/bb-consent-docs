@@ -40,7 +40,7 @@ get:
               IsDataDownloadRequestOngoing:
                 type: boolean
               Links:
-                $ref: "../../definitions/PaginationLinks.yaml"
+                $ref: "../../definitions/Pagination.yaml"
   deprecated: false
   security:
     - BearerAuth: []

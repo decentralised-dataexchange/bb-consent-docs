@@ -1,0 +1,7 @@
+name: page
+in: query
+description: Page number
+required: false
+schema:
+  type: integer
+  default: 1

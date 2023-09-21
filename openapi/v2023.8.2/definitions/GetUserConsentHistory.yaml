@@ -9,5 +9,5 @@ properties:
       $ref: "./ConsentHistory.yaml"
     description: "List of consent history"
   Links:
-    $ref: "./PaginationLinks.yaml"
+    $ref: "./Pagination.yaml"
     description: "Pagination links"

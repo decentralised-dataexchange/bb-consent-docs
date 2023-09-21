@@ -66,4 +66,4 @@ properties:
   IsDataDownloadRequestOngoing:
     type: boolean
   Links:
-    $ref: "./PaginationLinks.yaml"
+    $ref: "./Pagination.yaml"

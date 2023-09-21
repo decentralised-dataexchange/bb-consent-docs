@@ -36,7 +36,7 @@ tags:
     description: |
       These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  /v1/audit/logs:
+  /v1/audit/admin/logs:
     get:
       operationId: getAdminLogs
       description: Get admin logs
@@ -68,7 +68,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganisationLog'
+                $ref: '#/components/schemas/Log'
   '/v1/users/{userId}/consenthistory':
     get:
       tags:
@@ -4334,37 +4334,40 @@ paths:
           label: 'Authorised roles: Organisation admin'
 components:
   schemas:
-    OrganisationLog:
+    Log:
       type: object
       required:
         - message
       properties:
-        Logs:
-          description: A human readable error message
+        logs:
+          description: 'Log object captures an event occured in the system. For e.g. Organisation admin logs, webhook event logs e.t.c'
           type: array
           items:
             type: object
             properties:
-              ID:
+              id:
                 type: string
-                description: ID for organisation log
-              Type:
+                description: Log ID
+              type:
                 type: integer
-                description: Type integer for organisation log
-              TypeStr:
+                description: Type integer
+              typeStr:
                 type: string
-                description: Type string for organisation log
-              UserID:
+                description: 'Type string for a log. for .e.g. webhooks, organisation_admin e.t.c'
+              individualId:
                 type: string
                 description: User ID
-              UserName:
+              username:
                 type: string
-              TimeStamp:
+                description: Username of the individual if available.
+              timestamp:
                 type: string
-              Log:
+                description: UTC timestamp in seconds since epoch
+              log:
                 type: string
-        Links:
-          description: Pagination links
+                description: Log description
+        pagination:
+          description: Pagination object
           $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
     GetUserConsentHistory:
       required:
@@ -4771,7 +4774,7 @@ components:
         IsDataDownloadRequestOngoing:
           type: boolean
         Links:
-          description: Pagination links
+          description: Pagination
           type: object
           properties:
             currentPage:

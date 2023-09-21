@@ -1,4 +1,4 @@
-description: Pagination links
+description: Pagination
 type: object
 properties:
   currentPage:

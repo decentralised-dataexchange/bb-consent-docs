@@ -1,0 +1,34 @@
+type: object
+required:
+  - message
+properties:
+  logs:
+    description: Log object captures an event occured in the system. For e.g. Organisation admin logs, webhook event logs e.t.c
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Log ID
+        type:
+          type: integer
+          description: Type integer
+        typeStr:
+          type: string
+          description: Type string for a log. for .e.g. webhooks, organisation_admin e.t.c
+        individualId:
+          type: string
+          description: User ID
+        username:
+          type: string
+          description: Username of the individual if available.
+        timestamp:
+          type: string
+          description: UTC timestamp in seconds since epoch
+        log:
+          type: string
+          description: Log description
+  pagination:
+    description: Pagination object
+    $ref: "./Pagination.yaml"
