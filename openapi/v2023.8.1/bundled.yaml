@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 2023.8.1
+  version: 1.0.0
   title: GovStack Consent BB APIs
   description: |
     The Consent Building Block enables services for individuals to approve the use  of their personal data by defining the principles, functions, and architecture  of an information system. For organisations that process personal data, it  provides the ability to know the individual's will and legitimately process such  personal data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating auditable bilateral agreements within a multi-agent environment that  integrates with most other Building Blocks.
@@ -31,12 +31,12 @@ tags:
     x-tag-expanded: false
     description: |
       These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
-  - name: onboard
+  - name: onboarding
     x-tag-expanded: false
     description: |
-      These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
+      These are used for onboarding the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  '/v1/organisations/{orgId}/logs':
+  '/v1/organizations/{orgId}/logs':
     get:
       parameters:
         - name: orgId
@@ -94,11 +94,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}':
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}':
     get:
       tags:
         - service
-      description: Get consents by data agreement ID
+      description: Get consents by consent agreement ID
       parameters:
         - name: orgId
           in: path
@@ -118,7 +118,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           description: Consent agreement ID
           required: true
@@ -134,11 +134,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}':
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}':
     get:
       tags:
         - service
-      description: Get consents for all data agreements
+      description: Get consents for all consent agreements
       parameters:
         - name: orgId
           in: path
@@ -168,7 +168,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents':
+  '/v1/organizations/{orgId}/users/{userId}/consents':
     get:
       tags:
         - service
@@ -194,11 +194,11 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/status':
     post:
       tags:
         - service
-      description: Update consent for data agreement
+      description: Update consent for consent agreement
       parameters:
         - name: orgId
           in: path
@@ -215,7 +215,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           schema:
@@ -236,7 +236,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
+  '/v1/organizations/{orgId}/users/{userId}/consents/{consentId}/purposes/{purposeId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -257,7 +257,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           schema:
@@ -283,7 +283,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-status':
+  '/v1/user/organizations/{orgId}/data-status':
     get:
       tags:
         - service
@@ -304,7 +304,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-delete':
+  '/v1/user/organizations/{orgId}/data-delete':
     get:
       parameters:
         - name: orgId
@@ -344,7 +344,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-delete/status':
+  '/v1/user/organizations/{orgId}/data-delete/status':
     get:
       tags:
         - service
@@ -365,7 +365,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-delete/{dataReqId}/cancel':
+  '/v1/user/organizations/{orgId}/data-delete/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -391,7 +391,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-download':
+  '/v1/user/organizations/{orgId}/data-download':
     post:
       tags:
         - service
@@ -437,7 +437,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-download/status':
+  '/v1/user/organizations/{orgId}/data-download/status':
     get:
       tags:
         - service
@@ -458,7 +458,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/user/organisations/{orgId}/data-download/{dataReqId}/cancel':
+  '/v1/user/organizations/{orgId}/data-download/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -539,7 +539,7 @@ paths:
   /v1/users/admin/login:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Login as organisation admin
       parameters: []
       requestBody:
@@ -603,7 +603,7 @@ paths:
   /v1/users/login:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Login as individual
       requestBody:
         content:
@@ -666,7 +666,7 @@ paths:
   /v1.1/users/login:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Login as individual
       parameters: []
       requestBody:
@@ -804,7 +804,7 @@ paths:
   /v1/users/validate/email:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Validate email
       parameters: []
       requestBody:
@@ -842,7 +842,7 @@ paths:
   /v1/users/validate/phone:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Validate phone
       parameters: []
       requestBody:
@@ -882,7 +882,7 @@ paths:
   /v1/users/verify/phone:
     post:
       tags:
-        - onboard
+        - onboarding
       description: For OTP verification of the given phone number
       parameters: []
       requestBody:
@@ -915,7 +915,7 @@ paths:
   /v1/users/verify/otp:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Verify OTP
       parameters: []
       requestBody:
@@ -959,7 +959,7 @@ paths:
   /v1/user/password/reset:
     put:
       tags:
-        - onboard
+        - onboarding
       description: Reset Password
       operationId: ResetPassword
       parameters: []
@@ -996,7 +996,7 @@ paths:
   /v1/user/password/forgot:
     put:
       tags:
-        - onboard
+        - onboarding
       description: Forgot Password
       parameters: []
       requestBody:
@@ -1033,7 +1033,7 @@ paths:
   /v1/users/logout:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Logs out a user from the system
       requestBody:
         content:
@@ -1058,7 +1058,7 @@ paths:
   /v1/users/token:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Refresh access token
       parameters: []
       requestBody:
@@ -1106,7 +1106,7 @@ paths:
   /v1/users/register:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Register individual
       parameters: []
       requestBody:
@@ -1144,10 +1144,10 @@ paths:
                 example:
                   msg: User created successfully
       deprecated: false
-  /v1/organisations/types:
+  /v1/organizations/types:
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization types
       parameters: []
       responses:
@@ -1178,7 +1178,7 @@ paths:
         - BearerAuth: []
     post:
       tags:
-        - onboard
+        - onboarding
       description: Add organization type
       operationId: Addorganizationtype
       parameters: []
@@ -1217,10 +1217,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/types/{typeId}':
+  '/v1/organizations/types/{typeId}':
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization type by id
       parameters:
         - name: typeId
@@ -1254,7 +1254,7 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboard
+        - onboarding
       description: Delete organization type
       operationId: Deleteorganizationtype
       parameters:
@@ -1273,7 +1273,7 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - onboard
+        - onboarding
       description: Update organization type
       operationId: Updateorganizationtype
       parameters:
@@ -1317,10 +1317,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/types/{typeId}/image':
+  '/v1/organizations/types/{typeId}/image':
     post:
       tags:
-        - onboard
+        - onboarding
       description: Update organization type image
       parameters:
         - name: typeId
@@ -1350,7 +1350,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization type image
       parameters:
         - name: typeId
@@ -1360,15 +1360,14 @@ paths:
             type: string
       responses:
         '200':
-          description: OK
           headers: {}
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations:
+  /v1/organizations:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Add Organization
       parameters: []
       requestBody:
@@ -1409,13 +1408,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}':
+  '/v1/organizations/{organizationId}':
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization by ID
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1437,10 +1436,10 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - onboard
+        - onboarding
       description: Update organization
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1472,13 +1471,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/coverimage':
+  '/v1/organizations/{organizationId}/coverimage':
     post:
       tags:
-        - onboard
+        - onboarding
       description: Update organization cover image
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1511,13 +1510,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/logoimage':
+  '/v1/organizations/{organizationId}/logoimage':
     post:
       tags:
-        - onboard
+        - onboarding
       description: Update organization logo image
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1550,13 +1549,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/image/{imageId}':
+  '/v1/organizations/{organizationId}/image/{imageId}':
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization image
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1568,18 +1567,17 @@ paths:
             type: string
       responses:
         '200':
-          description: OK
           headers: {}
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/eulaURL':
+  '/v1/organizations/{organizationId}/eulaURL':
     post:
       tags:
-        - onboard
+        - onboarding
       description: Update organization EULA url
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1604,10 +1602,10 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboard
+        - onboarding
       description: Delete organization EULA url
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1619,13 +1617,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/admins':
+  '/v1/organizations/{organizationId}/admins':
     post:
       tags:
-        - onboard
+        - onboarding
       description: Add org admin
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1662,10 +1660,10 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get org admin
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1692,10 +1690,10 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboard
+        - onboarding
       description: Delete org admin
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -1715,10 +1713,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations/roles:
+  /v1/organizations/roles:
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get organization roles
       parameters: []
       responses:
@@ -1743,7 +1741,7 @@ paths:
   /v1/users/unregister:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Unregister users
       parameters: []
       responses:
@@ -1779,7 +1777,7 @@ paths:
   /v1/user/register/android:
     post:
       tags:
-        - onboard
+        - onboarding
       description: User client register (android)
       parameters: []
       requestBody:
@@ -1811,7 +1809,7 @@ paths:
   /v1/user/register/ios:
     post:
       tags:
-        - onboard
+        - onboarding
       description: User client register (ios)
       parameters: []
       requestBody:
@@ -1843,7 +1841,7 @@ paths:
   '/v1/user/image/{imageId}':
     delete:
       tags:
-        - onboard
+        - onboarding
       description: Delete my image
       parameters:
         - name: imageId
@@ -1860,7 +1858,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get my image
       parameters:
         - name: imageId
@@ -1870,7 +1868,6 @@ paths:
             type: string
       responses:
         '200':
-          description: OK
           headers: {}
       deprecated: false
       security:
@@ -1878,7 +1875,7 @@ paths:
   /v1/user/image:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Update my image
       parameters: []
       requestBody:
@@ -1912,7 +1909,7 @@ paths:
   /v1/user:
     patch:
       tags:
-        - onboard
+        - onboarding
       description: Update current user
       parameters: []
       requestBody:
@@ -1946,7 +1943,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get current user
       parameters: []
       responses:
@@ -1967,7 +1964,7 @@ paths:
   /v1/user/apikey:
     post:
       tags:
-        - onboard
+        - onboarding
       description: Create api key
       parameters: []
       responses:
@@ -1990,7 +1987,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - onboarding
       description: Get api key
       parameters: []
       responses:
@@ -2014,7 +2011,7 @@ paths:
   /v1/user/apikey/revoke:
     delete:
       tags:
-        - onboard
+        - onboarding
       description: Delete api key
       parameters: []
       responses:
@@ -2024,13 +2021,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/config/policy':
+  '/v1/organizations/{organizationId}/global-policy-configuration':
     get:
       tags:
         - config
       description: Get global policy configurations
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2096,7 +2093,7 @@ paths:
         - config
       description: Update global policy configurations
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2187,13 +2184,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements':
+  '/v1/organizations/{organizationId}/purposes':
     post:
       tags:
         - config
-      description: Add data agreement
+      description: Add consent agreement
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2229,9 +2226,9 @@ paths:
     get:
       tags:
         - config
-      description: Get data agreements
+      description: Get consent agreements
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2256,18 +2253,18 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}':
+  '/v1/organizations/{organizationId}/purposes/{purposeId}':
     delete:
       tags:
         - config
-      description: Delete data agreement by id
+      description: Delete consent agreement by id
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           style: simple
@@ -2306,14 +2303,14 @@ paths:
     put:
       tags:
         - config
-      description: Update data agreement by id
+      description: Update consent agreement by id
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           style: simple
@@ -2343,14 +2340,14 @@ paths:
     get:
       tags:
         - config
-      description: Get data agreement by id
+      description: Get consent agreement by id
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           style: simple
@@ -2375,13 +2372,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-attributes':
+  '/v1/organizations/{organizationId}/templates':
     post:
       tags:
         - config
       description: Add data attributes
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2391,10 +2388,10 @@ paths:
           application/json:
             schema:
               required:
-                - data-attributes
+                - templates
               type: object
               properties:
-                data-attributes:
+                templates:
                   type: array
                   items:
                     $ref: '#/components/schemas/DataAttribute'
@@ -2413,13 +2410,13 @@ paths:
                     $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
-        - BearerAuth: []
+        - bearer: []
     get:
       tags:
         - config
       description: Get data attributes
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2443,83 +2440,19 @@ paths:
                       $ref: '#/components/schemas/DataAttribute'
       deprecated: false
       security:
-        - BearerAuth: []
-  '/v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes':
-    delete:
-      tags:
-        - config
-      description: Delete multiple data attributes
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAgreementId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-  '/v1/organisations/{orgId}/data-attributes/{dataAttributeId}':
-    get:
-      tags:
-        - config
-      description: Get data attribute by ID
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAttributeId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Template
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Template:
-                    $ref: '#/components/schemas/DataAttribute'
-      deprecated: false
-      security:
-        - BearerAuth: []
+        - bearer: []
+  '/v1/organizations/{organizationId}/templates/{templateId}':
     put:
       tags:
         - config
       description: Update data attribute by id
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
             type: string
-        - name: dataAttributeId
+        - name: templateId
           in: path
           required: true
           schema:
@@ -2545,13 +2478,12 @@ paths:
           description: Created
           content:
             application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
+              required:
+                - Organization
+              type: object
+              properties:
+                Organization:
+                  $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2560,12 +2492,12 @@ paths:
         - config
       description: Delete data attribute by id
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
             type: string
-        - name: dataAttributeId
+        - name: templateId
           in: path
           required: true
           schema:
@@ -2585,13 +2517,78 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/idp/open-id':
+  '/v1/organizations/{organizationId}/purposes/{purposeId}/templates':
+    delete:
+      tags:
+        - config
+      description: Delete multiple data attributes
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: purposeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationID}/templates/{templateID}':
+    get:
+      tags:
+        - config
+      description: Get data attribute by ID
+      parameters:
+        - name: organizationID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: templateID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - OrgID
+                  - Template
+                type: object
+                properties:
+                  OrgID:
+                    type: string
+                  Template:
+                    $ref: '#/components/schemas/DataAttribute'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/v1/organizations/{organizationID}/idp/open-id':
     post:
       tags:
-        - onboard
+        - config
       summary: Add identity provider
       parameters:
-        - name: orgId
+        - name: organizationID
           in: path
           required: true
           schema:
@@ -2601,7 +2598,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
+              $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/requestBody/content/application~1json/schemas'
         required: true
       responses:
         '201':
@@ -2609,16 +2606,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
     put:
       tags:
-        - onboard
+        - config
       summary: Update identity provider
       parameters:
-        - name: orgId
+        - name: organizationID
           in: path
           required: true
           schema:
@@ -2627,7 +2624,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
+            schemas:
               required:
                 - authorizationUrl
                 - tokenUrl
@@ -2752,10 +2749,10 @@ paths:
         - BearerAuth: []
     delete:
       tags:
-        - onboard
+        - config
       summary: Delete identity provider
       parameters:
-        - name: orgId
+        - name: organizationID
           in: path
           required: true
           schema:
@@ -2770,10 +2767,10 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - config
       summary: Get identity provider
       parameters:
-        - name: orgId
+        - name: organizationID
           in: path
           required: true
           schema:
@@ -2784,17 +2781,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v1~1organizations~1%7BorganizationID%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/subscription/enable':
+  '/v1/organizations/{organizationId}/subscription/enable':
     post:
       tags:
-        - onboard
+        - config
       summary: Enable organization for subscription
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2814,13 +2811,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/subscription/disable':
+  '/v1/organizations/{organizationId}/subscription/disable':
     post:
       tags:
-        - onboard
+        - config
       summary: Disable organization for subscription
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2840,13 +2837,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/subscribe-method':
+  '/v1/organizations/{organizationId}/subscribe-method':
     get:
       tags:
-        - onboard
+        - config
       summary: Get subscribe method
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2875,10 +2872,10 @@ paths:
         - BearerAuth: []
     post:
       tags:
-        - onboard
+        - config
       summary: Set subscribe method
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2904,10 +2901,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations/subscribe-methods:
+  /v1/organizations/subscribe-methods:
     get:
       tags:
-        - onboard
+        - config
       summary: Get subscribe methods
       parameters: []
       responses:
@@ -2942,13 +2939,13 @@ paths:
                     - ID: 2
                       Method: OpenID-Connect
       deprecated: false
-  '/v1/organisations/{orgId}/subscribe-key':
+  '/v1/organizations/{organizationId}/subscribe-key':
     get:
       tags:
-        - onboard
+        - config
       summary: Get subscribe key
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -2974,13 +2971,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/subscribe-key/renew':
+  '/v1/organizations/{organizationId}/subscribe-key/renew':
     post:
       tags:
-        - onboard
+        - config
       summary: Renew subscribe key
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3006,13 +3003,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/count':
+  '/v1/organizations/{organizationId}/users/count':
     get:
       tags:
-        - onboard
+        - config
       summary: Get organization users count
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3035,13 +3032,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/subscription':
+  '/v1/organizations/{organizationId}/subscription':
     get:
       tags:
-        - onboard
+        - config
       summary: Get organization subscription status (enable/disable)
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3062,13 +3059,13 @@ paths:
                 example:
                   Enabled: false
       deprecated: false
-  '/v1/organisations/{orgId}/users':
+  '/v1/organizations/{organizationId}/users':
     post:
       tags:
-        - onboard
+        - config
       summary: Add user to organization
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3125,7 +3122,7 @@ paths:
         - BearerAuth: []
     get:
       tags:
-        - onboard
+        - config
       summary: Get organization users
       parameters:
         - name: limit
@@ -3135,7 +3132,7 @@ paths:
             type: integer
             format: int32
             example: 1024
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3174,13 +3171,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}':
+  '/v1/organizations/{organizationId}/users/{userId}':
     delete:
       tags:
-        - onboard
+        - config
       summary: Delete user from organization
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           schema:
@@ -3205,18 +3202,18 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{dataAgreementId}/attributes/{attributeID}/consented/users':
+  '/v1/organizations/{orgID}/purposes/{purposeID}/attributes/{attributeID}/consented/users':
     get:
       tags:
-        - onboard
+        - config
       summary: Get all users consented to data attribute
       parameters:
-        - name: orgId
+        - name: orgID
           in: path
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeID
           in: path
           required: true
           schema:
@@ -3260,10 +3257,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{dataAgreementId}/consented/users':
+  '/v1/organizations/{orgId}/purposes/{purposeId}/consented/users':
     get:
       tags:
-        - onboard
+        - config
       summary: Get all users consented to a data agreement
       parameters:
         - name: orgId
@@ -3271,7 +3268,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: dataAgreementId
+        - name: purposeId
           in: path
           required: true
           schema:
@@ -3310,10 +3307,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations/data-requests:
+  /v1/organizations/data-requests:
     get:
       tags:
-        - onboard
+        - config
       summary: Get available data request statuses
       responses:
         '200':
@@ -3337,10 +3334,10 @@ paths:
                     ID: 1
                     Str: Request initiated
       deprecated: false
-  '/v1/organisations/{orgId}/data-requests':
+  '/v1/organizations/{orgId}/data-requests':
     get:
       tags:
-        - onboard
+        - config
       summary: Get open and close data requests
       parameters:
         - name: status
@@ -3383,10 +3380,10 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-requests/{dataReqId}':
+  '/v1/organizations/{orgId}/data-requests/{dataReqId}':
     get:
       tags:
-        - onboard
+        - config
       summary: Get data request
       parameters:
         - name: orgId
@@ -3411,7 +3408,7 @@ paths:
         - BearerAuth: []
     patch:
       tags:
-        - onboard
+        - config
       summary: Update data request
       parameters:
         - name: orgId
@@ -3452,7 +3449,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations/webhooks/event-types:
+  /v1/organizations/webhooks/event-types:
     get:
       tags:
         - config
@@ -3487,7 +3484,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /v1/organisations/webhooks/payload/content-types:
+  /v1/organizations/webhooks/payload/content-types:
     get:
       tags:
         - config
@@ -3513,13 +3510,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks':
+  '/v1/organizations/{organizationId}/webhooks':
     post:
       tags:
         - config
       description: Create webhook
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3599,7 +3596,7 @@ paths:
         - config
       description: Get all webhooks for an organisation
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3634,13 +3631,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks/{webhookId}':
+  '/v1/organizations/{organizationId}/webhooks/{webhookId}':
     get:
       tags:
         - config
       description: Get a webhook by ID
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3698,7 +3695,7 @@ paths:
         - config
       description: Delete webhook
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3722,7 +3719,7 @@ paths:
         - config
       description: Update webhook
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3803,13 +3800,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks/{webhookId}/ping':
+  '/v1/organizations/{organizationId}/webhooks/{webhookId}/ping':
     post:
       tags:
         - config
       description: Ping webhook
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3852,13 +3849,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery':
+  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery':
     get:
       tags:
         - config
       description: Get recent webhook deliveries
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3914,13 +3911,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
+  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
         - config
       description: Get recent webhook delivery by ID
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -3999,7 +3996,7 @@ paths:
                           - consentID
                           - days
                           - organisationID
-                          - dataAgreementId
+                          - purposeID
                           - timestamp
                           - userID
                         type: object
@@ -4015,7 +4012,7 @@ paths:
                             format: int32
                           organisationID:
                             type: string
-                          dataAgreementId:
+                          purposeID:
                             type: string
                           timestamp:
                             type: string
@@ -4030,6 +4027,8 @@ paths:
                       webhookid:
                         type: string
                   ResponseHeaders:
+                    ResponseHeaders: null
+                    title: ResponseHeaders
                     required:
                       - Cache-Control
                       - Content-Type
@@ -4086,13 +4085,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+  '/v1/organizations/{organizationId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
         - config
       description: Redeliver a webhook payload by delivery ID
       parameters:
-        - name: orgId
+        - name: organizationId
           in: path
           required: true
           style: simple
@@ -5013,7 +5012,7 @@ components:
           type: object
           properties:
             RetentionPeriod:
-              type: integer
+              type: integeru
               format: int32
             Enabled:
               type: boolean
@@ -5023,7 +5022,7 @@ components:
         IdentityProviderRepresentation:
           required:
             - providerId
-            - onboard
+            - config
             - alias
             - storeToken
             - addReadTokenRoleOnCreate
