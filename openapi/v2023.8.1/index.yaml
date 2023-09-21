@@ -109,7 +109,7 @@ paths:
     $ref: "./paths/onboard/configureOrganisation/organisationType/getDeleteUpdateOrganisationTypeById.yaml"
   /v1/organisations/types/{typeId}/image:
     $ref: "./paths/onboard/configureOrganisation/organisationType/getAndUpdateOrganisationTypeImage.yaml"
-  /v1/organisation:
+  /v1/organisations:
     $ref: "./paths/onboard/configureOrganisation/addOrganisation.yaml"
   /v1/organisations/{orgId}:
     $ref: "./paths/onboard/configureOrganisation/getAndUpdateOrganisation.yaml"
