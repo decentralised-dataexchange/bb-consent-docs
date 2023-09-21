@@ -214,6 +214,10 @@ components:
   schemas:
     Log:
       $ref: "./definitions/Log.yaml"
+    Pagination:
+      $ref: "./definitions/Pagination.yaml"
+    Error:
+      $ref: "./definitions/Error.yaml"
     GetUserConsentHistory:
       $ref: "./definitions/GetUserConsentHistory.yaml"
     ConsentHistory:

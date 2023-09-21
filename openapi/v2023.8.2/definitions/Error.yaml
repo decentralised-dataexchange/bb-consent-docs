@@ -1,0 +1,7 @@
+type: object
+description: A generic error object
+properties:
+  code:
+    type: integer
+  message:
+    type: string

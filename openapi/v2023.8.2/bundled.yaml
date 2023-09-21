@@ -3331,7 +3331,7 @@ paths:
                         Email:
                           type: string
                   Links:
-                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+                    $ref: '#/components/schemas/Pagination'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3423,7 +3423,7 @@ paths:
                         Email:
                           type: string
                   Links:
-                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+                    $ref: '#/components/schemas/Pagination'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3476,7 +3476,7 @@ paths:
                         Email:
                           type: string
                   Links:
-                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+                    $ref: '#/components/schemas/Pagination'
       deprecated: false
       security:
         - BearerAuth: []
@@ -3552,7 +3552,7 @@ paths:
                   IsDataDownloadRequestOngoing:
                     type: boolean
                   Links:
-                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+                    $ref: '#/components/schemas/Pagination'
       deprecated: false
       security:
         - BearerAuth: []
@@ -4116,7 +4116,7 @@ paths:
                         StatusDescription:
                           type: string
                   Links:
-                    $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+                    $ref: '#/components/schemas/Pagination'
       deprecated: false
       security:
         - BearerAuth: []
@@ -4368,7 +4368,37 @@ components:
                 description: Log description
         pagination:
           description: Pagination object
-          $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      description: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: Current page number
+        totalItems:
+          type: integer
+          description: Total number of items available
+        totalPages:
+          type: integer
+          description: Total number of pages based on limit
+        limit:
+          type: integer
+          description: Number of items per page
+        hasPrevious:
+          type: boolean
+          description: Indicates if there's a previous page
+        hasNext:
+          type: boolean
+          description: Indicates if there's a next page
+    Error:
+      type: object
+      description: A generic error object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     GetUserConsentHistory:
       required:
         - ConsentHistory
@@ -4381,7 +4411,7 @@ components:
             $ref: '#/components/schemas/ConsentHistory'
           description: List of consent history
         Links:
-          $ref: '#/components/schemas/ListAllDataRequests/properties/Links'
+          $ref: '#/components/schemas/Pagination'
           description: Pagination links
     ConsentHistory:
       required:
@@ -4774,27 +4804,7 @@ components:
         IsDataDownloadRequestOngoing:
           type: boolean
         Links:
-          description: Pagination
-          type: object
-          properties:
-            currentPage:
-              type: integer
-              description: Current page number
-            totalItems:
-              type: integer
-              description: Total number of items available
-            totalPages:
-              type: integer
-              description: Total number of pages based on limit
-            limit:
-              type: integer
-              description: Number of items per page
-            hasPrevious:
-              type: boolean
-              description: Indicates if there's a previous page
-            hasNext:
-              type: boolean
-              description: Indicates if there's a next page
+          $ref: '#/components/schemas/Pagination'
     GetAllDeleteMyDataRequests:
       required:
         - ID
