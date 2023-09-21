@@ -21,7 +21,7 @@ get:
       required: true
       schema:
         type: string
-    - name: purposeId
+    - name: dataAgreementId
       in: path
       description: "Consent agreement ID"
       required: true

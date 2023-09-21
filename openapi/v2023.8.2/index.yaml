@@ -53,15 +53,15 @@ paths:
     $ref: "./paths/audit/getOrgLogs.yaml"
   /v1/users/{userId}/consenthistory:
     $ref: "./paths/service/getConsentHistory.yaml"
-  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}:
+  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}:
     $ref: "./paths/service/getConsentsByConsentAgreementId.yaml"
   /v1/organisations/{orgId}/users/{userId}/consents/{consentId}:
     $ref: "./paths/service/getConsentsForAllConsentAgreements.yaml"
   /v1/organisations/{orgId}/users/{userId}/consents:
     $ref: "./paths/service/getConsents.yaml"
-  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/status:
+  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status:
     $ref: "./paths/service/updateConsentForConsentAgreement.yaml"
-  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/attributes/{attributeId}:
+  /v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}:
     $ref: "./paths/service/updateConsentForDataAttribute.yaml"
   /v1/user/organisations/{orgId}/data-status:
     $ref: "./paths/service/dataRequests/listAllDataRequests.yaml"
@@ -147,13 +147,13 @@ paths:
     $ref: "./paths/config/dataAgreements/globalPolicyConfigurations/getAndUpdateGlobalPolicyConfiguration.yaml"
   /v1/organisations/{orgId}/data-agreements:
     $ref: "./paths/config/dataAgreements/getAndAddConsentAgreements.yaml"
-  /v1/organisations/{orgId}/data-agreements/{purposeId}:
+  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}:
     $ref: "./paths/config/dataAgreements/getDeleteUpdateConsentAgreementByID.yaml"
-  /v1/organisations/{orgId}/templates:
+  /v1/organisations/{orgId}/data-attributes:
     $ref: "./paths/config/dataAttributes/getAndAddDataAttributes.yaml"
-  /v1/organisations/{orgId}/data-agreements/{purposeId}/templates:
+  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes:
     $ref: "./paths/config/dataAttributes/deleteMultipleDataAttributes.yaml"
-  /v1/organisations/{orgId}/templates/{templateID}:
+  /v1/organisations/{orgId}/data-attributes/{dataAttributeId}:
     $ref: "./paths/config/dataAttributes/getUpdateAndDeleteDataAttributeByID.yaml"
   /v1/organisations/{orgId}/idp/open-id:
     $ref: "./paths/onboard/manageIndividuals/subscription/addGetUpdateAndDeleteIdentityProvider.yaml"
@@ -177,9 +177,9 @@ paths:
     $ref: "./paths/onboard/manageIndividuals/addAndGetOrganisationUsers.yaml"
   /v1/organisations/{orgId}/users/{userId}:
     $ref: "./paths/onboard/manageIndividuals/deleteUserFromOrganisation.yaml"
-  /v1/organisations/{orgId}/data-agreements/{purposeID}/attributes/{attributeID}/consented/users:
+  /v1/organisations/{orgId}/data-agreements/{dataAgreementId}/attributes/{attributeID}/consented/users:
     $ref: "./paths/onboard/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAttribute.yaml"
-  /v1/organisations/{orgId}/data-agreements/{purposeId}/consented/users:
+  /v1/organisations/{orgId}/data-agreements/{dataAgreementId}/consented/users:
     $ref: "./paths/onboard/manageIndividuals/consentAgreementRecords/getAllUsersConsentedToDataAgreement.yaml"
   /v1/organisations/data-requests:
     $ref: "./paths/onboard/dataRequests/getAvailableDataRequestStatuses.yaml"

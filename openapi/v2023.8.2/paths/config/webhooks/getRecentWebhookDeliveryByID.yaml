@@ -85,7 +85,7 @@ get:
                       - consentID
                       - days
                       - organisationID
-                      - purposeID
+                      - dataAgreementId
                       - timestamp
                       - userID
                     type: object
@@ -101,7 +101,7 @@ get:
                         format: int32
                       organisationID:
                         type: string
-                      purposeID:
+                      dataAgreementId:
                         type: string
                       timestamp:
                         type: string

@@ -8,7 +8,7 @@ get:
       required: true
       schema:
         type: string
-    - name: templateID
+    - name: dataAttributeId
       in: path
       required: true
       schema:
@@ -41,7 +41,7 @@ put:
       required: true
       schema:
         type: string
-    - name: templateID
+    - name: dataAttributeId
       in: path
       required: true
       schema:
@@ -87,7 +87,7 @@ delete:
       required: true
       schema:
         type: string
-    - name: templateID
+    - name: dataAttributeId
       in: path
       required: true
       schema:

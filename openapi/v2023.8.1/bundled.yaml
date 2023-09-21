@@ -94,7 +94,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}':
     get:
       tags:
         - service
@@ -118,7 +118,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           description: Consent agreement ID
           required: true
@@ -194,7 +194,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/status':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
     post:
       tags:
         - service
@@ -215,7 +215,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           schema:
@@ -236,7 +236,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{purposeId}/attributes/{attributeId}':
+  '/v1/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -257,7 +257,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           schema:
@@ -2256,7 +2256,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{purposeId}':
+  '/v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}':
     delete:
       tags:
         - config
@@ -2267,7 +2267,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           style: simple
@@ -2313,7 +2313,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           style: simple
@@ -2350,7 +2350,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           style: simple
@@ -2375,7 +2375,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/templates':
+  '/v1/organisations/{orgId}/data-attributes':
     post:
       tags:
         - config
@@ -2391,10 +2391,10 @@ paths:
           application/json:
             schema:
               required:
-                - templates
+                - data-attributes
               type: object
               properties:
-                templates:
+                data-attributes:
                   type: array
                   items:
                     $ref: '#/components/schemas/DataAttribute'
@@ -2444,7 +2444,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{purposeId}/templates':
+  '/v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes':
     delete:
       tags:
         - config
@@ -2455,7 +2455,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           schema:
@@ -2475,7 +2475,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/templates/{templateID}':
+  '/v1/organisations/{orgId}/data-attributes/{dataAttributeId}':
     get:
       tags:
         - config
@@ -2486,7 +2486,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: templateID
+        - name: dataAttributeId
           in: path
           required: true
           schema:
@@ -2519,7 +2519,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: templateID
+        - name: dataAttributeId
           in: path
           required: true
           schema:
@@ -2565,7 +2565,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: templateID
+        - name: dataAttributeId
           in: path
           required: true
           schema:
@@ -3205,7 +3205,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{purposeID}/attributes/{attributeID}/consented/users':
+  '/v1/organisations/{orgId}/data-agreements/{dataAgreementId}/attributes/{attributeID}/consented/users':
     get:
       tags:
         - onboard
@@ -3216,7 +3216,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeID
+        - name: dataAgreementId
           in: path
           required: true
           schema:
@@ -3260,7 +3260,7 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/v1/organisations/{orgId}/data-agreements/{purposeId}/consented/users':
+  '/v1/organisations/{orgId}/data-agreements/{dataAgreementId}/consented/users':
     get:
       tags:
         - onboard
@@ -3271,7 +3271,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: purposeId
+        - name: dataAgreementId
           in: path
           required: true
           schema:
@@ -3999,7 +3999,7 @@ paths:
                           - consentID
                           - days
                           - organisationID
-                          - purposeID
+                          - dataAgreementId
                           - timestamp
                           - userID
                         type: object
@@ -4015,7 +4015,7 @@ paths:
                             format: int32
                           organisationID:
                             type: string
-                          purposeID:
+                          dataAgreementId:
                             type: string
                           timestamp:
                             type: string

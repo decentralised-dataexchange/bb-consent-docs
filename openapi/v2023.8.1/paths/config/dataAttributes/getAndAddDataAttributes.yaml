@@ -13,10 +13,10 @@ post:
       application/json:
         schema:
           required:
-            - templates
+            - data-attributes
           type: object
           properties:
-            templates:
+            data-attributes:
               type: array
               items:
                 $ref: "../../../definitions/config/DataAttribute.yaml"

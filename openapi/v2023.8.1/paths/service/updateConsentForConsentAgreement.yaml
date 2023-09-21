@@ -18,7 +18,7 @@ post:
       required: true
       schema:
         type: string
-    - name: purposeId
+    - name: dataAgreementId
       in: path
       required: true
       schema:
