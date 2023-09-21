@@ -1,23 +1,15 @@
-get:
+delete:
   tags:
-    - service
-  description: Get consents for all data agreements
+    - onboard
+  summary: Delete user from organization
   parameters:
     - name: orgId
       in: path
-      description: "Organisation ID"
       required: true
       schema:
         type: string
     - name: userId
       in: path
-      description: "Individual ID"
-      required: true
-      schema:
-        type: string
-    - name: consentId
-      in: path
-      description: "Consent record ID"
       required: true
       schema:
         type: string
@@ -27,10 +19,15 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/GetConsentsForAllConsentAgreements.yaml"
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../definitions/Individual.yaml"
   deprecated: false
   security:
     - BearerAuth: []
   x-badges:
     - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
-      label: 'Authorised roles: Individual'
+      label: 'Authorised roles: Organisation admin'

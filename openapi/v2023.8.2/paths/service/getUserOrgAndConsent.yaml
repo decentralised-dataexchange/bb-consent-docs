@@ -21,7 +21,7 @@ get:
             type: object
             properties:
               Organization:
-                $ref: "../../definitions/onboard/Organisation.yaml"
+                $ref: "../../definitions/Organisation.yaml"
               ConsentID:
                 type: string
               PurposeConsents:
@@ -33,7 +33,7 @@ get:
                   type: object
                   properties:
                     Purpose:
-                      $ref: "../../definitions/config/DataAgreement.yaml"
+                      $ref: "../../definitions/DataAgreement.yaml"
                     Count:
                       required:
                         - Total

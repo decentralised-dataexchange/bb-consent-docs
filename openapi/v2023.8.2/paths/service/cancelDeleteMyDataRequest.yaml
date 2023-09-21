@@ -1,29 +1,15 @@
-get:
+post:
   tags:
     - service
-  description: Get consents by data agreement ID
+  description: Cancel delete my data request
   parameters:
     - name: orgId
       in: path
-      description: "Organisation ID"
       required: true
       schema:
         type: string
-    - name: userId
+    - name: dataReqId
       in: path
-      description: "Individual ID"
-      required: true
-      schema:
-        type: string
-    - name: consentId
-      in: path
-      description: "Consent record ID"
-      required: true
-      schema:
-        type: string
-    - name: dataAgreementId
-      in: path
-      description: "Consent agreement ID"
       required: true
       schema:
         type: string
@@ -33,7 +19,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/GetConsentsByConsentAgreementId.yaml"
+            $ref: "../../definitions/CancelDeleteMyDataRequest.yaml"
   deprecated: false
   security:
     - BearerAuth: []

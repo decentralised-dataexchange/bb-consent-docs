@@ -1,0 +1,34 @@
+required:
+  - Purpose
+  - Count
+  - Consents
+  - DataRetention
+type: object
+description: Data agreement record captures the individual consents for an agreement
+properties:
+  Purpose:
+    description: Data agreement
+    $ref: "./DataAgreement.yaml"
+  Count:
+    description: Count of data attributes for which consent has to be obtained
+    $ref: "./ConsentCount.yaml"
+  Consents:
+    type: array
+    description: Count of data attributes for which consent has to be obtained
+    items:
+      $ref: "./Consent.yaml"
+  DataRetention:
+    required:
+      - Expiry
+    type: object
+    description: "Data retention settings"
+    properties:
+      Expiry:
+        type: string
+        description: "Data retention expiry in UTC timestamp"
+  DataAgreementRecordRevision:
+    $ref: "./DataAgreementRecordRevision.yaml"
+    description: >
+      A generic revision model captures the serialized contents of any shema's single row. 
+      This is then subject to 1) cryptographic signature and 2) auditing. Aside from successor column, a 
+      revision should be considered locked.

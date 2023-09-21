@@ -32,7 +32,7 @@ patch:
     content:
       application/json:
         schema:
-          $ref: "../../definitions/service/UpdateConsentForDataAttributeRequest.yaml"
+          $ref: "../../definitions/UpdateConsentForDataAttributeRequest.yaml"
     required: true
   responses:
     "200":
@@ -40,7 +40,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/UpdateConsentForDataAttributeResponse.yaml"
+            $ref: "../../definitions/UpdateConsentForDataAttributeResponse.yaml"
   deprecated: false
   security:
     - BearerAuth: []

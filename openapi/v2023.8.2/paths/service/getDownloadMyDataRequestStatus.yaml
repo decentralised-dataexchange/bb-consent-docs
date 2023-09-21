@@ -1,23 +1,10 @@
 get:
   tags:
     - service
-  description: Get consents for all data agreements
+  description: Get download my data request status
   parameters:
     - name: orgId
       in: path
-      description: "Organisation ID"
-      required: true
-      schema:
-        type: string
-    - name: userId
-      in: path
-      description: "Individual ID"
-      required: true
-      schema:
-        type: string
-    - name: consentId
-      in: path
-      description: "Consent record ID"
       required: true
       schema:
         type: string
@@ -27,7 +14,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/GetConsentsForAllConsentAgreements.yaml"
+            $ref: "../../definitions/GetDownloadMyDataRequestStatus.yaml"
   deprecated: false
   security:
     - BearerAuth: []

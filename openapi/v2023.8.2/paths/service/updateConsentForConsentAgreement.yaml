@@ -27,7 +27,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../../definitions/service/UpdateDataAgreementRecord.yaml"
+          $ref: "../../definitions/UpdateDataAgreementRecord.yaml"
     required: true
   responses:
     "200":
@@ -35,7 +35,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/DataAgreementRecords.yaml"
+            $ref: "../../definitions/DataAgreementRecords.yaml"
   deprecated: false
   security:
     - BearerAuth: []
@@ -73,7 +73,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/DataAgreementRecords.yaml"
+            $ref: "../../definitions/DataAgreementRecords.yaml"
   deprecated: false
   security:
     - BearerAuth: []

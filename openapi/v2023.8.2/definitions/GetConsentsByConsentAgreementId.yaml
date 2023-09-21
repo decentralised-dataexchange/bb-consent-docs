@@ -1,0 +1,50 @@
+required:
+  - ID
+  - ConsentID
+  - OrgID
+  - UserID
+  - Consents
+  - DataRetention
+type: object
+
+properties:
+  ID:
+    type: string
+
+  ConsentID:
+    type: string
+
+  OrgID:
+    type: string
+
+  UserID:
+    type: string
+
+  DataRetention:
+    required:
+      - Expiry
+    type: object
+
+    properties:
+      Expiry:
+        type: string
+
+  Consents:
+    required:
+      - Purpose
+      - Count
+      - Consents
+    type: object
+
+    properties:
+      Purpose:
+        $ref: "./DataAgreement.yaml"
+
+      Count:
+        $ref: "./ConsentCount.yaml"
+
+      Consents:
+        type: array
+
+        items:
+          $ref: "./Consent.yaml"

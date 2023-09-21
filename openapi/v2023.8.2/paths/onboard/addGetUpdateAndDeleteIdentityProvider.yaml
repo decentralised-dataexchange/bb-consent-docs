@@ -1,0 +1,104 @@
+post:
+  tags:
+    - onboard
+  summary: Add identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../definitions/ConfigureExternalIdentityProviderRequest.yaml"
+    required: true
+  responses:
+    "201":
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
+put:
+  tags:
+    - onboard
+  summary: Update identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "../../definitions/ConfigureExternalIdentityProviderRequest.yaml"
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
+delete:
+  tags:
+    - onboard
+  summary: Delete identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: "{{company-id}}"
+  responses:
+    "204":
+      description: No Content
+      content: {}
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'
+get:
+  tags:
+    - onboard
+  summary: Get identity provider
+  parameters:
+    - name: orgId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/ConfigureExternalIdentityProviderResponse.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Organisation admin'

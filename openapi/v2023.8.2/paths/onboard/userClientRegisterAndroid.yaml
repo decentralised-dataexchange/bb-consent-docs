@@ -1,0 +1,34 @@
+post:
+  tags:
+    - onboard
+  description: User client register (android)
+  parameters: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          required:
+            - devicetoken
+          type: object
+          properties:
+            devicetoken:
+              type: string
+    required: true
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - User
+            type: object
+            properties:
+              User:
+                $ref: "../../definitions/Individual.yaml"
+  deprecated: false
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: 'Authorised roles: Individual'

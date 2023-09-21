@@ -36,15 +36,10 @@ tags:
     description: |
       These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  '/v1/organisations/{orgId}/logs':
+  /v1/audit/logs:
     get:
-      parameters:
-        - name: orgId
-          description: Organisation ID
-          in: path
-          required: true
-          schema:
-            type: string
+      operationId: getAdminLogs
+      description: Get admin logs
       tags:
         - audit
       security:
@@ -52,10 +47,24 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-      description: Get action logs
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of items to return per page
+          required: false
+          schema:
+            type: integer
+            default: 10
       responses:
         '200':
-          description: Action logs for the organisation
+          description: Audit logs for admin user
           content:
             application/json:
               schema:
@@ -4765,13 +4774,24 @@ components:
           description: Pagination links
           type: object
           properties:
-            self:
-              description: Link to the current page
-              type: string
-              example: 'https://staging-api.igrant.io/v1/users/638de3302f5d1700014431f3/consenthistory?limit=1024'
-            next:
-              description: Link to the next page
-              type: string
+            currentPage:
+              type: integer
+              description: Current page number
+            totalItems:
+              type: integer
+              description: Total number of items available
+            totalPages:
+              type: integer
+              description: Total number of pages based on limit
+            limit:
+              type: integer
+              description: Number of items per page
+            hasPrevious:
+              type: boolean
+              description: Indicates if there's a previous page
+            hasNext:
+              type: boolean
+              description: Indicates if there's a next page
     GetAllDeleteMyDataRequests:
       required:
         - ID

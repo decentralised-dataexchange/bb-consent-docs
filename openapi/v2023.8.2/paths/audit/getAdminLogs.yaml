@@ -1,0 +1,32 @@
+get:
+  operationId: getAdminLogs
+  description: Get admin logs
+  tags:
+    - audit
+  security:
+    - BearerAuth: []
+  x-badges:
+    - color: primary-color # <<< Allowed values (red, green, orange, blue, primary-color)
+      label: "Authorised roles: Organisation admin"
+  parameters:
+    - name: page
+      in: query
+      description: Page number
+      required: false
+      schema:
+        type: integer
+        default: 1
+    - name: limit
+      in: query
+      description: Number of items to return per page
+      required: false
+      schema:
+        type: integer
+        default: 10
+  responses:
+    "200":
+      description: Audit logs for admin user
+      content:
+        application/json:
+          schema:
+            $ref: "../../definitions/OrganisationLog.yaml"

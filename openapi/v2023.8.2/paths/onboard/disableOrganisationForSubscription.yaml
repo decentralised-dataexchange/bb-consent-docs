@@ -1,14 +1,9 @@
-get:
+post:
   tags:
-    - service
-  description: Get all consents
+    - onboard
+  summary: Disable organization for subscription
   parameters:
     - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
-    - name: userId
       in: path
       required: true
       schema:
@@ -19,10 +14,15 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/GetConsents.yaml"
+            required:
+              - Organization
+            type: object
+            properties:
+              Organization:
+                $ref: "../../definitions/Organisation.yaml"
   deprecated: false
   security:
     - BearerAuth: []
   x-badges:
     - color: primary-color  # <<< Allowed values (red, green, orange, blue, primary-color)
-      label: 'Authorised roles: Individual'
+      label: 'Authorised roles: Organisation admin'

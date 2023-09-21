@@ -1,0 +1,89 @@
+required:
+  - ID
+  - Name
+  - CoverImageID
+  - CoverImageURL
+  - LogoImageID
+  - LogoImageURL
+  - Location
+  - Type
+  - Jurisdiction
+  - Disclosure
+  - Restriction
+  - Shared3PP
+  - Description
+  - Enabled
+  - PolicyURL
+  - EulaURL
+  - Templates
+  - Purposes
+  - Admins
+  - BillingInfo
+  - Subs
+  - HlcSupport
+  - PrivacyDashboard
+  - AriesCloudAgentDeployment
+  - DataRetention
+  - IdentityProviderRepresentation
+  - KeycloakOpenIDClient
+  - ExternalIdentityProviderAvailable
+type: object
+properties:
+  ID:
+    type: string
+  Name:
+    type: string
+  CoverImageID:
+    type: string
+  CoverImageURL:
+    type: string
+  LogoImageID:
+    type: string
+  LogoImageURL:
+    type: string
+  Location:
+    type: string
+  Type:
+    $ref: "./OrganisationType.yaml"
+  Jurisdiction:
+    type: string
+  Disclosure:
+    type: string
+  Restriction:
+    type: string
+  Shared3PP:
+    type: boolean
+  Description:
+    type: string
+  Enabled:
+    type: boolean
+  PolicyURL:
+    type: string
+  EulaURL:
+    type: string
+  Templates:
+    type: array
+    items:
+      $ref: "./DataAttribute.yaml"
+  Purposes:
+    type: array
+    items:
+      $ref: "./DataAgreement.yaml"
+  Admins:
+    type: array
+    items:
+      $ref: "./OrganisationAdmin.yaml"
+  Subs:
+    $ref: "./SubscriptionMethod.yaml"
+  HlcSupport:
+    type: boolean
+  PrivacyDashboard:
+    $ref: "./PrivacyDashboard.yaml"
+  DataRetention:
+    $ref: "./DataRetention.yaml"
+  IdentityProviderRepresentation:
+    $ref: "./IdentityProviderRepresentation.yaml"
+  KeycloakOpenIDClient:
+    $ref: "./KeycloakOpenIDClient.yaml"
+  ExternalIdentityProviderAvailable:
+    type: boolean

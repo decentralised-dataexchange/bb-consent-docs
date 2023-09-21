@@ -30,7 +30,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "../../definitions/service/GetUserConsentHistory.yaml"
+            $ref: "../../definitions/GetUserConsentHistory.yaml"
   deprecated: false
   security:
     - BearerAuth: []
