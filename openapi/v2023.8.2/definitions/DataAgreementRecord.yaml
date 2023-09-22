@@ -1,34 +1,35 @@
 required:
-  - Purpose
-  - Count
-  - Consents
-  - DataRetention
+  - data_agreement
+  - data_agreement_revision
+  - individual
+  - opt_in
 type: object
-description: Data agreement record captures the individual consents for an agreement
+description: |
+  A Consent Record expresses consent (as defined in this building block's specification) to a single Agreement. 
+  There must be a UNIQUE constraint on (agreement_revision, individual)
 properties:
-  Purpose:
+  id:
+    type: string
+    format: uuid
+    example: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+    description: |
+      Objects may be passed back by some API endpoints without an id (PK), denoting that they are a \"draft\", 
+      i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. 
+      Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.
+  data_agreement:
     description: Data agreement
     $ref: "./DataAgreement.yaml"
-  Count:
-    description: Count of data attributes for which consent has to be obtained
-    $ref: "./ConsentCount.yaml"
-  Consents:
-    type: array
-    description: Count of data attributes for which consent has to be obtained
-    items:
-      $ref: "./Consent.yaml"
-  DataRetention:
-    required:
-      - Expiry
-    type: object
-    description: "Data retention settings"
-    properties:
-      Expiry:
-        type: string
-        description: "Data retention expiry in UTC timestamp"
-  DataAgreementRecordRevision:
-    $ref: "./DataAgreementRecordRevision.yaml"
-    description: >
-      A generic revision model captures the serialized contents of any shema's single row. 
-      This is then subject to 1) cryptographic signature and 2) auditing. Aside from successor column, a 
-      revision should be considered locked.
+  data_agreement_revision:
+    description: Data agreement revision
+    $ref: "./Revision.yaml"
+  individual:
+    description: Individual to whom this data agreement record belongs to
+    $ref: "./Individual.yaml"
+  opt_in:
+    type: boolean
+    description: "True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent)."
+  state:
+    type: string
+    description: "The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed"
+  signature:
+    $ref: "./Signature.yaml"

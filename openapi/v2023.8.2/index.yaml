@@ -51,7 +51,11 @@ tags:
 paths:
   # Audit
   /v1/audit/admin/logs:
-    $ref: "./paths/audit/getAdminLogs.yaml"
+    $ref: "./paths/audit/list_admin_logs.yaml"
+  /v1/audit/consentrecords:
+    $ref: "./paths/audit/list_consent_records.yaml"
+  /v1/audit/consentrecord/{consentRecordId}:
+    $ref: "./paths/audit/get_consent_record.yaml"
 
   # Service
   /v1/users/{userId}/consenthistory:
@@ -148,18 +152,6 @@ paths:
     $ref: "./paths/onboard/getAndCreateAPIKey.yaml"
   /v1/user/apikey/revoke:
     $ref: "./paths/onboard/deleteAPIKey.yaml"
-  /v1/organisations/{orgId}/config/policy:
-    $ref: "./paths/config/getAndUpdateGlobalPolicyConfiguration.yaml"
-  /v1/organisations/{orgId}/data-agreements:
-    $ref: "./paths/config/getAndAddConsentAgreements.yaml"
-  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}:
-    $ref: "./paths/config/getDeleteUpdateConsentAgreementByID.yaml"
-  /v1/organisations/{orgId}/data-attributes:
-    $ref: "./paths/config/getAndAddDataAttributes.yaml"
-  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes:
-    $ref: "./paths/config/deleteMultipleDataAttributes.yaml"
-  /v1/organisations/{orgId}/data-attributes/{dataAttributeId}:
-    $ref: "./paths/config/getUpdateAndDeleteDataAttributeByID.yaml"
   /v1/organisations/{orgId}/idp/open-id:
     $ref: "./paths/onboard/addGetUpdateAndDeleteIdentityProvider.yaml"
   /v1/organisations/{orgId}/subscription/enable:
@@ -182,10 +174,7 @@ paths:
     $ref: "./paths/onboard/addAndGetOrganisationUsers.yaml"
   /v1/organisations/{orgId}/users/{userId}:
     $ref: "./paths/onboard/deleteUserFromOrganisation.yaml"
-  /v1/organisations/{orgId}/data-agreements/{dataAgreementId}/attributes/{attributeID}/consented/users:
-    $ref: "./paths/onboard/getAllUsersConsentedToDataAttribute.yaml"
-  /v1/organisations/{orgId}/data-agreements/{dataAgreementId}/consented/users:
-    $ref: "./paths/onboard/getAllUsersConsentedToDataAgreement.yaml"
+
   /v1/organisations/data-requests:
     $ref: "./paths/onboard/getAvailableDataRequestStatuses.yaml"
   /v1/organisations/{orgId}/data-requests:
@@ -210,6 +199,18 @@ paths:
     $ref: "./paths/config/getRecentWebhookDeliveryByID.yaml"
   /v1/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
     $ref: "./paths/config/redeliverWebhook.yaml"
+  /v1/organisations/{orgId}/config/policy:
+    $ref: "./paths/config/getAndUpdateGlobalPolicyConfiguration.yaml"
+  /v1/organisations/{orgId}/data-agreements:
+    $ref: "./paths/config/getAndAddConsentAgreements.yaml"
+  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}:
+    $ref: "./paths/config/getDeleteUpdateConsentAgreementByID.yaml"
+  /v1/organisations/{orgId}/data-attributes:
+    $ref: "./paths/config/getAndAddDataAttributes.yaml"
+  /v1/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes:
+    $ref: "./paths/config/deleteMultipleDataAttributes.yaml"
+  /v1/organisations/{orgId}/data-attributes/{dataAttributeId}:
+    $ref: "./paths/config/getUpdateAndDeleteDataAttributeByID.yaml"
 components:
   schemas:
     Log:

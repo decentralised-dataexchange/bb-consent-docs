@@ -1,0 +1,46 @@
+type: object
+description: "A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.\n\nAside from \"successor\" column, a revision should be considered locked."
+required:
+  - id
+  - schemaName
+  - objectId
+  - serializedSnapshot
+  - timestamp
+properties:
+  id:
+    type: string
+    description: "Revision ID"
+
+  schemaName:
+    type: string
+    description: ""
+
+  objectId:
+    type: string
+    description: ""
+
+  serializedSnapshot:
+    type: string
+    description: ""
+
+  timestamp:
+    type: string
+    description: "UTC timestamp in epoch seconds"
+
+  authorizedByIndividual:
+    $ref: "./Individual.yaml"
+
+  authorizedByOther:
+    type: string
+    description: "Reference to an admin user that has created this revision"
+
+  successor:
+    $ref: "./Revision.yaml"
+
+  predecessorHash:
+    type: string
+    description: "Tamper-resistent artifact from previous record"
+
+  predecessorSignature:
+    type: string
+    description: "Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)"

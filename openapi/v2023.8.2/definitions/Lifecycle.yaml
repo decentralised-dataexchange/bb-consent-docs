@@ -1,0 +1,18 @@
+type: object
+description: "TBD: Models the valid lifecycle states of an Agreement"
+required:
+  - id
+  - name
+properties:
+  id:
+    type: string
+    description: "Data agreement lifecycle ID"
+
+  name:
+    type: string
+    description: "Definition / Preparation / Capture / Proof"
+    enum:
+      - definition
+      - preparation
+      - capture
+      - proof

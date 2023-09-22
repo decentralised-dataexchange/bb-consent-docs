@@ -1,55 +1,47 @@
 required:
-  - ID
-  - Name
-  - IamID
-  - Email
-  - Phone
-  - ImageID
-  - ImageURL
-  - LastVisit
-  - Client
-  - Orgs
+  - id
+  - iamId
+  - orgs
   - APIKey
   - Roles
   - IncompleteProfile
 type: object
+description: |
+  Shallowly models an Individual which may reference some instance in an external system (registration system, functional ID, foundational ID etc). 
+  An Individual instance of this model is not to be mistaken with a unique natural individual. 
+  It is up to the system owner to decide if this record permits mapping to a natural individual and/or if a single Individual row can map to several consent agreements.
 properties:
-  ID:
+  id:
     type: string
-  Name:
+  name:
     type: string
-  IamID:
+    description: "Name of the individual"
+  iamId:
     type: string
-  Email:
+    description: "Consent BB specific IAM ID"
+  external_id:
     type: string
-  Phone:
+    format: ""
+    example: ""
+    description: "Reference to another foundational/functional ID, which is likely PII"
+  external_id_type:
     type: string
-  ImageID:
+    format: ""
+    example: ""
+    description: "External id type specifier. A string. For instance \"email\" or \"foundational id\". Can be used in later queries."
+  lastVisit:
     type: string
-  ImageURL:
-    type: string
-  LastVisit:
-    type: string
-  Client:
-    required:
-      - Token
-      - Type
-    type: object
-    properties:
-      Token:
-        type: string
-      Type:
-        type: integer
-        format: int32
-  Orgs:
+    description: "Last logged-in time"
+  orgs:
     type: array
     items:
       type: string
-  APIKey:
-    type: string
-  Roles:
+      description: "Organisation ID"
+  roles:
     type: array
     items:
       type: string
-  IncompleteProfile:
+      description: "Role ID and organisation ID"
+  incompleteProfile:
     type: boolean
+    description: "Indicates whether the profile is incomplete or not"

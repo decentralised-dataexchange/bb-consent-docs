@@ -1,0 +1,14 @@
+title: Data agreement
+type: object
+description: DPIA details
+required:
+  - dpia_timestamp
+  - dpia_summary_url
+properties:
+  dpia_timestamp:
+    type: string
+    description: UTC timestamp in epoch seconds when the DPIA was performed
+
+  dpia_summary_url:
+    type: string
+    description: URL to the DPIA summary

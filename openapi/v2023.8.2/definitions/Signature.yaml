@@ -1,28 +1,77 @@
 type: object
-description: Digital signature to secure the integrity of the data agreement
+description: |
+  A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. 
+  Required signing methods: Revision object or another Signature object.
+required:
+  - id
+  - payload
+  - signature
+  - verification_method
+  - verification_hash
+  - verification_signed_by
+  - timestamp
 properties:
   id:
     type: string
-    description: Identifier of the proof
-  type:
+    format: uuid
+    description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a Signature that is not yet stored in the database and only exist in transit.'
+
+  payload:
     type: string
-    description: Type of the proof
-  created:
-    description: Creation time in UTC timestamp
+    format: ""
+    example: ""
+    description: "The payload that is signed, constructed as a serialization of fields verification_method + verification_hash + verification_artifact + verification_signed_by + verification_jws_header. Serialized as a JSON dict."
+
+  signature:
     type: string
-  verificationMethod:
-    description: Method of verification for the proof
+    format: ""
+    example: ""
+    description: "Signature (of payload), the format of the signature should be specified by either verification_method or verification_jws_header"
+
+  verification_method:
     type: string
-  proofPurpose:
-    description: Purpose of the proof
+    format: ""
+    example: ""
+    description: "A well-known string denoting which method is used. Valid values: <TBD>. We might expand this with a relation to which verification methods that are supported. There may be a minimal set of supported methods necessary."
+
+  verification_hash:
     type: string
-  proofValue:
-    description: Value of the proof (Signature digest)
+    format: ""
+    example: ""
+    description: "Internally generated cryptographic hash of the value to be signed. The hash is (re)produced from the object_type and object_reference - but from the serialized data of those."
+
+  verification_artifact:
     type: string
-required:
-  - id
-  - type
-  - created
-  - verificationMethod
-  - proofPurpose
-  - proofValue
+    format: ""
+    example: ""
+    description: "A verification artifact in the form of a scanned object, image, signature etc."
+
+  verification_signed_by:
+    type: string
+    format: ""
+    example: ""
+    description: "Because an identifier's information may change over time, there is a need to store that information at the time of signing. In case of a cryptographic signature, this field should contain some identifier for looking up or verifying the public key of the signing party. In case of a non-cryptographic signature, this field could contain a natural individual's names, personal number, email addresses - store a snapshot that binds to the signature at the time of signing. In case of a cryptographic signature, this may be the fingerprint of the individual's public key or in some cases, a token from the user's ID session."
+
+  verification_jws_header:
+    type: string
+    format: ""
+    example: ""
+    description: "Alternative to the verification_method, verification_hash and verification_signature, give a JWS serialized object (RFC7515)"
+
+  timestamp:
+    type: string
+    format: ""
+    example: ""
+    description: "Timestamp of signature, currently this field isn't part of the payload so it's not tamper-proof."
+
+  object_type:
+    type: string
+    format: ""
+    example: ""
+    description: 'Name of the schema model that object_reference points to. Values: "signature" or "revision"'
+
+  object_reference:
+    type: string
+    format: ""
+    example: ""
+    description: "A symmetric relation / back reference to the object_type that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)"

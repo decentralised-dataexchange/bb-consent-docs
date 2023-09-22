@@ -1,6 +1,4 @@
 type: object
-required:
-  - message
 properties:
   logs:
     description: Log object captures an event occured in the system. For e.g. Organisation admin logs, webhook event logs e.t.c
@@ -14,10 +12,10 @@ properties:
         type:
           type: integer
           description: Type integer
-        typeStr:
+        type_str:
           type: string
           description: Type string for a log. for .e.g. webhooks, organisation_admin e.t.c
-        individualId:
+        individual_id:
           type: string
           description: User ID
         username:
