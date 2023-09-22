@@ -36,7 +36,7 @@ tags:
     description: |
       These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
-  /v1/audit/admin/logs:
+  /v2/audit/admin/logs:
     get:
       operationId: getAdminLogs
       description: Get admin logs
@@ -69,7 +69,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Log'
-  /v1/audit/consentrecords:
+  /v2/audit/consentrecords:
     get:
       tags:
         - audit
@@ -98,7 +98,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/audit/consentrecord/{consentRecordId}':
+  '/v2/audit/consentrecord/{consentRecordId}':
     get:
       tags:
         - audit
@@ -126,7 +126,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/service/users/{userId}/consenthistory':
+  '/v2/service/users/{userId}/consenthistory':
     get:
       tags:
         - service
@@ -166,7 +166,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}':
+  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}':
     get:
       tags:
         - service
@@ -209,7 +209,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/organisations/{orgId}/users/{userId}/consents/{consentId}':
+  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}':
     get:
       tags:
         - service
@@ -246,7 +246,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/organisations/{orgId}/users/{userId}/consents':
+  '/v2/service/organisations/{orgId}/users/{userId}/consents':
     get:
       tags:
         - service
@@ -275,7 +275,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
+  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
     post:
       tags:
         - service
@@ -358,7 +358,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
+  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -408,7 +408,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-status':
+  '/v2/service/user/organisations/{orgId}/data-status':
     get:
       tags:
         - service
@@ -432,7 +432,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-delete':
+  '/v2/service/user/organisations/{orgId}/data-delete':
     get:
       parameters:
         - name: orgId
@@ -478,7 +478,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-delete/status':
+  '/v2/service/user/organisations/{orgId}/data-delete/status':
     get:
       tags:
         - service
@@ -502,7 +502,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-delete/{dataReqId}/cancel':
+  '/v2/service/user/organisations/{orgId}/data-delete/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -531,7 +531,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-download':
+  '/v2/service/user/organisations/{orgId}/data-download':
     post:
       tags:
         - service
@@ -583,7 +583,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-download/status':
+  '/v2/service/user/organisations/{orgId}/data-download/status':
     get:
       tags:
         - service
@@ -607,7 +607,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/service/user/organisations/{orgId}/data-download/{dataReqId}/cancel':
+  '/v2/service/user/organisations/{orgId}/data-download/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -636,7 +636,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  /v1/service/GetUserOrgsAndConsents:
+  /v2/service/GetUserOrgsAndConsents:
     get:
       tags:
         - service
@@ -691,7 +691,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  /v1/onboard/users/admin/login:
+  /v2/onboard/users/admin/login:
     post:
       tags:
         - onboard
@@ -755,7 +755,7 @@ paths:
                   error: invalid_grant
                   error_description: Invalid user credentials
       deprecated: false
-  /v1/onboard/users/login:
+  /v2/onboard/users/login:
     post:
       tags:
         - onboard
@@ -956,7 +956,7 @@ paths:
                       token_type:
                         type: string
       deprecated: false
-  /v1/onboard/users/validate/email:
+  /v2/onboard/users/validate/email:
     post:
       tags:
         - onboard
@@ -993,7 +993,7 @@ paths:
                   Message: Email address is valid and not in use in our system
       deprecated: false
       security: []
-  /v1/onboard/users/validate/phone:
+  /v2/onboard/users/validate/phone:
     post:
       tags:
         - onboard
@@ -1032,7 +1032,7 @@ paths:
                   Message: Phone number is in use
       deprecated: false
       security: []
-  /v1/onboard/users/verify/phone:
+  /v2/onboard/users/verify/phone:
     post:
       tags:
         - onboard
@@ -1061,7 +1061,7 @@ paths:
           content: {}
       deprecated: false
       security: []
-  /v1/onboard/users/verify/otp:
+  /v2/onboard/users/verify/otp:
     post:
       tags:
         - onboard
@@ -1104,7 +1104,7 @@ paths:
                   Message: Otp validatiation Succeeded
       deprecated: false
       security: []
-  /v1/onboard/user/password/reset:
+  /v2/onboard/user/password/reset:
     put:
       tags:
         - onboard
@@ -1144,7 +1144,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/user/password/forgot:
+  /v2/onboard/user/password/forgot:
     put:
       tags:
         - onboard
@@ -1181,7 +1181,7 @@ paths:
                   Message:
                     type: string
       deprecated: false
-  /v1/onboard/users/logout:
+  /v2/onboard/users/logout:
     post:
       tags:
         - onboard
@@ -1210,7 +1210,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/users/token:
+  /v2/onboard/users/token:
     post:
       tags:
         - onboard
@@ -1258,7 +1258,7 @@ paths:
                     type: string
       deprecated: false
       security: []
-  /v1/onboard/users/register:
+  /v2/onboard/users/register:
     post:
       tags:
         - onboard
@@ -1299,7 +1299,7 @@ paths:
                 example:
                   msg: User created successfully
       deprecated: false
-  /v1/onboard/organisations/types:
+  /v2/onboard/organisations/types:
     get:
       tags:
         - onboard
@@ -1374,7 +1374,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  '/v1/onboard/organisations/types/{typeId}':
+  '/v2/onboard/organisations/types/{typeId}':
     get:
       tags:
         - onboard
@@ -1483,7 +1483,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/types/{typeId}/image':
+  '/v2/onboard/organisations/types/{typeId}/image':
     post:
       tags:
         - onboard
@@ -1537,7 +1537,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/organisations:
+  /v2/onboard/organisations:
     post:
       tags:
         - onboard
@@ -1584,7 +1584,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/onboard/organisations/{orgId}':
+  '/v2/onboard/organisations/{orgId}':
     get:
       tags:
         - onboard
@@ -1653,7 +1653,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/coverimage':
+  '/v2/onboard/organisations/{orgId}/coverimage':
     post:
       tags:
         - onboard
@@ -1695,7 +1695,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/logoimage':
+  '/v2/onboard/organisations/{orgId}/logoimage':
     post:
       tags:
         - onboard
@@ -1737,7 +1737,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/image/{imageId}':
+  '/v2/onboard/organisations/{orgId}/image/{imageId}':
     get:
       tags:
         - onboard
@@ -1763,7 +1763,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/image/{imageId}/web':
+  '/v2/onboard/organisations/{orgId}/image/{imageId}/web':
     get:
       tags:
         - onboard
@@ -1784,7 +1784,7 @@ paths:
           description: OK
           headers: {}
       deprecated: false
-  '/v1/onboard/organisations/{orgId}/eulaURL':
+  '/v2/onboard/organisations/{orgId}/eulaURL':
     post:
       tags:
         - onboard
@@ -1836,7 +1836,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/admins':
+  '/v2/onboard/organisations/{orgId}/admins':
     post:
       tags:
         - onboard
@@ -1941,7 +1941,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/onboard/organisations/roles:
+  /v2/onboard/organisations/roles:
     get:
       tags:
         - onboard
@@ -1966,7 +1966,7 @@ paths:
                     Role:
                       type: string
       deprecated: false
-  /v1/onboard/users/unregister:
+  /v2/onboard/users/unregister:
     post:
       tags:
         - onboard
@@ -2005,7 +2005,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/user/register/android:
+  /v2/onboard/user/register/android:
     post:
       tags:
         - onboard
@@ -2040,7 +2040,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  /v1/onboard/user/register/ios:
+  /v2/onboard/user/register/ios:
     post:
       tags:
         - onboard
@@ -2075,7 +2075,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v1/onboard/user/image/{imageId}':
+  '/v2/onboard/user/image/{imageId}':
     delete:
       tags:
         - onboard
@@ -2116,7 +2116,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/user/image:
+  /v2/onboard/user/image:
     post:
       tags:
         - onboard
@@ -2153,7 +2153,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/user:
+  /v2/onboard/user:
     patch:
       tags:
         - onboard
@@ -2214,7 +2214,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v1/onboard/user/apikey:
+  /v2/onboard/user/apikey:
     post:
       tags:
         - onboard
@@ -2267,7 +2267,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/onboard/user/apikey/revoke:
+  /v2/onboard/user/apikey/revoke:
     delete:
       tags:
         - onboard
@@ -2283,7 +2283,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/idp/open-id':
+  '/v2/onboard/organisations/{orgId}/idp/open-id':
     post:
       tags:
         - onboard
@@ -2299,7 +2299,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/paths/~1v1~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
+              $ref: '#/paths/~1v2~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/requestBody/content/application~1json/schema'
         required: true
       responses:
         '201':
@@ -2307,7 +2307,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v2~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
@@ -2491,14 +2491,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1v1~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1v2~1onboard~1organisations~1%7BorgId%7D~1idp~1open-id/put/responses/200/content/application~1json/schema'
       deprecated: false
       security:
         - BearerAuth: []
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/subscription/enable':
+  '/v2/onboard/organisations/{orgId}/subscription/enable':
     post:
       tags:
         - onboard
@@ -2527,7 +2527,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/subscription/disable':
+  '/v2/onboard/organisations/{orgId}/subscription/disable':
     post:
       tags:
         - onboard
@@ -2556,7 +2556,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/subscribe-method':
+  '/v2/onboard/organisations/{orgId}/subscribe-method':
     get:
       tags:
         - onboard
@@ -2626,7 +2626,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/onboard/organisations/subscribe-methods:
+  /v2/onboard/organisations/subscribe-methods:
     get:
       tags:
         - onboard
@@ -2664,7 +2664,7 @@ paths:
                     - ID: 2
                       Method: OpenID-Connect
       deprecated: false
-  '/v1/onboard/organisations/{orgId}/subscribe-key':
+  '/v2/onboard/organisations/{orgId}/subscribe-key':
     get:
       tags:
         - onboard
@@ -2699,7 +2699,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/subscribe-key/renew':
+  '/v2/onboard/organisations/{orgId}/subscribe-key/renew':
     post:
       tags:
         - onboard
@@ -2734,7 +2734,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/users/count':
+  '/v2/onboard/organisations/{orgId}/users/count':
     get:
       tags:
         - onboard
@@ -2766,7 +2766,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/subscription':
+  '/v2/onboard/organisations/{orgId}/subscription':
     get:
       tags:
         - onboard
@@ -2793,7 +2793,7 @@ paths:
                 example:
                   Enabled: false
       deprecated: false
-  '/v1/onboard/organisations/{orgId}/users':
+  '/v2/onboard/organisations/{orgId}/users':
     post:
       tags:
         - onboard
@@ -2911,7 +2911,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/users/{userId}':
+  '/v2/onboard/organisations/{orgId}/users/{userId}':
     delete:
       tags:
         - onboard
@@ -2945,7 +2945,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/onboard/organisations/data-requests:
+  /v2/onboard/organisations/data-requests:
     get:
       tags:
         - onboard
@@ -2972,7 +2972,7 @@ paths:
                     ID: 1
                     Str: Request initiated
       deprecated: false
-  '/v1/onboard/organisations/{orgId}/data-requests':
+  '/v2/onboard/organisations/{orgId}/data-requests':
     get:
       tags:
         - onboard
@@ -3021,7 +3021,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/onboard/organisations/{orgId}/data-requests/{dataReqId}':
+  '/v2/onboard/organisations/{orgId}/data-requests/{dataReqId}':
     get:
       tags:
         - onboard
@@ -3096,7 +3096,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/config/organisations/webhooks/event-types:
+  /v2/config/organisations/webhooks/event-types:
     get:
       tags:
         - config
@@ -3134,7 +3134,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v1/config/organisations/webhooks/payload/content-types:
+  /v2/config/organisations/webhooks/payload/content-types:
     get:
       tags:
         - config
@@ -3163,7 +3163,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks':
+  '/v2/config/organisations/{orgId}/webhooks':
     post:
       tags:
         - config
@@ -3290,7 +3290,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks/{webhookId}':
+  '/v2/config/organisations/{orgId}/webhooks/{webhookId}':
     get:
       tags:
         - config
@@ -3468,7 +3468,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks/{webhookId}/ping':
+  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/ping':
     post:
       tags:
         - config
@@ -3520,7 +3520,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks/{webhookId}/delivery':
+  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery':
     get:
       tags:
         - config
@@ -3585,7 +3585,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
+  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
         - config
@@ -3760,7 +3760,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
         - config
@@ -3794,7 +3794,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/config/policy':
+  '/v2/config/organisations/{orgId}/config/policy':
     get:
       tags:
         - config
@@ -3847,7 +3847,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/data-agreements':
+  '/v2/config/organisations/{orgId}/data-agreements':
     post:
       tags:
         - config
@@ -3922,7 +3922,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}':
+  '/v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}':
     delete:
       tags:
         - config
@@ -4050,7 +4050,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/data-attributes':
+  '/v2/config/organisations/{orgId}/data-attributes':
     post:
       tags:
         - config
@@ -4125,7 +4125,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes':
+  '/v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes':
     delete:
       tags:
         - config
@@ -4159,7 +4159,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v1/config/organisations/{orgId}/data-attributes/{dataAttributeId}':
+  '/v2/config/organisations/{orgId}/data-attributes/{dataAttributeId}':
     get:
       tags:
         - config
@@ -4605,7 +4605,7 @@ components:
           $ref: '#/components/schemas/DataAgreement'
         data_agreement_revision:
           description: Data agreement revision
-          $ref: '#/paths/~1v1~1audit~1consentrecords/get/responses/200/content/application~1json/schema/properties/data_agreement_record/properties/data_agreement_revision/properties/successor'
+          $ref: '#/paths/~1v2~1audit~1consentrecords/get/responses/200/content/application~1json/schema/properties/data_agreement_record/properties/data_agreement_revision/properties/successor'
         individual:
           description: Individual to whom this data agreement record belongs to
           $ref: '#/components/schemas/Individual'
