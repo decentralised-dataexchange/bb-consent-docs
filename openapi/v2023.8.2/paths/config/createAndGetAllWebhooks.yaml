@@ -2,13 +2,6 @@ post:
   tags:
     - config
   description: Create webhook
-  parameters:
-    - name: orgId
-      in: path
-      required: true
-      style: simple
-      schema:
-        type: string
   requestBody:
     content:
       application/json:
@@ -85,13 +78,6 @@ get:
   tags:
     - config
   description: Get all webhooks for an organisation
-  parameters:
-    - name: orgId
-      in: path
-      required: true
-      style: simple
-      schema:
-        type: string
   responses:
     "200":
       description: OK

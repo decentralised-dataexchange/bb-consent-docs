@@ -3,11 +3,6 @@ get:
     - config
   description: Get data attribute by ID
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAttributeId
       in: path
       required: true
@@ -39,11 +34,6 @@ put:
     - config
   description: Update data attribute by id
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAttributeId
       in: path
       required: true
@@ -88,11 +78,6 @@ delete:
     - config
   description: Delete data attribute by id
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAttributeId
       in: path
       required: true

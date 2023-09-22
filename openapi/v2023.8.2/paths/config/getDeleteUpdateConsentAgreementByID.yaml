@@ -3,11 +3,6 @@ delete:
     - config
   description: Delete data agreement by id
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAgreementId
       in: path
       required: true
@@ -52,11 +47,6 @@ put:
     - config
   description: Update data agreement by id
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAgreementId
       in: path
       required: true
@@ -92,11 +82,6 @@ get:
     - config
   description: Get data agreement by id
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      schema:
-        type: string
     - name: dataAgreementId
       in: path
       required: true

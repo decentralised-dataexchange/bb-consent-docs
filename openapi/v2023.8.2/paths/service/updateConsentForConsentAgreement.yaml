@@ -8,7 +8,7 @@ post:
       required: true
       schema:
         type: string
-    - name: userId
+    - name: individualId
       in: path
       required: true
       schema:
@@ -52,7 +52,7 @@ get:
       required: true
       schema:
         type: string
-    - name: userId
+    - name: individualId
       in: path
       required: true
       schema:

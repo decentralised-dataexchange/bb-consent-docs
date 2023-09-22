@@ -9,7 +9,7 @@ get:
       required: true
       schema:
         type: string
-    - name: userId
+    - name: individualId
       in: path
       description: "Individual ID"
       required: true

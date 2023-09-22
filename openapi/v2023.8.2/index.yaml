@@ -58,59 +58,59 @@ paths:
     $ref: "./paths/audit/get_consent_record.yaml"
 
   # Service
-  /v2/service/users/{userId}/consenthistory:
+  /v2/service/individual/{individualId}/consenthistory:
     $ref: "./paths/service/getConsentHistory.yaml"
-  /v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}:
+  /v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}:
     $ref: "./paths/service/getConsentsByConsentAgreementId.yaml"
-  /v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}:
+  /v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}:
     $ref: "./paths/service/getConsentsForAllConsentAgreements.yaml"
-  /v2/service/organisations/{orgId}/users/{userId}/consents:
+  /v2/service/organisations/{orgId}/individual/{individualId}/consents:
     $ref: "./paths/service/getConsents.yaml"
-  /v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status:
+  /v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}/status:
     $ref: "./paths/service/updateConsentForConsentAgreement.yaml"
-  /v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}:
+  /v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}:
     $ref: "./paths/service/updateConsentForDataAttribute.yaml"
-  /v2/service/user/organisations/{orgId}/data-status:
+  /v2/service/individual/organisations/{orgId}/data-status:
     $ref: "./paths/service/listAllDataRequests.yaml"
-  /v2/service/user/organisations/{orgId}/data-delete:
+  /v2/service/individual/organisations/{orgId}/data-delete:
     $ref: "./paths/service/sendAndGetAllDeleteMyDataRequests.yaml"
-  /v2/service/user/organisations/{orgId}/data-delete/status:
+  /v2/service/individual/organisations/{orgId}/data-delete/status:
     $ref: "./paths/service/getDeleteMyDataRequestStatus.yaml"
-  /v2/service/user/organisations/{orgId}/data-delete/{dataReqId}/cancel:
+  /v2/service/individual/organisations/{orgId}/data-delete/{dataReqId}/cancel:
     $ref: "./paths/service/cancelDeleteMyDataRequest.yaml"
-  /v2/service/user/organisations/{orgId}/data-download:
+  /v2/service/individual/organisations/{orgId}/data-download:
     $ref: "./paths/service/sendAndGetAllDownloadMyDataRequests.yaml"
-  /v2/service/user/organisations/{orgId}/data-download/status:
+  /v2/service/individual/organisations/{orgId}/data-download/status:
     $ref: "./paths/service/getDownloadMyDataRequestStatus.yaml"
-  /v2/service/user/organisations/{orgId}/data-download/{dataReqId}/cancel:
+  /v2/service/individual/organisations/{orgId}/data-download/{dataReqId}/cancel:
     $ref: "./paths/service/cancelDownloadMyDataRequest.yaml"
   /v2/service/GetUserOrgsAndConsents:
     $ref: "./paths/service/getUserOrgAndConsent.yaml"
 
   # Onboard
-  /v2/onboard/users/admin/login:
+  /v2/onboard/individual/admin/login:
     $ref: "./paths/onboard/loginAsOrganisationAdmin.yaml"
-  /v2/onboard/users/login:
+  /v2/onboard/individual/login:
     $ref: "./paths/onboard/loginAsIndividual.yaml"
-  /v1.1/onboard/users/login:
+  /v1.1/onboard/individual/login:
     $ref: "./paths/onboard/loginAsIndividualV11.yaml"
-  /v2/onboard/users/validate/email:
+  /v2/onboard/individual/validate/email:
     $ref: "./paths/onboard/validateEmail.yaml"
-  /v2/onboard/users/validate/phone:
+  /v2/onboard/individual/validate/phone:
     $ref: "./paths/onboard/validatePhone.yaml"
-  /v2/onboard/users/verify/phone:
+  /v2/onboard/individual/verify/phone:
     $ref: "./paths/onboard/verifyPhone.yaml"
-  /v2/onboard/users/verify/otp:
+  /v2/onboard/individual/verify/otp:
     $ref: "./paths/onboard/verifyOTP.yaml"
-  /v2/onboard/user/password/reset:
+  /v2/onboard/individual/password/reset:
     $ref: "./paths/onboard/resetPassword.yaml"
-  /v2/onboard/user/password/forgot:
+  /v2/onboard/individual/password/forgot:
     $ref: "./paths/onboard/forgotPassword.yaml"
-  /v2/onboard/users/logout:
+  /v2/onboard/individual/logout:
     $ref: "./paths/onboard/logout.yaml"
-  /v2/onboard/users/token:
+  /v2/onboard/individual/token:
     $ref: "./paths/onboard/refreshToken.yaml"
-  /v2/onboard/users/register:
+  /v2/onboard/individual/register:
     $ref: "./paths/onboard/register.yaml"
   /v2/onboard/organisations/types:
     $ref: "./paths/onboard/getAndAddOrganisationTypes.yaml"
@@ -136,21 +136,21 @@ paths:
     $ref: "./paths/onboard/addGetDeleteOrganisationAdmin.yaml"
   /v2/onboard/organisations/roles:
     $ref: "./paths/onboard/getOrganisationRoles.yaml"
-  /v2/onboard/users/unregister:
+  /v2/onboard/individual/unregister:
     $ref: "./paths/onboard/unregisterUser.yaml"
-  /v2/onboard/user/register/android:
+  /v2/onboard/individual/register/android:
     $ref: "./paths/onboard/userClientRegisterAndroid.yaml"
-  /v2/onboard/user/register/ios:
+  /v2/onboard/individual/register/ios:
     $ref: "./paths/onboard/userClientRegisteriOS.yaml"
-  /v2/onboard/user/image/{imageId}:
+  /v2/onboard/individual/image/{imageId}:
     $ref: "./paths/onboard/getAndDeleteUserImageByID.yaml"
-  /v2/onboard/user/image:
+  /v2/onboard/individual/image:
     $ref: "./paths/onboard/updateUserImage.yaml"
   /v2/onboard/user:
     $ref: "./paths/onboard/getAndUpdateUserProfile.yaml"
-  /v2/onboard/user/apikey:
+  /v2/onboard/individual/apikey:
     $ref: "./paths/onboard/getAndCreateAPIKey.yaml"
-  /v2/onboard/user/apikey/revoke:
+  /v2/onboard/individual/apikey/revoke:
     $ref: "./paths/onboard/deleteAPIKey.yaml"
   /v2/onboard/organisations/{orgId}/idp/open-id:
     $ref: "./paths/onboard/addGetUpdateAndDeleteIdentityProvider.yaml"
@@ -166,13 +166,13 @@ paths:
     $ref: "./paths/onboard/getCurrentSubscriptionKey.yaml"
   /v2/onboard/organisations/{orgId}/subscribe-key/renew:
     $ref: "./paths/onboard/renewSubscriptionKey.yaml"
-  /v2/onboard/organisations/{orgId}/users/count:
+  /v2/onboard/organisations/{orgId}/individual/count:
     $ref: "./paths/onboard/getOrganisationUsersCount.yaml"
   /v2/onboard/organisations/{orgId}/subscription:
     $ref: "./paths/onboard/getOrganisationSubscriptionStatus.yaml"
   /v2/onboard/organisations/{orgId}/users:
     $ref: "./paths/onboard/addAndGetOrganisationUsers.yaml"
-  /v2/onboard/organisations/{orgId}/users/{userId}:
+  /v2/onboard/organisations/{orgId}/individual/{individualId}:
     $ref: "./paths/onboard/deleteUserFromOrganisation.yaml"
   /v2/onboard/organisations/data-requests:
     $ref: "./paths/onboard/getAvailableDataRequestStatuses.yaml"
@@ -182,34 +182,34 @@ paths:
     $ref: "./paths/onboard/getAndUpdateDataRequestByID.yaml"
 
   # Config
-  /v2/config/organisations/webhooks/event-types:
-    $ref: "./paths/config/getAvailableWebhookEventTypes.yaml"
-  /v2/config/organisations/webhooks/payload/content-types:
-    $ref: "./paths/config/getAvailableWebhookPayloadTypes.yaml"
-  /v2/config/organisations/{orgId}/webhooks:
-    $ref: "./paths/config/createAndGetAllWebhooks.yaml"
-  /v2/config/organisations/{orgId}/webhooks/{webhookId}:
-    $ref: "./paths/config/getDeleteAndUpdateWebhookByID.yaml"
-  /v2/config/organisations/{orgId}/webhooks/{webhookId}/ping:
-    $ref: "./paths/config/pingWebhook.yaml"
-  /v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery:
-    $ref: "./paths/config/getRecentWebhookDeliveries.yaml"
-  /v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}:
-    $ref: "./paths/config/getRecentWebhookDeliveryByID.yaml"
-  /v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
-    $ref: "./paths/config/redeliverWebhook.yaml"
-  /v2/config/organisations/{orgId}/config/policy:
+  /v2/config/policy:
     $ref: "./paths/config/getAndUpdateGlobalPolicyConfiguration.yaml"
-  /v2/config/organisations/{orgId}/data-agreements:
+  /v2/config/data-agreements:
     $ref: "./paths/config/getAndAddConsentAgreements.yaml"
-  /v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}:
+  /v2/config/data-agreement/{dataAgreementId}:
     $ref: "./paths/config/getDeleteUpdateConsentAgreementByID.yaml"
-  /v2/config/organisations/{orgId}/data-attributes:
+  /v2/config/data-attributes:
     $ref: "./paths/config/getAndAddDataAttributes.yaml"
-  /v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes:
-    $ref: "./paths/config/deleteMultipleDataAttributes.yaml"
-  /v2/config/organisations/{orgId}/data-attributes/{dataAttributeId}:
+  /v2/config/data-attributes/{dataAttributeId}:
     $ref: "./paths/config/getUpdateAndDeleteDataAttributeByID.yaml"
+  /v2/config/webhooks/event-types:
+    $ref: "./paths/config/getAvailableWebhookEventTypes.yaml"
+  /v2/config/webhooks/payload/content-types:
+    $ref: "./paths/config/getAvailableWebhookPayloadTypes.yaml"
+  /v2/config/webhooks:
+    $ref: "./paths/config/createAndGetAllWebhooks.yaml"
+  /v2/config/webhooks/{webhookId}:
+    $ref: "./paths/config/getDeleteAndUpdateWebhookByID.yaml"
+  /v2/config/webhooks/{webhookId}/ping:
+    $ref: "./paths/config/pingWebhook.yaml"
+  /v2/config/webhooks/{webhookId}/delivery:
+    $ref: "./paths/config/getRecentWebhookDeliveries.yaml"
+  /v2/config/webhooks/{webhookId}/delivery/{deliveryId}:
+    $ref: "./paths/config/getRecentWebhookDeliveryByID.yaml"
+  /v2/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
+    $ref: "./paths/config/redeliverWebhook.yaml"
+  
+  
 components:
   schemas:
     Log:

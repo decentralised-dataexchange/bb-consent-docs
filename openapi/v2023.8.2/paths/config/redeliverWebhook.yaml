@@ -3,12 +3,6 @@ post:
     - config
   description: Redeliver a webhook payload by delivery ID
   parameters:
-    - name: orgId
-      in: path
-      required: true
-      style: simple
-      schema:
-        type: string
     - name: webhookId
       in: path
       required: true

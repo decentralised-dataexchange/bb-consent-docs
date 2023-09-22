@@ -126,7 +126,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/service/users/{userId}/consenthistory':
+  '/v2/service/individual/{individualId}/consenthistory':
     get:
       tags:
         - service
@@ -146,7 +146,7 @@ paths:
             type: integer
             format: int32
             example: 1024
-        - name: userId
+        - name: individualId
           in: path
           description: Individual ID
           required: true
@@ -166,7 +166,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}':
+  '/v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}':
     get:
       tags:
         - service
@@ -178,7 +178,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           description: Individual ID
           required: true
@@ -209,7 +209,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}':
+  '/v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}':
     get:
       tags:
         - service
@@ -221,7 +221,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           description: Individual ID
           required: true
@@ -246,7 +246,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/organisations/{orgId}/users/{userId}/consents':
+  '/v2/service/organisations/{orgId}/individual/{individualId}/consents':
     get:
       tags:
         - service
@@ -257,7 +257,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           required: true
           schema:
@@ -275,7 +275,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
+  '/v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}/status':
     post:
       tags:
         - service
@@ -286,7 +286,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           required: true
           schema:
@@ -330,7 +330,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           required: true
           schema:
@@ -358,7 +358,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/organisations/{orgId}/users/{userId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
+  '/v2/service/organisations/{orgId}/individual/{individualId}/consents/{consentId}/data-agreements/{dataAgreementId}/attributes/{attributeId}':
     patch:
       tags:
         - service
@@ -369,7 +369,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           required: true
           schema:
@@ -408,7 +408,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-status':
+  '/v2/service/individual/organisations/{orgId}/data-status':
     get:
       tags:
         - service
@@ -432,7 +432,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-delete':
+  '/v2/service/individual/organisations/{orgId}/data-delete':
     get:
       parameters:
         - name: orgId
@@ -478,7 +478,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-delete/status':
+  '/v2/service/individual/organisations/{orgId}/data-delete/status':
     get:
       tags:
         - service
@@ -502,7 +502,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-delete/{dataReqId}/cancel':
+  '/v2/service/individual/organisations/{orgId}/data-delete/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -531,7 +531,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-download':
+  '/v2/service/individual/organisations/{orgId}/data-download':
     post:
       tags:
         - service
@@ -583,7 +583,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-download/status':
+  '/v2/service/individual/organisations/{orgId}/data-download/status':
     get:
       tags:
         - service
@@ -607,7 +607,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/service/user/organisations/{orgId}/data-download/{dataReqId}/cancel':
+  '/v2/service/individual/organisations/{orgId}/data-download/{dataReqId}/cancel':
     post:
       tags:
         - service
@@ -691,7 +691,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  /v2/onboard/users/admin/login:
+  /v2/onboard/individual/admin/login:
     post:
       tags:
         - onboard
@@ -755,7 +755,7 @@ paths:
                   error: invalid_grant
                   error_description: Invalid user credentials
       deprecated: false
-  /v2/onboard/users/login:
+  /v2/onboard/individual/login:
     post:
       tags:
         - onboard
@@ -818,7 +818,7 @@ paths:
                   error: invalid_grant
                   error_description: Invalid user credentials
       deprecated: false
-  /v1.1/onboard/users/login:
+  /v1.1/onboard/individual/login:
     post:
       tags:
         - onboard
@@ -956,7 +956,7 @@ paths:
                       token_type:
                         type: string
       deprecated: false
-  /v2/onboard/users/validate/email:
+  /v2/onboard/individual/validate/email:
     post:
       tags:
         - onboard
@@ -993,7 +993,7 @@ paths:
                   Message: Email address is valid and not in use in our system
       deprecated: false
       security: []
-  /v2/onboard/users/validate/phone:
+  /v2/onboard/individual/validate/phone:
     post:
       tags:
         - onboard
@@ -1032,7 +1032,7 @@ paths:
                   Message: Phone number is in use
       deprecated: false
       security: []
-  /v2/onboard/users/verify/phone:
+  /v2/onboard/individual/verify/phone:
     post:
       tags:
         - onboard
@@ -1061,7 +1061,7 @@ paths:
           content: {}
       deprecated: false
       security: []
-  /v2/onboard/users/verify/otp:
+  /v2/onboard/individual/verify/otp:
     post:
       tags:
         - onboard
@@ -1104,7 +1104,7 @@ paths:
                   Message: Otp validatiation Succeeded
       deprecated: false
       security: []
-  /v2/onboard/user/password/reset:
+  /v2/onboard/individual/password/reset:
     put:
       tags:
         - onboard
@@ -1144,7 +1144,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v2/onboard/user/password/forgot:
+  /v2/onboard/individual/password/forgot:
     put:
       tags:
         - onboard
@@ -1181,7 +1181,7 @@ paths:
                   Message:
                     type: string
       deprecated: false
-  /v2/onboard/users/logout:
+  /v2/onboard/individual/logout:
     post:
       tags:
         - onboard
@@ -1210,7 +1210,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v2/onboard/users/token:
+  /v2/onboard/individual/token:
     post:
       tags:
         - onboard
@@ -1258,7 +1258,7 @@ paths:
                     type: string
       deprecated: false
       security: []
-  /v2/onboard/users/register:
+  /v2/onboard/individual/register:
     post:
       tags:
         - onboard
@@ -1966,7 +1966,7 @@ paths:
                     Role:
                       type: string
       deprecated: false
-  /v2/onboard/users/unregister:
+  /v2/onboard/individual/unregister:
     post:
       tags:
         - onboard
@@ -2005,7 +2005,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v2/onboard/user/register/android:
+  /v2/onboard/individual/register/android:
     post:
       tags:
         - onboard
@@ -2040,7 +2040,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  /v2/onboard/user/register/ios:
+  /v2/onboard/individual/register/ios:
     post:
       tags:
         - onboard
@@ -2075,7 +2075,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Individual'
-  '/v2/onboard/user/image/{imageId}':
+  '/v2/onboard/individual/image/{imageId}':
     delete:
       tags:
         - onboard
@@ -2116,7 +2116,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v2/onboard/user/image:
+  /v2/onboard/individual/image:
     post:
       tags:
         - onboard
@@ -2214,7 +2214,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin, Individual'
-  /v2/onboard/user/apikey:
+  /v2/onboard/individual/apikey:
     post:
       tags:
         - onboard
@@ -2267,7 +2267,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v2/onboard/user/apikey/revoke:
+  /v2/onboard/individual/apikey/revoke:
     delete:
       tags:
         - onboard
@@ -2734,7 +2734,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/onboard/organisations/{orgId}/users/count':
+  '/v2/onboard/organisations/{orgId}/individual/count':
     get:
       tags:
         - onboard
@@ -2911,7 +2911,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/onboard/organisations/{orgId}/users/{userId}':
+  '/v2/onboard/organisations/{orgId}/individual/{individualId}':
     delete:
       tags:
         - onboard
@@ -2922,7 +2922,7 @@ paths:
           required: true
           schema:
             type: string
-        - name: userId
+        - name: individualId
           in: path
           required: true
           schema:
@@ -3096,7 +3096,403 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v2/config/organisations/webhooks/event-types:
+  /v2/config/policy:
+    get:
+      tags:
+        - config
+      description: Get global policy configurations
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    post:
+      tags:
+        - config
+      description: Update global policy configurations
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  /v2/config/data-agreements:
+    post:
+      tags:
+        - config
+      description: Add data agreement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - purposes
+              type: object
+              properties:
+                purposes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataAgreement'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    get:
+      tags:
+        - config
+      description: Get data agreements
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - OrgID
+                  - Purposes
+                type: object
+                properties:
+                  OrgID:
+                    type: string
+                  Purposes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataAgreement'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  '/v2/config/data-agreement/{dataAgreementId}':
+    delete:
+      tags:
+        - config
+      description: Delete data agreement by id
+      parameters:
+        - name: dataAgreementId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                required:
+                  - Code
+                  - Message
+                type: object
+                properties:
+                  Code:
+                    type: integer
+                    format: int32
+                  Message:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    put:
+      tags:
+        - config
+      description: Update data agreement by id
+      parameters:
+        - name: dataAgreementId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataAgreement'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    get:
+      tags:
+        - config
+      description: Get data agreement by id
+      parameters:
+        - name: dataAgreementId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - Purpose
+                  - Templates
+                type: object
+                properties:
+                  Purpose:
+                    $ref: '#/components/schemas/DataAgreement'
+                  Templates:
+                    type: string
+                    nullable: true
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  /v2/config/data-attributes:
+    post:
+      tags:
+        - config
+      description: Add data attributes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - data-attributes
+              type: object
+              properties:
+                data-attributes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataAttribute'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    get:
+      tags:
+        - config
+      description: Get data attributes
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - OrgID
+                  - Templates
+                type: object
+                properties:
+                  OrgID:
+                    type: string
+                  Templates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataAttribute'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  '/v2/config/data-attributes/{dataAttributeId}':
+    get:
+      tags:
+        - config
+      description: Get data attribute by ID
+      parameters:
+        - name: dataAttributeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - OrgID
+                  - Template
+                type: object
+                properties:
+                  OrgID:
+                    type: string
+                  Template:
+                    $ref: '#/components/schemas/DataAttribute'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    put:
+      tags:
+        - config
+      description: Update data attribute by id
+      parameters:
+        - name: dataAttributeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - Consent
+                - PurposeIDs
+              type: object
+              properties:
+                Consent:
+                  type: string
+                PurposeIDs:
+                  type: array
+                  items:
+                    type: string
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+    delete:
+      tags:
+        - config
+      description: Delete data attribute by id
+      parameters:
+        - name: dataAttributeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                required:
+                  - Organization
+                type: object
+                properties:
+                  Organization:
+                    $ref: '#/components/schemas/Organisation'
+      deprecated: false
+      security:
+        - BearerAuth: []
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+  /v2/config/webhooks/event-types:
     get:
       tags:
         - config
@@ -3134,7 +3530,7 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  /v2/config/organisations/webhooks/payload/content-types:
+  /v2/config/webhooks/payload/content-types:
     get:
       tags:
         - config
@@ -3163,18 +3559,11 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks':
+  /v2/config/webhooks:
     post:
       tags:
         - config
       description: Create webhook
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -3251,13 +3640,6 @@ paths:
       tags:
         - config
       description: Get all webhooks for an organisation
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -3290,18 +3672,12 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks/{webhookId}':
+  '/v2/config/webhooks/{webhookId}':
     get:
       tags:
         - config
       description: Get a webhook by ID
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3357,12 +3733,6 @@ paths:
         - config
       description: Delete webhook
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3384,12 +3754,6 @@ paths:
         - config
       description: Update webhook
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3468,18 +3832,12 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/ping':
+  '/v2/config/webhooks/{webhookId}/ping':
     post:
       tags:
         - config
       description: Ping webhook
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3520,18 +3878,12 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery':
+  '/v2/config/webhooks/{webhookId}/delivery':
     get:
       tags:
         - config
       description: Get recent webhook deliveries
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3585,18 +3937,12 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}':
+  '/v2/config/webhooks/{webhookId}/delivery/{deliveryId}':
     get:
       tags:
         - config
       description: Get recent webhook delivery by ID
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3760,18 +4106,12 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+  '/v2/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
     post:
       tags:
         - config
       description: Redeliver a webhook payload by delivery ID
       parameters:
-        - name: orgId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
         - name: webhookId
           in: path
           required: true
@@ -3788,490 +4128,6 @@ paths:
         '200':
           description: OK
           content: {}
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/config/policy':
-    get:
-      tags:
-        - config
-      description: Get global policy configurations
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    post:
-      tags:
-        - config
-      description: Update global policy configurations
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/data-agreements':
-    post:
-      tags:
-        - config
-      description: Add data agreement
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - purposes
-              type: object
-              properties:
-                purposes:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/DataAgreement'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get data agreements
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Purposes
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Purposes:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataAgreement'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}':
-    delete:
-      tags:
-        - config
-      description: Delete data agreement by id
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAgreementId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                required:
-                  - Code
-                  - Message
-                type: object
-                properties:
-                  Code:
-                    type: integer
-                    format: int32
-                  Message:
-                    type: string
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    put:
-      tags:
-        - config
-      description: Update data agreement by id
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAgreementId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DataAgreement'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get data agreement by id
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAgreementId
-          in: path
-          required: true
-          style: simple
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Purpose
-                  - Templates
-                type: object
-                properties:
-                  Purpose:
-                    $ref: '#/components/schemas/DataAgreement'
-                  Templates:
-                    type: string
-                    nullable: true
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/data-attributes':
-    post:
-      tags:
-        - config
-      description: Add data attributes
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - data-attributes
-              type: object
-              properties:
-                data-attributes:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/DataAttribute'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get data attributes
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Templates
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Templates:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataAttribute'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/config/data-agreements/{dataAgreementId}/data-attributes':
-    delete:
-      tags:
-        - config
-      description: Delete multiple data attributes
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAgreementId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/v2/config/organisations/{orgId}/data-attributes/{dataAttributeId}':
-    get:
-      tags:
-        - config
-      description: Get data attribute by ID
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAttributeId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Template
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Template:
-                    $ref: '#/components/schemas/DataAttribute'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    put:
-      tags:
-        - config
-      description: Update data attribute by id
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAttributeId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - Consent
-                - PurposeIDs
-              type: object
-              properties:
-                Consent:
-                  type: string
-                PurposeIDs:
-                  type: array
-                  items:
-                    type: string
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    delete:
-      tags:
-        - config
-      description: Delete data attribute by id
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: dataAttributeId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
       deprecated: false
       security:
         - BearerAuth: []

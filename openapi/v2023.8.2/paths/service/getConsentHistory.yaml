@@ -17,7 +17,7 @@ get:
         type: integer
         format: int32
         example: 1024
-    - name: userId
+    - name: individualId
       in: path
       description: "Individual ID"
       required: true
