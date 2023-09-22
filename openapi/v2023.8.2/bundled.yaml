@@ -73,7 +73,7 @@ paths:
     get:
       tags:
         - audit
-      summary: Get consent record
+      description: List consent records
       parameters:
         - name: consentRecordId
           in: path
@@ -102,7 +102,7 @@ paths:
     get:
       tags:
         - audit
-      summary: List all consent records
+      description: Get consent record
       responses:
         '200':
           description: OK

@@ -1,7 +1,7 @@
 get:
   tags:
     - audit
-  summary: List all consent records
+  description: Get consent record
   responses:
     "200":
       description: OK
