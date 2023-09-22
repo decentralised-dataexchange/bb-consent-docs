@@ -95,11 +95,11 @@ get:
         application/json:
           schema:
             required:
-              - Purpose
+              - DataAgreement
               - Templates
             type: object
             properties:
-              Purpose:
+              DataAgreement:
                 $ref: "../../definitions/DataAgreement.yaml"
               Templates:
                 type: string

@@ -667,11 +667,11 @@ paths:
                     type: array
                     items:
                       required:
-                        - Purpose
+                        - DataAgreement
                         - Count
                       type: object
                       properties:
-                        Purpose:
+                        DataAgreement:
                           $ref: '#/components/schemas/DataAgreement'
                         Count:
                           required:
@@ -3310,11 +3310,11 @@ paths:
             application/json:
               schema:
                 required:
-                  - Purpose
+                  - DataAgreement
                   - Templates
                 type: object
                 properties:
-                  Purpose:
+                  DataAgreement:
                     $ref: '#/components/schemas/DataAgreement'
                   Templates:
                     type: string
@@ -4270,12 +4270,12 @@ components:
               type: string
         Consents:
           required:
-            - Purpose
+            - DataAgreement
             - Count
             - Consents
           type: object
           properties:
-            Purpose:
+            DataAgreement:
               $ref: '#/components/schemas/DataAgreement'
             Count:
               required:
@@ -4351,12 +4351,12 @@ components:
           type: array
           items:
             required:
-              - Purpose
+              - DataAgreement
               - Count
               - Consents
             type: object
             properties:
-              Purpose:
+              DataAgreement:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
                 $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
@@ -4382,13 +4382,13 @@ components:
           type: array
           items:
             required:
-              - Purpose
+              - DataAgreement
               - Count
               - Consents
               - DataRetention
             type: object
             properties:
-              Purpose:
+              DataAgreement:
                 $ref: '#/components/schemas/DataAgreement'
               Count:
                 $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'

@@ -28,11 +28,11 @@ get:
                 type: array
                 items:
                   required:
-                    - Purpose
+                    - DataAgreement
                     - Count
                   type: object
                   properties:
-                    Purpose:
+                    DataAgreement:
                       $ref: "../../definitions/DataAgreement.yaml"
                     Count:
                       required:

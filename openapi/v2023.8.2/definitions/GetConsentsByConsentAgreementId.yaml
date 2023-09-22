@@ -31,13 +31,13 @@ properties:
 
   Consents:
     required:
-      - Purpose
+      - DataAgreement
       - Count
       - Consents
     type: object
 
     properties:
-      Purpose:
+      DataAgreement:
         $ref: "./DataAgreement.yaml"
 
       Count:

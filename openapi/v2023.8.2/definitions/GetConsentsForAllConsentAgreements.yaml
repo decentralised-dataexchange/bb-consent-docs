@@ -15,12 +15,12 @@ properties:
     type: array
     items:
       required:
-        - Purpose
+        - DataAgreement
         - Count
         - Consents
       type: object
       properties:
-        Purpose:
+        DataAgreement:
           $ref: "./DataAgreement.yaml"
         Count:
           $ref: "./ConsentCount.yaml"
