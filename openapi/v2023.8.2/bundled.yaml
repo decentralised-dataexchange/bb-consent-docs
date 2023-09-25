@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 2023.8.2
-  title: GovStack Consent BB APIs
+  title: Consent Building Block APIs
   description: |
     The Consent Building Block enables services for individuals to approve the use  of their personal data by defining the principles, functions, and architecture  of an information system. For organisations that process personal data, it  provides the ability to know the individual's will and legitimately process such  personal data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating auditable bilateral agreements within a multi-agent environment that  integrates with most other Building Blocks.
   contact:

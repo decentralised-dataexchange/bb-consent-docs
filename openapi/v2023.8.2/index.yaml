@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: "2023.8.2"
-  title: "GovStack Consent BB APIs"
+  title: "Consent Building Block APIs"
   description: >
     The Consent Building Block enables services for individuals to approve the use 
     of their personal data by defining the principles, functions, and architecture 
@@ -208,8 +208,7 @@ paths:
     $ref: "./paths/config/getRecentWebhookDeliveryByID.yaml"
   /v2/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
     $ref: "./paths/config/redeliverWebhook.yaml"
-  
-  
+
 components:
   schemas:
     Log:
