@@ -52,7 +52,7 @@ paths:
   # Config
   # CRUDL for global policy configuration
   /config/policy:
-    $ref: "./paths/config/getAndUpdateGlobalPolicyConfiguration.yaml"
+    $ref: "./paths/config_v2/config_policy_create.yaml"
   # Get, put and delete global policy configuration
   /config/policy/{policyId}:
     $ref: "./paths/config/getAndUpdateGlobalPolicyConfiguration.yaml"
@@ -149,10 +149,10 @@ paths:
     $ref: ""
   /service/individual/data-agreement/{dataAgreementRecordId}:
     $ref: ""
-  
+
   /service/individual/record/agreement:
     $ref: ""
-  
+
   /service/individual/record/data-agreement:
     $ref: ""
 
@@ -203,7 +203,6 @@ paths:
     $ref: "./paths/onboard/updateOrganisationCoverImage.yaml"
   /onboard/organisation/logoimage:
     $ref: "./paths/onboard/updateOrganisationLogoImage.yaml"
-
 
 components:
   schemas:

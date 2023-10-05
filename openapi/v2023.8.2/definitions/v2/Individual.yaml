@@ -1,0 +1,32 @@
+type: object
+title: "Individual"
+description: "Shallowly models an Individual which may reference some instance in an external system (registration system, functional ID, foundational ID etc). An Individual instance of this model is not to be mistaken with a unique natural individual. It is up to the system owner to decide if this record permits mapping to a natural individual and/or if a single Individual row can map to several consent agreements."
+x-not-in-database: false
+
+required:
+      - id
+properties:
+
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: "The unique ID of an Individual row."
+
+  external_id:
+    type: string
+    format: ""
+    example: ""
+    description: "Reference to another foundational/functional ID, which is likely PII"
+
+  external_id_type:
+    type: string
+    format: ""
+    example: ""
+    description: "External id type specifier. A string. For instance \"email\" or \"foundational id\". Can be used in later queries."
+
+  identity_provider_id:
+    type: string
+    format: ""
+    example: ""
+    description: "This could be an FK, but for now we do not have a mapping of identity providers. IDBB may have more requirements."

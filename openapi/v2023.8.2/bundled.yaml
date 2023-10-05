@@ -37,6 +37,205 @@ tags:
       These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
 paths:
   /config/policy:
+    post:
+      tags:
+        - config
+      summary: CREATE - Creates a new Policy object and returns the new object and a PolicyRevision
+      operationId: configCreatePolicy
+      description: CREATE - Creates a new Policy object and returns the new object and a PolicyRevision
+      parameters: []
+      x-specification-usecase: UC-C-PIC-A-001
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-crudl-model: Policy
+      x-badges:
+        - color: primary-color
+          label: 'Authorised roles: Organisation admin'
+      responses:
+        '200':
+          description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - type: object
+                      title: Policy
+                      description: A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
+                      x-not-in-database: false
+                      required:
+                        - id
+                        - name
+                        - version
+                        - url
+                      properties:
+                        id:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                        name:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Name of the policy
+                        version:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Version of the policy
+                        url:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: 'Permanent URL at which this very version of the Policy can be read, should not be allowed to change over time.'
+                        jurisdiction:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                        industry_sector:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                        data_retention_period_days:
+                          type: integer
+                          format: ''
+                          example: ''
+                          description: ''
+                        geographic_restriction:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                        storage_location:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                    - title: Revision
+                      type: object
+                      description: |-
+                        A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
+
+                        Aside from "successor" column, a revision should be considered locked.
+                      x-not-in-database: false
+                      required:
+                        - id
+                        - schema_name
+                        - object_id
+                        - serialized_snapshot
+                        - serialized_hash
+                        - timestamp
+                      properties:
+                        id:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: ''
+                        schema_name:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: This was previously called "schema" but for technical reasons should be called "schema_name"
+                        object_id:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: The PK of the object that was serialized.
+                        signed_without_object_id:
+                          type: boolean
+                          format: ''
+                          example: ''
+                          description: Indicates that object_id was left blank in serialized_snapshot when calculating serialized_hash. object_id may be subsequently filled in.
+                        serialized_snapshot:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: |
+                            Revisioned data (serialized as JSON) as a dict {object_data: 
+                            {...}, schema_name: ..., object_id: ..., signed_without_object_id: ..., timestamp: ..., authorized_by_individual: ..., authorized_by_other: ...}. 
+                            It contains all the fields of the schema except id, successor, predessor_hash and predecessor_signature.
+                        serialized_hash:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Hash of serialized_snapshot (SHA-1)
+                        timestamp:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Timestamp of when revisioning happened
+                        authorized_by_individual:
+                          x-fk-model: Individual
+                          description: ''
+                          type: object
+                          title: Individual
+                          x-not-in-database: false
+                          required:
+                            - id
+                          properties:
+                            id:
+                              type: string
+                              format: ''
+                              example: ''
+                              description: The unique ID of an Individual row.
+                            external_id:
+                              type: string
+                              format: ''
+                              example: ''
+                              description: 'Reference to another foundational/functional ID, which is likely PII'
+                            external_id_type:
+                              type: string
+                              format: ''
+                              example: ''
+                              description: External id type specifier. A string. For instance "email" or "foundational id". Can be used in later queries.
+                            identity_provider_id:
+                              type: string
+                              format: ''
+                              example: ''
+                              description: 'This could be an FK, but for now we do not have a mapping of identity providers. IDBB may have more requirements.'
+                        authorized_by_other:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Reference to an admin user that has created this revision
+                        successor:
+                          $ref: '#/paths/~1config~1policy/post/responses/200/content/application~1json/schema/items/oneOf/1'
+                          x-fk-model: Revision
+                          description: 'This revision is no longer the latest revision, refer to its successor.'
+                        predecessor_hash:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: 'Tamper-resistent artifact from previous record, copied from serialized_hash'
+                        predecessor_signature:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policy:
+                  $ref: '#/paths/~1config~1policy/post/responses/200/content/application~1json/schema/items/oneOf/0'
+                  description: An object of type Policy
+              required:
+                - policy
+  '/config/policy/{policyId}':
+    $ref: '#/paths/~1config~1policies'
+  '/config/policy/{policyId}/revisions':
+    $ref: '#/paths/~1config~1policies'
+  /config/policies:
     get:
       tags:
         - config
@@ -89,12 +288,6 @@ paths:
       x-badges:
         - color: primary-color
           label: 'Authorised roles: Organisation admin'
-  '/config/policy/{policyId}':
-    $ref: '#/paths/~1config~1policy'
-  '/config/policy/{policyId}/revisions':
-    $ref: '#/paths/~1config~1policy'
-  /config/policies:
-    $ref: '#/paths/~1config~1policy'
   '/config/data-agreement/{dataAgreementId}':
     $ref: '#/paths/~1config~1data-agreement'
   /config/data-agreement:

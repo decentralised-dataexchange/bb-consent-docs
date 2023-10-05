@@ -1,0 +1,43 @@
+post:
+  tags:
+    - config
+  summary: "CREATE - Creates a new Policy object and returns the new object and a PolicyRevision"
+  operationId: "configCreatePolicy"
+  description: "CREATE - Creates a new Policy object and returns the new object and a PolicyRevision"
+  parameters: []
+  x-specification-usecase: "UC-C-PIC-A-001"
+  x-specification-scenario: ""
+  x-specification-pii-or-sensitive: "False"
+  x-specification-crudl-model: "Policy"
+  x-badges:
+    - color: primary-color
+      label: 'Authorised roles: Organisation admin'
+  responses:
+    "200":
+      description: "A set consisting of the new Policy object created, together with the initial Revision object."
+
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              oneOf:
+                - $ref: "../../definitions/v2/Policy.yaml"
+                - $ref: "../../definitions/v2/Revision.yaml"
+
+    "400":
+      description: bad input parameter
+  security:
+    - BearerAuth: []
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            policy:
+              $ref: "../../definitions/v2/Policy.yaml"
+              description: An object of type Policy
+          required:
+            - policy
