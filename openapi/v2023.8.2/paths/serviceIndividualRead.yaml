@@ -1,0 +1,27 @@
+description: READ - Fetch an Individual in the Consent system
+operationId: serviceIndividualRead
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: individualId
+  required: true
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/Individual.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - Fetch an Individual in the Consent system
+tags:
+- service
+x-specification-crudl-model: Individual
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: ''

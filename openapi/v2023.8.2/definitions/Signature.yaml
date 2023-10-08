@@ -1,32 +1,35 @@
 type: object
-description: |
-  A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. 
-  Required signing methods: Revision object or another Signature object.
+title: Signature
+description: "A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. Required signing methods: Revision object or another Signature object."
+x-not-in-database: false
+
 required:
   - id
   - payload
   - signature
   - verification_method
-  - verification_hash
+  - verification_payload
+  - verification_payload_hash
   - verification_signed_by
   - timestamp
 properties:
   id:
     type: string
-    format: uuid
+    format: ""
+    example: ""
     description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a Signature that is not yet stored in the database and only exist in transit.'
 
   payload:
     type: string
     format: ""
     example: ""
-    description: "The payload that is signed, constructed as a serialization of fields verification_method + verification_hash + verification_artifact + verification_signed_by + verification_jws_header. Serialized as a JSON dict."
+    description: "The final payload that is signed, constructed as a JSON serialization of fields {verificiation_payload: ..., verification_payload_hash: ..., verification_method: ..., verification_artifact: ..., verification_signed_by: ..., verification_jws_header, timestamp: ..., signed_without_object_reference: ..., object_type: ..., object_reference: ...}. Serialized as a JSON dict. If the signature is generated before anything is stored in the database (and has a PK), then the object_reference should be omitted from the payload but filled in afterwards."
 
   signature:
     type: string
     format: ""
     example: ""
-    description: "Signature (of payload), the format of the signature should be specified by either verification_method or verification_jws_header"
+    description: "Signature of payload hash, the format of the signature should be specified by either verification_method or verification_jws_header"
 
   verification_method:
     type: string
@@ -34,11 +37,17 @@ properties:
     example: ""
     description: "A well-known string denoting which method is used. Valid values: <TBD>. We might expand this with a relation to which verification methods that are supported. There may be a minimal set of supported methods necessary."
 
-  verification_hash:
+  verification_payload:
     type: string
     format: ""
     example: ""
-    description: "Internally generated cryptographic hash of the value to be signed. The hash is (re)produced from the object_type and object_reference - but from the serialized data of those."
+    description: "Internally generated serialized version of the data referenced by object_type and object_reference - by extracting and serializing their data as JSON."
+
+  verification_payload_hash:
+    type: string
+    format: ""
+    example: ""
+    description: "Internally generated cryptographic hash of the value to be signed, i.e. the value of verification_payload"
 
   verification_artifact:
     type: string
@@ -52,6 +61,12 @@ properties:
     example: ""
     description: "Because an identifier's information may change over time, there is a need to store that information at the time of signing. In case of a cryptographic signature, this field should contain some identifier for looking up or verifying the public key of the signing party. In case of a non-cryptographic signature, this field could contain a natural individual's names, personal number, email addresses - store a snapshot that binds to the signature at the time of signing. In case of a cryptographic signature, this may be the fingerprint of the individual's public key or in some cases, a token from the user's ID session."
 
+  verification_signed_as:
+    type: string
+    format: ""
+    example: ""
+    description: 'DRAFT FIELD: Specifies the relationship between the authorizing signature and the invidual which the payload concerns. This is relevant for Consent Records. Possible values: "individual" / "delegate"'
+
   verification_jws_header:
     type: string
     format: ""
@@ -63,6 +78,12 @@ properties:
     format: ""
     example: ""
     description: "Timestamp of signature, currently this field isn't part of the payload so it's not tamper-proof."
+
+  signed_without_object_reference:
+    type: boolean
+    format: ""
+    example: ""
+    description: "Indicates that object_reference was left blank in the serialized version that was signed."
 
   object_type:
     type: string

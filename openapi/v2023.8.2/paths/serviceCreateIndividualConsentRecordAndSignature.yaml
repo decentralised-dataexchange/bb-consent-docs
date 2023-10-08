@@ -1,0 +1,43 @@
+description: CREATE - Creates a paired ConsentRecord and Signature object. Returns
+  the same objects with the PK defined.
+operationId: serviceCreateIndividualConsentRecordAndSignature
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          consentRecord:
+            $ref: ../definitions/ConsentRecord.yaml
+            description: An object of type ConsentRecord
+          signature:
+            $ref: ../definitions/Signature.yaml
+            description: An object of type Signature
+        required:
+        - consentRecord
+        - signature
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+            - $ref: ../definitions/Revision.yaml
+            - $ref: ../definitions/Signature.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - Creates a paired ConsentRecord and Signature object. Returns the
+  same objects with the PK defined.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: '1.2'
+x-specification-usecase: UC-C-PIC-I-002

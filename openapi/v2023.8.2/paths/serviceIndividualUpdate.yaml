@@ -1,0 +1,38 @@
+description: UPDATE - Updates an Individual in the Consent system
+operationId: serviceIndividualUpdate
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: individualId
+  required: true
+  schema:
+    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          individual:
+            $ref: ../definitions/Individual.yaml
+            description: An object of type Individual
+        required:
+        - individual
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/Individual.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: UPDATE - Updates an Individual in the Consent system
+tags:
+- service
+x-specification-crudl-model: Individual
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: ''

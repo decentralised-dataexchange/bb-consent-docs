@@ -1,0 +1,38 @@
+description: LIST - lists individuals in the system
+operationId: serviceIndividualList
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/Individual.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - lists individuals in the system
+tags:
+- service
+x-specification-crudl-model: Individual
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: ''

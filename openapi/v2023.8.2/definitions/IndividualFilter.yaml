@@ -1,0 +1,17 @@
+type: object
+title: IndividualFilter
+description: "TBD: When creating an Invidiual, we need some input that refers to a functional or foundational ID in an external system"
+x-not-in-database: true
+
+properties:
+  foundational_id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  functional_id:
+    type: string
+    format: ""
+    example: ""
+    description: ""

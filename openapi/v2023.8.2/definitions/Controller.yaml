@@ -1,0 +1,27 @@
+type: object
+title: Controller
+description: "Details of a data controller."
+x-not-in-database: false
+
+required:
+  - id
+  - name
+  - url
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: "Name of data controller (may be omitted if no data involved)"
+
+  url:
+    type: string
+    format: ""
+    example: ""
+    description: "URL of data controller (may be omitted if no data involved)"

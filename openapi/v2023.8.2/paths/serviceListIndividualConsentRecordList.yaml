@@ -1,0 +1,40 @@
+description: LIST - Fetches all current unambiguous consent records stored for Individual
+  ID. Individual ID supplied as HTTP header.
+operationId: serviceListIndividualConsentRecordList
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - Fetches all current unambiguous consent records stored for Individual
+  ID. Individual ID supplied as HTTP header.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-I-001

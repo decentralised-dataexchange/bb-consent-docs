@@ -1,0 +1,39 @@
+description: READ - fetches the latest version of an AgreementPurpose and the presented
+  revisionId of that Agreement
+operationId: serviceAgreementPurposeRead
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: purposeId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/AgreementPurpose.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - fetches the latest version of an AgreementPurpose and the presented
+  revisionId of that Agreement
+tags:
+- service
+x-specification-crudl-model: AgreementPurpose
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-003

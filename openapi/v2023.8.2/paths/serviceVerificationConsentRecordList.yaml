@@ -1,0 +1,51 @@
+description: LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter,
+  query if consent exists.
+operationId: serviceVerificationConsentRecordList
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          consentRecordFilter:
+            $ref: ../definitions/ConsentRecordFilter.yaml
+            description: An object of type ConsentRecordFilter
+        required:
+        - consentRecordFilter
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter,
+  query if consent exists.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: 3.1, 1.2
+x-specification-usecase: UC-C-PIC-A-003

@@ -1,0 +1,24 @@
+type: object
+description: "This model is not stored in a database. It describes the status of the Building Block while running. Returns immediately. API should not be public."
+x-not-in-database: true
+
+required:
+  - status
+properties:
+  status:
+    type: string
+    format: ""
+    example: ""
+    description: "Possible values: OK, WAITING, ERROR"
+
+  error_message:
+    type: string
+    format: ""
+    example: ""
+    description: "Description of failure"
+
+  waiting_for:
+    type: string
+    format: ""
+    example: ""
+    description: "When a timeout occurs, a list of pending operations may be shared"

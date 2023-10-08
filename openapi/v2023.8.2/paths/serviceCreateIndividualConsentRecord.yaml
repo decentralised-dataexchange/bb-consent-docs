@@ -1,0 +1,47 @@
+description: CREATE - For a particular Individual and a particular Agreement, create
+  a new Consent Record pointing to the current Revision of a given Agreement. Individual
+  ID supplied as HTTP header.
+operationId: serviceCreateIndividualConsentRecord
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+- description: An object with id individualId
+  in: query
+  name: individualId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - For a particular Individual and a particular Agreement, create a
+  new Consent Record pointing to the current Revision of a given Agreement. Individual
+  ID supplied as HTTP header.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: '1.2'
+x-specification-usecase: UC-C-PIC-I-002

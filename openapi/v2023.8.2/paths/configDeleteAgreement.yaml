@@ -1,0 +1,27 @@
+description: DELETE - a data agreement
+operationId: configDeleteAgreement
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/Revision.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - a data agreement
+tags:
+- config
+x-specification-crudl-model: Agreement
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-004

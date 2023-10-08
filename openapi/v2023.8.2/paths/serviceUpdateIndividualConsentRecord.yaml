@@ -1,0 +1,51 @@
+description: UPDATE* - Update a particular Consent Record. Individual ID supplied
+  as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+operationId: serviceUpdateIndividualConsentRecord
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementRecordId
+  required: true
+  schema:
+    type: string
+- description: An object with id individualId
+  in: query
+  name: individualId
+  required: true
+  schema:
+    type: string
+- description: An object with id dataAgreementId
+  in: query
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP
+  header. Note that updating a signed Consent Record invalidates its signature.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-I-003

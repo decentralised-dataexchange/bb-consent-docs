@@ -1,0 +1,82 @@
+type: object
+title: Agreement
+description: "An agreement contains the specification of a single purpose that can be consented to. An Agreement is universal and can be consented to by *many* individuals through a ConsentRecord"
+x-not-in-database: false
+
+required:
+  - id
+  - version
+  - lawful_basis
+  - dpia
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  version:
+    type: string
+    format: ""
+    example: ""
+    description: "The version of this specification to which a receipt conforms"
+
+  controller:
+    $ref: "./Controller.yaml"
+    x-fk-model: "Controller"
+    description: "Data controller (may be omitted if no data involved)"
+
+  policy:
+    $ref: "./Policy.yaml"
+    x-fk-model: "Policy"
+    description: "Reference to the policy under which this Agreement shall be governed"
+
+  purpose:
+    $ref: "./AgreementPurpose.yaml"
+    x-fk-model: "AgreementPurpose"
+    description: "Purpose of data processing or purpose of consent. Displayed to the user."
+
+  lawful_basis:
+    type: string
+    format: ""
+    example: ""
+    description: "Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest"
+
+  data_use:
+    type: string
+    format: ""
+    example: ""
+    description: "null/data_source/data_using_service"
+
+  dpia:
+    type: string
+    format: ""
+    example: ""
+    description: "Data Protection Impact Assessment"
+
+  signature:
+    $ref: "./Signature.yaml"
+    x-fk-model: "Signature"
+    description: "Signature of authorizing party of Agreement. Note: Signatures may be chained in case of multiple signatures."
+
+  active:
+    type: boolean
+    format: ""
+    example: ""
+    description: "Agreement is active and new ConsentRecords can be created."
+
+  forgettable:
+    type: boolean
+    format: ""
+    example: ""
+    description: "Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability."
+
+  compatible_with_version:
+    $ref: "./Agreement.yaml"
+    x-fk-model: "Agreement"
+    description: "WIP: This field indicates that Consent Records may be transferred from this compatible previous version of the same Agreement."
+
+  lifecycle:
+    $ref: "./AgreementLifecycle.yaml"
+    x-fk-model: "AgreementLifecycle"
+    description: "WIP: Current Lifecycle state of the Agreement. Lifecycle states are used to manage internal workflows and should not be assigned semantic meanings for active Consent Records."

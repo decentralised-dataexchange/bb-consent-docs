@@ -1,0 +1,23 @@
+description: DELETE - Cascading delete operation for Right To Be Forgotten, deletes
+  all Consent Records that shall not be retained and have a "forgettable" Agreement.
+  May also delete an unsigned Consent Record, for instance in cases where the user
+  exits the signing process. Individual ID supplied as HTTP header.
+operationId: serviceDeleteAllRecords
+parameters: []
+responses:
+  '200':
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - Cascading delete operation for Right To Be Forgotten, deletes all
+  Consent Records that shall not be retained and have a "forgettable" Agreement. May
+  also delete an unsigned Consent Record, for instance in cases where the user exits
+  the signing process. Individual ID supplied as HTTP header.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-I-003

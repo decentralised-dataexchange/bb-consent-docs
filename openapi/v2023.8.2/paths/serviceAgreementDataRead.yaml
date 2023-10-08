@@ -1,0 +1,38 @@
+description: READ - fetches a list of latest versions of AgreementData associated
+  with an Agreement and the presented revisionId of that Agreement
+operationId: serviceAgreementDataRead
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/AgreementData.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - fetches a list of latest versions of AgreementData associated with
+  an Agreement and the presented revisionId of that Agreement
+tags:
+- service
+x-specification-crudl-model: AgreementData
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-003

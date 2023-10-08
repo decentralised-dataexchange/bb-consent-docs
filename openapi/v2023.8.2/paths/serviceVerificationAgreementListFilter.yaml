@@ -1,0 +1,49 @@
+description: LIST - Fetch consent records for supplied AgreementFilter
+operationId: serviceVerificationAgreementListFilter
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          agreementFilter:
+            $ref: ../definitions/AgreementFilter.yaml
+            description: An object of type AgreementFilter
+        required:
+        - agreementFilter
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - Fetch consent records for supplied AgreementFilter
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: '1.1'
+x-specification-usecase: UC-C-PIC-A-003

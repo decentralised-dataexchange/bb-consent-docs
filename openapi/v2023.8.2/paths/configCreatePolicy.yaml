@@ -1,0 +1,37 @@
+description: CREATE - a new policy and returned together with revision
+operationId: configCreatePolicy
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          policy:
+            $ref: ../definitions/Policy.yaml
+            description: An object of type Policy
+        required:
+        - policy
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/Policy.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: A set consisting of the new Policy object created, together with
+      the initial Revision object.
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - a new policy and returned together with revision
+tags:
+- config
+x-specification-crudl-model: Policy
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-001

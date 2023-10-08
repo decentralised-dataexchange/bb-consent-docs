@@ -1,0 +1,27 @@
+description: READ - fetch a single data agreement record
+operationId: auditConsentRecordRead
+parameters:
+  - description: Unique ID of an object
+    in: path
+    name: dataAgreementRecordId
+    required: true
+    schema:
+      type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/ConsentRecord.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - fetch a single data agreement record
+tags:
+  - auditor
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: ""

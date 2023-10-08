@@ -1,0 +1,13 @@
+type: object
+title: AgreementFilter
+description: "Query filter for API endpoint listing Agreement objects"
+x-not-in-database: true
+
+required:
+  - name
+properties:
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: ""

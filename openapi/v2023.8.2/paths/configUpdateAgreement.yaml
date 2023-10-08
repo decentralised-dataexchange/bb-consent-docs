@@ -1,0 +1,42 @@
+description: UPDATE - an existing data agreement and returned together with revision
+operationId: configUpdateAgreement
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          agreement:
+            $ref: ../definitions/Agreement.yaml
+            description: An object of type Agreement
+        required:
+        - agreement
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/Agreement.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: UPDATE - an existing data agreement and returned together with revision
+tags:
+- config
+x-specification-crudl-model: Agreement
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-002

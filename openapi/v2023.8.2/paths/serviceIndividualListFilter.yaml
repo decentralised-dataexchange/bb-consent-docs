@@ -1,0 +1,49 @@
+description: LIST - lists individuals in the system
+operationId: serviceIndividualListFilter
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          individualFilter:
+            $ref: ../definitions/IndividualFilter.yaml
+            description: An object of type IndividualFilter
+        required:
+        - individualFilter
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/Individual.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - lists individuals in the system
+tags:
+- service
+x-specification-crudl-model: Individual
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: ''
+x-specification-usecase: ''

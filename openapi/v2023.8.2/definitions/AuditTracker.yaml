@@ -1,0 +1,60 @@
+type: object
+title: AuditTracker
+description: "TBD: An external tracker receiving information from the system that can be subject to external auditing and verification of correct behavior. This is one of several notification/monitor/subscription patterns that may be more suitable for an encrypted Pub/Sub service."
+x-not-in-database: false
+
+required:
+  - id
+  - name
+  - public_key
+  - callback_agreement
+  - callback_consent_record
+  - callback_policy
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: "Name of the auditing system"
+
+  public_key:
+    type: string
+    format: ""
+    example: ""
+    description: "The auditing system's public key for encrypting data sent to callback functions"
+
+  callback_agreement:
+    type: string
+    format: ""
+    example: ""
+    description: "A URL receiving a callback with the Agreement object + Revision + AuditEventType"
+
+  callback_consent_record:
+    type: string
+    format: ""
+    example: ""
+    description: "A URL receiving a callback with the ConsentRecord object + Revision + AuditEventType"
+
+  callback_policy:
+    type: string
+    format: ""
+    example: ""
+    description: "A URL receiving a callback with the Policy object + Revision + AuditEventType"
+
+  callback_revision_table_hash:
+    type: string
+    format: ""
+    example: ""
+    description: "A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the revision table."
+
+  callback_signature_table_hash:
+    type: string
+    format: ""
+    example: ""
+    description: "A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the signature table."

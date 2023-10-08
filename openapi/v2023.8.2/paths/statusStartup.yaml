@@ -1,0 +1,19 @@
+description: 'DRAFT: This endpoint relates to a proposal for generic liveness/readiness
+  API endpoints for building blocks'
+operationId: statusStartup
+parameters: []
+responses:
+  '200':
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: 'DRAFT: This endpoint relates to a proposal for generic liveness/readiness
+  API endpoints for building blocks'
+tags:
+- status
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: ''

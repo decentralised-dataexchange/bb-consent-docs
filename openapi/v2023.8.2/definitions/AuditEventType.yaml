@@ -1,0 +1,20 @@
+type: object
+title: AuditEventType
+description: "TBD: Model for the possible events pertaining a change to an object subject to auditing. This model is not necessarily a database-backed model, but part of application code."
+x-not-in-database: false
+
+required:
+  - id
+  - event_name
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  event_name:
+    type: string
+    format: ""
+    example: ""
+    description: "What happened - create/update/delete"

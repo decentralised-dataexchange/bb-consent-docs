@@ -1,0 +1,38 @@
+description: LIST - Fetch consent records
+operationId: serviceVerificationAgreementList
+parameters:
+- description: Requested index for start of resources to be provided in response requested
+    by client
+  in: query
+  name: offset
+  required: false
+  schema:
+    type: integer
+- description: Requested number of resources to be provided in response requested
+    by client
+  in: query
+  name: limit
+  required: false
+  schema:
+    type: integer
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - Fetch consent records
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: '1.1'
+x-specification-usecase: UC-C-PIC-A-003

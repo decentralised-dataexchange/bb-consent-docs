@@ -1,0 +1,20 @@
+type: object
+title: AgreementLifecycle
+description: "TBD: Models the valid lifecycle states of an Agreement"
+x-not-in-database: false
+
+required:
+  - id
+  - name
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: "Draft / Complete"

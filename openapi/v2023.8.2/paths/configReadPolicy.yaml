@@ -1,0 +1,38 @@
+description: READ - get a policy + latest revision. If a policy filter is supplied
+  and contains a `revision_id`, then this specific revision is returned.
+operationId: configReadPolicy
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: policyId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/Policy.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - get a policy + latest revision
+tags:
+- config
+x-specification-crudl-model: Policy
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-003

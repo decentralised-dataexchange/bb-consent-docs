@@ -1,0 +1,32 @@
+description: CREATE - A new AuditTracker is set up
+operationId: auditCreateTracker
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          auditTracker:
+            $ref: ../definitions/AuditTracker.yaml
+            description: An object of type AuditTracker
+        required:
+        - auditTracker
+        type: object
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/AuditTracker.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - A new AuditTracker is set up
+tags:
+- auditor
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-AT-001, UC-C-PIC-AT-002

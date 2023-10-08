@@ -1,0 +1,25 @@
+type: object
+title: StatusStartup
+description: "This model is not stored in a database. It describes the status of the Building Block while starting up. API should not be public. This call is blocking until the system is ready, a timeout occurs or an error is detected."
+x-not-in-database: true
+
+required:
+  - status
+properties:
+  status:
+    type: string
+    format: ""
+    example: ""
+    description: "Possible values: OK, TIMEOUT, ERROR"
+
+  error_message:
+    type: string
+    format: ""
+    example: ""
+    description: "Description of failure"
+
+  waiting_for:
+    type: string
+    format: ""
+    example: ""
+    description: "When a timeout occurs, a list of pending operations may be shared"

@@ -1,0 +1,29 @@
+description: DELETE - Deletes an existing policy, returning the updated version
+  and a new revision. Deleting a policy is not possible if it's associated with active
+  Agreement.
+operationId: configDeletePolicy
+parameters:
+  - description: Unique ID of an object
+    in: path
+    name: policyId
+    required: true
+    schema:
+      type: string
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/Revision.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - an existing policy
+tags:
+  - config
+x-specification-crudl-model: Policy
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-004

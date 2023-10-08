@@ -1,0 +1,39 @@
+type: object
+title: AgreementData
+description: "Agreement data contains specifications of exactly what is collected."
+x-not-in-database: false
+
+required:
+  - id
+  - name
+  - sensitivity
+  - category
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  agreement:
+    $ref: "./Agreement.yaml"
+    x-fk-model: "Agreement"
+    description: ""
+
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: 'Name of the attribute, for instance "name" or "age"'
+
+  sensitivity:
+    type: string
+    format: ""
+    example: ""
+    description: "categories of sensitivity"
+
+  category:
+    type: string
+    format: ""
+    example: ""
+    description: ""

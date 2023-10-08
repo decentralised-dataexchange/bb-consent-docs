@@ -1,0 +1,27 @@
+description: READ - get the details of an AuditTracker
+operationId: auditReadTracker
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: trackerId
+  required: true
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/AuditTracker.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - get the details of an AuditTracker
+tags:
+- auditor
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-AT-001, UC-C-PIC-AT-002

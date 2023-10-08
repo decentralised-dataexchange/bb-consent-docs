@@ -1,0 +1,45 @@
+description: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without
+  a PK) for a given dataAgreementId.
+operationId: serviceCreateIndividualConsentRecordDraft
+parameters:
+- description: An object with id individualId
+  in: query
+  name: individualId
+  required: true
+  schema:
+    type: string
+- description: An object with id dataAgreementId
+  in: query
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+- description: An object with id revisionId
+  in: query
+  name: revisionId
+  required: false
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+            - $ref: ../definitions/Signature.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without
+  a PK) for a given dataAgreementId.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'True'
+x-specification-scenario: '1.2'
+x-specification-usecase: UC-C-PIC-I-002

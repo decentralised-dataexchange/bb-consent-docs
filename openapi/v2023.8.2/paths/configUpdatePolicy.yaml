@@ -1,0 +1,44 @@
+description: UPDATE - Updates an existing policy, returning the updated version
+  and a new revision. Updating a Policy does not affect existing references in Agreement,
+  the new revision should be specified for Agreement.
+operationId: configUpdatePolicy
+parameters:
+  - description: Unique ID of an object
+    in: path
+    name: policyId
+    required: true
+    schema:
+      type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          policy:
+            $ref: ../definitions/Policy.yaml
+            description: An object of type Policy
+        required:
+          - policy
+        type: object
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+              - $ref: ../definitions/Policy.yaml
+              - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: UPDATE - Updates an existing policy, returning the updated version and a new revision.
+tags:
+  - config
+x-specification-crudl-model: Policy
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-002

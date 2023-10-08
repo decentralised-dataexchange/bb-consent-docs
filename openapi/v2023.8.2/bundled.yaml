@@ -1,2201 +1,363 @@
-openapi: 3.0.0
-info:
-  version: 2023.8.2
-  title: Consent Building Block APIs
-  description: |
-    The Consent Building Block enables services for individuals to approve the use  of their personal data by defining the principles, functions, and architecture  of an information system. For organisations that process personal data, it  provides the ability to know the individual's will and legitimately process such  personal data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating auditable bilateral agreements within a multi-agent environment that  integrates with most other Building Blocks.
-  contact:
-    email: support@igrant.io
-    name: iGrant.io
-    url: 'https://igrant.io'
-  license:
-    name: Apache 2.0
-    url: 'https://www.apache.org/licenses/LICENSE-2.0'
-servers:
-  - url: 'https://api.bb-consent.dev/v2'
-    description: Development server
-  - url: 'https://staging-consent-bb-api.igrant.io/v2'
-    description: Staging server
-  - url: 'https://demo-consent-bb-api.igrant.io/v2'
-    description: Demo server
-tags:
-  - name: audit
-    x-tag-expanded: false
-    description: |
-      These API(s) allow managing and viewing the consents and their audit trails. The audit trails  of consent management are vital to individuals and organisations in case of disputes or for  other reasons where it is necessary to ascertain a transaction's validity.
-  - name: config
-    x-tag-expanded: false
-    description: |
-      The Organisational API(s) allow administrators to configure consent-related aspects  from an organisational perspective. The notification APIs using webhooks are also part  of this category. E.g. These are used for notifications and callbacks to organisation's  IT systems. The administrators configure these, and the notifications may be towards the  organisation's IT system or towards individual users.
-  - name: service
-    x-tag-expanded: false
-    description: |
-      These API(s) sets allow individual users to view and manage their consent-related information about their organisation.
-  - name: onboard
-    x-tag-expanded: false
-    description: |
-      These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.
-paths:
-  /config/policy:
-    post:
-      tags:
-        - config
-      summary: CREATE - Creates a new Policy object and returns the new object and a PolicyRevision
-      operationId: configCreatePolicy
-      description: CREATE - Creates a new Policy object and returns the new object and a PolicyRevision
-      parameters: []
-      x-specification-usecase: UC-C-PIC-A-001
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-crudl-model: Policy
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-      responses:
-        '200':
-          description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  oneOf:
-                    - type: object
-                      title: Policy
-                      description: A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
-                      x-not-in-database: false
-                      required:
-                        - id
-                        - name
-                        - version
-                        - url
-                      properties:
-                        id:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                        name:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Name of the policy
-                        version:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Version of the policy
-                        url:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: 'Permanent URL at which this very version of the Policy can be read, should not be allowed to change over time.'
-                        jurisdiction:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                        industry_sector:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                        data_retention_period_days:
-                          type: integer
-                          format: ''
-                          example: ''
-                          description: ''
-                        geographic_restriction:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                        storage_location:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                    - title: Revision
-                      type: object
-                      description: |-
-                        A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
-
-                        Aside from "successor" column, a revision should be considered locked.
-                      x-not-in-database: false
-                      required:
-                        - id
-                        - schema_name
-                        - object_id
-                        - serialized_snapshot
-                        - serialized_hash
-                        - timestamp
-                      properties:
-                        id:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: ''
-                        schema_name:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: This was previously called "schema" but for technical reasons should be called "schema_name"
-                        object_id:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: The PK of the object that was serialized.
-                        signed_without_object_id:
-                          type: boolean
-                          format: ''
-                          example: ''
-                          description: Indicates that object_id was left blank in serialized_snapshot when calculating serialized_hash. object_id may be subsequently filled in.
-                        serialized_snapshot:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: |
-                            Revisioned data (serialized as JSON) as a dict {object_data: 
-                            {...}, schema_name: ..., object_id: ..., signed_without_object_id: ..., timestamp: ..., authorized_by_individual: ..., authorized_by_other: ...}. 
-                            It contains all the fields of the schema except id, successor, predessor_hash and predecessor_signature.
-                        serialized_hash:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Hash of serialized_snapshot (SHA-1)
-                        timestamp:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Timestamp of when revisioning happened
-                        authorized_by_individual:
-                          x-fk-model: Individual
-                          description: ''
-                          type: object
-                          title: Individual
-                          x-not-in-database: false
-                          required:
-                            - id
-                          properties:
-                            id:
-                              type: string
-                              format: ''
-                              example: ''
-                              description: The unique ID of an Individual row.
-                            external_id:
-                              type: string
-                              format: ''
-                              example: ''
-                              description: 'Reference to another foundational/functional ID, which is likely PII'
-                            external_id_type:
-                              type: string
-                              format: ''
-                              example: ''
-                              description: External id type specifier. A string. For instance "email" or "foundational id". Can be used in later queries.
-                            identity_provider_id:
-                              type: string
-                              format: ''
-                              example: ''
-                              description: 'This could be an FK, but for now we do not have a mapping of identity providers. IDBB may have more requirements.'
-                        authorized_by_other:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Reference to an admin user that has created this revision
-                        successor:
-                          $ref: '#/paths/~1config~1policy/post/responses/200/content/application~1json/schema/items/oneOf/1'
-                          x-fk-model: Revision
-                          description: 'This revision is no longer the latest revision, refer to its successor.'
-                        predecessor_hash:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: 'Tamper-resistent artifact from previous record, copied from serialized_hash'
-                        predecessor_signature:
-                          type: string
-                          format: ''
-                          example: ''
-                          description: Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                policy:
-                  $ref: '#/paths/~1config~1policy/post/responses/200/content/application~1json/schema/items/oneOf/0'
-                  description: An object of type Policy
-              required:
-                - policy
-  '/config/policy/{policyId}':
-    $ref: '#/paths/~1config~1policies'
-  '/config/policy/{policyId}/revisions':
-    $ref: '#/paths/~1config~1policies'
-  /config/policies:
-    get:
-      tags:
-        - config
-      description: Get global policy configurations
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    post:
-      tags:
-        - config
-      description: Update global policy configurations
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GlobalDataPolicyConfiguration'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/config/data-agreement/{dataAgreementId}':
-    $ref: '#/paths/~1config~1data-agreement'
-  /config/data-agreement:
-    post:
-      tags:
-        - config
-      description: Add data agreement
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - purposes
-              type: object
-              properties:
-                purposes:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/DataAgreement'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get data agreements
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Purposes
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Purposes:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataAgreement'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  /config/data-agreements:
-    $ref: '#/paths/~1config~1data-agreement'
-  '/config/data-agreement/{dataAgreementId}/revisions':
-    $ref: '#/paths/~1config~1data-agreement'
-  '/config/data-agreement/{dataAgreementId}/revision/{revisionId}':
-    $ref: '#/paths/~1config~1data-agreement'
-  /config/data-agreements/data-attributes:
-    $ref: '#/paths/~1config~1data-agreements~1data-attribute'
-  /config/data-agreements/data-attribute:
-    post:
-      tags:
-        - config
-      description: Add data attributes
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - data-attributes
-              type: object
-              properties:
-                data-attributes:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/DataAttribute'
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get data attributes
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - OrgID
-                  - Templates
-                type: object
-                properties:
-                  OrgID:
-                    type: string
-                  Templates:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataAttribute'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/config/data-agreements/data-attribute/{dataAttributeId}"':
-    $ref: '#/paths/~1config~1data-agreements~1data-attribute'
-  /config/webhooks/event-types:
-    $ref: '#/paths/~1config~1webhooks'
-  /config/webhooks/payload/content-types:
-    $ref: '#/paths/~1config~1webhooks'
-  /config/webhooks:
-    post:
-      tags:
-        - config
-      description: Create webhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - payloadurl
-                - subscribedevents
-                - contenttype
-                - secretkey
-                - disabled
-                - skipsslverification
-              type: object
-              properties:
-                payloadurl:
-                  type: string
-                subscribedevents:
-                  type: array
-                  items:
-                    type: string
-                contenttype:
-                  type: string
-                secretkey:
-                  type: string
-                disabled:
-                  type: boolean
-                skipsslverification:
-                  type: boolean
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - ID
-                  - OrgID
-                  - PayloadURL
-                  - ContentType
-                  - SubscribedEvents
-                  - Disabled
-                  - SecretKey
-                  - SkipSSLVerification
-                  - TimeStamp
-                type: object
-                properties:
-                  ID:
-                    type: string
-                  OrgID:
-                    type: string
-                  PayloadURL:
-                    type: string
-                  ContentType:
-                    type: string
-                  SubscribedEvents:
-                    type: array
-                    items:
-                      type: string
-                  Disabled:
-                    type: boolean
-                  SecretKey:
-                    type: string
-                  SkipSSLVerification:
-                    type: boolean
-                  TimeStamp:
-                    type: string
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - config
-      description: Get all webhooks for an organisation
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  required:
-                    - ID
-                    - PayloadURL
-                    - Disabled
-                    - TimeStamp
-                    - IsLastDeliverySuccess
-                  type: object
-                  properties:
-                    ID:
-                      type: string
-                    PayloadURL:
-                      type: string
-                    Disabled:
-                      type: boolean
-                    TimeStamp:
-                      type: string
-                    IsLastDeliverySuccess:
-                      type: boolean
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/config/webhook/{webhookId}':
-    $ref: '#/paths/~1config~1webhooks'
-  '/config/webhook/{webhookId}/ping':
-    $ref: '#/paths/~1config~1webhooks'
-  '/config/webhook/{webhookId}/delivery':
-    $ref: '#/paths/~1config~1webhooks'
-  '/config/webhook/{webhookId}/delivery/{deliveryId}':
-    $ref: '#/paths/~1config~1webhooks'
-  '/config/webhook/{webhookId}/delivery/{deliveryId}/redeliver':
-    $ref: '#/paths/~1config~1webhooks'
-  /config/idp/open-id:
-    $ref: '#/paths/~1config~1webhooks'
-  /config/admin/apikey:
-    post:
-      tags:
-        - onboard
-      description: Create api key
-      parameters: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - User
-                  - APIKey
-                type: object
-                properties:
-                  User:
-                    type: string
-                  APIKey:
-                    type: string
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-    get:
-      tags:
-        - onboard
-      description: Get api key
-      parameters: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - User
-                  - APIKey
-                type: object
-                properties:
-                  User:
-                    type: string
-                  APIKey:
-                    type: string
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  /config/individuals:
-    $ref: '#/paths/~1config~1individual'
-  /config/individual:
-    post:
-      tags:
-        - onboard
-      description: Register individual
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - username
-                - name
-                - password
-                - phone
-              type: object
-              properties:
-                username:
-                  type: string
-                name:
-                  type: string
-                password:
-                  type: string
-                phone:
-                  type: string
-        required: true
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                required:
-                  - msg
-                type: object
-                properties:
-                  msg:
-                    type: string
-                example:
-                  msg: User created successfully
-      deprecated: false
-  '/config/individual/{individualId}':
-    $ref: '#/paths/~1config~1individual'
-  '/service/data-agreement/{dataAgreementId}':
-    $ref: ''
-  '/service/policy/{policyId}':
-    $ref: ''
-  /service/data-agreements/data-attributes:
-    $ref: ''
-  /service/verification/data-agreements/:
-    $ref: ''
-  /service/verification/data-agreement/:
-    $ref: ''
-  /service/verification/records:
-    $ref: ''
-  '/service/individual/record/agreement/{agreementId}':
-    $ref: ''
-  '/service/individual/data-agreement/{dataAgreementId}/record':
-    $ref: ''
-  '/service/individual/record/consentrecord/{consentRecordId}':
-    $ref: ''
-  '/service/individual/data-agreement/{dataAgreementRecordId}':
-    $ref: ''
-  /service/individual/record/agreement:
-    $ref: ''
-  /service/individual/record/data-agreement:
-    $ref: ''
-  '/service/individual/record/data-agreement/{dataAgreementId}':
-    $ref: ''
-  /audit/consentrecords:
-    $ref: '#/paths/~1audit~1agreements'
-  '/audit/consentrecord/{consentRecordId}':
-    $ref: '#/paths/~1audit~1agreement~1%7BagreementId%7D'
-  /audit/agreements:
-    get:
-      tags:
-        - audit
-      description: List consent records
-      parameters:
-        - name: consentRecordId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - data_agreement_record
-                type: object
-                properties:
-                  data_agreement_record:
-                    $ref: '#/components/schemas/DataAgreementRecord'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  '/audit/agreement/{agreementId}':
-    get:
-      tags:
-        - audit
-      description: Get consent record
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - data_agreement_records
-                  - pagination
-                type: object
-                properties:
-                  data_agreement_records:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataAgreementRecord'
-                  pagination:
-                    $ref: '#/components/schemas/Pagination'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  /audit/admin/logs:
-    get:
-      operationId: getAdminLogs
-      description: Get admin logs
-      tags:
-        - audit
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-      parameters:
-        - name: page
-          in: query
-          description: Page number
-          required: false
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          description: Number of items to return per page
-          required: false
-          schema:
-            type: integer
-            default: 10
-      responses:
-        '200':
-          description: Audit logs for admin user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Log'
-  /onboard/admin/login:
-    post:
-      tags:
-        - onboard
-      description: Login as organisation admin
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - username
-                - password
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - access_token
-                  - expires_in
-                  - refresh_expires_in
-                  - refresh_token
-                  - token_type
-                type: object
-                properties:
-                  access_token:
-                    type: string
-                  expires_in:
-                    type: integer
-                    format: int32
-                  refresh_expires_in:
-                    type: integer
-                    format: int32
-                  refresh_token:
-                    type: string
-                  token_type:
-                    type: string
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                required:
-                  - error
-                  - error_description
-                type: object
-                properties:
-                  error:
-                    type: string
-                  error_description:
-                    type: string
-                example:
-                  error: invalid_grant
-                  error_description: Invalid user credentials
-      deprecated: false
-  /onboard/individual/login:
-    post:
-      tags:
-        - onboard
-      description: Login as individual
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - username
-                - password
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - User
-                  - Token
-                type: object
-                properties:
-                  User:
-                    required:
-                      - ID
-                      - Name
-                      - IamID
-                      - Email
-                      - Phone
-                      - ImageID
-                      - ImageURL
-                      - LastVisit
-                      - Client
-                      - Orgs
-                      - APIKey
-                      - Roles
-                      - IncompleteProfile
-                    type: object
-                    properties:
-                      ID:
-                        type: string
-                      Name:
-                        type: string
-                      IamID:
-                        type: string
-                      Email:
-                        type: string
-                      Phone:
-                        type: string
-                      ImageID:
-                        type: string
-                      ImageURL:
-                        type: string
-                      LastVisit:
-                        type: string
-                      Client:
-                        required:
-                          - Token
-                          - Type
-                        type: object
-                        properties:
-                          Token:
-                            type: string
-                          Type:
-                            type: integer
-                            format: int32
-                      Orgs:
-                        type: array
-                        items:
-                          required:
-                            - OrgID
-                            - Name
-                            - Location
-                            - Type
-                            - TypeID
-                            - EulaAccepted
-                          type: object
-                          properties:
-                            OrgID:
-                              type: string
-                            Name:
-                              type: string
-                            Location:
-                              type: string
-                            Type:
-                              type: string
-                            TypeID:
-                              type: string
-                            EulaAccepted:
-                              type: boolean
-                      APIKey:
-                        type: string
-                      Roles:
-                        type: array
-                        items:
-                          required:
-                            - RoleID
-                            - OrgID
-                          type: object
-                          properties:
-                            RoleID:
-                              type: integer
-                              format: int32
-                            OrgID:
-                              type: string
-                      IncompleteProfile:
-                        type: boolean
-                  Token:
-                    required:
-                      - access_token
-                      - expires_in
-                      - refresh_expires_in
-                      - refresh_token
-                      - token_type
-                    type: object
-                    properties:
-                      access_token:
-                        type: string
-                      expires_in:
-                        type: integer
-                        format: int32
-                      refresh_expires_in:
-                        type: integer
-                        format: int32
-                      refresh_token:
-                        type: string
-                      token_type:
-                        type: string
-      deprecated: false
-  /onboard/validate/email:
-    post:
-      tags:
-        - onboard
-      description: Validate email
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - email
-              type: object
-              properties:
-                email:
-                  type: string
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Result
-                  - Message
-                type: object
-                properties:
-                  Result:
-                    type: boolean
-                  Message:
-                    type: string
-                example:
-                  Result: true
-                  Message: Email address is valid and not in use in our system
-      deprecated: false
-      security: []
-  /onboard/validate/phone:
-    post:
-      tags:
-        - onboard
-      description: Validate phone
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - phone
-              type: object
-              properties:
-                phone:
-                  type: string
-              example:
-                phone: '+918848245047'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Result
-                  - Message
-                type: object
-                properties:
-                  Result:
-                    type: boolean
-                  Message:
-                    type: string
-                example:
-                  Result: false
-                  Message: Phone number is in use
-      deprecated: false
-      security: []
-  /onboard/verify/phone:
-    post:
-      tags:
-        - onboard
-      description: For OTP verification of the given phone number
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - email
-                - phone
-              type: object
-              properties:
-                email:
-                  type: string
-                phone:
-                  type: string
-              example:
-                email: george@yopmail.com
-                phone: '+918848245047'
-        required: true
-      responses:
-        '204':
-          description: No Content
-          content: {}
-      deprecated: false
-      security: []
-  /onboard/verify/otp:
-    post:
-      tags:
-        - onboard
-      description: Verify OTP
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - phone
-                - otp
-              type: object
-              properties:
-                phone:
-                  type: string
-                otp:
-                  type: string
-              example:
-                phone: '+918848245047'
-                otp: '333363'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Result
-                  - Message
-                type: object
-                properties:
-                  Result:
-                    type: boolean
-                  Message:
-                    type: string
-                example:
-                  Result: true
-                  Message: Otp validatiation Succeeded
-      deprecated: false
-      security: []
-  /onboard/individual/password/reset:
-    put:
-      tags:
-        - onboard
-      description: Reset Password
-      operationId: ResetPassword
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - password
-              type: object
-              properties:
-                password:
-                  type: string
-              example:
-                password: qwerty123
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - msg
-                type: object
-                properties:
-                  msg:
-                    type: string
-                example:
-                  msg: User password resetted successfully
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin, Individual'
-  /onboard/individual/password/forgot:
-    put:
-      tags:
-        - onboard
-      description: Forgot Password
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - username
-              type: object
-              properties:
-                username:
-                  type: string
-        required: true
-      responses:
-        '204':
-          description: No Content
-          content: {}
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                required:
-                  - Code
-                  - Message
-                type: object
-                properties:
-                  Code:
-                    type: integer
-                    format: int32
-                  Message:
-                    type: string
-      deprecated: false
-  /onboard/individual/logout:
-    post:
-      tags:
-        - onboard
-      description: Logs out a user from the system
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - clientid
-                - refreshtoken
-              type: object
-              properties:
-                clientid:
-                  type: string
-                refreshtoken:
-                  type: string
-        required: true
-      responses:
-        '204':
-          description: No Content
-          content: {}
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin, Individual'
-  /onboard/individual/token:
-    post:
-      tags:
-        - onboard
-      description: Refresh access token
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - refreshtoken
-                - clientid
-              type: object
-              properties:
-                refreshtoken:
-                  type: string
-                clientid:
-                  type: string
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - access_token
-                  - expires_in
-                  - refresh_expires_in
-                  - refresh_token
-                  - token_type
-                type: object
-                properties:
-                  access_token:
-                    type: string
-                  expires_in:
-                    type: integer
-                    format: int32
-                  refresh_expires_in:
-                    type: integer
-                    format: int32
-                  refresh_token:
-                    type: string
-                  token_type:
-                    type: string
-      deprecated: false
-      security: []
-  /onboard/organisation:
-    get:
-      tags:
-        - onboard
-      description: Get organization by ID
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin, Individual'
-    patch:
-      tags:
-        - onboard
-      description: Update organization
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-                - name
-                - location
-                - description
-                - policyurl
-              type: object
-              properties:
-                name:
-                  type: string
-                location:
-                  type: string
-                description:
-                  type: string
-                policyurl:
-                  type: string
-        required: true
-      responses:
-        '202':
-          description: Accepted
-          content: {}
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  /onboard/organisation/coverimage:
-    post:
-      tags:
-        - onboard
-      description: Update organization cover image
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            encoding: {}
-            schema:
-              required:
-                - orgimage
-              type: object
-              properties:
-                orgimage:
-                  type: string
-                  format: binary
-        required: false
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
-  /onboard/organisation/logoimage:
-    post:
-      tags:
-        - onboard
-      description: Update organization logo image
-      parameters:
-        - name: orgId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            encoding: {}
-            schema:
-              required:
-                - orgimage
-              type: object
-              properties:
-                orgimage:
-                  type: string
-                  format: binary
-        required: false
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                required:
-                  - Organization
-                type: object
-                properties:
-                  Organization:
-                    $ref: '#/components/schemas/Organisation'
-      deprecated: false
-      security:
-        - BearerAuth: []
-      x-badges:
-        - color: primary-color
-          label: 'Authorised roles: Organisation admin'
 components:
   schemas:
-    Log:
+    Agreement:
       type: object
-      properties:
-        logs:
-          description: 'Log object captures an event occured in the system. For e.g. Organisation admin logs, webhook event logs e.t.c'
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Log ID
-              type:
-                type: integer
-                description: Type integer
-              type_str:
-                type: string
-                description: 'Type string for a log. for .e.g. webhooks, organisation_admin e.t.c'
-              individual_id:
-                type: string
-                description: User ID
-              username:
-                type: string
-                description: Username of the individual if available.
-              timestamp:
-                type: string
-                description: UTC timestamp in seconds since epoch
-              log:
-                type: string
-                description: Log description
-        pagination:
-          description: Pagination object
-          $ref: '#/components/schemas/Pagination'
-    Pagination:
-      description: Pagination
-      type: object
-      properties:
-        current_page:
-          type: integer
-          description: Current page number
-        total_items:
-          type: integer
-          description: Total number of items available
-        total_pages:
-          type: integer
-          description: Total number of pages based on limit
-        limit:
-          type: integer
-          description: Number of items per page
-        has_previous:
-          type: boolean
-          description: Indicates if there's a previous page
-        has_next:
-          type: boolean
-          description: Indicates if there's a next page
-    Error:
-      type: object
-      description: A generic error object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-    GetUserConsentHistory:
+      title: Agreement
+      description: An agreement contains the specification of a single purpose that can be consented to. An Agreement is universal and can be consented to by *many* individuals through a ConsentRecord
+      x-not-in-database: false
       required:
-        - ConsentHistory
-        - Links
-      type: object
-      properties:
-        ConsentHistory:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsentHistory'
-          description: List of consent history
-        Links:
-          $ref: '#/components/schemas/Pagination'
-          description: Pagination links
-    ConsentHistory:
-      required:
-        - ID
-        - OrgID
-        - PurposeID
-        - Log
-        - TimeStamp
-      type: object
-      properties:
-        ID:
-          type: string
-          description: Consent history ID
-        OrgID:
-          type: string
-          description: Organisation ID
-        PurposeID:
-          type: string
-          description: Consent agreement ID
-        Log:
-          type: string
-          description: Log string
-        TimeStamp:
-          type: string
-          description: Timestamp in ISO 8601 date time format
-      example:
-        ID: 64e91591e2f6a8000142c665
-        OrgID: 603e683c69dd720001c74f93
-        PurposeID: 61e183127c81650001f97d43
-        Log: Updated consent value to <Allow> for the purpose <Customer Loyalty Card Issuance> in organization <The Retail Company (Germany)>
-        TimeStamp: '2023-08-25T20:56:49Z'
-    GetConsentsByConsentAgreementId:
-      required:
-        - ID
-        - ConsentID
-        - OrgID
-        - UserID
-        - Consents
-        - DataRetention
-      type: object
-      properties:
-        ID:
-          type: string
-        ConsentID:
-          type: string
-        OrgID:
-          type: string
-        UserID:
-          type: string
-        DataRetention:
-          required:
-            - Expiry
-          type: object
-          properties:
-            Expiry:
-              type: string
-        Consents:
-          required:
-            - DataAgreement
-            - Count
-            - Consents
-          type: object
-          properties:
-            DataAgreement:
-              $ref: '#/components/schemas/DataAgreement'
-            Count:
-              required:
-                - Total
-                - Consented
-              type: object
-              properties:
-                Total:
-                  type: integer
-                  format: int32
-                Consented:
-                  type: integer
-                  format: int32
-            Consents:
-              type: array
-              items:
-                required:
-                  - ID
-                  - Description
-                  - Value
-                  - Status
-                type: object
-                properties:
-                  ID:
-                    description: Identifier for the consent
-                    type: string
-                  Description:
-                    description: Description of the data attribute
-                    type: string
-                  Value:
-                    description: Name of the data attribute
-                    type: string
-                  Status:
-                    required:
-                      - Consented
-                      - TimeStamp
-                      - Days
-                      - Remaining
-                    type: object
-                    properties:
-                      Consented:
-                        type: string
-                        enum:
-                          - Allow
-                          - Disallow
-                        description: Status of the consent for e.g. Allow/Disallow
-                      TimeStamp:
-                        type: string
-                        description: UTC timestamp of when the consent was recorded
-                      Days:
-                        type: integer
-                        format: int32
-                        description: No of days the consent should be remembered for.
-                      Remaining:
-                        type: integer
-                        format: int32
-                        description: No of days the consent will expire in.
-    GetConsentsForAllConsentAgreements:
-      required:
-        - ID
-        - OrgID
-        - UserID
-        - ConsentsAndPurposes
-      type: object
-      properties:
-        ID:
-          type: string
-        OrgID:
-          type: string
-        UserID:
-          type: string
-        ConsentsAndPurposes:
-          type: array
-          items:
-            required:
-              - DataAgreement
-              - Count
-              - Consents
-            type: object
-            properties:
-              DataAgreement:
-                $ref: '#/components/schemas/DataAgreement'
-              Count:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
-              Consents:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
-    GetConsents:
-      required:
-        - ID
-        - OrgID
-        - UserID
-        - ConsentsAndPurposes
-      type: object
-      properties:
-        ID:
-          type: string
-        OrgID:
-          type: string
-        UserID:
-          type: string
-        ConsentsAndPurposes:
-          type: array
-          items:
-            required:
-              - DataAgreement
-              - Count
-              - Consents
-              - DataRetention
-            type: object
-            properties:
-              DataAgreement:
-                $ref: '#/components/schemas/DataAgreement'
-              Count:
-                $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Count'
-              Consents:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetConsentsByConsentAgreementId/properties/Consents/properties/Consents/items'
-              DataRetention:
-                required:
-                  - Expiry
-                type: object
-                properties:
-                  Expiry:
-                    type: string
-    UpdateDataAgreementRecord:
-      required:
-        - consented
-      type: object
-      properties:
-        consented:
-          type: string
-          enum:
-            - Allow
-            - DisAllow
-      example:
-        consented: Allow
-    DataAgreementRecords:
-      required:
-        - ID
-        - OrgID
-        - UserID
-        - ConsentsAndPurposes
-      type: object
-      description: A list of data agreement records
-      properties:
-        ID:
-          type: string
-          description: Consent identifier
-        OrgID:
-          type: string
-          description: Organisation identifier
-        UserID:
-          type: string
-          description: User identifier
-        ConsentsAndPurposes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataAgreementRecord'
-    DataAgreementRecord:
-      required:
-        - data_agreement
-        - data_agreement_revision
-        - individual
-        - opt_in
-      type: object
-      description: |
-        A Consent Record expresses consent (as defined in this building block's specification) to a single Agreement. 
-        There must be a UNIQUE constraint on (agreement_revision, individual)
+        - id
+        - version
+        - lawful_basis
+        - dpia
       properties:
         id:
           type: string
-          format: uuid
-          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          description: |
-            Objects may be passed back by some API endpoints without an id (PK), denoting that they are a \"draft\", 
-            i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. 
-            Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.
-        data_agreement:
-          description: Data agreement
-          $ref: '#/components/schemas/DataAgreement'
-        data_agreement_revision:
-          description: Data agreement revision
-          $ref: '#/paths/~1audit~1agreements/get/responses/200/content/application~1json/schema/properties/data_agreement_record/properties/data_agreement_revision/properties/successor'
+          format: ''
+          example: ''
+          description: ''
+        version:
+          type: string
+          format: ''
+          example: ''
+          description: The version of this specification to which a receipt conforms
+        controller:
+          $ref: '#/components/schemas/Controller'
+          x-fk-model: Controller
+          description: Data controller (may be omitted if no data involved)
+        policy:
+          $ref: '#/components/schemas/Policy'
+          x-fk-model: Policy
+          description: Reference to the policy under which this Agreement shall be governed
+        purpose:
+          $ref: '#/components/schemas/AgreementPurpose'
+          x-fk-model: AgreementPurpose
+          description: Purpose of data processing or purpose of consent. Displayed to the user.
+        lawful_basis:
+          type: string
+          format: ''
+          example: ''
+          description: Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest
+        data_use:
+          type: string
+          format: ''
+          example: ''
+          description: null/data_source/data_using_service
+        dpia:
+          type: string
+          format: ''
+          example: ''
+          description: Data Protection Impact Assessment
+        signature:
+          $ref: '#/components/schemas/Signature'
+          x-fk-model: Signature
+          description: 'Signature of authorizing party of Agreement. Note: Signatures may be chained in case of multiple signatures.'
+        active:
+          type: boolean
+          format: ''
+          example: ''
+          description: Agreement is active and new ConsentRecords can be created.
+        forgettable:
+          type: boolean
+          format: ''
+          example: ''
+          description: 'Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability.'
+        compatible_with_version:
+          $ref: '#/components/schemas/Agreement'
+          x-fk-model: Agreement
+          description: 'WIP: This field indicates that Consent Records may be transferred from this compatible previous version of the same Agreement.'
+        lifecycle:
+          $ref: '#/components/schemas/AgreementLifecycle'
+          x-fk-model: AgreementLifecycle
+          description: 'WIP: Current Lifecycle state of the Agreement. Lifecycle states are used to manage internal workflows and should not be assigned semantic meanings for active Consent Records.'
+    AgreementData:
+      type: object
+      title: AgreementData
+      description: Agreement data contains specifications of exactly what is collected.
+      x-not-in-database: false
+      required:
+        - id
+        - name
+        - sensitivity
+        - category
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        agreement:
+          $ref: '#/components/schemas/Agreement'
+          x-fk-model: Agreement
+          description: ''
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: 'Name of the attribute, for instance "name" or "age"'
+        sensitivity:
+          type: string
+          format: ''
+          example: ''
+          description: categories of sensitivity
+        category:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+    AgreementFilter:
+      type: object
+      title: AgreementFilter
+      description: Query filter for API endpoint listing Agreement objects
+      x-not-in-database: true
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+    AgreementLifecycle:
+      type: object
+      title: AgreementLifecycle
+      description: 'TBD: Models the valid lifecycle states of an Agreement'
+      x-not-in-database: false
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: Draft / Complete
+    AgreementPurpose:
+      type: object
+      title: AgreementPurpose
+      description: 'TBD: Models the purpose of an agreement'
+      x-not-in-database: false
+      required:
+        - id
+        - name
+        - description
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: Name of purpose
+        description:
+          type: string
+          format: ''
+          example: ''
+          description: Description of purpose
+        serialized_hash:
+          type: string
+          format: ''
+          example: ''
+          description: 'In order to sign an Agreement, this relation needs to have a cryptopgraphic hash of the JSON serialized data to be included in the Signature payload of the Agreement. Hashes are collected as the hex representation of the SHA-1 sum of all UTF8 encoded string versions of the JSON representation of data. SHA1(json_serialized_data)'
+    AuditEventType:
+      type: object
+      title: AuditEventType
+      description: 'TBD: Model for the possible events pertaining a change to an object subject to auditing. This model is not necessarily a database-backed model, but part of application code.'
+      x-not-in-database: false
+      required:
+        - id
+        - event_name
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        event_name:
+          type: string
+          format: ''
+          example: ''
+          description: What happened - create/update/delete
+    AuditTracker:
+      type: object
+      title: AuditTracker
+      description: 'TBD: An external tracker receiving information from the system that can be subject to external auditing and verification of correct behavior. This is one of several notification/monitor/subscription patterns that may be more suitable for an encrypted Pub/Sub service.'
+      x-not-in-database: false
+      required:
+        - id
+        - name
+        - public_key
+        - callback_agreement
+        - callback_consent_record
+        - callback_policy
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: Name of the auditing system
+        public_key:
+          type: string
+          format: ''
+          example: ''
+          description: The auditing system's public key for encrypting data sent to callback functions
+        callback_agreement:
+          type: string
+          format: ''
+          example: ''
+          description: A URL receiving a callback with the Agreement object + Revision + AuditEventType
+        callback_consent_record:
+          type: string
+          format: ''
+          example: ''
+          description: A URL receiving a callback with the ConsentRecord object + Revision + AuditEventType
+        callback_policy:
+          type: string
+          format: ''
+          example: ''
+          description: A URL receiving a callback with the Policy object + Revision + AuditEventType
+        callback_revision_table_hash:
+          type: string
+          format: ''
+          example: ''
+          description: 'A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the revision table.'
+        callback_signature_table_hash:
+          type: string
+          format: ''
+          example: ''
+          description: 'A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the signature table.'
+    ConsentRecord:
+      type: object
+      title: ConsentRecord
+      description: 'A Consent Record expresses consent (as defined in this building block''s specification) to a single Agreement. There must be a UNIQUE constraint on (agreement_revision, individual)'
+      x-not-in-database: false
+      required:
+        - id
+        - agreement_revision_hash
+        - state
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
+        agreement:
+          $ref: '#/components/schemas/Agreement'
+          x-fk-model: Agreement
+          description: The Agreement to which consent has been given
+        agreement_revision:
+          $ref: '#/components/schemas/Revision'
+          x-fk-model: Revision
+          description: The Revision of the agreement which consent has been given to
+        agreement_revision_hash:
+          type: string
+          format: ''
+          example: ''
+          description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement.
         individual:
-          description: Individual to whom this data agreement record belongs to
           $ref: '#/components/schemas/Individual'
+          x-fk-model: Individual
+          description: The Individual who has signed this consent record
         opt_in:
           type: boolean
+          format: ''
+          example: ''
           description: 'True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent).'
         state:
           type: string
+          format: ''
+          example: ''
           description: 'The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed'
         signature:
           $ref: '#/components/schemas/Signature'
-    DataAgreementRecordRevision:
+          x-fk-model: Signature
+          description: 'A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+    ConsentRecordFilter:
       type: object
-      description: |
-        A generic revision model captures the serialized contents of any schema's single row.  This is then subject to 1) cryptographic signature and 2) auditing. Aside from successor column,  a revision should be considered locked.
+      title: ConsentRecordFilter
+      description: Query filter for API endpoint listing ConsentRecord objects
+      x-not-in-database: true
+      required:
+        - opt_in
+      properties:
+        opt_in:
+          type: boolean
+          format: ''
+          example: ''
+          description: ''
+        agreement:
+          $ref: '#/components/schemas/Agreement'
+          x-fk-model: Agreement
+          description: ''
+        agreement_revision:
+          $ref: '#/components/schemas/Revision'
+          x-fk-model: Revision
+          description: ''
+        individual:
+          $ref: '#/components/schemas/Individual'
+          x-fk-model: Individual
+          description: ''
+        functional_id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        foundational_id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+    Controller:
+      type: object
+      title: Controller
+      description: Details of a data controller.
+      x-not-in-database: false
       required:
         - id
-        - schema_name
-        - object_id
-        - serialized_snapshot
-        - timestamp
+        - name
+        - url
       properties:
         id:
           type: string
-          description: Revision identifier
-        object_id:
-          type: string
-          description: Consent identifier
-        serialized_snapshot:
-          type: string
-          description: Snapshot of the revision
-        timestamp:
-          type: string
-          description: UTC timestamp of when the revision was created
-        authorized_by_individual:
-          $ref: '#/components/schemas/Individual'
-          description: Reference to the individual that consented
-        authorized_by_other:
-          $ref: '#/components/schemas/Individual'
-          description: Reference to an admin user that has created this revision
-        successor:
-          $ref: '#/components/schemas/DataAgreementRecordRevision'
-        predecessor_hash:
-          type: string
-          description: Tamper-resistent artifact from previous record
-        predecessor_signature:
-          $ref: '#/components/schemas/Signature'
-          description: Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)
-    UpdateConsentForDataAttributeRequest:
-      required:
-        - consented
-        - days
-      type: object
-      properties:
-        consented:
-          type: string
-        days:
-          type: integer
-          format: int32
-      example:
-        consented: Allow
-        days: 0
-    UpdateConsentForDataAttributeResponse:
-      required:
-        - Msg
-        - Status
-      type: object
-      properties:
-        Msg:
-          type: string
-        Status:
-          type: integer
-          format: int32
-      example:
-        Msg: Consent updated successfully
-        Status: 200
-    ListAllDataRequests:
-      required:
-        - DataRequests
-        - IsRequestsOngoing
-        - IsDataDeleteRequestOngoing
-        - IsDataDownloadRequestOngoing
-        - Links
-      type: object
-      properties:
-        DataRequests:
-          type: array
-          items:
-            required:
-              - ID
-              - UserID
-              - UserName
-              - OrgID
-              - Type
-              - TypeStr
-              - State
-              - RequestedDate
-              - ClosedDate
-              - StateStr
-              - Comment
-            type: object
-            properties:
-              ID:
-                type: string
-              UserID:
-                type: string
-              UserName:
-                type: string
-              OrgID:
-                type: string
-              Type:
-                type: integer
-                format: int32
-              TypeStr:
-                type: string
-              State:
-                type: integer
-                format: int32
-              RequestedDate:
-                type: string
-              ClosedDate:
-                type: string
-              StateStr:
-                type: string
-              Comment:
-                type: string
-            example:
-              ID: 64eb3999e2f6a8000142c666
-              UserID: 638de3302f5d1700014431f3
-              UserName: johndoe@yopmail.com
-              OrgID: 603e683c69dd720001c74f93
-              Type: 1
-              TypeStr: Delete Data
-              State: 7
-              RequestedDate: '2023-08-27 11:55:05 +0000 UTC'
-              ClosedDate: '2023-08-27 11:56:45.307 +0000 UTC'
-              StateStr: Request processed with action
-              Comment: ''
-        IsRequestsOngoing:
-          type: boolean
-        IsDataDeleteRequestOngoing:
-          type: boolean
-        IsDataDownloadRequestOngoing:
-          type: boolean
-        Links:
-          $ref: '#/components/schemas/Pagination'
-    GetAllDeleteMyDataRequests:
-      required:
-        - ID
-        - UserID
-        - UserName
-        - OrgID
-        - Type
-        - TypeStr
-        - State
-        - RequestedDate
-        - ClosedDate
-        - StateStr
-        - Comment
-      type: object
-      properties:
-        ID:
-          type: string
-        UserID:
-          type: string
-        UserName:
-          type: string
-        OrgID:
-          type: string
-        Type:
-          type: integer
-          format: int32
-        TypeStr:
-          type: string
-        State:
-          type: integer
-          format: int32
-        RequestedDate:
-          type: string
-        ClosedDate:
-          type: string
-        StateStr:
-          type: string
-        Comment:
-          type: string
-      example:
-        ID: 64eb3999e2f6a8000142c666
-        UserID: 638de3302f5d1700014431f3
-        UserName: johndoe@yopmail.com
-        OrgID: 603e683c69dd720001c74f93
-        Type: 1
-        TypeStr: Delete Data
-        State: 7
-        RequestedDate: '2023-08-27 11:55:05 +0000 UTC'
-        ClosedDate: '2023-08-27 11:56:45.307 +0000 UTC'
-        StateStr: Request processed with action
-        Comment: ''
-    GetDeleteMyDataRequestStatus:
-      required:
-        - RequestOngoing
-        - ID
-        - State
-        - StateStr
-        - RequestedDate
-      type: object
-      properties:
-        RequestOngoing:
-          type: boolean
-        ID:
-          type: string
-        State:
-          type: integer
-          format: int32
-        StateStr:
-          type: string
-        RequestedDate:
-          type: string
-      example:
-        RequestOngoing: true
-        ID: 64eba692e2f6a8000142c668
-        State: 1
-        StateStr: Request initiated
-        RequestedDate: '2023-08-27 19:40:02 +0000 UTC'
-    CancelDeleteMyDataRequest:
-      required:
-        - ID
-        - UserID
-        - UserName
-        - OrgID
-        - Type
-        - TypeStr
-        - State
-        - RequestedDate
-        - ClosedDate
-        - StateStr
-        - Comment
-      type: object
-      properties:
-        ID:
-          type: string
-        UserID:
-          type: string
-        UserName:
-          type: string
-        OrgID:
-          type: string
-        Type:
-          type: integer
-          format: int32
-        TypeStr:
-          type: string
-        State:
-          type: integer
-          format: int32
-        RequestedDate:
-          type: string
-        ClosedDate:
-          type: string
-        StateStr:
-          type: string
-        Comment:
-          type: string
-      example:
-        ID: 64eba692e2f6a8000142c668
-        UserID: 638de3302f5d1700014431f3
-        UserName: johndoe@yopmail.com
-        OrgID: 603e683c69dd720001c74f93
-        Type: 1
-        TypeStr: Delete Data
-        State: 8
-        RequestedDate: '2023-08-27 19:40:02 +0000 UTC'
-        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
-        StateStr: Request cancelled by user
-        Comment: ''
-    SendDownloadMyDataRequestError:
-      required:
-        - Code
-        - Message
-      type: object
-      properties:
-        Code:
-          type: integer
-          format: int32
-        Message:
-          type: string
-      example:
-        Code: 400
-        Message: 'Request (Download Data) ongoing for user: 638de3302f5d1700014431f3 organization: 603e683c69dd720001c74f93'
-    GetAllDownloadMyDataRequests:
-      required:
-        - ID
-        - UserID
-        - UserName
-        - OrgID
-        - Type
-        - TypeStr
-        - State
-        - RequestedDate
-        - ClosedDate
-        - StateStr
-        - Comment
-      type: object
-      properties:
-        ID:
-          type: string
-        UserID:
-          type: string
-        UserName:
-          type: string
-        OrgID:
-          type: string
-        Type:
-          type: integer
-          format: int32
-        TypeStr:
-          type: string
-        State:
-          type: integer
-          format: int32
-        RequestedDate:
-          type: string
-        ClosedDate:
-          type: string
-        StateStr:
-          type: string
-        Comment:
-          type: string
-      example:
-        ID: 64ebb1a7e2f6a8000142c669
-        UserID: 638de3302f5d1700014431f3
-        UserName: johndoe@yopmail.com
-        OrgID: 603e683c69dd720001c74f93
-        Type: 2
-        TypeStr: Download Data
-        State: 1
-        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
-        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
-        StateStr: Request initiated
-        Comment: ''
-    GetDownloadMyDataRequestStatus:
-      required:
-        - RequestOngoing
-        - ID
-        - State
-        - StateStr
-        - RequestedDate
-      type: object
-      properties:
-        RequestOngoing:
-          type: boolean
-        ID:
-          type: string
-        State:
-          type: integer
-          format: int32
-        StateStr:
-          type: string
-        RequestedDate:
-          type: string
-      example:
-        RequestOngoing: true
-        ID: 64ebb1a7e2f6a8000142c669
-        State: 1
-        StateStr: Request initiated
-        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
-    CancelDownloadMyDataRequest:
-      required:
-        - ID
-        - UserID
-        - UserName
-        - OrgID
-        - Type
-        - TypeStr
-        - State
-        - RequestedDate
-        - ClosedDate
-        - StateStr
-        - Comment
-      type: object
-      properties:
-        ID:
-          type: string
-        UserID:
-          type: string
-        UserName:
-          type: string
-        OrgID:
-          type: string
-        Type:
-          type: integer
-          format: int32
-        TypeStr:
-          type: string
-        State:
-          type: integer
-          format: int32
-        RequestedDate:
-          type: string
-        ClosedDate:
-          type: string
-        StateStr:
-          type: string
-        Comment:
-          type: string
-      example:
-        ID: 64ebb1a7e2f6a8000142c669
-        UserID: 638de3302f5d1700014431f3
-        UserName: johndoe@yopmail.com
-        OrgID: 603e683c69dd720001c74f93
-        Type: 2
-        TypeStr: Download Data
-        State: 8
-        RequestedDate: '2023-08-27 20:27:19 +0000 UTC'
-        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
-        StateStr: Request cancelled by user
-        Comment: ''
-    Individual:
-      required:
-        - id
-        - iamId
-        - orgs
-        - APIKey
-        - Roles
-        - IncompleteProfile
-      type: object
-      description: |
-        Shallowly models an Individual which may reference some instance in an external system (registration system, functional ID, foundational ID etc). 
-        An Individual instance of this model is not to be mistaken with a unique natural individual. 
-        It is up to the system owner to decide if this record permits mapping to a natural individual and/or if a single Individual row can map to several consent agreements.
-      properties:
-        id:
-          type: string
+          format: ''
+          example: ''
+          description: ''
         name:
           type: string
-          description: Name of the individual
-        iamId:
+          format: ''
+          example: ''
+          description: Name of data controller (may be omitted if no data involved)
+        url:
           type: string
-          description: Consent BB specific IAM ID
+          format: ''
+          example: ''
+          description: URL of data controller (may be omitted if no data involved)
+    Individual:
+      type: object
+      title: Individual
+      description: 'Shallowly models an Individual which may reference some instance in an external system (registration system, functional ID, foundational ID etc). An Individual instance of this model is not to be mistaken with a unique natural individual. It is up to the system owner to decide if this record permits mapping to a natural individual and/or if a single Individual row can map to several consent agreements.'
+      x-not-in-database: false
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: The unique ID of an Individual row.
         external_id:
           type: string
           format: ''
@@ -2206,787 +368,202 @@ components:
           format: ''
           example: ''
           description: External id type specifier. A string. For instance "email" or "foundational id". Can be used in later queries.
-        lastVisit:
+        identity_provider_id:
           type: string
-          description: Last logged-in time
-        orgs:
-          type: array
-          items:
-            type: string
-            description: Organisation ID
-        roles:
-          type: array
-          items:
-            type: string
-            description: Role ID and organisation ID
-        incompleteProfile:
-          type: boolean
-          description: Indicates whether the profile is incomplete or not
-    Organisation:
-      required:
-        - ID
-        - Name
-        - CoverImageID
-        - CoverImageURL
-        - LogoImageID
-        - LogoImageURL
-        - Location
-        - Type
-        - Jurisdiction
-        - Disclosure
-        - Restriction
-        - Shared3PP
-        - Description
-        - Enabled
-        - PolicyURL
-        - EulaURL
-        - Templates
-        - Purposes
-        - Admins
-        - BillingInfo
-        - Subs
-        - HlcSupport
-        - PrivacyDashboard
-        - AriesCloudAgentDeployment
-        - DataRetention
-        - IdentityProviderRepresentation
-        - KeycloakOpenIDClient
-        - ExternalIdentityProviderAvailable
+          format: ''
+          example: ''
+          description: 'This could be an FK, but for now we do not have a mapping of identity providers. IDBB may have more requirements.'
+    IndividualFilter:
       type: object
+      title: IndividualFilter
+      description: 'TBD: When creating an Invidiual, we need some input that refers to a functional or foundational ID in an external system'
+      x-not-in-database: true
       properties:
-        ID:
+        foundational_id:
           type: string
-        Name:
+          format: ''
+          example: ''
+          description: ''
+        functional_id:
           type: string
-        CoverImageID:
-          type: string
-        CoverImageURL:
-          type: string
-        LogoImageID:
-          type: string
-        LogoImageURL:
-          type: string
-        Location:
-          type: string
-        Type:
-          required:
-            - ID
-            - Type
-            - ImageID
-            - ImageURL
-          type: object
-          properties:
-            ID:
-              type: string
-            Type:
-              type: string
-            ImageID:
-              type: string
-            ImageURL:
-              type: string
-        Jurisdiction:
-          type: string
-        Disclosure:
-          type: string
-        Restriction:
-          type: string
-        Shared3PP:
-          type: boolean
-        Description:
-          type: string
-        Enabled:
-          type: boolean
-        PolicyURL:
-          type: string
-        EulaURL:
-          type: string
-        Templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataAttribute'
-        Purposes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataAgreement'
-        Admins:
-          type: array
-          items:
-            required:
-              - UserID
-              - RoleID
-            type: object
-            properties:
-              UserID:
-                type: string
-              RoleID:
-                type: integer
-                format: int32
-        Subs:
-          required:
-            - Method
-            - Key
-          type: object
-          properties:
-            Method:
-              type: integer
-              format: int32
-            Key:
-              type: string
-        HlcSupport:
-          type: boolean
-        PrivacyDashboard:
-          required:
-            - HostName
-            - Version
-          type: object
-          properties:
-            HostName:
-              type: string
-            Version:
-              type: string
-        DataRetention:
-          required:
-            - RetentionPeriod
-            - Enabled
-          type: object
-          properties:
-            RetentionPeriod:
-              type: integer
-              format: int32
-            Enabled:
-              type: boolean
-          example:
-            RetentionPeriod: 0
-            Enabled: false
-        IdentityProviderRepresentation:
-          required:
-            - providerId
-            - onboard
-            - alias
-            - storeToken
-            - addReadTokenRoleOnCreate
-            - enabled
-            - firstBrokerLoginFlowAlias
-            - linkOnly
-            - postBrokerLoginFlowAlias
-            - trustEmail
-            - authenticateByDefault
-          type: object
-          properties:
-            providerId:
-              type: string
-            config:
-              required:
-                - authorizationUrl
-                - tokenUrl
-                - logoutUrl
-                - clientAuthMethod
-                - syncMode
-                - clientId
-                - clientSecret
-                - jwksUrl
-                - userInfoUrl
-                - defaultScope
-                - validateSignature
-                - backchannelSupported
-                - disableUserInfo
-                - hideOnLoginPage
-                - issuer
-                - useJwksUrl
-              type: object
-              properties:
-                authorizationUrl:
-                  type: string
-                tokenUrl:
-                  type: string
-                logoutUrl:
-                  type: string
-                clientAuthMethod:
-                  type: string
-                syncMode:
-                  type: string
-                clientId:
-                  type: string
-                clientSecret:
-                  type: string
-                jwksUrl:
-                  type: string
-                userInfoUrl:
-                  type: string
-                defaultScope:
-                  type: string
-                validateSignature:
-                  type: boolean
-                backchannelSupported:
-                  type: boolean
-                disableUserInfo:
-                  type: boolean
-                hideOnLoginPage:
-                  type: boolean
-                issuer:
-                  type: string
-                useJwksUrl:
-                  type: boolean
-              example:
-                authorizationUrl: ''
-                tokenUrl: ''
-                logoutUrl: ''
-                clientAuthMethod: ''
-                syncMode: ''
-                clientId: ''
-                clientSecret: ''
-                jwksUrl: ''
-                userInfoUrl: ''
-                defaultScope: ''
-                validateSignature: false
-                backchannelSupported: false
-                disableUserInfo: false
-                hideOnLoginPage: false
-                issuer: ''
-                useJwksUrl: false
-            alias:
-              type: string
-            storeToken:
-              type: boolean
-            addReadTokenRoleOnCreate:
-              type: boolean
-            enabled:
-              type: boolean
-            firstBrokerLoginFlowAlias:
-              type: string
-            linkOnly:
-              type: boolean
-            postBrokerLoginFlowAlias:
-              type: string
-            trustEmail:
-              type: boolean
-            authenticateByDefault:
-              type: boolean
-          example:
-            providerId: ''
-            config:
-              authorizationUrl: ''
-              tokenUrl: ''
-              logoutUrl: ''
-              clientAuthMethod: ''
-              syncMode: ''
-              clientId: ''
-              clientSecret: ''
-              jwksUrl: ''
-              userInfoUrl: ''
-              defaultScope: ''
-              validateSignature: false
-              backchannelSupported: false
-              disableUserInfo: false
-              hideOnLoginPage: false
-              issuer: ''
-              useJwksUrl: false
-            alias: ''
-            storeToken: false
-            addReadTokenRoleOnCreate: false
-            enabled: false
-            firstBrokerLoginFlowAlias: ''
-            linkOnly: false
-            postBrokerLoginFlowAlias: ''
-            trustEmail: false
-            authenticateByDefault: false
-        KeycloakOpenIDClient:
-          required:
-            - clientId
-            - surrogateAuthRequired
-            - enabled
-            - alwaysDisplayInConsole
-            - clientAuthenticatorType
-            - redirectUris
-            - webOrigins
-            - notBefore
-            - bearerOnly
-            - consentRequired
-            - standardFlowEnabled
-            - implicitFlowEnabled
-            - directAccessGrantsEnabled
-            - serviceAccountsEnabled
-            - publicClient
-            - frontchannelLogout
-            - protocol
-            - attributes
-            - authenticationFlowBindingOverrides
-            - fullScopeAllowed
-            - nodeReRegistrationTimeout
-            - defaultClientScopes
-            - optionalClientScopes
-            - access
-          type: object
-          properties:
-            clientId:
-              type: string
-            surrogateAuthRequired:
-              type: boolean
-            enabled:
-              type: boolean
-            alwaysDisplayInConsole:
-              type: boolean
-            clientAuthenticatorType:
-              type: string
-            redirectUris:
-              type: string
-              nullable: true
-            webOrigins:
-              type: string
-              nullable: true
-            notBefore:
-              type: integer
-              format: int32
-            bearerOnly:
-              type: boolean
-            consentRequired:
-              type: boolean
-            standardFlowEnabled:
-              type: boolean
-            implicitFlowEnabled:
-              type: boolean
-            directAccessGrantsEnabled:
-              type: boolean
-            serviceAccountsEnabled:
-              type: boolean
-            publicClient:
-              type: boolean
-            frontchannelLogout:
-              type: boolean
-            protocol:
-              type: string
-            attributes:
-              required:
-                - saml.assertion.signature
-                - saml.force.post.binding
-                - saml.multivalued.roles
-                - saml.encrypt
-                - backchannel.logout.revoke.offline.tokens
-                - saml.server.signature
-                - saml.server.signature.keyinfo.ext
-                - exclude.session.state.from.auth.response
-                - backchannel.logout.session.required
-                - backchannel.logout.url
-                - client_credentials.use_refresh_token
-                - saml_force_name_id_format
-                - saml.client.signature
-                - tls.client.certificate.bound.access.tokens
-                - saml.authnstatement
-                - display.on.consent.screen
-                - saml.onetimeuse.condition
-              type: object
-              properties:
-                saml.assertion.signature:
-                  type: string
-                saml.force.post.binding:
-                  type: string
-                saml.multivalued.roles:
-                  type: string
-                saml.encrypt:
-                  type: string
-                backchannel.logout.revoke.offline.tokens:
-                  type: string
-                saml.server.signature:
-                  type: string
-                saml.server.signature.keyinfo.ext:
-                  type: string
-                exclude.session.state.from.auth.response:
-                  type: string
-                backchannel.logout.session.required:
-                  type: string
-                backchannel.logout.url:
-                  type: string
-                client_credentials.use_refresh_token:
-                  type: string
-                saml_force_name_id_format:
-                  type: string
-                saml.client.signature:
-                  type: string
-                tls.client.certificate.bound.access.tokens:
-                  type: string
-                saml.authnstatement:
-                  type: string
-                display.on.consent.screen:
-                  type: string
-                saml.onetimeuse.condition:
-                  type: string
-            authenticationFlowBindingOverrides:
-              required:
-                - direct_grant
-                - browser
-              type: object
-              properties:
-                direct_grant:
-                  type: string
-                browser:
-                  type: string
-            fullScopeAllowed:
-              type: boolean
-            nodeReRegistrationTimeout:
-              type: integer
-              format: int32
-            defaultClientScopes:
-              type: string
-              nullable: true
-            optionalClientScopes:
-              type: string
-              nullable: true
-            access:
-              required:
-                - view
-                - configure
-                - manage
-              type: object
-              properties:
-                view:
-                  type: boolean
-                configure:
-                  type: boolean
-                manage:
-                  type: boolean
-        ExternalIdentityProviderAvailable:
-          type: boolean
-    DataAttribute:
-      title: Data Attribute
-      description: Data attributes exposed for data exchange by the organisation
+          format: ''
+          example: ''
+          description: ''
+    Policy:
       type: object
-      properties:
-        attributeId:
-          description: Identifier for the attribute.
-          type: string
-        attributeName:
-          description: Name of the attribute
-          type: string
-        attributeSensitive:
-          description: |
-            Indicates that personal data is sensitive or belongs to a  special category as per a regulations, typically requiring additional measures of handling.
-          type: boolean
-        attributeCategory:
-          description: A category of personal data
-          type: string
-        attributeDescription:
-          description: Description for the attribute
-          type: string
-        dataAgreementIds:
-          description: Identifiers for the associated data agreements
-          type: array
-          items:
-            type: string
-      required:
-        - attributeId
-        - attributeName
-        - attributeSensitive
-        - attributeCategory
-        - attributeDescription
-    DataRequest:
-      required:
-        - ID
-        - UserID
-        - UserName
-        - OrgID
-        - Type
-        - TypeStr
-        - State
-        - RequestedDate
-        - ClosedDate
-        - StateStr
-        - Comment
-      type: object
-      properties:
-        ID:
-          type: string
-        UserID:
-          type: string
-        UserName:
-          type: string
-        OrgID:
-          type: string
-        Type:
-          type: integer
-          format: int32
-        TypeStr:
-          type: string
-        State:
-          type: integer
-          format: int32
-        RequestedDate:
-          type: string
-        ClosedDate:
-          type: string
-        StateStr:
-          type: string
-        Comment:
-          type: string
-      example:
-        ID: 64ee6e86e2f6a8000142c68f
-        UserID: 638de3302f5d1700014431f3
-        UserName: george@igrant.io
-        OrgID: 64ec561de2f6a8000142c671
-        Type: 2
-        TypeStr: Download Data
-        State: 1
-        RequestedDate: '2023-08-29 22:17:42 +0000 UTC'
-        ClosedDate: '0001-01-01 00:00:00 +0000 UTC'
-        StateStr: Request initiated
-        Comment: ''
-    DataAgreement:
-      title: Data agreement
-      type: object
-      description: |
-        A data agreement contains the specification of a single purpose that can be consented to. 
-        A data greement is universal and can be consented to by *many* individuals through a data agreement record.
+      title: Policy
+      description: A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
+      x-not-in-database: false
       required:
         - id
+        - name
         - version
-        - lawful_basis
-        - dpia
+        - url
       properties:
         id:
           type: string
-          description: Data agreement identifier
+          format: ''
+          example: ''
+          description: ''
+        name:
+          type: string
+          format: ''
+          example: ''
+          description: Name of the policy
         version:
           type: string
-          description: The version of this specification to which a data agreement conforms
-        data_controller:
-          description: Data source organisation details
-          type: object
-          required:
-            - id
-            - name
-            - url
-          properties:
-            id:
-              type: string
-              format: ''
-              example: ''
-              description: ''
-            name:
-              type: string
-              description: Name of data controller (may be omitted if no data involved)
-            url:
-              type: string
-              description: URL of data controller (may be omitted if no data involved)
-        data_policy:
-          description: Global policy configuration
-          type: object
-          required:
-            - id
-            - name
-            - version
-            - url
-          properties:
-            id:
-              type: string
-              format: ''
-              example: ''
-              description: Policy ID
-            name:
-              type: string
-              format: ''
-              example: ''
-              description: Name of the policy
-            version:
-              type: string
-              format: ''
-              example: ''
-              description: Version of the policy
-            url:
-              type: string
-              format: ''
-              example: ''
-              description: 'Permanent URL at which this very version of the Policy can be read, should not be allowed to change over time.'
-            jurisdiction:
-              type: string
-              format: ''
-              example: ''
-              description: 'Indicates a legal jurisdiction, e.g. of some legislation, or where some government service is based.'
-            industry_sector:
-              type: string
-              format: ''
-              example: ''
-              description: Indicate or restrict scope for interpretation and application of purpose in a domain.
-            data_retention_period_days:
-              type: integer
-              format: ''
-              example: ''
-              description: 'The amount of time that an organization holds onto any personal data, in days.'
-            geographic_restriction:
-              type: string
-              format: ''
-              example: ''
-              description: The geographic restrictions required or followed regarding storage of data.
-            storage_location:
-              type: string
-              format: ''
-              example: ''
-              description: The geographic location where the personal data is stored
-        purpose:
-          description: Purpose of an agreement
-          type: object
-          required:
-            - id
-            - name
-            - description
-          properties:
-            id:
-              type: string
-              format: ''
-              example: ''
-              description: ''
-            name:
-              type: string
-              format: ''
-              example: ''
-              description: Name of purpose
-            description:
-              type: string
-              format: ''
-              example: ''
-              description: Description of purpose
-            hash:
-              type: string
-              format: ''
-              example: ''
-              description: 'In order to sign an Agreement, this relation needs to have a cryptopgraphic hash to be included in the Signature of the Agreement.'
-        lawful_basis:
+          format: ''
+          example: ''
+          description: Version of the policy
+        url:
           type: string
-          description: Lawful basis of the data agreement
-          enum:
-            - consent
-            - legal_obligation
-            - contract
-            - vital_interest
-            - public_task
-            - legitimate_interest
-        method_of_use:
-          type: string
-          description: |
-            Method of use indicates the data exchange mode of data agreement. 
-            When the data controller wishes to expose the data for consumption it should be data-source.
-            When the data controller wishes to consume the data it should be data-using-service
-          num:
-            - null
-            - data-source
-            - data-using-service
-        dpia:
-          description: Data Protection Impact Assessment
-          title: Data agreement
-          type: object
-          required:
-            - dpia_timestamp
-            - dpia_summary_url
-          properties:
-            dpia_timestamp:
-              type: string
-              description: UTC timestamp in epoch seconds when the DPIA was performed
-            dpia_summary_url:
-              type: string
-              description: URL to the DPIA summary
-        lifecycle:
-          type: object
-          description: 'TBD: Models the valid lifecycle states of an Agreement'
-          required:
-            - id
-            - name
-          properties:
-            id:
-              type: string
-              description: Data agreement lifecycle ID
-            name:
-              type: string
-              description: Definition / Preparation / Capture / Proof
-              enum:
-                - definition
-                - preparation
-                - capture
-                - proof
-        signature:
-          $ref: '#/components/schemas/Signature'
-        active:
-          type: boolean
-          description: Agreement is active and new ConsentRecords can be created.
-        forgettable:
-          type: boolean
-          description: 'Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability.'
-    GlobalDataPolicyConfiguration:
-      type: object
-      description: Global data policy configuration for the organisation
-      properties:
-        policyUrl:
-          description: Policy URL for the organisation
-          type: string
+          format: ''
+          example: ''
+          description: 'Permanent URL at which this very version of the Policy can be read, should not be allowed to change over time.'
         jurisdiction:
-          description: |
-            Indicates a legal jurisdiction, e.g. of some legislation, or where some government service is based.
           type: string
-        industrySectorId:
-          description: |
-            Identifier for the industry sector
+          format: ''
+          example: ''
+          description: ''
+        industry_sector:
           type: string
-        industrySector:
-          description: |
-            Indicate or restrict scope for interpretation and application of purpose in a domain.
+          format: ''
+          example: ''
+          description: ''
+        data_retention_period_days:
+          type: integer
+          format: ''
+          example: ''
+          description: ''
+        geographic_restriction:
           type: string
-        dataRetentionPeriod:
-          description: 'The amount of time that an organization holds onto any personal data, in seconds.'
-          type: number
-        geographicRestriction:
-          description: The geographic restrictions required or followed regarding storage of data.
+          format: ''
+          example: ''
+          description: ''
+        storage_location:
           type: string
-        storageLocation:
-          description: The geographic location where the personal data is stored
-          type: string
-        thirdPartyDataSharing:
-          description: |
-            This is a boolean value to indicate that the DA is used for third party data disclosures.  This indicates that some data disclosures will happen and is used to release personal data  to DUS based on an agreement
-          type: boolean
+          format: ''
+          example: ''
+          description: ''
+    Revision:
+      type: object
+      title: Revision
+      description: |-
+        A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
+
+        Aside from "successor" column, a revision should be considered locked.
+      x-not-in-database: false
       required:
-        - policyUrl
-        - jurisdiction
-        - industrySectorId
-        - industrySector
-        - dataRetentionPeriod
-        - geographicRestriction
-        - storageLocation
-        - thirdPartyDataSharing
+        - id
+        - schema_name
+        - object_id
+        - serialized_snapshot
+        - serialized_hash
+        - timestamp
+      properties:
+        id:
+          type: string
+          format: ''
+          example: ''
+          description: ''
+        schema_name:
+          type: string
+          format: ''
+          example: ''
+          description: This was previously called "schema" but for technical reasons should be called "schema_name"
+        object_id:
+          type: string
+          format: ''
+          example: ''
+          description: The PK of the object that was serialized.
+        signed_without_object_id:
+          type: boolean
+          format: ''
+          example: ''
+          description: Indicates that object_id was left blank in serialized_snapshot when calculating serialized_hash. object_id may be subsequently filled in.
+        serialized_snapshot:
+          type: string
+          format: ''
+          example: ''
+          description: 'Revisioned data (serialized as JSON) as a dict {object_data: {...}, schema_name: ..., object_id: ..., signed_without_object_id: ..., timestamp: ..., authorized_by_individual: ..., authorized_by_other: ...}. It contains all the fields of the schema except id, successor, predessor_hash and predecessor_signature.'
+        serialized_hash:
+          type: string
+          format: ''
+          example: ''
+          description: Hash of serialized_snapshot (SHA-1)
+        timestamp:
+          type: string
+          format: ''
+          example: ''
+          description: Timestamp of when revisioning happened
+        authorized_by_individual:
+          $ref: '#/components/schemas/Individual'
+          x-fk-model: Individual
+          description: ''
+        authorized_by_other:
+          type: string
+          format: ''
+          example: ''
+          description: Reference to an admin user that has created this revision
+        successor:
+          $ref: '#/components/schemas/Revision'
+          x-fk-model: Revision
+          description: 'This revision is no longer the latest revision, refer to its successor.'
+        predecessor_hash:
+          type: string
+          format: ''
+          example: ''
+          description: 'Tamper-resistent artifact from previous record, copied from serialized_hash'
+        predecessor_signature:
+          type: string
+          format: ''
+          example: ''
+          description: Tamper-resistent artifact from previous record (we don't know if the previous record was signed or not)
     Signature:
       type: object
-      description: |
-        A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. 
-        Required signing methods: Revision object or another Signature object.
+      title: Signature
+      description: 'A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. Required signing methods: Revision object or another Signature object.'
+      x-not-in-database: false
       required:
         - id
         - payload
         - signature
         - verification_method
-        - verification_hash
+        - verification_payload
+        - verification_payload_hash
         - verification_signed_by
         - timestamp
       properties:
         id:
           type: string
-          format: uuid
+          format: ''
+          example: ''
           description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a Signature that is not yet stored in the database and only exist in transit.'
         payload:
           type: string
           format: ''
           example: ''
-          description: 'The payload that is signed, constructed as a serialization of fields verification_method + verification_hash + verification_artifact + verification_signed_by + verification_jws_header. Serialized as a JSON dict.'
+          description: 'The final payload that is signed, constructed as a JSON serialization of fields {verificiation_payload: ..., verification_payload_hash: ..., verification_method: ..., verification_artifact: ..., verification_signed_by: ..., verification_jws_header, timestamp: ..., signed_without_object_reference: ..., object_type: ..., object_reference: ...}. Serialized as a JSON dict. If the signature is generated before anything is stored in the database (and has a PK), then the object_reference should be omitted from the payload but filled in afterwards.'
         signature:
           type: string
           format: ''
           example: ''
-          description: 'Signature (of payload), the format of the signature should be specified by either verification_method or verification_jws_header'
+          description: 'Signature of payload hash, the format of the signature should be specified by either verification_method or verification_jws_header'
         verification_method:
           type: string
           format: ''
           example: ''
           description: 'A well-known string denoting which method is used. Valid values: <TBD>. We might expand this with a relation to which verification methods that are supported. There may be a minimal set of supported methods necessary.'
-        verification_hash:
+        verification_payload:
           type: string
           format: ''
           example: ''
-          description: Internally generated cryptographic hash of the value to be signed. The hash is (re)produced from the object_type and object_reference - but from the serialized data of those.
+          description: Internally generated serialized version of the data referenced by object_type and object_reference - by extracting and serializing their data as JSON.
+        verification_payload_hash:
+          type: string
+          format: ''
+          example: ''
+          description: 'Internally generated cryptographic hash of the value to be signed, i.e. the value of verification_payload'
         verification_artifact:
           type: string
           format: ''
@@ -2997,6 +574,11 @@ components:
           format: ''
           example: ''
           description: 'Because an identifier''s information may change over time, there is a need to store that information at the time of signing. In case of a cryptographic signature, this field should contain some identifier for looking up or verifying the public key of the signing party. In case of a non-cryptographic signature, this field could contain a natural individual''s names, personal number, email addresses - store a snapshot that binds to the signature at the time of signing. In case of a cryptographic signature, this may be the fingerprint of the individual''s public key or in some cases, a token from the user''s ID session.'
+        verification_signed_as:
+          type: string
+          format: ''
+          example: ''
+          description: 'DRAFT FIELD: Specifies the relationship between the authorizing signature and the invidual which the payload concerns. This is relevant for Consent Records. Possible values: "individual" / "delegate"'
         verification_jws_header:
           type: string
           format: ''
@@ -3007,6 +589,11 @@ components:
           format: ''
           example: ''
           description: 'Timestamp of signature, currently this field isn''t part of the payload so it''s not tamper-proof.'
+        signed_without_object_reference:
+          type: boolean
+          format: ''
+          example: ''
+          description: Indicates that object_reference was left blank in the serialized version that was signed.
         object_type:
           type: string
           format: ''
@@ -3017,9 +604,1617 @@ components:
           format: ''
           example: ''
           description: 'A symmetric relation / back reference to the object_type that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)'
+    StatusReadiness:
+      type: object
+      description: This model is not stored in a database. It describes the status of the Building Block while running. Returns immediately. API should not be public.
+      x-not-in-database: true
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          format: ''
+          example: ''
+          description: 'Possible values: OK, WAITING, ERROR'
+        error_message:
+          type: string
+          format: ''
+          example: ''
+          description: Description of failure
+        waiting_for:
+          type: string
+          format: ''
+          example: ''
+          description: 'When a timeout occurs, a list of pending operations may be shared'
+    StatusStartup:
+      type: object
+      title: StatusStartup
+      description: 'This model is not stored in a database. It describes the status of the Building Block while starting up. API should not be public. This call is blocking until the system is ready, a timeout occurs or an error is detected.'
+      x-not-in-database: true
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          format: ''
+          example: ''
+          description: 'Possible values: OK, TIMEOUT, ERROR'
+        error_message:
+          type: string
+          format: ''
+          example: ''
+          description: Description of failure
+        waiting_for:
+          type: string
+          format: ''
+          example: ''
+          description: 'When a timeout occurs, a list of pending operations may be shared'
   securitySchemes:
     BearerAuth:
       description: Access token passed with Bearer prefix in Authorization header
       type: http
       scheme: bearer
       bearerFormat: JWT
+info:
+  contact:
+    email: support@igrant.io
+    name: iGrant.io
+    url: 'https://igrant.io'
+  description: 'The Consent Building Block enables services for individuals to approve the use  of their personal data by defining the principles, functions, and architecture  of an information system. For organisations that process personal data, it  provides the ability to know the individual''s will and legitimately process such  personal data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating auditable bilateral data-agreements within a multi-agent environment that  integrates with most other Building Blocks.'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+  title: Consent Building Block APIs
+  version: 2023.8.2
+openapi: 3.1.0
+paths:
+  '/audit/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - fetch a single data agreement.
+      operationId: auditReadRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agreement'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetch a single data agreement.
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
+  /audit/data-agreements/:
+    post:
+      description: LIST - fetch all data agreements stored in the system
+      operationId: auditAgreementList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreementFilter:
+                  $ref: '#/components/schemas/AgreementFilter'
+                  description: An object of type AgreementFilter
+              required:
+                - agreementFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - fetch all data agreements stored in the system
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
+  '/audit/data-agreement-record/{dataAgreementRecordId}':
+    get:
+      description: READ - fetch a single data agreement record
+      operationId: auditConsentRecordRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementRecordId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRecord'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetch a single data agreement record
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  /audit/data-agreement-records:
+    post:
+      description: LIST - fetch all consent records
+      operationId: auditConsentRecordList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                consentRecordFilter:
+                  $ref: '#/components/schemas/ConsentRecordFilter'
+                  description: An object of type ConsentRecordFilter
+              required:
+                - consentRecordFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - fetch all consent records
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-AT-003
+  /config/data-agreement:
+    post:
+      description: CREATE - a new data agreement and returned together with revision
+      operationId: configCreateAgreement
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreement:
+                  $ref: '#/components/schemas/Agreement'
+                  description: An object of type Agreement
+              required:
+                - agreement
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - a new data agreement and returned together with revision
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-001
+  '/config/data-agreement/{dataAgreementId}':
+    delete:
+      description: DELETE - a data agreement
+      operationId: configDeleteAgreement
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - a data agreement
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-004
+    get:
+      description: READ - fetches the latest version of a data agreement
+      operationId: configReadAgreement
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetches the latest version of a data agreement
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: UPDATE - an existing data agreement and returned together with revision
+      operationId: configUpdateAgreement
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreement:
+                  $ref: '#/components/schemas/Agreement'
+                  description: An object of type Agreement
+              required:
+                - agreement
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - an existing data agreement and returned together with revision
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+  /config/data-agreements:
+    get:
+      description: LIST - fetch all data agreements
+      operationId: configListAgreement
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - fetch all data agreements
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    post:
+      description: LIST - fetch all data agreements matching the data agreement filter
+      operationId: configListAgreementFilter
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreementFilter:
+                  $ref: '#/components/schemas/AgreementFilter'
+                  description: An object of type AgreementFilter
+              required:
+                - agreementFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - fetch all data agreements matching the data agreement filter
+      tags:
+        - config
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  /config/policies:
+    get:
+      description: LIST - Fetches list of policies
+      operationId: configListPolicy
+      parameters:
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Policy'
+                type: array
+          description: A list of Policy objects readable for the current session's credentials.
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetches list of policies
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-A-001, UC-C-PIC-A-002'
+  /config/policy:
+    post:
+      description: CREATE - a new policy and returned together with revision
+      operationId: configCreatePolicy
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                  description: An object of type Policy
+              required:
+                - policy
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Policy'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - a new policy and returned together with revision
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-001
+  '/config/policy/{policyId}':
+    delete:
+      description: 'DELETE - Deletes an existing policy, returning the updated version and a new revision. Deleting a policy is not possible if it''s associated with active Agreement.'
+      operationId: configDeletePolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - an existing policy
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-004
+    get:
+      description: 'READ - get a policy + latest revision. If a policy filter is supplied and contains a `revision_id`, then this specific revision is returned.'
+      operationId: configReadPolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Policy'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - get a policy + latest revision
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: 'UPDATE - Updates an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in Agreement, the new revision should be specified for Agreement.'
+      operationId: configUpdatePolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                  description: An object of type Policy
+              required:
+                - policy
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Policy'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: 'UPDATE - Updates an existing policy, returning the updated version and a new revision.'
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+  '/config/policy/{policyId}/revisions':
+    get:
+      description: LIST - returns all the revisions for the policy
+      operationId: configListPolicyRevisions
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - returns all the revisions for the policy
+      tags:
+        - config
+      x-specification-crudl-model: Revision
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - fetches the latest version of an Agreement
+      operationId: serviceAgreementRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetches the latest version of an Agreement
+      tags:
+        - service
+      x-specification-crudl-model: Agreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/data-agreement/{dataAgreementId}/agreementdata':
+    get:
+      description: READ - fetches a list of latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      operationId: serviceAgreementDataRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/AgreementData'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetches a list of latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      tags:
+        - service
+      x-specification-crudl-model: AgreementData
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  /service/individual:
+    post:
+      description: CREATE - Creates an Individual in the Consent system
+      operationId: serviceIndividualCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                individual:
+                  $ref: '#/components/schemas/Individual'
+                  description: An object of type Individual
+              required:
+                - individual
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Creates an Individual in the Consent system
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  /service/individual/record:
+    delete:
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all Consent Records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned Consent Record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      operationId: serviceDeleteAllRecords
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all Consent Records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned Consent Record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-003
+    get:
+      description: LIST - Fetches all current unambiguous consent records stored for Individual ID. Individual ID supplied as HTTP header.
+      operationId: serviceListIndividualConsentRecordList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetches all current unambiguous consent records stored for Individual ID. Individual ID supplied as HTTP header.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
+  '/service/individual/record/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord for an Agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement.
+      operationId: serviceReadIndividualRecordRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRecord'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord for an Agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
+    post:
+      description: 'CREATE - For a particular Individual and a particular Agreement, create a new Consent Record pointing to the current Revision of a given Agreement. Individual ID supplied as HTTP header.'
+      operationId: serviceCreateIndividualConsentRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: An object with id individualId
+          in: query
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: 'CREATE - For a particular Individual and a particular Agreement, create a new Consent Record pointing to the current Revision of a given Agreement. Individual ID supplied as HTTP header.'
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+  '/service/individual/record/data-agreement/{dataAgreementId}/all':
+    get:
+      description: LIST - Fetches all consent records given to a particular agreement. Individual ID supplied as HTTP header.
+      operationId: serviceListIndividualAgreementConsentRecordList
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetches all consent records given to a particular agreement. Individual ID supplied as HTTP header.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
+  /service/individual/record/data-agreement-record:
+    post:
+      description: CREATE - Creates a paired ConsentRecord and Signature object. Returns the same objects with the PK defined.
+      operationId: serviceCreateIndividualConsentRecordAndSignature
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                consentRecord:
+                  $ref: '#/components/schemas/ConsentRecord'
+                  description: An object of type ConsentRecord
+                signature:
+                  $ref: '#/components/schemas/Signature'
+                  description: An object of type Signature
+              required:
+                - consentRecord
+                - signature
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Revision'
+                    - $ref: '#/components/schemas/Signature'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Creates a paired ConsentRecord and Signature object. Returns the same objects with the PK defined.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+  /service/individual/record/data-agreement-record/draft:
+    post:
+      description: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without a PK) for a given dataAgreementId.
+      operationId: serviceCreateIndividualConsentRecordDraft
+      parameters:
+        - description: An object with id individualId
+          in: query
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - description: An object with id dataAgreementId
+          in: query
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Signature'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without a PK) for a given dataAgreementId.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+  '/service/individual/record/data-agreement-record/{dataAgreementRecordId}':
+    put:
+      description: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+      operationId: serviceUpdateIndividualConsentRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementRecordId
+          required: true
+          schema:
+            type: string
+        - description: An object with id individualId
+          in: query
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - description: An object with id dataAgreementId
+          in: query
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-003
+  '/service/individual/record/data-agreement-record/{dataAgreementRecordId}/signature':
+    post:
+      description: CREATE - Creates and returns a blank Signature object for the Consent Record.
+      operationId: serviceCreateIndividualConsentRecordSignature
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementRecordId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signature'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Creates and returns a blank Signature object for the Consent Record.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
+    put:
+      description: UPDATE - Updates a Signature object for a Consent Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Consent Record state.
+      operationId: serviceUpdateIndividualConsentRecordSignature
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementRecordId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                signature:
+                  $ref: '#/components/schemas/Signature'
+                  description: An object of type Signature
+              required:
+                - signature
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signature'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Updates a Signature object for a Consent Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Consent Record state.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
+  '/service/individual/{individualId}':
+    delete:
+      description: DELETE - entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
+      operationId: serviceIndividualDelete
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: individualId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+    get:
+      description: READ - Fetch an Individual in the Consent system
+      operationId: serviceIndividualRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: individualId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch an Individual in the Consent system
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+    put:
+      description: UPDATE - Updates an Individual in the Consent system
+      operationId: serviceIndividualUpdate
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: individualId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                individual:
+                  $ref: '#/components/schemas/Individual'
+                  description: An object of type Individual
+              required:
+                - individual
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Individual'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Updates an Individual in the Consent system
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  /service/individuals:
+    get:
+      description: LIST - lists individuals in the system
+      operationId: serviceIndividualList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Individual'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - lists individuals in the system
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+    post:
+      description: LIST - lists individuals in the system
+      operationId: serviceIndividualListFilter
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                individualFilter:
+                  $ref: '#/components/schemas/IndividualFilter'
+                  description: An object of type IndividualFilter
+              required:
+                - individualFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Individual'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - lists individuals in the system
+      tags:
+        - service
+      x-specification-crudl-model: Individual
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  '/service/policy/{policyId}':
+    get:
+      description: READ - fetches the latest version of a Policy and the presented revisionId of an associated Agreement
+      operationId: servicePolicyRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Policy'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetches the latest version of a Policy and the presented revisionId of an associated Agreement
+      tags:
+        - service
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/purpose/{purposeId}':
+    get:
+      description: READ - fetches the latest version of an AgreementPurpose and the presented revisionId of that Agreement
+      operationId: serviceAgreementPurposeRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: purposeId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/AgreementPurpose'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - fetches the latest version of an AgreementPurpose and the presented revisionId of that Agreement
+      tags:
+        - service
+      x-specification-crudl-model: AgreementPurpose
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/verification/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied as HTTP header.
+      operationId: serviceVerificationAgreementConsentRecordRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied as HTTP header.
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-A-003
+  /service/verification/data-agreements:
+    get:
+      description: LIST - Fetch consent records
+      operationId: serviceVerificationAgreementList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetch consent records
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: '1.1'
+      x-specification-usecase: UC-C-PIC-A-003
+    post:
+      description: LIST - Fetch consent records for supplied AgreementFilter
+      operationId: serviceVerificationAgreementListFilter
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreementFilter:
+                  $ref: '#/components/schemas/AgreementFilter'
+                  description: An object of type AgreementFilter
+              required:
+                - agreementFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetch consent records for supplied AgreementFilter
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: '1.1'
+      x-specification-usecase: UC-C-PIC-A-003
+  /service/verification/data-agreement-records:
+    post:
+      description: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
+      operationId: serviceVerificationConsentRecordList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                consentRecordFilter:
+                  $ref: '#/components/schemas/ConsentRecordFilter'
+                  description: An object of type ConsentRecordFilter
+              required:
+                - consentRecordFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '3.1, 1.2'
+      x-specification-usecase: UC-C-PIC-A-003
+servers:
+  - description: Development server
+    url: 'https://api.bb-consent.dev/v2'
+  - description: Staging server
+    url: 'https://staging-consent-bb-api.igrant.io/v2'
+  - description: Demo server
+    url: 'https://demo-consent-bb-api.igrant.io/v2'
+tags:
+  - description: Operations for external auditing systems to query detailed data from the system and subscribe to notifications.
+    name: audit
+    x-tag-expanded: false
+  - description: Secured operations available to organization API integration
+    name: config
+    x-tag-expanded: false
+  - description: 'Secured operations for individuals, data consumers and applications to record and verify consent'
+    name: service
+    x-tag-expanded: false
+  - description: 'These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.'
+    name: onboard
+    x-tag-expanded: false

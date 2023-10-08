@@ -1,0 +1,33 @@
+description: READ - Fetch a specific Consent Record (latest revision). Individual
+  ID supplied as HTTP header.
+operationId: serviceVerificationAgreementConsentRecordRead
+parameters:
+- description: Unique ID of an object
+  in: path
+  name: dataAgreementId
+  required: true
+  schema:
+    type: string
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+            - $ref: ../definitions/ConsentRecord.yaml
+            - $ref: ../definitions/Revision.yaml
+          type: array
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied
+  as HTTP header.
+tags:
+- service
+x-specification-crudl-model: ''
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: '1.2'
+x-specification-usecase: UC-C-PIC-A-003
