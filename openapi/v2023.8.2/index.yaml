@@ -106,7 +106,7 @@ paths:
   /service/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceAgreementRead.yaml
-  /service/data-agreement/{dataAgreementId}/agreementdata:
+  /service/data-agreement/{dataAgreementId}/data-attributes:
     get:
       $ref: ./paths/serviceAgreementDataRead.yaml
   /service/individual:

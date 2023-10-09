@@ -1318,7 +1318,7 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
-  '/service/data-agreement/{dataAgreementId}/agreementdata':
+  '/service/data-agreement/{dataAgreementId}/data-attributes':
     get:
       description: READ - fetches a list of latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
       operationId: serviceAgreementDataRead
