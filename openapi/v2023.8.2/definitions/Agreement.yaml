@@ -6,7 +6,7 @@ x-not-in-database: false
 required:
   - id
   - version
-  - lawful_basis
+  - lawfulBasis
   - dpia
 properties:
   id:
@@ -36,13 +36,13 @@ properties:
     x-fk-model: "AgreementPurpose"
     description: "Purpose of data processing or purpose of consent. Displayed to the user."
 
-  lawful_basis:
+  lawfulBasis:
     type: string
     format: ""
     example: ""
     description: "Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest"
 
-  data_use:
+  dataUse:
     type: string
     format: ""
     example: ""
@@ -71,7 +71,7 @@ properties:
     example: ""
     description: "Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability."
 
-  compatible_with_version:
+  compatibleWithVersion:
     $ref: "./Agreement.yaml"
     x-fk-model: "Agreement"
     description: "WIP: This field indicates that Consent Records may be transferred from this compatible previous version of the same Agreement."

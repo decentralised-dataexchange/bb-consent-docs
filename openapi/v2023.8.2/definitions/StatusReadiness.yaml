@@ -11,13 +11,13 @@ properties:
     example: ""
     description: "Possible values: OK, WAITING, ERROR"
 
-  error_message:
+  errorMessage:
     type: string
     format: ""
     example: ""
     description: "Description of failure"
 
-  waiting_for:
+  waitingFor:
     type: string
     format: ""
     example: ""

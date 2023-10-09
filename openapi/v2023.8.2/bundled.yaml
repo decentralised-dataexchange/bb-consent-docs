@@ -8,7 +8,7 @@ components:
       required:
         - id
         - version
-        - lawful_basis
+        - lawfulBasis
         - dpia
       properties:
         id:
@@ -33,12 +33,12 @@ components:
           $ref: '#/components/schemas/AgreementPurpose'
           x-fk-model: AgreementPurpose
           description: Purpose of data processing or purpose of consent. Displayed to the user.
-        lawful_basis:
+        lawfulBasis:
           type: string
           format: ''
           example: ''
           description: Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest
-        data_use:
+        dataUse:
           type: string
           format: ''
           example: ''
@@ -62,7 +62,7 @@ components:
           format: ''
           example: ''
           description: 'Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability.'
-        compatible_with_version:
+        compatibleWithVersion:
           $ref: '#/components/schemas/Agreement'
           x-fk-model: Agreement
           description: 'WIP: This field indicates that Consent Records may be transferred from this compatible previous version of the same Agreement.'
@@ -162,11 +162,11 @@ components:
           format: ''
           example: ''
           description: Description of purpose
-        serialized_hash:
+        serializedHash:
           type: string
           format: ''
           example: ''
-          description: 'In order to sign an Agreement, this relation needs to have a cryptopgraphic hash of the JSON serialized data to be included in the Signature payload of the Agreement. Hashes are collected as the hex representation of the SHA-1 sum of all UTF8 encoded string versions of the JSON representation of data. SHA1(json_serialized_data)'
+          description: 'In order to sign an Agreement, this relation needs to have a cryptopgraphic hash of the JSON serialized data to be included in the Signature payload of the Agreement. Hashes are collected as the hex representation of the SHA-1 sum of all UTF8 encoded string versions of the JSON representation of data. SHA1(jsonSerializedData)'
     AuditEventType:
       type: object
       title: AuditEventType
@@ -174,14 +174,14 @@ components:
       x-not-in-database: false
       required:
         - id
-        - event_name
+        - eventName
       properties:
         id:
           type: string
           format: ''
           example: ''
           description: ''
-        event_name:
+        eventName:
           type: string
           format: ''
           example: ''
@@ -194,10 +194,10 @@ components:
       required:
         - id
         - name
-        - public_key
-        - callback_agreement
-        - callback_consent_record
-        - callback_policy
+        - publicKey
+        - callbackAgreement
+        - callbackConsentRecord
+        - callbackPolicy
       properties:
         id:
           type: string
@@ -209,32 +209,32 @@ components:
           format: ''
           example: ''
           description: Name of the auditing system
-        public_key:
+        publicKey:
           type: string
           format: ''
           example: ''
           description: The auditing system's public key for encrypting data sent to callback functions
-        callback_agreement:
+        callbackAgreement:
           type: string
           format: ''
           example: ''
           description: A URL receiving a callback with the Agreement object + Revision + AuditEventType
-        callback_consent_record:
+        callbackConsentRecord:
           type: string
           format: ''
           example: ''
           description: A URL receiving a callback with the ConsentRecord object + Revision + AuditEventType
-        callback_policy:
+        callbackPolicy:
           type: string
           format: ''
           example: ''
           description: A URL receiving a callback with the Policy object + Revision + AuditEventType
-        callback_revision_table_hash:
+        callbackRevisionTableHash:
           type: string
           format: ''
           example: ''
           description: 'A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the revision table.'
-        callback_signature_table_hash:
+        callbackSignatureTableHash:
           type: string
           format: ''
           example: ''
@@ -242,11 +242,11 @@ components:
     ConsentRecord:
       type: object
       title: ConsentRecord
-      description: 'A Consent Record expresses consent (as defined in this building block''s specification) to a single Agreement. There must be a UNIQUE constraint on (agreement_revision, individual)'
+      description: 'A Consent Record expresses consent (as defined in this building block''s specification) to a single Agreement. There must be a UNIQUE constraint on (agreementRevision, individual)'
       x-not-in-database: false
       required:
         - id
-        - agreement_revision_hash
+        - agreementRevisionHash
         - state
       properties:
         id:
@@ -258,11 +258,11 @@ components:
           $ref: '#/components/schemas/Agreement'
           x-fk-model: Agreement
           description: The Agreement to which consent has been given
-        agreement_revision:
+        agreementRevision:
           $ref: '#/components/schemas/Revision'
           x-fk-model: Revision
           description: The Revision of the agreement which consent has been given to
-        agreement_revision_hash:
+        agreementRevisionHash:
           type: string
           format: ''
           example: ''
@@ -271,7 +271,7 @@ components:
           $ref: '#/components/schemas/Individual'
           x-fk-model: Individual
           description: The Individual who has signed this consent record
-        opt_in:
+        optIn:
           type: boolean
           format: ''
           example: ''
@@ -291,9 +291,9 @@ components:
       description: Query filter for API endpoint listing ConsentRecord objects
       x-not-in-database: true
       required:
-        - opt_in
+        - optIn
       properties:
-        opt_in:
+        optIn:
           type: boolean
           format: ''
           example: ''
@@ -302,7 +302,7 @@ components:
           $ref: '#/components/schemas/Agreement'
           x-fk-model: Agreement
           description: ''
-        agreement_revision:
+        agreementRevision:
           $ref: '#/components/schemas/Revision'
           x-fk-model: Revision
           description: ''
@@ -310,12 +310,12 @@ components:
           $ref: '#/components/schemas/Individual'
           x-fk-model: Individual
           description: ''
-        functional_id:
+        functionalId:
           type: string
           format: ''
           example: ''
           description: ''
-        foundational_id:
+        foundationalId:
           type: string
           format: ''
           example: ''
@@ -358,17 +358,17 @@ components:
           format: ''
           example: ''
           description: The unique ID of an Individual row.
-        external_id:
+        externalId:
           type: string
           format: ''
           example: ''
           description: 'Reference to another foundational/functional ID, which is likely PII'
-        external_id_type:
+        externalIdType:
           type: string
           format: ''
           example: ''
           description: External id type specifier. A string. For instance "email" or "foundational id". Can be used in later queries.
-        identity_provider_id:
+        identityProviderId:
           type: string
           format: ''
           example: ''
@@ -379,12 +379,12 @@ components:
       description: 'TBD: When creating an Invidiual, we need some input that refers to a functional or foundational ID in an external system'
       x-not-in-database: true
       properties:
-        foundational_id:
+        foundationalId:
           type: string
           format: ''
           example: ''
           description: ''
-        functional_id:
+        functionalId:
           type: string
           format: ''
           example: ''
@@ -425,22 +425,22 @@ components:
           format: ''
           example: ''
           description: ''
-        industry_sector:
+        industrySector:
           type: string
           format: ''
           example: ''
           description: ''
-        data_retention_period_days:
+        dataRetentionPeriodDays:
           type: integer
           format: ''
           example: ''
           description: ''
-        geographic_restriction:
+        geographicRestriction:
           type: string
           format: ''
           example: ''
           description: ''
-        storage_location:
+        storageLocation:
           type: string
           format: ''
           example: ''
@@ -455,10 +455,10 @@ components:
       x-not-in-database: false
       required:
         - id
-        - schema_name
-        - object_id
-        - serialized_snapshot
-        - serialized_hash
+        - schemaName
+        - objectId
+        - serizalizedSnapshot
+        - serializedHash
         - timestamp
       properties:
         id:
@@ -466,41 +466,41 @@ components:
           format: ''
           example: ''
           description: ''
-        schema_name:
+        schemaName:
           type: string
           format: ''
           example: ''
-          description: This was previously called "schema" but for technical reasons should be called "schema_name"
-        object_id:
+          description: This was previously called "schema" but for technical reasons should be called "schemaName"
+        objectId:
           type: string
           format: ''
           example: ''
           description: The PK of the object that was serialized.
-        signed_without_object_id:
+        signedWithoutObjectId:
           type: boolean
           format: ''
           example: ''
-          description: Indicates that object_id was left blank in serialized_snapshot when calculating serialized_hash. object_id may be subsequently filled in.
-        serialized_snapshot:
+          description: Indicates that objectId was left blank in serizalizedSnapshot when calculating serializedHash. objectId may be subsequently filled in.
+        serizalizedSnapshot:
           type: string
           format: ''
           example: ''
-          description: 'Revisioned data (serialized as JSON) as a dict {object_data: {...}, schema_name: ..., object_id: ..., signed_without_object_id: ..., timestamp: ..., authorized_by_individual: ..., authorized_by_other: ...}. It contains all the fields of the schema except id, successor, predessor_hash and predecessor_signature.'
-        serialized_hash:
+          description: 'Revisioned data (serialized as JSON) as a dict {objectData: {...}, schemaName: ..., objectId: ..., signedWithoutObjectId: ..., timestamp: ..., authorizedByIndividual: ..., authorizedByOther: ...}. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature.'
+        serializedHash:
           type: string
           format: ''
           example: ''
-          description: Hash of serialized_snapshot (SHA-1)
+          description: Hash of serizalizedSnapshot (SHA-1)
         timestamp:
           type: string
           format: ''
           example: ''
           description: Timestamp of when revisioning happened
-        authorized_by_individual:
+        authorizedByIndividual:
           $ref: '#/components/schemas/Individual'
           x-fk-model: Individual
           description: ''
-        authorized_by_other:
+        authorizedByOther:
           type: string
           format: ''
           example: ''
@@ -509,12 +509,12 @@ components:
           $ref: '#/components/schemas/Revision'
           x-fk-model: Revision
           description: 'This revision is no longer the latest revision, refer to its successor.'
-        predecessor_hash:
+        predecessorHash:
           type: string
           format: ''
           example: ''
-          description: 'Tamper-resistent artifact from previous record, copied from serialized_hash'
-        predecessor_signature:
+          description: 'Tamper-resistent artifact from previous record, copied from serializedHash'
+        predecessorSignature:
           type: string
           format: ''
           example: ''
@@ -528,10 +528,10 @@ components:
         - id
         - payload
         - signature
-        - verification_method
-        - verification_payload
-        - verification_payload_hash
-        - verification_signed_by
+        - verificationMethod
+        - verificationPayload
+        - verificationPayloadHash
+        - verificationSignedBy
         - timestamp
       properties:
         id:
@@ -543,67 +543,67 @@ components:
           type: string
           format: ''
           example: ''
-          description: 'The final payload that is signed, constructed as a JSON serialization of fields {verificiation_payload: ..., verification_payload_hash: ..., verification_method: ..., verification_artifact: ..., verification_signed_by: ..., verification_jws_header, timestamp: ..., signed_without_object_reference: ..., object_type: ..., object_reference: ...}. Serialized as a JSON dict. If the signature is generated before anything is stored in the database (and has a PK), then the object_reference should be omitted from the payload but filled in afterwards.'
+          description: 'The final payload that is signed, constructed as a JSON serialization of fields {verificationPayload: ..., verificationPayloadHash: ..., verificationMethod: ..., verificationArtifact: ..., verificationSignedBy: ..., verificationJwsHeader, timestamp: ..., signedWithoutObjectReference: ..., objectType: ..., objectReference: ...}. Serialized as a JSON dict. If the signature is generated before anything is stored in the database (and has a PK), then the objectReference should be omitted from the payload but filled in afterwards.'
         signature:
           type: string
           format: ''
           example: ''
-          description: 'Signature of payload hash, the format of the signature should be specified by either verification_method or verification_jws_header'
-        verification_method:
+          description: 'Signature of payload hash, the format of the signature should be specified by either verificationMethod or verificationJwsHeader'
+        verificationMethod:
           type: string
           format: ''
           example: ''
           description: 'A well-known string denoting which method is used. Valid values: <TBD>. We might expand this with a relation to which verification methods that are supported. There may be a minimal set of supported methods necessary.'
-        verification_payload:
+        verificationPayload:
           type: string
           format: ''
           example: ''
-          description: Internally generated serialized version of the data referenced by object_type and object_reference - by extracting and serializing their data as JSON.
-        verification_payload_hash:
+          description: Internally generated serialized version of the data referenced by objectType and objectReference - by extracting and serializing their data as JSON.
+        verificationPayloadHash:
           type: string
           format: ''
           example: ''
-          description: 'Internally generated cryptographic hash of the value to be signed, i.e. the value of verification_payload'
-        verification_artifact:
+          description: 'Internally generated cryptographic hash of the value to be signed, i.e. the value of verificationPayload'
+        verificationArtifact:
           type: string
           format: ''
           example: ''
           description: 'A verification artifact in the form of a scanned object, image, signature etc.'
-        verification_signed_by:
+        verificationSignedBy:
           type: string
           format: ''
           example: ''
           description: 'Because an identifier''s information may change over time, there is a need to store that information at the time of signing. In case of a cryptographic signature, this field should contain some identifier for looking up or verifying the public key of the signing party. In case of a non-cryptographic signature, this field could contain a natural individual''s names, personal number, email addresses - store a snapshot that binds to the signature at the time of signing. In case of a cryptographic signature, this may be the fingerprint of the individual''s public key or in some cases, a token from the user''s ID session.'
-        verification_signed_as:
+        verificationSignedAs:
           type: string
           format: ''
           example: ''
           description: 'DRAFT FIELD: Specifies the relationship between the authorizing signature and the invidual which the payload concerns. This is relevant for Consent Records. Possible values: "individual" / "delegate"'
-        verification_jws_header:
+        verificationJwsHeader:
           type: string
           format: ''
           example: ''
-          description: 'Alternative to the verification_method, verification_hash and verification_signature, give a JWS serialized object (RFC7515)'
+          description: 'Alternative to the verificationMethod, verificationHash and verificationSignature, give a JWS serialized object (RFC7515)'
         timestamp:
           type: string
           format: ''
           example: ''
           description: 'Timestamp of signature, currently this field isn''t part of the payload so it''s not tamper-proof.'
-        signed_without_object_reference:
+        signedWithoutObjectReference:
           type: boolean
           format: ''
           example: ''
-          description: Indicates that object_reference was left blank in the serialized version that was signed.
-        object_type:
+          description: Indicates that objectReference was left blank in the serialized version that was signed.
+        objectType:
           type: string
           format: ''
           example: ''
-          description: 'Name of the schema model that object_reference points to. Values: "signature" or "revision"'
-        object_reference:
+          description: 'Name of the schema model that objectReference points to. Values: "signature" or "revision"'
+        objectReference:
           type: string
           format: ''
           example: ''
-          description: 'A symmetric relation / back reference to the object_type that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)'
+          description: 'A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)'
     StatusReadiness:
       type: object
       description: This model is not stored in a database. It describes the status of the Building Block while running. Returns immediately. API should not be public.
@@ -616,12 +616,12 @@ components:
           format: ''
           example: ''
           description: 'Possible values: OK, WAITING, ERROR'
-        error_message:
+        errorMessage:
           type: string
           format: ''
           example: ''
           description: Description of failure
-        waiting_for:
+        waitingFor:
           type: string
           format: ''
           example: ''
@@ -639,12 +639,12 @@ components:
           format: ''
           example: ''
           description: 'Possible values: OK, TIMEOUT, ERROR'
-        error_message:
+        errorMessage:
           type: string
           format: ''
           example: ''
           description: Description of failure
-        waiting_for:
+        waitingFor:
           type: string
           format: ''
           example: ''
@@ -1164,7 +1164,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
     get:
-      description: 'READ - get a policy + latest revision. If a policy filter is supplied and contains a `revision_id`, then this specific revision is returned.'
+      description: 'READ - get a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
       operationId: configReadPolicy
       parameters:
         - description: Unique ID of an object

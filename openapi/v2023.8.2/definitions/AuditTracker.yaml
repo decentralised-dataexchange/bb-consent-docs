@@ -6,10 +6,10 @@ x-not-in-database: false
 required:
   - id
   - name
-  - public_key
-  - callback_agreement
-  - callback_consent_record
-  - callback_policy
+  - publicKey
+  - callbackAgreement
+  - callbackConsentRecord
+  - callbackPolicy
 properties:
   id:
     type: string
@@ -23,37 +23,37 @@ properties:
     example: ""
     description: "Name of the auditing system"
 
-  public_key:
+  publicKey:
     type: string
     format: ""
     example: ""
     description: "The auditing system's public key for encrypting data sent to callback functions"
 
-  callback_agreement:
+  callbackAgreement:
     type: string
     format: ""
     example: ""
     description: "A URL receiving a callback with the Agreement object + Revision + AuditEventType"
 
-  callback_consent_record:
+  callbackConsentRecord:
     type: string
     format: ""
     example: ""
     description: "A URL receiving a callback with the ConsentRecord object + Revision + AuditEventType"
 
-  callback_policy:
+  callbackPolicy:
     type: string
     format: ""
     example: ""
     description: "A URL receiving a callback with the Policy object + Revision + AuditEventType"
 
-  callback_revision_table_hash:
+  callbackRevisionTableHash:
     type: string
     format: ""
     example: ""
     description: "A URL receiving a callback with <string> + AuditEventType. Periodically, the system can publish the hash of the revision table."
 
-  callback_signature_table_hash:
+  callbackSignatureTableHash:
     type: string
     format: ""
     example: ""

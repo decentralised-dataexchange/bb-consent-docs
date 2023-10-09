@@ -1,5 +1,5 @@
 description: READ - get a policy + latest revision. If a policy filter is supplied
-  and contains a `revision_id`, then this specific revision is returned.
+  and contains a `revisionId`, then this specific revision is returned.
 operationId: configReadPolicy
 parameters:
 - description: Unique ID of an object

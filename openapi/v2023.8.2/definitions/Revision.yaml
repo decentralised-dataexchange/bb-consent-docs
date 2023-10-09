@@ -5,10 +5,10 @@ x-not-in-database: false
 
 required:
   - id
-  - schema_name
-  - object_id
-  - serialized_snapshot
-  - serialized_hash
+  - schemaName
+  - objectId
+  - serizalizedSnapshot
+  - serializedHash
   - timestamp
 properties:
   id:
@@ -17,35 +17,35 @@ properties:
     example: ""
     description: ""
 
-  schema_name:
+  schemaName:
     type: string
     format: ""
     example: ""
-    description: 'This was previously called "schema" but for technical reasons should be called "schema_name"'
+    description: 'This was previously called "schema" but for technical reasons should be called "schemaName"'
 
-  object_id:
+  objectId:
     type: string
     format: ""
     example: ""
     description: "The PK of the object that was serialized."
 
-  signed_without_object_id:
+  signedWithoutObjectId:
     type: boolean
     format: ""
     example: ""
-    description: "Indicates that object_id was left blank in serialized_snapshot when calculating serialized_hash. object_id may be subsequently filled in."
+    description: "Indicates that objectId was left blank in serizalizedSnapshot when calculating serializedHash. objectId may be subsequently filled in."
 
-  serialized_snapshot:
+  serizalizedSnapshot:
     type: string
     format: ""
     example: ""
-    description: "Revisioned data (serialized as JSON) as a dict {object_data: {...}, schema_name: ..., object_id: ..., signed_without_object_id: ..., timestamp: ..., authorized_by_individual: ..., authorized_by_other: ...}. It contains all the fields of the schema except id, successor, predessor_hash and predecessor_signature."
+    description: "Revisioned data (serialized as JSON) as a dict {objectData: {...}, schemaName: ..., objectId: ..., signedWithoutObjectId: ..., timestamp: ..., authorizedByIndividual: ..., authorizedByOther: ...}. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature."
 
-  serialized_hash:
+  serializedHash:
     type: string
     format: ""
     example: ""
-    description: "Hash of serialized_snapshot (SHA-1)"
+    description: "Hash of serizalizedSnapshot (SHA-1)"
 
   timestamp:
     type: string
@@ -53,12 +53,12 @@ properties:
     example: ""
     description: "Timestamp of when revisioning happened"
 
-  authorized_by_individual:
+  authorizedByIndividual:
     $ref: "./Individual.yaml"
     x-fk-model: "Individual"
     description: ""
 
-  authorized_by_other:
+  authorizedByOther:
     type: string
     format: ""
     example: ""
@@ -69,13 +69,13 @@ properties:
     x-fk-model: "Revision"
     description: "This revision is no longer the latest revision, refer to its successor."
 
-  predecessor_hash:
+  predecessorHash:
     type: string
     format: ""
     example: ""
-    description: "Tamper-resistent artifact from previous record, copied from serialized_hash"
+    description: "Tamper-resistent artifact from previous record, copied from serializedHash"
 
-  predecessor_signature:
+  predecessorSignature:
     type: string
     format: ""
     example: ""

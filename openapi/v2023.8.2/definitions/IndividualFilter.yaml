@@ -4,13 +4,13 @@ description: "TBD: When creating an Invidiual, we need some input that refers to
 x-not-in-database: true
 
 properties:
-  foundational_id:
+  foundationalId:
     type: string
     format: ""
     example: ""
     description: ""
 
-  functional_id:
+  functionalId:
     type: string
     format: ""
     example: ""

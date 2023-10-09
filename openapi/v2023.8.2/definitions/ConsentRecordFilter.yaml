@@ -4,9 +4,9 @@ description: "Query filter for API endpoint listing ConsentRecord objects"
 x-not-in-database: true
 
 required:
-  - opt_in
+  - optIn
 properties:
-  opt_in:
+  optIn:
     type: boolean
     format: ""
     example: ""
@@ -17,7 +17,7 @@ properties:
     x-fk-model: "Agreement"
     description: ""
 
-  agreement_revision:
+  agreementRevision:
     $ref: "./Revision.yaml"
     x-fk-model: "Revision"
     description: ""
@@ -27,13 +27,13 @@ properties:
     x-fk-model: "Individual"
     description: ""
 
-  functional_id:
+  functionalId:
     type: string
     format: ""
     example: ""
     description: ""
 
-  foundational_id:
+  foundationalId:
     type: string
     format: ""
     example: ""

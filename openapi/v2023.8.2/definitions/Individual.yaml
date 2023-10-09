@@ -13,19 +13,19 @@ properties:
     example: ""
     description: "The unique ID of an Individual row."
 
-  external_id:
+  externalId:
     type: string
     format: ""
     example: ""
     description: "Reference to another foundational/functional ID, which is likely PII"
 
-  external_id_type:
+  externalIdType:
     type: string
     format: ""
     example: ""
     description: "External id type specifier. A string. For instance \"email\" or \"foundational id\". Can be used in later queries."
 
-  identity_provider_id:
+  identityProviderId:
     type: string
     format: ""
     example: ""

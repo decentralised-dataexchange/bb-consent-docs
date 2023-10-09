@@ -1,11 +1,11 @@
 type: object
 title: ConsentRecord
-description: "A Consent Record expresses consent (as defined in this building block's specification) to a single Agreement. There must be a UNIQUE constraint on (agreement_revision, individual)"
+description: "A Consent Record expresses consent (as defined in this building block's specification) to a single Agreement. There must be a UNIQUE constraint on (agreementRevision, individual)"
 x-not-in-database: false
 
 required:
   - id
-  - agreement_revision_hash
+  - agreementRevisionHash
   - state
 properties:
   id:
@@ -19,12 +19,12 @@ properties:
     x-fk-model: "Agreement"
     description: "The Agreement to which consent has been given"
 
-  agreement_revision:
+  agreementRevision:
     $ref: "./Revision.yaml"
     x-fk-model: "Revision"
     description: "The Revision of the agreement which consent has been given to"
 
-  agreement_revision_hash:
+  agreementRevisionHash:
     type: string
     format: ""
     example: ""
@@ -35,7 +35,7 @@ properties:
     x-fk-model: "Individual"
     description: "The Individual who has signed this consent record"
 
-  opt_in:
+  optIn:
     type: boolean
     format: ""
     example: ""

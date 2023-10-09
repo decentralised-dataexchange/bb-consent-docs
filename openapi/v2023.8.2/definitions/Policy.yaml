@@ -39,25 +39,25 @@ properties:
     example: ""
     description: ""
 
-  industry_sector:
+  industrySector:
     type: string
     format: ""
     example: ""
     description: ""
 
-  data_retention_period_days:
+  dataRetentionPeriodDays:
     type: integer
     format: ""
     example: ""
     description: ""
 
-  geographic_restriction:
+  geographicRestriction:
     type: string
     format: ""
     example: ""
     description: ""
 
-  storage_location:
+  storageLocation:
     type: string
     format: ""
     example: ""
