@@ -112,7 +112,7 @@ paths:
   /service/individual:
     post:
       $ref: ./paths/serviceIndividualCreate.yaml
-  /service/individual/record:
+  /service/individual/data-agreement-records:
     delete:
       $ref: ./paths/serviceDeleteAllRecords.yaml
     get:
@@ -149,14 +149,9 @@ paths:
   /service/individuals:
     get:
       $ref: ./paths/serviceIndividualList.yaml
-    post:
-      $ref: ./paths/serviceIndividualListFilter.yaml
   /service/policy/{policyId}:
     get:
       $ref: ./paths/servicePolicyRead.yaml
-  /service/purpose/{purposeId}:
-    get:
-      $ref: ./paths/serviceAgreementPurposeRead.yaml
   /service/verification/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml

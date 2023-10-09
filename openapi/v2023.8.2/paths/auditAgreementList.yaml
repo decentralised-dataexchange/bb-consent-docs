@@ -1,4 +1,4 @@
-description: LIST - fetch all data agreements stored in the system
+description: LIST - Fetch all data agreements stored in the system
 operationId: auditAgreementList
 parameters:
   - description:
@@ -42,7 +42,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - fetch all data agreements stored in the system
+summary: LIST - Fetch all data agreements stored in the system
 tags:
   - auditor
 x-specification-crudl-model: ""

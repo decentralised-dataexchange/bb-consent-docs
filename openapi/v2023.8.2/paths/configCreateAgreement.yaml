@@ -1,4 +1,4 @@
-description: CREATE - a new data agreement and returned together with revision
+description: CREATE - Create a new data agreement and returned together with revision
 operationId: configCreateAgreement
 parameters: []
 requestBody:
@@ -27,7 +27,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - a new data agreement and returned together with revision
+summary: CREATE - Create a new data agreement and returned together with revision
 tags:
   - config
 x-specification-crudl-model: Agreement

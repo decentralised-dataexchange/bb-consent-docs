@@ -31,9 +31,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Updates a Signature object for a Consent Record. This is used to
-  add a signature to an existing unsigned Signature object. Consent BB is responsible
-  for updating the Consent Record state.
+summary: UPDATE - Updates a Signature object for a Consent Record
 tags:
 - service
 x-specification-crudl-model: ''

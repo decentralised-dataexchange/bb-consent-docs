@@ -1,4 +1,4 @@
-description: READ - get a policy + latest revision. If a policy filter is supplied
+description: READ - Fetch a policy + latest revision. If a policy filter is supplied
   and contains a `revisionId`, then this specific revision is returned.
 operationId: configReadPolicy
 parameters:
@@ -29,7 +29,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - get a policy + latest revision
+summary: READ - Fetch a policy + latest revision
 tags:
 - config
 x-specification-crudl-model: Policy

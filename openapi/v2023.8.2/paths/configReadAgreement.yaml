@@ -1,4 +1,4 @@
-description: READ - fetches the latest version of a data agreement
+description: READ - Fetch the latest version of a data agreement
 operationId: configReadAgreement
 parameters:
 - description: Unique ID of an object
@@ -22,7 +22,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - fetches the latest version of a data agreement
+summary: READ - Fetch the latest version of a data agreement
 tags:
 - config
 x-specification-crudl-model: Agreement

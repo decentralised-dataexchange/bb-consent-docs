@@ -1,4 +1,4 @@
-description: UPDATE* - Update a particular Consent Record. Individual ID supplied
+description: UPDATE* - Update a particular data agreement record. The individualId supplied
   as HTTP header. Note that updating a signed Consent Record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
@@ -41,8 +41,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP
-  header. Note that updating a signed Consent Record invalidates its signature.
+summary: UPDATE* - Update a particular data agreement record
 tags:
 - service
 x-specification-crudl-model: ''

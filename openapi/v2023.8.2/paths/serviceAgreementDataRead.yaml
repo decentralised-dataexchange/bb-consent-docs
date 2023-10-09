@@ -1,4 +1,4 @@
-description: READ - fetches a list of latest versions of AgreementData associated
+description: READ - Fetch all latest versions of AgreementData associated
   with an Agreement and the presented revisionId of that Agreement
 operationId: serviceAgreementDataRead
 parameters:
@@ -28,7 +28,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - fetches a list of latest versions of AgreementData associated with
+summary: READ - Fetch all latest versions of AgreementData associated with
   an Agreement and the presented revisionId of that Agreement
 tags:
 - service

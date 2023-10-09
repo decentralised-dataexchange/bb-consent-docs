@@ -1,4 +1,4 @@
-description: READ - fetches the latest version of an Agreement
+description: READ - Fetches the latest version of an Agreement
 operationId: serviceAgreementRead
 parameters:
 - description: Unique ID of an object
@@ -22,7 +22,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - fetches the latest version of an Agreement
+summary: READ - Fetches the latest version of an Agreement
 tags:
 - service
 x-specification-crudl-model: Agreement

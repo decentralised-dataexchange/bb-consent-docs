@@ -1,4 +1,4 @@
-description: UPDATE - an existing data agreement and returned together with revision
+description: UPDATE - Update an existing data agreement and returned together with revision
 operationId: configUpdateAgreement
 parameters:
 - description: Unique ID of an object
@@ -33,7 +33,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - an existing data agreement and returned together with revision
+summary: UPDATE - Update an existing data agreement and returned together with revision
 tags:
 - config
 x-specification-crudl-model: Agreement

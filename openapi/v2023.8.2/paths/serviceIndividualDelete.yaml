@@ -1,4 +1,4 @@
-description: DELETE - entirely removes an individual from the system and cascades
+description: DELETE - Entirely removes an individual from the system and cascades
   necessary actions to related ConsentRecord objects
 operationId: serviceIndividualDelete
 parameters:
@@ -19,7 +19,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - entirely removes an individual from the system and cascades necessary
+summary: DELETE - Entirely removes an individual from the system and cascades necessary
   actions to related ConsentRecord objects
 tags:
 - service

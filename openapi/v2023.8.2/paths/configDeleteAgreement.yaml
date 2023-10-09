@@ -1,4 +1,4 @@
-description: DELETE - a data agreement
+description: DELETE - Delete a data agreement
 operationId: configDeleteAgreement
 parameters:
 - description: Unique ID of an object
@@ -18,7 +18,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - a data agreement
+summary: DELETE - Delete a data agreement
 tags:
 - config
 x-specification-crudl-model: Agreement

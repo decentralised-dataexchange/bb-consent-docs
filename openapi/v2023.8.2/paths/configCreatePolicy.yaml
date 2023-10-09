@@ -1,4 +1,4 @@
-description: CREATE - a new policy and returned together with revision
+description: CREATE - Create a new policy and returned together with revision
 operationId: configCreatePolicy
 parameters: []
 requestBody:
@@ -28,7 +28,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - a new policy and returned together with revision
+summary: CREATE - Create a new policy and returned together with revision
 tags:
 - config
 x-specification-crudl-model: Policy

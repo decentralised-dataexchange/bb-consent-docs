@@ -1,4 +1,4 @@
-description: CREATE - Creates an Individual in the Consent system
+description: CREATE - Create an individual in the consent system
 operationId: serviceIndividualCreate
 parameters: []
 requestBody:
@@ -23,7 +23,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Creates an Individual in the Consent system
+summary: CREATE - Create an individual in the consent system
 tags:
 - service
 x-specification-crudl-model: Individual

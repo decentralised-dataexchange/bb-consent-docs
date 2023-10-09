@@ -1,4 +1,4 @@
-description: LIST - Fetches list of policies
+description: LIST - Fetch all policies
 operationId: configListPolicy
 parameters:
 - description: An object with id revisionId
@@ -35,7 +35,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetches list of policies
+summary: LIST - Fetch all policies
 tags:
 - config
 x-specification-crudl-model: Policy

@@ -1,4 +1,4 @@
-description: LIST - fetch all data agreements matching the data agreement filter
+description: LIST - Fetch all data agreements matching the data agreement filter
 operationId: configListAgreementFilter
 parameters:
 - description: Requested index for start of resources to be provided in response requested
@@ -40,7 +40,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - fetch all data agreements matching the data agreement filter
+summary: LIST - Fetch all data agreements matching the data agreement filter
 tags:
 - config
 x-specification-crudl-model: Agreement

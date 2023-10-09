@@ -1,4 +1,4 @@
-description: READ - fetch a single data agreement.
+description: READ - Fetch a single data agreement.
 operationId: auditReadRecord
 parameters:
 - description: Unique ID of an object
@@ -18,7 +18,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - fetch a single data agreement.
+summary: READ - Fetch a single data agreement.
 tags:
 - auditor
 x-specification-crudl-model: ''

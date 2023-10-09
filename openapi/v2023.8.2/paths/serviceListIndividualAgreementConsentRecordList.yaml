@@ -1,5 +1,4 @@
-description: LIST - Fetches all consent records given to a particular agreement. Individual
-  ID supplied as HTTP header.
+description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
 operationId: serviceListIndividualAgreementConsentRecordList
 parameters:
 - description: Unique ID of an object
@@ -36,8 +35,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetches all consent records given to a particular agreement. Individual
-  ID supplied as HTTP header.
+summary: LIST - Fetches all data agreement records given to a data agreement
 tags:
 - service
 x-specification-crudl-model: ''

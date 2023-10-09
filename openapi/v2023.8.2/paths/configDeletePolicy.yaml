@@ -20,7 +20,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - an existing policy
+summary: DELETE - Deletes an existing policy
 tags:
   - config
 x-specification-crudl-model: Policy

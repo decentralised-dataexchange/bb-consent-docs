@@ -1,4 +1,4 @@
-description: LIST - lists individuals in the system
+description: LIST - List all individuals in the system
 operationId: serviceIndividualList
 parameters:
 - description: Requested index for start of resources to be provided in response requested
@@ -29,7 +29,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - lists individuals in the system
+summary: LIST - List all individuals in the system
 tags:
 - service
 x-specification-crudl-model: Individual

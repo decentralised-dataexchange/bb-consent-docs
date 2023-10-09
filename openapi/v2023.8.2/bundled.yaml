@@ -670,7 +670,7 @@ openapi: 3.1.0
 paths:
   '/audit/data-agreement/{dataAgreementId}':
     get:
-      description: READ - fetch a single data agreement.
+      description: READ - Fetch a single data agreement.
       operationId: auditReadRecord
       parameters:
         - description: Unique ID of an object
@@ -690,7 +690,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetch a single data agreement.
+      summary: READ - Fetch a single data agreement.
       tags:
         - auditor
       x-specification-crudl-model: ''
@@ -699,7 +699,7 @@ paths:
       x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   /audit/data-agreements/:
     post:
-      description: LIST - fetch all data agreements stored in the system
+      description: LIST - Fetch all data agreements stored in the system
       operationId: auditAgreementList
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -739,7 +739,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - fetch all data agreements stored in the system
+      summary: LIST - Fetch all data agreements stored in the system
       tags:
         - auditor
       x-specification-crudl-model: ''
@@ -748,7 +748,7 @@ paths:
       x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   '/audit/data-agreement-record/{dataAgreementRecordId}':
     get:
-      description: READ - fetch a single data agreement record
+      description: READ - Fetch a single data agreement record
       operationId: auditConsentRecordRead
       parameters:
         - description: Unique ID of an object
@@ -768,7 +768,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetch a single data agreement record
+      summary: READ - Fetch a single data agreement record
       tags:
         - auditor
       x-specification-crudl-model: ''
@@ -777,7 +777,7 @@ paths:
       x-specification-usecase: ''
   /audit/data-agreement-records:
     post:
-      description: LIST - fetch all consent records
+      description: LIST - Fetch all consent records
       operationId: auditConsentRecordList
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -817,7 +817,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - fetch all consent records
+      summary: LIST - Fetch all consent records
       tags:
         - auditor
       x-specification-crudl-model: ''
@@ -826,7 +826,7 @@ paths:
       x-specification-usecase: UC-C-PIC-AT-003
   /config/data-agreement:
     post:
-      description: CREATE - a new data agreement and returned together with revision
+      description: CREATE - Create a new data agreement and returned together with revision
       operationId: configCreateAgreement
       parameters: []
       requestBody:
@@ -855,7 +855,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - a new data agreement and returned together with revision
+      summary: CREATE - Create a new data agreement and returned together with revision
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -864,7 +864,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-001
   '/config/data-agreement/{dataAgreementId}':
     delete:
-      description: DELETE - a data agreement
+      description: DELETE - Delete a data agreement
       operationId: configDeleteAgreement
       parameters:
         - description: Unique ID of an object
@@ -884,7 +884,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - a data agreement
+      summary: DELETE - Delete a data agreement
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -892,7 +892,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
     get:
-      description: READ - fetches the latest version of a data agreement
+      description: READ - Fetch the latest version of a data agreement
       operationId: configReadAgreement
       parameters:
         - description: Unique ID of an object
@@ -916,7 +916,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetches the latest version of a data agreement
+      summary: READ - Fetch the latest version of a data agreement
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -924,7 +924,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
     put:
-      description: UPDATE - an existing data agreement and returned together with revision
+      description: UPDATE - Update an existing data agreement and returned together with revision
       operationId: configUpdateAgreement
       parameters:
         - description: Unique ID of an object
@@ -959,7 +959,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - an existing data agreement and returned together with revision
+      summary: UPDATE - Update an existing data agreement and returned together with revision
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -968,7 +968,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-002
   /config/data-agreements:
     get:
-      description: LIST - fetch all data agreements
+      description: LIST - Fetch all data agreements
       operationId: configListAgreement
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -997,7 +997,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - fetch all data agreements
+      summary: LIST - Fetch all data agreements
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -1005,7 +1005,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
     post:
-      description: LIST - fetch all data agreements matching the data agreement filter
+      description: LIST - Fetch all data agreements matching the data agreement filter
       operationId: configListAgreementFilter
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -1045,7 +1045,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - fetch all data agreements matching the data agreement filter
+      summary: LIST - Fetch all data agreements matching the data agreement filter
       tags:
         - config
       x-specification-crudl-model: Agreement
@@ -1054,7 +1054,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   /config/policies:
     get:
-      description: LIST - Fetches list of policies
+      description: LIST - Fetch all policies
       operationId: configListPolicy
       parameters:
         - description: An object with id revisionId
@@ -1089,7 +1089,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetches list of policies
+      summary: LIST - Fetch all policies
       tags:
         - config
       x-specification-crudl-model: Policy
@@ -1098,7 +1098,7 @@ paths:
       x-specification-usecase: 'UC-C-PIC-A-001, UC-C-PIC-A-002'
   /config/policy:
     post:
-      description: CREATE - a new policy and returned together with revision
+      description: CREATE - Create a new policy and returned together with revision
       operationId: configCreatePolicy
       parameters: []
       requestBody:
@@ -1127,7 +1127,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - a new policy and returned together with revision
+      summary: CREATE - Create a new policy and returned together with revision
       tags:
         - config
       x-specification-crudl-model: Policy
@@ -1156,7 +1156,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - an existing policy
+      summary: DELETE - Deletes an existing policy
       tags:
         - config
       x-specification-crudl-model: Policy
@@ -1164,7 +1164,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
     get:
-      description: 'READ - get a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
+      description: 'READ - Fetch a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
       operationId: configReadPolicy
       parameters:
         - description: Unique ID of an object
@@ -1194,7 +1194,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - get a policy + latest revision
+      summary: READ - Fetch a policy + latest revision
       tags:
         - config
       x-specification-crudl-model: Policy
@@ -1202,7 +1202,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
     put:
-      description: 'UPDATE - Updates an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in Agreement, the new revision should be specified for Agreement.'
+      description: 'UPDATE - Update an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in Agreement, the new revision should be specified for Agreement.'
       operationId: configUpdatePolicy
       parameters:
         - description: Unique ID of an object
@@ -1237,7 +1237,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: 'UPDATE - Updates an existing policy, returning the updated version and a new revision.'
+      summary: 'UPDATE - Update an existing policy, returning the updated version and a new revision.'
       tags:
         - config
       x-specification-crudl-model: Policy
@@ -1246,7 +1246,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-002
   '/config/policy/{policyId}/revisions':
     get:
-      description: LIST - returns all the revisions for the policy
+      description: LIST - Returns all the revisions for the policy
       operationId: configListPolicyRevisions
       parameters:
         - description: Unique ID of an object
@@ -1278,7 +1278,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - returns all the revisions for the policy
+      summary: LIST - Returns all the revisions for the policy
       tags:
         - config
       x-specification-crudl-model: Revision
@@ -1287,7 +1287,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}':
     get:
-      description: READ - fetches the latest version of an Agreement
+      description: READ - Fetches the latest version of an Agreement
       operationId: serviceAgreementRead
       parameters:
         - description: Unique ID of an object
@@ -1311,7 +1311,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetches the latest version of an Agreement
+      summary: READ - Fetches the latest version of an Agreement
       tags:
         - service
       x-specification-crudl-model: Agreement
@@ -1320,7 +1320,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      description: READ - fetches a list of latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      description: READ - Fetch all latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
       operationId: serviceAgreementDataRead
       parameters:
         - description: Unique ID of an object
@@ -1349,7 +1349,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetches a list of latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      summary: READ - Fetch all latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
       tags:
         - service
       x-specification-crudl-model: AgreementData
@@ -1358,7 +1358,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   /service/individual:
     post:
-      description: CREATE - Creates an Individual in the Consent system
+      description: CREATE - Create an individual in the consent system
       operationId: serviceIndividualCreate
       parameters: []
       requestBody:
@@ -1383,16 +1383,16 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Creates an Individual in the Consent system
+      summary: CREATE - Create an individual in the consent system
       tags:
         - service
       x-specification-crudl-model: Individual
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: ''
-  /service/individual/record:
+  /service/individual/data-agreement-records:
     delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all Consent Records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned Consent Record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
       operationId: serviceDeleteAllRecords
       parameters: []
       responses:
@@ -1402,7 +1402,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all Consent Records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned Consent Record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      summary: DELETE - Delete all data agreement records
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1410,7 +1410,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-003
     get:
-      description: LIST - Fetches all current unambiguous consent records stored for Individual ID. Individual ID supplied as HTTP header.
+      description: LIST - Fetch all current unambiguous data agreement records stored for individualId supplied as HTTP header.
       operationId: serviceListIndividualConsentRecordList
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -1439,7 +1439,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetches all current unambiguous consent records stored for Individual ID. Individual ID supplied as HTTP header.
+      summary: LIST - Fetch all consent records for individual
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1448,7 +1448,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   '/service/individual/record/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord for an Agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement.
+      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement. The individualId is supplied as HTTP header.
       operationId: serviceReadIndividualRecordRead
       parameters:
         - description: Unique ID of an object
@@ -1468,7 +1468,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord for an Agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement.
+      summary: READ - Fetch the current record for data agreement
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1476,7 +1476,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-001
     post:
-      description: 'CREATE - For a particular Individual and a particular Agreement, create a new Consent Record pointing to the current Revision of a given Agreement. Individual ID supplied as HTTP header.'
+      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header.'
       operationId: serviceCreateIndividualConsentRecord
       parameters:
         - description: Unique ID of an object
@@ -1512,7 +1512,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: 'CREATE - For a particular Individual and a particular Agreement, create a new Consent Record pointing to the current Revision of a given Agreement. Individual ID supplied as HTTP header.'
+      summary: CREATE - Create a data agreement record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1521,7 +1521,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-002
   '/service/individual/record/data-agreement/{dataAgreementId}/all':
     get:
-      description: LIST - Fetches all consent records given to a particular agreement. Individual ID supplied as HTTP header.
+      description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
       operationId: serviceListIndividualAgreementConsentRecordList
       parameters:
         - description: Unique ID of an object
@@ -1556,7 +1556,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetches all consent records given to a particular agreement. Individual ID supplied as HTTP header.
+      summary: LIST - Fetches all data agreement records given to a data agreement
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1565,7 +1565,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/data-agreement-record:
     post:
-      description: CREATE - Creates a paired ConsentRecord and Signature object. Returns the same objects with the PK defined.
+      description: CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
       operationId: serviceCreateIndividualConsentRecordAndSignature
       parameters: []
       requestBody:
@@ -1599,7 +1599,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Creates a paired ConsentRecord and Signature object. Returns the same objects with the PK defined.
+      summary: CREATE - Create a paired consent record and signature object
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1608,7 +1608,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-002
   /service/individual/record/data-agreement-record/draft:
     post:
-      description: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without a PK) for a given dataAgreementId.
+      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       operationId: serviceCreateIndividualConsentRecordDraft
       parameters:
         - description: An object with id individualId
@@ -1644,7 +1644,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Gets a DRAFT (unsaved) ConsentRecord and Signature objects (without a PK) for a given dataAgreementId.
+      summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1653,7 +1653,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-002
   '/service/individual/record/data-agreement-record/{dataAgreementRecordId}':
     put:
-      description: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+      description: UPDATE* - Update a particular data agreement record. The individualId supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
       operationId: serviceUpdateIndividualConsentRecord
       parameters:
         - description: Unique ID of an object
@@ -1695,7 +1695,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE* - Update a particular Consent Record. Individual ID supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+      summary: UPDATE* - Update a particular data agreement record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1704,7 +1704,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/data-agreement-record/{dataAgreementRecordId}/signature':
     post:
-      description: CREATE - Creates and returns a blank Signature object for the Consent Record.
+      description: CREATE - Creates and returns a blank Signature object for the data agreement record
       operationId: serviceCreateIndividualConsentRecordSignature
       parameters:
         - description: Unique ID of an object
@@ -1724,7 +1724,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Creates and returns a blank Signature object for the Consent Record.
+      summary: CREATE - Creates and returns a blank Signature object for the data agreement record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1763,7 +1763,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Updates a Signature object for a Consent Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Consent Record state.
+      summary: UPDATE - Updates a Signature object for a Consent Record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1772,7 +1772,7 @@ paths:
       x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
   '/service/individual/{individualId}':
     delete:
-      description: DELETE - entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
+      description: DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
       operationId: serviceIndividualDelete
       parameters:
         - description: Unique ID of an object
@@ -1792,7 +1792,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
+      summary: DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
       tags:
         - service
       x-specification-crudl-model: Individual
@@ -1868,7 +1868,7 @@ paths:
       x-specification-usecase: ''
   /service/individuals:
     get:
-      description: LIST - lists individuals in the system
+      description: LIST - List all individuals in the system
       operationId: serviceIndividualList
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -1897,55 +1897,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - lists individuals in the system
-      tags:
-        - service
-      x-specification-crudl-model: Individual
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-    post:
-      description: LIST - lists individuals in the system
-      operationId: serviceIndividualListFilter
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                individualFilter:
-                  $ref: '#/components/schemas/IndividualFilter'
-                  description: An object of type IndividualFilter
-              required:
-                - individualFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Individual'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - lists individuals in the system
+      summary: LIST - List all individuals in the system
       tags:
         - service
       x-specification-crudl-model: Individual
@@ -1954,7 +1906,7 @@ paths:
       x-specification-usecase: ''
   '/service/policy/{policyId}':
     get:
-      description: READ - fetches the latest version of a Policy and the presented revisionId of an associated Agreement
+      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated Agreement
       operationId: servicePolicyRead
       parameters:
         - description: Unique ID of an object
@@ -1984,55 +1936,16 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - fetches the latest version of a Policy and the presented revisionId of an associated Agreement
+      summary: READ - Fetch the latest version of a Policy and the presented revisionId of an associated Agreement
       tags:
         - service
       x-specification-crudl-model: Policy
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
-  '/service/purpose/{purposeId}':
-    get:
-      description: READ - fetches the latest version of an AgreementPurpose and the presented revisionId of that Agreement
-      operationId: serviceAgreementPurposeRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: purposeId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/AgreementPurpose'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - fetches the latest version of an AgreementPurpose and the presented revisionId of that Agreement
-      tags:
-        - service
-      x-specification-crudl-model: AgreementPurpose
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   '/service/verification/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied as HTTP header.
+      description: READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
       operationId: serviceVerificationAgreementConsentRecordRead
       parameters:
         - description: Unique ID of an object
@@ -2056,7 +1969,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied as HTTP header.
+      summary: READ - Fetch a specific data agreement record (latest revision)
       tags:
         - service
       x-specification-crudl-model: ''
@@ -2065,7 +1978,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   /service/verification/data-agreements:
     get:
-      description: LIST - Fetch consent records
+      description: LIST - Fetch all consent records
       operationId: serviceVerificationAgreementList
       parameters:
         - description: Requested index for start of resources to be provided in response requested by client
@@ -2094,7 +2007,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch consent records
+      summary: LIST - Fetch all consent records
       tags:
         - service
       x-specification-crudl-model: ''

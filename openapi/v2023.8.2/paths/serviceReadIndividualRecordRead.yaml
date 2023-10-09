@@ -1,31 +1,29 @@
-description: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord
-  for an Agreement. There should be one unambiguous ConsentRecord for an Individual
-  and an Agreement.
+description:
+  READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual
+  and an Agreement. The individualId is supplied as HTTP header.
 operationId: serviceReadIndividualRecordRead
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
+  - description: Unique ID of an object
+    in: path
+    name: dataAgreementId
+    required: true
+    schema:
+      type: string
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
           $ref: ../definitions/ConsentRecord.yaml
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Individual ID supplied as HTTP header. Fetches the current ConsentRecord
-  for an Agreement. There should be one unambiguous ConsentRecord for an Individual
-  and an Agreement.
+summary: READ - Fetch the current record for data agreement
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-I-001

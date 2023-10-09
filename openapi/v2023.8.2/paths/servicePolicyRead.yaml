@@ -1,4 +1,4 @@
-description: READ - fetches the latest version of a Policy and the presented revisionId
+description: READ - Fetch the latest version of a Policy and the presented revisionId
   of an associated Agreement
 operationId: servicePolicyRead
 parameters:
@@ -29,7 +29,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - fetches the latest version of a Policy and the presented revisionId
+summary: READ - Fetch the latest version of a Policy and the presented revisionId
   of an associated Agreement
 tags:
 - service

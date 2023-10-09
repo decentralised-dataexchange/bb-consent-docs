@@ -1,4 +1,4 @@
-description: LIST - fetch all consent records
+description: LIST - Fetch all consent records
 operationId: auditConsentRecordList
 parameters:
 - description: Requested index for start of resources to be provided in response requested
@@ -40,7 +40,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - fetch all consent records
+summary: LIST - Fetch all consent records
 tags:
 - auditor
 x-specification-crudl-model: ''

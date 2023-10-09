@@ -1,4 +1,4 @@
-description: LIST - returns all the revisions for the policy
+description: LIST - Returns all the revisions for the policy
 operationId: configListPolicyRevisions
 parameters:
 - description: Unique ID of an object
@@ -32,7 +32,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - returns all the revisions for the policy
+summary: LIST - Returns all the revisions for the policy
 tags:
 - config
 x-specification-crudl-model: Revision

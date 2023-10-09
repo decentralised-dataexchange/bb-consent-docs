@@ -1,5 +1,4 @@
-description: READ - Fetch a specific Consent Record (latest revision). Individual
-  ID supplied as HTTP header.
+description: READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
 - description: Unique ID of an object
@@ -23,8 +22,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a specific Consent Record (latest revision). Individual ID supplied
-  as HTTP header.
+summary: READ - Fetch a specific data agreement record (latest revision)
 tags:
 - service
 x-specification-crudl-model: ''

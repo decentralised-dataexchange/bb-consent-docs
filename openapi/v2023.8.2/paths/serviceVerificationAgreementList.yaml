@@ -1,4 +1,4 @@
-description: LIST - Fetch consent records
+description: LIST - Fetch all consent records
 operationId: serviceVerificationAgreementList
 parameters:
 - description: Requested index for start of resources to be provided in response requested
@@ -29,7 +29,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch consent records
+summary: LIST - Fetch all consent records
 tags:
 - service
 x-specification-crudl-model: ''
