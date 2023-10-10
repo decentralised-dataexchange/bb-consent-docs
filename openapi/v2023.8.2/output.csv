@@ -1,0 +1,61 @@
+Tag,OperationId,Description
+service,serviceAgreementRead,READ - Fetches the latest version of an Agreement
+service,serviceVerificationConsentRecordList,"LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists."
+service,serviceVerificationAgreementListFilter,LIST - Fetch consent records for supplied AgreementFilter
+service,serviceAgreementPurposeRead,READ - fetches the latest version of an AgreementPurpose and the presented revisionId of that Agreement
+service,serviceVerificationAgreementList,LIST - Fetch all consent records
+service,serviceIndividualCreate,CREATE - Create an individual in the consent system
+service,serviceIndividualList,LIST - List all individuals in the system
+service,serviceIndividualRead,READ - Fetch an Individual in the Consent system
+service,serviceCreateIndividualConsentRecordDraft,CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
+service,serviceAgreementDataRead,READ - Fetch all latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+service,serviceDeleteAllRecords,"DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a ""forgettable"" Agreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header."
+service,serviceListIndividualAgreementConsentRecordList,LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
+service,serviceIndividualListFilter,LIST - lists individuals in the system
+service,serviceCreateIndividualConsentRecord,"CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header."
+service,serviceUpdateIndividualConsentRecord,UPDATE* - Update a particular data agreement record. The individualId supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+service,serviceReadIndividualRecordRead,READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement. The individualId is supplied as HTTP header.
+service,serviceUpdateIndividualConsentRecordSignature,UPDATE - Updates a Signature object for a Consent Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Consent Record state.
+service,serviceIndividualUpdate,UPDATE - Updates an Individual in the Consent system
+service,serviceCreateIndividualConsentRecordSignature,CREATE - Creates and returns a blank Signature object for the data agreement record
+service,serviceListIndividualConsentRecordList,LIST - Fetch all current unambiguous data agreement records stored for individualId supplied as HTTP header.
+service,serviceIndividualDelete,DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
+service,serviceVerificationAgreementConsentRecordRead,READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
+service,serviceCreateIndividualConsentRecordAndSignature,CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
+service,servicePolicyRead,READ - Fetch the latest version of a Policy and the presented revisionId of an associated Agreement
+config,configUpdateAgreement,UPDATE - Update an existing data agreement and returned together with revision
+config,configReadAgreement,READ - Fetch the latest version of a data agreement
+config,configDeleteAgreement,DELETE - Delete a data agreement
+config,configListAgreement,LIST - Fetch all data agreements
+config,configReadPolicy,"READ - Fetch a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned."
+config,configUpdatePolicy,"UPDATE - Update an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in Agreement, the new revision should be specified for Agreement."
+config,configListPolicy,LIST - Fetch all policies
+config,configCreatePolicy,CREATE - Create a new policy and returned together with revision
+config,configDeletePolicy,"DELETE - Deletes an existing policy, returning the updated version and a new revision. Deleting a policy is not possible if it's associated with active Agreement."
+config,configListPolicyRevisions,LIST - Returns all the revisions for the policy
+config,configCreateAgreement,CREATE - Create a new data agreement and returned together with revision
+config,configListAgreementFilter,LIST - Fetch all data agreements matching the data agreement filter
+onboard,getOrganisation,Get organization
+onboard,validateEmail,Validate email
+onboard,refreshToken,Refresh access token
+onboard,getOrganisationCoverImage,Get organization cover image
+onboard,loginIndividual,Login individual
+onboard,verifyOtp,Verify OTP
+onboard,updateOrganisation,Update organization
+onboard,updateOrganisationCoverImage,Update organization cover image
+onboard,verifyPhone,For OTP verification of the given phone number
+onboard,getOrganisationLogoImage,Get organization logo image
+onboard,updateOrganisationLogoImage,Update organization logo image
+onboard,validatePhone,Validate phone
+onboard,loginOrganisationAdmin,Login organisation admin
+auditor,auditAgreementList,LIST - Fetch all data agreements stored in the system
+auditor,auditUpdateTracker,UPDATE - get the details of an AuditTracker
+auditor,auditDeleteTracker,DELETE - removes an AuditTracker
+auditor,auditListTrackers,LIST - show available AuditTracker objects
+auditor,auditConsentRecordRead,READ - Fetch a single data agreement record
+auditor,auditReadTracker,READ - get the details of an AuditTracker
+auditor,auditConsentRecordList,LIST - Fetch all consent records
+auditor,auditCreateTracker,CREATE - A new AuditTracker is set up
+auditor,auditReadRecord,READ - Fetch a single data agreement.
+status,statusReadiness,DRAFT: This endpoint relates to a proposal for generic liveness/readiness API endpoints for building blocks
+status,statusStartup,DRAFT: This endpoint relates to a proposal for generic liveness/readiness API endpoints for building blocks
