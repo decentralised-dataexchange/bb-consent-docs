@@ -1,0 +1,21 @@
+required:
+  - accessToken
+  - expiresIn
+  - refreshExpiresIn
+  - refreshToken
+  - tokenType
+type: object
+title: Token
+properties:
+  accessToken:
+    type: string
+  expiresIn:
+    type: integer
+    format: int32
+  refreshExpiresIn:
+    type: integer
+    format: int32
+  refreshToken:
+    type: string
+  tokenType:
+    type: string

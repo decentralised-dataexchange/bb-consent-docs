@@ -1,0 +1,37 @@
+operationId: validateEmail
+tags:
+  - onboard
+description: Validate email
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - email
+        type: object
+        properties:
+          email:
+            type: string
+  required: true
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - result
+            - message
+          type: object
+          properties:
+            result:
+              type: boolean
+            message:
+              type: string
+          example:
+            result: true
+            message: Email address is valid and not in use in our system
+deprecated: false
+security:
+  - BearerAuth: []

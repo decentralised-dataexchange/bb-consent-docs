@@ -36,23 +36,22 @@ components:
       $ref: ./definitions/StatusStartup.yaml
   securitySchemes:
     BearerAuth:
-      description: Access token passed with Bearer prefix in Authorization header
-      type: http
-      scheme: bearer
       bearerFormat: JWT
+      description: Access token passed with Bearer prefix in Authorization header
+      scheme: bearer
+      type: http
 info:
   contact:
     email: support@igrant.io
     name: iGrant.io
     url: https://igrant.io
-  description:
-    "The Consent Building Block enables services for individuals to approve
+  description: The Consent Building Block enables services for individuals to approve
     the use  of their personal data by defining the principles, functions, and architecture  of
     an information system. For organisations that process personal data, it  provides
     the ability to know the individual's will and legitimately process such  personal
     data. The Consent Building Block is a process-oriented GovStack Building Block  facilitating
     auditable bilateral data-agreements within a multi-agent environment that  integrates
-    with most other Building Blocks."
+    with most other Building Blocks.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -60,18 +59,18 @@ info:
   version: 2023.8.2
 openapi: 3.1.0
 paths:
-  /audit/data-agreement/{dataAgreementId}:
-    get:
-      $ref: ./paths/auditReadRecord.yaml
-  /audit/data-agreements/:
-    post:
-      $ref: ./paths/auditAgreementList.yaml
   /audit/data-agreement-record/{dataAgreementRecordId}:
     get:
       $ref: ./paths/auditConsentRecordRead.yaml
   /audit/data-agreement-records:
     post:
       $ref: ./paths/auditConsentRecordList.yaml
+  /audit/data-agreement/{dataAgreementId}:
+    get:
+      $ref: ./paths/auditReadRecord.yaml
+  /audit/data-agreements/:
+    post:
+      $ref: ./paths/auditAgreementList.yaml
   /config/data-agreement:
     post:
       $ref: ./paths/configCreateAgreement.yaml
@@ -103,6 +102,42 @@ paths:
   /config/policy/{policyId}/revisions:
     get:
       $ref: ./paths/configListPolicyRevisions.yaml
+  /onboard/admin/login:
+    post:
+      $ref: ./paths/loginOrganisationAdmin.yaml
+  /onboard/individual/login:
+    post:
+      $ref: ./paths/loginIndividual.yaml
+  /onboard/organisation:
+    get:
+      $ref: ./paths/getOrganisation.yaml
+    put:
+      $ref: ./paths/updateOrganisation.yaml
+  /onboard/organisation/coverimage:
+    get:
+      $ref: ./paths/getOrganisationCoverImage.yaml
+    post:
+      $ref: ./paths/updateOrganisationCoverImage.yaml
+  /onboard/organisation/logoimage:
+    get:
+      $ref: ./paths/getOrganisationLogoImage.yaml
+    post:
+      $ref: ./paths/updateOrganisationLogoImage.yaml
+  /onboard/token/refresh:
+    post:
+      $ref: ./paths/refreshToken.yaml
+  /onboard/validate/email:
+    post:
+      $ref: ./paths/validateEmail.yaml
+  /onboard/validate/phone:
+    post:
+      $ref: ./paths/validatePhone.yaml
+  /onboard/verify/otp:
+    post:
+      $ref: ./paths/verifyOtp.yaml
+  /onboard/verify/phone:
+    post:
+      $ref: ./paths/verifyPhone.yaml
   /service/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceAgreementRead.yaml
@@ -117,20 +152,9 @@ paths:
       $ref: ./paths/serviceDeleteAllRecords.yaml
     get:
       $ref: ./paths/serviceListIndividualConsentRecordList.yaml
-  /service/individual/record/data-agreement/{dataAgreementId}:
-    get:
-      $ref: ./paths/serviceReadIndividualRecordRead.yaml
-    post:
-      $ref: ./paths/serviceCreateIndividualConsentRecord.yaml
-  /service/individual/record/data-agreement/{dataAgreementId}/all:
-    get:
-      $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
   /service/individual/record/data-agreement-record:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordAndSignature.yaml
-  /service/individual/record/data-agreement-record/draft:
-    post:
-      $ref: ./paths/serviceCreateIndividualConsentRecordDraft.yaml
   /service/individual/record/data-agreement-record/{dataAgreementRecordId}:
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecord.yaml
@@ -139,6 +163,14 @@ paths:
       $ref: ./paths/serviceCreateIndividualConsentRecordSignature.yaml
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecordSignature.yaml
+  /service/individual/record/data-agreement/{dataAgreementId}:
+    get:
+      $ref: ./paths/serviceReadIndividualRecordRead.yaml
+    post:
+      $ref: ./paths/serviceCreateIndividualConsentRecord.yaml
+  /service/individual/record/data-agreement/{dataAgreementId}/all:
+    get:
+      $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
   /service/individual/{individualId}:
     delete:
       $ref: ./paths/serviceIndividualDelete.yaml
@@ -152,6 +184,9 @@ paths:
   /service/policy/{policyId}:
     get:
       $ref: ./paths/servicePolicyRead.yaml
+  /service/verification/data-agreement-records:
+    post:
+      $ref: ./paths/serviceVerificationConsentRecordList.yaml
   /service/verification/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml
@@ -160,33 +195,27 @@ paths:
       $ref: ./paths/serviceVerificationAgreementList.yaml
     post:
       $ref: ./paths/serviceVerificationAgreementListFilter.yaml
-  /service/verification/data-agreement-records:
-    post:
-      $ref: ./paths/serviceVerificationConsentRecordList.yaml
 servers:
-  - description: Development server
-    url: https://api.bb-consent.dev/v2
-  - description: Staging server
-    url: https://staging-consent-bb-api.igrant.io/v2
-  - description: Demo server
-    url: https://demo-consent-bb-api.igrant.io/v2
+- description: Development server
+  url: https://api.bb-consent.dev/v2
+- description: Staging server
+  url: https://staging-consent-bb-api.igrant.io/v2
+- description: Demo server
+  url: https://demo-consent-bb-api.igrant.io/v2
 tags:
-  - description:
-      "Operations for external auditing systems to query detailed data from
-      the system and subscribe to notifications."
-    name: audit
-    x-tag-expanded: false
-  - description: "Secured operations available to organization API integration"
-    name: config
-    x-tag-expanded: false
-  - description:
-      "Secured operations for individuals, data consumers and applications
-      to record and verify consent"
-    name: service
-    x-tag-expanded: false
-  - description:
-      "These are used for onboard the organisation, organisation admin and
-      individual users to the system.  It also deals with all authentication and authorisation
-      APIs that can be configured towards external IDPs."
-    name: onboard
-    x-tag-expanded: false
+- description: Operations for external auditing systems to query detailed data from
+    the system and subscribe to notifications.
+  name: audit
+  x-tag-expanded: false
+- description: Secured operations available to organization API integration
+  name: config
+  x-tag-expanded: false
+- description: Secured operations for individuals, data consumers and applications
+    to record and verify consent
+  name: service
+  x-tag-expanded: false
+- description: These are used for onboard the organisation, organisation admin and
+    individual users to the system.  It also deals with all authentication and authorisation
+    APIs that can be configured towards external IDPs.
+  name: onboard
+  x-tag-expanded: false

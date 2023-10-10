@@ -1,0 +1,34 @@
+tags:
+  - onboard
+description: Login organisation admin
+operationId: loginOrganisationAdmin
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - username
+          - password
+        type: object
+        properties:
+          username:
+            type: string
+          password:
+            type: string
+  required: true
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../definitions/Token.yaml"
+  "401":
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: "../definitions/Error.yaml"
+
+deprecated: false

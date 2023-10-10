@@ -1,0 +1,24 @@
+required:
+  - name
+  - location
+  - description
+  - policyUrl
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  location:
+    type: string
+  policyurl:
+    type: string
+  coverImageId:
+    type: string
+  coverImageUrl:
+    type: string
+  logoImageId:
+    type: string
+  logoImageUrl:
+    type: string
+  

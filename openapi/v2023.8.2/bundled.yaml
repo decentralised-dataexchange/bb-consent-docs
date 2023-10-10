@@ -651,10 +651,10 @@ components:
           description: 'When a timeout occurs, a list of pending operations may be shared'
   securitySchemes:
     BearerAuth:
-      description: Access token passed with Bearer prefix in Authorization header
-      type: http
-      scheme: bearer
       bearerFormat: JWT
+      description: Access token passed with Bearer prefix in Authorization header
+      scheme: bearer
+      type: http
 info:
   contact:
     email: support@igrant.io
@@ -668,84 +668,6 @@ info:
   version: 2023.8.2
 openapi: 3.1.0
 paths:
-  '/audit/data-agreement/{dataAgreementId}':
-    get:
-      description: READ - Fetch a single data agreement.
-      operationId: auditReadRecord
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Agreement'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch a single data agreement.
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
-  /audit/data-agreements/:
-    post:
-      description: LIST - Fetch all data agreements stored in the system
-      operationId: auditAgreementList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                agreementFilter:
-                  $ref: '#/components/schemas/AgreementFilter'
-                  description: An object of type AgreementFilter
-              required:
-                - agreementFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetch all data agreements stored in the system
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   '/audit/data-agreement-record/{dataAgreementRecordId}':
     get:
       description: READ - Fetch a single data agreement record
@@ -824,6 +746,84 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-AT-003
+  '/audit/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch a single data agreement.
+      operationId: auditReadRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agreement'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch a single data agreement.
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
+  /audit/data-agreements/:
+    post:
+      description: LIST - Fetch all data agreements stored in the system
+      operationId: auditAgreementList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                agreementFilter:
+                  $ref: '#/components/schemas/AgreementFilter'
+                  description: An object of type AgreementFilter
+              required:
+                - agreementFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Agreement'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetch all data agreements stored in the system
+      tags:
+        - auditor
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   /config/data-agreement:
     post:
       description: CREATE - Create a new data agreement and returned together with revision
@@ -1285,6 +1285,526 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /onboard/admin/login:
+    post:
+      tags:
+        - onboard
+      description: Login organisation admin
+      operationId: loginOrganisationAdmin
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - accessToken
+                  - expiresIn
+                  - refreshExpiresIn
+                  - refreshToken
+                  - tokenType
+                type: object
+                title: Token
+                properties:
+                  accessToken:
+                    type: string
+                  expiresIn:
+                    type: integer
+                    format: int32
+                  refreshExpiresIn:
+                    type: integer
+                    format: int32
+                  refreshToken:
+                    type: string
+                  tokenType:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                required:
+                  - errorCode
+                  - errorDescription
+                type: object
+                properties:
+                  errorCode:
+                    type: string
+                  errorDescription:
+                    type: string
+      deprecated: false
+  /onboard/individual/login:
+    post:
+      tags:
+        - onboard
+      description: Login individual
+      operationId: loginIndividual
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - individual
+                  - token
+                type: object
+                properties:
+                  individual:
+                    allOf:
+                      - $ref: '#/components/schemas/Individual'
+                      - type: object
+                        title: IndividualExtras
+                        properties:
+                          name:
+                            type: string
+                          iamId:
+                            type: string
+                          email:
+                            type: string
+                          phone:
+                            type: string
+                          imageId:
+                            type: string
+                          imageUrl:
+                            type: string
+                          lastVisit:
+                            type: string
+                          orgs:
+                            type: array
+                            items:
+                              required:
+                                - id
+                                - name
+                                - location
+                                - type
+                                - typeId
+                                - eulaAccepted
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                                location:
+                                  type: string
+                                type:
+                                  type: string
+                                typeId:
+                                  type: string
+                                eulaAccepted:
+                                  type: boolean
+                          apiKey:
+                            type: string
+                          roles:
+                            type: array
+                            items:
+                              required:
+                                - roleId
+                                - orgId
+                              type: object
+                              properties:
+                                roleId:
+                                  type: integer
+                                  format: int32
+                                orgId:
+                                  type: string
+                          incompleteProfile:
+                            type: boolean
+                  token:
+                    $ref: '#/paths/~1onboard~1admin~1login/post/responses/200/content/application~1json/schema'
+      deprecated: false
+  /onboard/organisation:
+    get:
+      deprecated: false
+      description: Get organization
+      operationId: getOrganisation
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  Organization:
+                    required:
+                      - name
+                      - location
+                      - description
+                      - policyUrl
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      location:
+                        type: string
+                      policyurl:
+                        type: string
+                      coverImageId:
+                        type: string
+                      coverImageUrl:
+                        type: string
+                      logoImageId:
+                        type: string
+                      logoImageUrl:
+                        type: string
+                required:
+                  - Organization
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+    put:
+      deprecated: false
+      description: Update organization
+      operationId: updateOrganisation
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  type: string
+                location:
+                  type: string
+                name:
+                  type: string
+                policyurl:
+                  type: string
+              required:
+                - name
+                - location
+                - description
+                - policyurl
+              type: object
+        required: true
+      responses:
+        '202':
+          content: {}
+          description: Accepted
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+  /onboard/organisation/coverimage:
+    get:
+      deprecated: false
+      description: Get organization cover image
+      operationId: getOrganisationCoverImage
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+    post:
+      deprecated: false
+      description: Update organization cover image
+      operationId: updateOrganisationCoverImage
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              properties:
+                orgimage:
+                  format: binary
+                  type: string
+              required:
+                - orgimage
+              type: object
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  coverImageId:
+                    type: string
+                  coverImageUrl:
+                    type: string
+                required:
+                  - coverImageId
+                  - coverImageUrl
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+  /onboard/organisation/logoimage:
+    get:
+      deprecated: false
+      description: Get organization logo image
+      operationId: getOrganisationLogoImage
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+    post:
+      deprecated: false
+      description: Update organization logo image
+      operationId: updateOrganisationLogoImage
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              properties:
+                orgimage:
+                  format: binary
+                  type: string
+              required:
+                - orgimage
+              type: object
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  logoImageId:
+                    type: string
+                  logoImageUrl:
+                    type: string
+                required:
+                  - logoImageId
+                  - logoImageUrl
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+  /onboard/token/refresh:
+    post:
+      deprecated: false
+      description: Refresh access token
+      operationId: refreshToken
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                clientid:
+                  type: string
+                refreshtoken:
+                  type: string
+              required:
+                - refreshtoken
+                - clientid
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1onboard~1admin~1login/post/responses/200/content/application~1json/schema'
+          description: OK
+      security: []
+      tags:
+        - onboard
+  /onboard/validate/email:
+    post:
+      operationId: validateEmail
+      tags:
+        - onboard
+      description: Validate email
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+              type: object
+              properties:
+                email:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - result
+                  - message
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  result: true
+                  message: Email address is valid and not in use in our system
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /onboard/validate/phone:
+    post:
+      operationId: validatePhone
+      tags:
+        - onboard
+      description: Validate phone
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - phone
+              type: object
+              properties:
+                phone:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - result
+                  - message
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  result: false
+                  message: Phone number is in use
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /onboard/verify/otp:
+    post:
+      operationId: verifyOtp
+      tags:
+        - onboard
+      description: Verify OTP
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - phone
+                - otp
+              type: object
+              properties:
+                phone:
+                  type: string
+                otp:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - result
+                  - message
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                  message:
+                    type: string
+                example:
+                  result: true
+                  message: Otp validatiation Succeeded
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /onboard/verify/phone:
+    post:
+      operationId: verifyPhone
+      tags:
+        - onboard
+      description: For OTP verification of the given phone number
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+                - phone
+              type: object
+              properties:
+                email:
+                  type: string
+                phone:
+                  type: string
+        required: true
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
   '/service/data-agreement/{dataAgreementId}':
     get:
       description: READ - Fetches the latest version of an Agreement
@@ -1446,123 +1966,6 @@ paths:
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-001
-  '/service/individual/record/data-agreement/{dataAgreementId}':
-    get:
-      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement. The individualId is supplied as HTTP header.
-      operationId: serviceReadIndividualRecordRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConsentRecord'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch the current record for data agreement
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-001
-    post:
-      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header.'
-      operationId: serviceCreateIndividualConsentRecord
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-        - description: An object with id individualId
-          in: query
-          name: individualId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: CREATE - Create a data agreement record
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
-  '/service/individual/record/data-agreement/{dataAgreementId}/all':
-    get:
-      description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
-      operationId: serviceListIndividualAgreementConsentRecordList
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetches all data agreement records given to a data agreement
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/data-agreement-record:
     post:
       description: CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
@@ -1600,51 +2003,6 @@ paths:
       security:
         - BearerAuth: []
       summary: CREATE - Create a paired consent record and signature object
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
-  /service/individual/record/data-agreement-record/draft:
-    post:
-      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
-      operationId: serviceCreateIndividualConsentRecordDraft
-      parameters:
-        - description: An object with id individualId
-          in: query
-          name: individualId
-          required: true
-          schema:
-            type: string
-        - description: An object with id dataAgreementId
-          in: query
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Signature'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       tags:
         - service
       x-specification-crudl-model: ''
@@ -1770,6 +2128,123 @@ paths:
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
+  '/service/individual/record/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement. The individualId is supplied as HTTP header.
+      operationId: serviceReadIndividualRecordRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRecord'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch the current record for data agreement
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
+    post:
+      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header.'
+      operationId: serviceCreateIndividualConsentRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: An object with id individualId
+          in: query
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                    - $ref: '#/components/schemas/Revision'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Create a data agreement record
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+  '/service/individual/record/data-agreement/{dataAgreementId}/all':
+    get:
+      description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
+      operationId: serviceListIndividualAgreementConsentRecordList
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetches all data agreement records given to a data agreement
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
   '/service/individual/{individualId}':
     delete:
       description: DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
@@ -1943,6 +2418,55 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /service/verification/data-agreement-records:
+    post:
+      description: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
+      operationId: serviceVerificationConsentRecordList
+      parameters:
+        - description: Requested index for start of resources to be provided in response requested by client
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Requested number of resources to be provided in response requested by client
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                consentRecordFilter:
+                  $ref: '#/components/schemas/ConsentRecordFilter'
+                  description: An object of type ConsentRecordFilter
+              required:
+                - consentRecordFilter
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ConsentRecord'
+                type: array
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '3.1, 1.2'
+      x-specification-usecase: UC-C-PIC-A-003
   '/service/verification/data-agreement/{dataAgreementId}':
     get:
       description: READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
@@ -2061,55 +2585,6 @@ paths:
       x-specification-crudl-model: ''
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: '1.1'
-      x-specification-usecase: UC-C-PIC-A-003
-  /service/verification/data-agreement-records:
-    post:
-      description: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
-      operationId: serviceVerificationConsentRecordList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                consentRecordFilter:
-                  $ref: '#/components/schemas/ConsentRecordFilter'
-                  description: An object of type ConsentRecordFilter
-              required:
-                - consentRecordFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '3.1, 1.2'
       x-specification-usecase: UC-C-PIC-A-003
 servers:
   - description: Development server

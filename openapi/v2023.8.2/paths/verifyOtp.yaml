@@ -1,0 +1,40 @@
+operationId: verifyOtp
+tags:
+  - onboard
+description: Verify OTP
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - phone
+          - otp
+        type: object
+        properties:
+          phone:
+            type: string
+          otp:
+            type: string
+  required: true
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - result
+            - message
+          type: object
+          properties:
+            result:
+              type: boolean
+            message:
+              type: string
+          example:
+            result: true
+            message: Otp validatiation Succeeded
+deprecated: false
+security:
+  - BearerAuth: []

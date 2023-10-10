@@ -1,0 +1,58 @@
+type: object
+title: IndividualExtras
+properties:
+  name:
+    type: string
+  iamId:
+    type: string
+  email:
+    type: string
+  phone:
+    type: string
+  imageId:
+    type: string
+  imageUrl:
+    type: string
+  lastVisit:
+    type: string
+  orgs:
+    type: array
+    items:
+      required:
+        - id
+        - name
+        - location
+        - type
+        - typeId
+        - eulaAccepted
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+        typeId:
+          type: string
+        eulaAccepted:
+          type: boolean
+  apiKey:
+    type: string
+  roles:
+    type: array
+    items:
+      required:
+        - roleId
+        - orgId
+      type: object
+      properties:
+        roleId:
+          type: integer
+          format: int32
+        orgId:
+          type: string
+  incompleteProfile:
+    type: boolean

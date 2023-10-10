@@ -1,0 +1,26 @@
+operationId: verifyPhone
+tags:
+  - onboard
+description: For OTP verification of the given phone number
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - email
+          - phone
+        type: object
+        properties:
+          email:
+            type: string
+          phone:
+            type: string
+  required: true
+responses:
+  "204":
+    description: No Content
+    content: {}
+deprecated: false
+security:
+  - BearerAuth: []

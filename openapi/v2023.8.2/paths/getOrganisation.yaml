@@ -1,0 +1,19 @@
+deprecated: false
+description: Get organization
+operationId: getOrganisation
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          properties:
+            Organization:
+              $ref: ../definitions/Organisation.yaml
+          required:
+          - Organization
+          type: object
+    description: OK
+security:
+- BearerAuth: []
+tags:
+- onboard

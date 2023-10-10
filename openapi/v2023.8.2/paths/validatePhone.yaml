@@ -1,0 +1,37 @@
+operationId: validatePhone
+tags:
+  - onboard
+description: Validate phone
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - phone
+        type: object
+        properties:
+          phone:
+            type: string
+  required: true
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - result
+            - message
+          type: object
+          properties:
+            result:
+              type: boolean
+            message:
+              type: string
+          example:
+            result: false
+            message: Phone number is in use
+deprecated: false
+security:
+  - BearerAuth: []

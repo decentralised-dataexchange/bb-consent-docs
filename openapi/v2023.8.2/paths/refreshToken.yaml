@@ -1,0 +1,28 @@
+deprecated: false
+description: Refresh access token
+operationId: refreshToken
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          clientid:
+            type: string
+          refreshtoken:
+            type: string
+        required:
+          - refreshtoken
+          - clientid
+        type: object
+  required: true
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: "../definitions/Token.yaml"
+    description: OK
+security: []
+tags:
+  - onboard

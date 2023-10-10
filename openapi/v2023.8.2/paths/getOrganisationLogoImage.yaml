@@ -1,0 +1,10 @@
+deprecated: false
+description: Get organization logo image
+operationId: getOrganisationLogoImage
+responses:
+  '200':
+    headers: {}
+security:
+- BearerAuth: []
+tags:
+- onboard

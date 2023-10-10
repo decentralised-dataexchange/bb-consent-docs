@@ -1,0 +1,9 @@
+required:
+  - errorCode
+  - errorDescription
+type: object
+properties:
+  errorCode:
+    type: string
+  errorDescription:
+    type: string

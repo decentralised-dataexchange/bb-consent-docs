@@ -1,0 +1,37 @@
+deprecated: false
+description: Update organization
+operationId: updateOrganisation
+parameters:
+- in: path
+  name: organizationId
+  required: true
+  schema:
+    type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          description:
+            type: string
+          location:
+            type: string
+          name:
+            type: string
+          policyurl:
+            type: string
+        required:
+        - name
+        - location
+        - description
+        - policyurl
+        type: object
+  required: true
+responses:
+  '202':
+    content: {}
+    description: Accepted
+security:
+- BearerAuth: []
+tags:
+- onboard
