@@ -1,12 +1,6 @@
 deprecated: false
 description: Update organization
 operationId: updateOrganisation
-parameters:
-- in: path
-  name: organizationId
-  required: true
-  schema:
-    type: string
 requestBody:
   content:
     application/json:
@@ -18,13 +12,13 @@ requestBody:
             type: string
           name:
             type: string
-          policyurl:
+          policyUrl:
             type: string
         required:
         - name
         - location
         - description
-        - policyurl
+        - policyUrl
         type: object
   required: true
 responses:

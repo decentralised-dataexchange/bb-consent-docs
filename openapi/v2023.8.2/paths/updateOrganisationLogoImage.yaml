@@ -1,12 +1,6 @@
 deprecated: false
 description: Update organization logo image
 operationId: updateOrganisationLogoImage
-parameters:
-- in: path
-  name: organizationId
-  required: true
-  schema:
-    type: string
 requestBody:
   content:
     multipart/form-data:

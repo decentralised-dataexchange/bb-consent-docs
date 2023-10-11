@@ -7,13 +7,13 @@ requestBody:
     application/json:
       schema:
         properties:
-          clientid:
+          clientId:
             type: string
-          refreshtoken:
+          refreshToken:
             type: string
         required:
-          - refreshtoken
-          - clientid
+          - refreshToken
+          - clientId
         type: object
   required: true
 responses:

@@ -1469,7 +1469,7 @@ paths:
                         type: string
                       location:
                         type: string
-                      policyurl:
+                      policyUrl:
                         type: string
                       coverImageId:
                         type: string
@@ -1491,12 +1491,6 @@ paths:
       deprecated: false
       description: Update organization
       operationId: updateOrganisation
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1508,13 +1502,13 @@ paths:
                   type: string
                 name:
                   type: string
-                policyurl:
+                policyUrl:
                   type: string
               required:
                 - name
                 - location
                 - description
-                - policyurl
+                - policyUrl
               type: object
         required: true
       responses:
@@ -1589,12 +1583,6 @@ paths:
       deprecated: false
       description: Update organization logo image
       operationId: updateOrganisationLogoImage
-      parameters:
-        - in: path
-          name: organizationId
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           multipart/form-data:
@@ -1638,13 +1626,13 @@ paths:
           application/json:
             schema:
               properties:
-                clientid:
+                clientId:
                   type: string
-                refreshtoken:
+                refreshToken:
                   type: string
               required:
-                - refreshtoken
-                - clientid
+                - refreshToken
+                - clientId
               type: object
         required: true
       responses:
