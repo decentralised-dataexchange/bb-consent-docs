@@ -5324,6 +5324,7 @@ components:
         - Shared3PP
         - Version
         - PublishFlag
+        - DPIA
       type: object
       properties:
         ID:
@@ -5348,6 +5349,13 @@ components:
           type: string
         IndustryScope:
           type: string
+        DPIA:
+          type: object
+          properties:
+            DPIADate:
+              type: string
+            DPIASummaryURL:
+              type: string
         DataRetention:
           required:
             - RetentionPeriod
