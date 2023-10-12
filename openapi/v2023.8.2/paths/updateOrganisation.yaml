@@ -26,7 +26,12 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ../definitions/Organisation.yaml
+          properties:
+            organisation:
+              $ref: ../definitions/Organisation.yaml
+          required:
+          - organisation
+          type: object
     description: "Updated the organisation"
 security:
   - BearerAuth: []

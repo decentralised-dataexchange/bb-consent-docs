@@ -1456,7 +1456,31 @@ paths:
               schema:
                 properties:
                   organisation:
-                    $ref: '#/paths/~1onboard~1organisation/put/responses/200/content/application~1json/schema'
+                    required:
+                      - name
+                      - location
+                      - description
+                      - policyUrl
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      location:
+                        type: string
+                      policyUrl:
+                        type: string
+                      coverImageId:
+                        type: string
+                      coverImageUrl:
+                        type: string
+                      logoImageId:
+                        type: string
+                      logoImageUrl:
+                        type: string
                 required:
                   - organisation
                 type: object
@@ -1494,31 +1518,12 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - name
-                  - location
-                  - description
-                  - policyUrl
-                type: object
                 properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  location:
-                    type: string
-                  policyUrl:
-                    type: string
-                  coverImageId:
-                    type: string
-                  coverImageUrl:
-                    type: string
-                  logoImageId:
-                    type: string
-                  logoImageUrl:
-                    type: string
+                  organisation:
+                    $ref: '#/paths/~1onboard~1organisation/get/responses/200/content/application~1json/schema/properties/organisation'
+                required:
+                  - organisation
+                type: object
           description: Updated the organisation
       security:
         - BearerAuth: []
