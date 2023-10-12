@@ -26,10 +26,7 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-              - $ref: ../definitions/Organisation.yaml
-          type: array
+          $ref: ../definitions/Organisation.yaml
     description: "Updated the organisation"
 security:
   - BearerAuth: []
