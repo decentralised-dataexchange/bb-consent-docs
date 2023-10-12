@@ -396,7 +396,6 @@ components:
       x-not-in-database: false
       required:
         - name
-        - version
         - url
       properties:
         id:
