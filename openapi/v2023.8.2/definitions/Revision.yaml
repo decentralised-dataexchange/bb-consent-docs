@@ -59,8 +59,9 @@ properties:
 
   authorizedByIndividualId:
     description: "Individual Id"
+    type: string
 
-  authorizedByOther:
+  authorizedByOtherId:
     type: string
     format: ""
     example: ""

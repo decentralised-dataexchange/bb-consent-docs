@@ -522,7 +522,8 @@ components:
           description: Timestamp of when revisioning happened. It should be ISO 8601 UTC date time
         authorizedByIndividualId:
           description: Individual Id
-        authorizedByOther:
+          type: string
+        authorizedByOtherId:
           type: string
           format: ''
           example: ''
