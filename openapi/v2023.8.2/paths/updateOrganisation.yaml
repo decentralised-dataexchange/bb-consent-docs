@@ -15,17 +15,23 @@ requestBody:
           policyUrl:
             type: string
         required:
-        - name
-        - location
-        - description
-        - policyUrl
+          - name
+          - location
+          - description
+          - policyUrl
         type: object
   required: true
 responses:
-  '202':
-    content: {}
-    description: Accepted
+  "200":
+    content:
+      application/json:
+        schema:
+          items:
+            oneOf:
+              - $ref: ../definitions/Organisation.yaml
+          type: array
+    description: "Updated the organisation"
 security:
-- BearerAuth: []
+  - BearerAuth: []
 tags:
-- onboard
+  - onboard
