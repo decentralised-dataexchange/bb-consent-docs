@@ -4,7 +4,6 @@ description: 'A policy governs data and Agreement in the realm of an organisatio
 x-not-in-database: false
 
 required:
-  - id
   - name
   - version
   - url
@@ -25,7 +24,7 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "Version of the policy"
+    description: "Version of the policy. It can follow semver format."
 
   url:
     type: string

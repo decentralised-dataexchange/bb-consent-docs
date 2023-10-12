@@ -22,6 +22,10 @@ properties:
     format: ""
     example: ""
     description: 'This was previously called "schema" but for technical reasons should be called "schemaName"'
+    enum:
+      - dataAgreement
+      - policy
+      - dataAgreementRecord
 
   objectId:
     type: string
@@ -39,7 +43,7 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "Revisioned data (serialized as JSON) as a dict {objectData: {...}, schemaName: ..., objectId: ..., signedWithoutObjectId: ..., timestamp: ..., authorizedByIndividual: ..., authorizedByOther: ...}. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature."
+    description: "Revisioned data (serialized as JSON) as a dict.Apply JSON Canonicalization Scheme as per IETF RFC 8785. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature."
 
   serializedHash:
     type: string
@@ -51,12 +55,10 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "Timestamp of when revisioning happened"
+    description: "Timestamp of when revisioning happened. It should be ISO 8601 UTC date time"
 
-  authorizedByIndividual:
-    $ref: "./Individual.yaml"
-    x-fk-model: "Individual"
-    description: ""
+  authorizedByIndividualId:
+    description: "Individual Id"
 
   authorizedByOther:
     type: string
@@ -64,10 +66,10 @@ properties:
     example: ""
     description: "Reference to an admin user that has created this revision"
 
-  successor:
-    $ref: "./Revision.yaml"
+  successorId:
     x-fk-model: "Revision"
-    description: "This revision is no longer the latest revision, refer to its successor."
+    type: string
+    description: "If this revision is no longer the latest revision, refer to its successor."
 
   predecessorHash:
     type: string

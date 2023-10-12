@@ -395,7 +395,6 @@ components:
       description: A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
       x-not-in-database: false
       required:
-        - id
         - name
         - version
         - url
@@ -414,7 +413,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: Version of the policy
+          description: Version of the policy. It can follow semver format.
         url:
           type: string
           format: ''
@@ -471,6 +470,10 @@ components:
           format: ''
           example: ''
           description: This was previously called "schema" but for technical reasons should be called "schemaName"
+          enum:
+            - dataAgreement
+            - policy
+            - dataAgreementRecord
         objectId:
           type: string
           format: ''
@@ -485,7 +488,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: 'Revisioned data (serialized as JSON) as a dict {objectData: {...}, schemaName: ..., objectId: ..., signedWithoutObjectId: ..., timestamp: ..., authorizedByIndividual: ..., authorizedByOther: ...}. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature.'
+          description: 'Revisioned data (serialized as JSON) as a dict.Apply JSON Canonicalization Scheme as per IETF RFC 8785. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature.'
         serializedHash:
           type: string
           format: ''
@@ -495,20 +498,18 @@ components:
           type: string
           format: ''
           example: ''
-          description: Timestamp of when revisioning happened
-        authorizedByIndividual:
-          $ref: '#/components/schemas/Individual'
-          x-fk-model: Individual
-          description: ''
+          description: Timestamp of when revisioning happened. It should be ISO 8601 UTC date time
+        authorizedByIndividualId:
+          description: Individual Id
         authorizedByOther:
           type: string
           format: ''
           example: ''
           description: Reference to an admin user that has created this revision
-        successor:
-          $ref: '#/components/schemas/Revision'
+        successorId:
           x-fk-model: Revision
-          description: 'This revision is no longer the latest revision, refer to its successor.'
+          type: string
+          description: 'If this revision is no longer the latest revision, refer to its successor.'
         predecessorHash:
           type: string
           format: ''
