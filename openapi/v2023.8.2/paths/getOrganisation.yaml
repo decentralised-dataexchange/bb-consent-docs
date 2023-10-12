@@ -7,10 +7,10 @@ responses:
       application/json:
         schema:
           properties:
-            Organization:
+            organisation:
               $ref: ../definitions/Organisation.yaml
           required:
-          - Organization
+          - organisation
           type: object
     description: OK
 security:

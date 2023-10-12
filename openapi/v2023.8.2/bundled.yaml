@@ -1455,7 +1455,7 @@ paths:
             application/json:
               schema:
                 properties:
-                  Organization:
+                  organisation:
                     required:
                       - name
                       - location
@@ -1466,6 +1466,8 @@ paths:
                       id:
                         type: string
                       name:
+                        type: string
+                      description:
                         type: string
                       location:
                         type: string
@@ -1480,7 +1482,7 @@ paths:
                       logoImageUrl:
                         type: string
                 required:
-                  - Organization
+                  - organisation
                 type: object
           description: OK
       security:

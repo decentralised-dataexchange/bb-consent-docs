@@ -9,6 +9,8 @@ properties:
     type: string
   name:
     type: string
+  description:
+    type: string
   location:
     type: string
   policyUrl:
