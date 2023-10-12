@@ -1,41 +1,39 @@
 description: LIST - Returns all the revisions for the policy
 operationId: configListPolicyRevisions
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: policyId
-  required: true
-  schema:
-    type: string
-- description: Requested index for start of resources to be provided in response requested
-    by client
-  in: query
-  name: offset
-  required: false
-  schema:
-    type: integer
-- description: Requested number of resources to be provided in response requested
-    by client
-  in: query
-  name: limit
-  required: false
-  schema:
-    type: integer
+  - description: Unique ID of an object
+    in: path
+    name: policyId
+    required: true
+    schema:
+      type: string
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/page.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          $ref: ../definitions/Policy.yaml
-    description: ''
-  '400':
+          type: object
+          properties:
+            policy:
+              $ref: ../definitions/Policy.yaml
+            revisions:
+              type: array
+              items:
+                $ref: ../definitions/Revision.yaml
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: LIST - Returns all the revisions for the policy
 tags:
-- config
+  - config
 x-specification-crudl-model: Revision
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-A-003

@@ -1,5 +1,7 @@
 components:
   schemas:
+    Pagination:
+      $ref: "./definitions/Pagination.yaml"
     Agreement:
       $ref: ./definitions/Agreement.yaml
     AgreementData:
@@ -45,7 +47,8 @@ info:
     email: support@igrant.io
     name: iGrant.io
     url: https://igrant.io
-  description: The Consent Building Block enables services for individuals to approve
+  description:
+    The Consent Building Block enables services for individuals to approve
     the use  of their personal data by defining the principles, functions, and architecture  of
     an information system. For organisations that process personal data, it  provides
     the ability to know the individual's will and legitimately process such  personal
@@ -196,26 +199,29 @@ paths:
     post:
       $ref: ./paths/serviceVerificationAgreementListFilter.yaml
 servers:
-- description: Development server
-  url: https://api.bb-consent.dev/v2
-- description: Staging server
-  url: https://staging-consent-bb-api.igrant.io/v2
-- description: Demo server
-  url: https://demo-consent-bb-api.igrant.io/v2
+  - description: Development server
+    url: https://api.bb-consent.dev/v2
+  - description: Staging server
+    url: https://staging-consent-bb-api.igrant.io/v2
+  - description: Demo server
+    url: https://demo-consent-bb-api.igrant.io/v2
 tags:
-- description: Operations for external auditing systems to query detailed data from
-    the system and subscribe to notifications.
-  name: audit
-  x-tag-expanded: false
-- description: Secured operations available to organization API integration
-  name: config
-  x-tag-expanded: false
-- description: Secured operations for individuals, data consumers and applications
-    to record and verify consent
-  name: service
-  x-tag-expanded: false
-- description: These are used for onboard the organisation, organisation admin and
-    individual users to the system.  It also deals with all authentication and authorisation
-    APIs that can be configured towards external IDPs.
-  name: onboard
-  x-tag-expanded: false
+  - description:
+      Operations for external auditing systems to query detailed data from
+      the system and subscribe to notifications.
+    name: audit
+    x-tag-expanded: false
+  - description: Secured operations available to organization API integration
+    name: config
+    x-tag-expanded: false
+  - description:
+      Secured operations for individuals, data consumers and applications
+      to record and verify consent
+    name: service
+    x-tag-expanded: false
+  - description:
+      These are used for onboard the organisation, organisation admin and
+      individual users to the system.  It also deals with all authentication and authorisation
+      APIs that can be configured towards external IDPs.
+    name: onboard
+    x-tag-expanded: false

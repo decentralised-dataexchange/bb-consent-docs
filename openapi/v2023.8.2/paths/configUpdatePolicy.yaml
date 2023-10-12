@@ -25,11 +25,12 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-              - $ref: ../definitions/Policy.yaml
-              - $ref: ../definitions/Revision.yaml
-          type: array
+          type: object
+          properties:
+            policy:
+              $ref: ../definitions/Policy.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
     description: ""
   "400":
     description: bad input parameter

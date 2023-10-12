@@ -1,44 +1,37 @@
 description: LIST - Fetch all policies
 operationId: configListPolicy
 parameters:
-- description: An object with id revisionId
-  in: query
-  name: revisionId
-  required: false
-  schema:
-    type: string
-- description: Requested index for start of resources to be provided in response requested
-    by client
-  in: query
-  name: offset
-  required: false
-  schema:
-    type: integer
-- description: Requested number of resources to be provided in response requested
-    by client
-  in: query
-  name: limit
-  required: false
-  schema:
-    type: integer
+  - description: An object with id revisionId
+    in: query
+    name: revisionId
+    required: false
+    schema:
+      type: string
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/page.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/Policy.yaml
-          type: array
+          type: object
+          properties:
+            policies:
+              items:
+                $ref: ../definitions/Policy.yaml
+              type: array
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
     description: A list of Policy objects readable for the current session's credentials.
-  '400':
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: LIST - Fetch all policies
 tags:
-- config
+  - config
 x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-A-001, UC-C-PIC-A-002

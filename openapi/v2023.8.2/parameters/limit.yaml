@@ -1,6 +1,6 @@
 name: limit
 in: query
-description: Number of items to return per page
+description: Number of items returned per page. Requested number of resources to be provided in response requested by client
 required: false
 schema:
   type: integer

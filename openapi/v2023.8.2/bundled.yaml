@@ -1,5 +1,27 @@
 components:
   schemas:
+    Pagination:
+      type: object
+      title: Pagination
+      properties:
+        currentPage:
+          type: integer
+          description: Current page number
+        totalItems:
+          type: integer
+          description: Total number of items available
+        totalPages:
+          type: integer
+          description: Total number of pages based on limit
+        limit:
+          type: integer
+          description: Number of items per page
+        hasPrevious:
+          type: boolean
+          description: Indicates if there's a previous page
+        hasNext:
+          type: boolean
+          description: Indicates if there's a next page
     Agreement:
       type: object
       title: Agreement
@@ -1069,21 +1091,33 @@ paths:
           required: false
           schema:
             type: integer
-        - description: Requested number of resources to be provided in response requested by client
+        - name: limit
           in: query
-          name: limit
+          description: Number of items returned per page. Requested number of resources to be provided in response requested by client
           required: false
           schema:
             type: integer
+            default: 10
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Policy'
-                type: array
+                type: object
+                properties:
+                  policies:
+                    items:
+                      $ref: '#/components/schemas/Policy'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
           description: A list of Policy objects readable for the current session's credentials.
         '400':
           description: bad input parameter
@@ -1117,11 +1151,12 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Policy'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
         '400':
           description: bad input parameter
@@ -1184,11 +1219,12 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Policy'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
@@ -1227,11 +1263,12 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Policy'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
@@ -1255,24 +1292,24 @@ paths:
           required: true
           schema:
             type: string
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - $ref: '#/paths/~1config~1policies/get/parameters/3'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revisions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Revision'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
           description: ''
         '400':
           description: bad input parameter
