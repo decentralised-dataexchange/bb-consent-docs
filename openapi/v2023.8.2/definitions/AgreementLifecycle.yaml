@@ -1,6 +1,6 @@
 type: object
 title: AgreementLifecycle
-description: "TBD: Models the valid lifecycle states of an Agreement"
+description: "TBD: Models the valid lifecycle states of an DataAgreement"
 x-not-in-database: false
 
 required:

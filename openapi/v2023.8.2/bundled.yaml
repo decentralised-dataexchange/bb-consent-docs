@@ -22,16 +22,23 @@ components:
         hasNext:
           type: boolean
           description: Indicates if there's a next page
-    Agreement:
+    DataAgreement:
       type: object
-      title: Agreement
-      description: An agreement contains the specification of a single purpose that can be consented to. An Agreement is universal and can be consented to by *many* individuals through a ConsentRecord
+      title: DataAgreement
+      description: |
+        An agreement contains the specification of a single purpose that can be consented to.  An DataAgreement is universal and can be consented to by *many* individuals through a DataAgreementRecord"
       x-not-in-database: false
       required:
-        - id
-        - version
+        - purpose
+        - purposeDescription
+        - controllerUrl
+        - controllerName
+        - policy
         - lawfulBasis
-        - dpia
+        - methodOfUse
+        - active
+        - forgettable
+        - lifecycle
       properties:
         id:
           type: string
@@ -43,59 +50,86 @@ components:
           format: ''
           example: ''
           description: The version of this specification to which a receipt conforms
-        controller:
-          $ref: '#/components/schemas/Controller'
-          x-fk-model: Controller
-          description: Data controller (may be omitted if no data involved)
+        controllerId:
+          type: string
+          description: ID of the controller
+        controllerUrl:
+          type: string
+          description: URL of data controller (may be omitted if no data involved)
+        controllerName:
+          type: string
+          description: Name of data controller (may be omitted if no data involved)
         policy:
           $ref: '#/components/schemas/Policy'
-          x-fk-model: Policy
-          description: Reference to the policy under which this Agreement shall be governed
+          description: |
+            Policy under which this DataAgreement shall be governed.  When creating a data agreement, the latest policy can be used to fill the default value,  and organisation admin can decide to change it in data agreement level
         purpose:
-          $ref: '#/components/schemas/AgreementPurpose'
-          x-fk-model: AgreementPurpose
-          description: Purpose of data processing or purpose of consent. Displayed to the user.
+          type: string
+          description: Name of purpose
+        purposeDescription:
+          type: string
+          description: Description of purpose
         lawfulBasis:
           type: string
           format: ''
           example: ''
           description: Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest
-        dataUse:
+          enum:
+            - consent
+            - legal_obligation
+            - contract
+            - vital_interest
+            - public_task
+            - legitimate_interest
+        methodOfUse:
           type: string
           format: ''
           example: ''
           description: null/data_source/data_using_service
-        dpia:
+          enum:
+            - null
+            - data_source
+            - data_using_service
+        dpiaDate:
           type: string
           format: ''
           example: ''
-          description: Data Protection Impact Assessment
+          description: The date on which the DPIA report is generated after a DPIA
+        dpiaSummaryUrl:
+          type: string
+          description: 'The URl providing the DPIA result reports, summary etc that can be verified by any interested parties'
         signature:
           $ref: '#/components/schemas/Signature'
           x-fk-model: Signature
-          description: 'Signature of authorizing party of Agreement. Note: Signatures may be chained in case of multiple signatures.'
+          description: |
+            Signature of authorizing party of DataAgreement.  Note: Signatures may be chained in case of multiple signatures.
         active:
           type: boolean
           format: ''
           example: ''
-          description: Agreement is active and new ConsentRecords can be created.
+          description: DataAgreement is active and new DataAgreementRecords can be created.
         forgettable:
           type: boolean
           format: ''
           example: ''
-          description: 'Consent Record may be deleted when consent is withdrawn, as its existence is not necessary for auditability.'
-        compatibleWithVersion:
-          $ref: '#/components/schemas/Agreement'
-          x-fk-model: Agreement
-          description: 'WIP: This field indicates that Consent Records may be transferred from this compatible previous version of the same Agreement.'
+          description: 'DataAgreementRecord may be deleted when consent is withdrawn, as its existence is not necessary for auditability.'
+        compatibleWithVersionId:
+          type: string
+          format: ''
+          x-fk-model: DataAgreement
+          description: |
+            WIP: This field indicates that Data Agreement Records may be transferred from this  compatible previous revision of the same DataAgreement.
         lifecycle:
-          $ref: '#/components/schemas/AgreementLifecycle'
-          x-fk-model: AgreementLifecycle
-          description: 'WIP: Current Lifecycle state of the Agreement. Lifecycle states are used to manage internal workflows and should not be assigned semantic meanings for active Consent Records.'
+          type: string
+          description: |
+            WIP: Current Lifecycle state of the DataAgreement.  Lifecycle states are used to manage internal workflows and  should not be assigned semantic meanings for active Data Agreement Records.
+          enum:
+            - draft
+            - complete
     AgreementData:
       type: object
       title: AgreementData
-      description: Agreement data contains specifications of exactly what is collected.
+      description: DataAgreement data contains specifications of exactly what is collected.
       x-not-in-database: false
       required:
         - id
@@ -109,8 +143,8 @@ components:
           example: ''
           description: ''
         agreement:
-          $ref: '#/components/schemas/Agreement'
-          x-fk-model: Agreement
+          $ref: '#/components/schemas/DataAgreement'
+          x-fk-model: DataAgreement
           description: ''
         name:
           type: string
@@ -130,7 +164,7 @@ components:
     AgreementFilter:
       type: object
       title: AgreementFilter
-      description: Query filter for API endpoint listing Agreement objects
+      description: Query filter for API endpoint listing DataAgreement objects
       x-not-in-database: true
       required:
         - name
@@ -143,7 +177,7 @@ components:
     AgreementLifecycle:
       type: object
       title: AgreementLifecycle
-      description: 'TBD: Models the valid lifecycle states of an Agreement'
+      description: 'TBD: Models the valid lifecycle states of an DataAgreement'
       x-not-in-database: false
       required:
         - id
@@ -188,7 +222,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: 'In order to sign an Agreement, this relation needs to have a cryptopgraphic hash of the JSON serialized data to be included in the Signature payload of the Agreement. Hashes are collected as the hex representation of the SHA-1 sum of all UTF8 encoded string versions of the JSON representation of data. SHA1(jsonSerializedData)'
+          description: 'In order to sign an DataAgreement, this relation needs to have a cryptopgraphic hash of the JSON serialized data to be included in the Signature payload of the DataAgreement. Hashes are collected as the hex representation of the SHA-1 sum of all UTF8 encoded string versions of the JSON representation of data. SHA1(jsonSerializedData)'
     AuditEventType:
       type: object
       title: AuditEventType
@@ -240,7 +274,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: A URL receiving a callback with the Agreement object + Revision + AuditEventType
+          description: A URL receiving a callback with the DataAgreement object + Revision + AuditEventType
         callbackConsentRecord:
           type: string
           format: ''
@@ -264,7 +298,7 @@ components:
     ConsentRecord:
       type: object
       title: ConsentRecord
-      description: 'A Consent Record expresses consent (as defined in this building block''s specification) to a single Agreement. There must be a UNIQUE constraint on (agreementRevision, individual)'
+      description: 'A Consent Record expresses consent (as defined in this building block''s specification) to a single DataAgreement. There must be a UNIQUE constraint on (agreementRevision, individual)'
       x-not-in-database: false
       required:
         - id
@@ -277,9 +311,9 @@ components:
           example: ''
           description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
         agreement:
-          $ref: '#/components/schemas/Agreement'
-          x-fk-model: Agreement
-          description: The Agreement to which consent has been given
+          $ref: '#/components/schemas/DataAgreement'
+          x-fk-model: DataAgreement
+          description: The DataAgreement to which consent has been given
         agreementRevision:
           $ref: '#/components/schemas/Revision'
           x-fk-model: Revision
@@ -321,8 +355,8 @@ components:
           example: ''
           description: ''
         agreement:
-          $ref: '#/components/schemas/Agreement'
-          x-fk-model: Agreement
+          $ref: '#/components/schemas/DataAgreement'
+          x-fk-model: DataAgreement
           description: ''
         agreementRevision:
           $ref: '#/components/schemas/Revision'
@@ -414,7 +448,7 @@ components:
     Policy:
       type: object
       title: Policy
-      description: A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
+      description: A policy governs data and DataAgreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.
       x-not-in-database: false
       required:
         - name
@@ -469,7 +503,7 @@ components:
       type: object
       title: Revision
       description: |-
-        A *generic* revision model captures the serialized contents of any shema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
+        A *generic* revision model captures the serialized contents of any schema's single row. This is then subject to 1) cryptographic signature and 2) auditing.
 
         Aside from "successor" column, a revision should be considered locked.
       x-not-in-database: false
@@ -545,10 +579,10 @@ components:
     Signature:
       type: object
       title: Signature
-      description: 'A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. Required signing methods: Revision object or another Signature object.'
+      description: |
+        A generic signature contains a cryptographic hash of some value,  together with a signature created by some private key in another system.  Required signing methods: Revision object or another Signature object.
       x-not-in-database: false
       required:
-        - id
         - payload
         - signature
         - verificationMethod
@@ -622,6 +656,9 @@ components:
           format: ''
           example: ''
           description: 'Name of the schema model that objectReference points to. Values: "signature" or "revision"'
+          enum:
+            - revision
+            - signature
         objectReference:
           type: string
           format: ''
@@ -785,7 +822,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agreement'
+                $ref: '#/components/schemas/DataAgreement'
           description: ''
         '400':
           description: bad input parameter
@@ -833,7 +870,7 @@ paths:
               schema:
                 items:
                   oneOf:
-                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/DataAgreement'
                 type: array
           description: ''
         '400':
@@ -857,35 +894,113 @@ paths:
           application/json:
             schema:
               properties:
-                agreement:
-                  $ref: '#/components/schemas/Agreement'
-                  description: An object of type Agreement
+                dataAgreement:
+                  $ref: '#/components/schemas/DataAgreement'
+                  description: An object of type DataAgreement
               required:
-                - agreement
+                - dataAgreement
               type: object
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
+                type: object
+                properties:
+                  dataAgreement:
+                    $ref: '#/components/schemas/DataAgreement'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create a new data agreement and returned together with revision
+      summary: CREATE - Create data agreement
       tags:
         - config
-      x-specification-crudl-model: Agreement
+      x-specification-crudl-model: DataAgreement
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-001
   '/config/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch the latest version of a data agreement
+      operationId: configReadAgreement
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreement:
+                    $ref: '#/components/schemas/DataAgreement'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read data agreement
+      tags:
+        - config
+      x-specification-crudl-model: DataAgreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: UPDATE - Update an existing data agreement and returned together with revision
+      operationId: configUpdateAgreement
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dataAgreement:
+                  $ref: '#/components/schemas/DataAgreement'
+                  description: An object of type DataAgreement
+              required:
+                - dataAgreement
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreement:
+                    $ref: '#/components/schemas/DataAgreement'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Update data agreement
+      tags:
+        - config
+      x-specification-crudl-model: DataAgreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
     delete:
       description: DELETE - Delete a data agreement
       operationId: configDeleteAgreement
@@ -907,174 +1022,197 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - Delete a data agreement
+      summary: DELETE - Delete data agreement
       tags:
         - config
-      x-specification-crudl-model: Agreement
+      x-specification-crudl-model: DataAgreement
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
-    get:
-      description: READ - Fetch the latest version of a data agreement
-      operationId: configReadAgreement
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch the latest version of a data agreement
-      tags:
-        - config
-      x-specification-crudl-model: Agreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
-    put:
-      description: UPDATE - Update an existing data agreement and returned together with revision
-      operationId: configUpdateAgreement
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                agreement:
-                  $ref: '#/components/schemas/Agreement'
-                  description: An object of type Agreement
-              required:
-                - agreement
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: UPDATE - Update an existing data agreement and returned together with revision
-      tags:
-        - config
-      x-specification-crudl-model: Agreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
   /config/data-agreements:
     get:
       description: LIST - Fetch all data agreements
       operationId: configListAgreement
       parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - $ref: '#/paths/~1config~1policies/get/parameters/3'
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                type: array
+                type: object
+                properties:
+                  dataAgreements:
+                    items:
+                      $ref: '#/components/schemas/DataAgreement'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all data agreements
+      summary: LIST - List all data agreements
       tags:
         - config
-      x-specification-crudl-model: Agreement
+      x-specification-crudl-model: DataAgreement
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /config/policy:
     post:
-      description: LIST - Fetch all data agreements matching the data agreement filter
-      operationId: configListAgreementFilter
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
+      description: CREATE - Create a new policy and returned together with revision
+      operationId: configCreatePolicy
+      parameters: []
       requestBody:
         content:
           application/json:
             schema:
               properties:
-                agreementFilter:
-                  $ref: '#/components/schemas/AgreementFilter'
-                  description: An object of type AgreementFilter
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                  description: An object of type Policy
               required:
-                - agreementFilter
+                - policy
               type: object
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Agreement'
-                type: array
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Create policy
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-001
+  '/config/policy/{policyId}':
+    get:
+      description: 'READ - Fetch a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
+      operationId: configReadPolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all data agreements matching the data agreement filter
+      summary: READ - Read policy
       tags:
         - config
-      x-specification-crudl-model: Agreement
+      x-specification-crudl-model: Policy
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: 'UPDATE - Update an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in DataAgreement, the new revision should be specified for DataAgreement.'
+      operationId: configUpdatePolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                  description: An object of type Policy
+              required:
+                - policy
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Update policy
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+    delete:
+      description: 'DELETE - Deletes an existing policy, returning the updated version and a new revision. Deleting a policy is not possible if it''s associated with active DataAgreement.'
+      operationId: configDeletePolicy
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - Deletes policy
+      tags:
+        - config
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-004
   /config/policies:
     get:
       description: LIST - Fetch all policies
@@ -1124,164 +1262,13 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all policies
+      summary: LIST - List all policies
       tags:
         - config
       x-specification-crudl-model: Policy
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: 'UC-C-PIC-A-001, UC-C-PIC-A-002'
-  /config/policy:
-    post:
-      description: CREATE - Create a new policy and returned together with revision
-      operationId: configCreatePolicy
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                policy:
-                  $ref: '#/components/schemas/Policy'
-                  description: An object of type Policy
-              required:
-                - policy
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  policy:
-                    $ref: '#/components/schemas/Policy'
-                  revision:
-                    $ref: '#/components/schemas/Revision'
-          description: 'A set consisting of the new Policy object created, together with the initial Revision object.'
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: CREATE - Create a new policy and returned together with revision
-      tags:
-        - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-001
-  '/config/policy/{policyId}':
-    delete:
-      description: 'DELETE - Deletes an existing policy, returning the updated version and a new revision. Deleting a policy is not possible if it''s associated with active Agreement.'
-      operationId: configDeletePolicy
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: policyId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Revision'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: DELETE - Deletes an existing policy
-      tags:
-        - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-004
-    get:
-      description: 'READ - Fetch a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
-      operationId: configReadPolicy
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: policyId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  policy:
-                    $ref: '#/components/schemas/Policy'
-                  revision:
-                    $ref: '#/components/schemas/Revision'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch a policy + latest revision
-      tags:
-        - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
-    put:
-      description: 'UPDATE - Update an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in Agreement, the new revision should be specified for Agreement.'
-      operationId: configUpdatePolicy
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: policyId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                policy:
-                  $ref: '#/components/schemas/Policy'
-                  description: An object of type Policy
-              required:
-                - policy
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  policy:
-                    $ref: '#/components/schemas/Policy'
-                  revision:
-                    $ref: '#/components/schemas/Revision'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: 'UPDATE - Update an existing policy, returning the updated version and a new revision.'
-      tags:
-        - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
   '/config/policy/{policyId}/revisions':
     get:
       description: LIST - Returns all the revisions for the policy
@@ -1316,7 +1303,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Returns all the revisions for the policy
+      summary: LIST - List all policy revisions
       tags:
         - config
       x-specification-crudl-model: Revision
@@ -1843,7 +1830,7 @@ paths:
         - BearerAuth: []
   '/service/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetches the latest version of an Agreement
+      description: READ - Fetches the latest version of an DataAgreement
       operationId: serviceAgreementRead
       parameters:
         - description: Unique ID of an object
@@ -1859,7 +1846,7 @@ paths:
               schema:
                 items:
                   oneOf:
-                    - $ref: '#/components/schemas/Agreement'
+                    - $ref: '#/components/schemas/DataAgreement'
                     - $ref: '#/components/schemas/Revision'
                 type: array
           description: ''
@@ -1867,16 +1854,16 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetches the latest version of an Agreement
+      summary: READ - Fetches the latest version of an DataAgreement
       tags:
         - service
-      x-specification-crudl-model: Agreement
+      x-specification-crudl-model: DataAgreement
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      description: READ - Fetch all latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      description: READ - Fetch all latest versions of AgreementData associated with an DataAgreement and the presented revisionId of that DataAgreement
       operationId: serviceAgreementDataRead
       parameters:
         - description: Unique ID of an object
@@ -1905,7 +1892,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch all latest versions of AgreementData associated with an Agreement and the presented revisionId of that Agreement
+      summary: READ - Fetch all latest versions of AgreementData associated with an DataAgreement and the presented revisionId of that DataAgreement
       tags:
         - service
       x-specification-crudl-model: AgreementData
@@ -1948,7 +1935,7 @@ paths:
       x-specification-usecase: ''
   /service/individual/data-agreement-records:
     delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" Agreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
       operationId: serviceDeleteAllRecords
       parameters: []
       responses:
@@ -2166,7 +2153,7 @@ paths:
       x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
   '/service/individual/record/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an Agreement. The individualId is supplied as HTTP header.
+      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an DataAgreement. The individualId is supplied as HTTP header.
       operationId: serviceReadIndividualRecordRead
       parameters:
         - description: Unique ID of an object
@@ -2417,7 +2404,7 @@ paths:
       x-specification-usecase: ''
   '/service/policy/{policyId}':
     get:
-      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated Agreement
+      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
       operationId: servicePolicyRead
       parameters:
         - description: Unique ID of an object
@@ -2447,7 +2434,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch the latest version of a Policy and the presented revisionId of an associated Agreement
+      summary: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
       tags:
         - service
       x-specification-crudl-model: Policy

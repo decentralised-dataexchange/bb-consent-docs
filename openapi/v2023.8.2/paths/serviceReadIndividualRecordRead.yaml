@@ -1,6 +1,6 @@
 description:
   READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual
-  and an Agreement. The individualId is supplied as HTTP header.
+  and an DataAgreement. The individualId is supplied as HTTP header.
 operationId: serviceReadIndividualRecordRead
 parameters:
   - description: Unique ID of an object

@@ -29,7 +29,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a new policy and returned together with revision
+summary: CREATE - Create policy
 tags:
 - config
 x-specification-crudl-model: Policy

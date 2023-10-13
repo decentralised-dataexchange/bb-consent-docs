@@ -2,8 +2,8 @@ components:
   schemas:
     Pagination:
       $ref: "./definitions/Pagination.yaml"
-    Agreement:
-      $ref: ./definitions/Agreement.yaml
+    DataAgreement:
+      $ref: ./definitions/DataAgreement.yaml
     AgreementData:
       $ref: ./definitions/AgreementData.yaml
     AgreementFilter:
@@ -78,30 +78,28 @@ paths:
     post:
       $ref: ./paths/configCreateAgreement.yaml
   /config/data-agreement/{dataAgreementId}:
-    delete:
-      $ref: ./paths/configDeleteAgreement.yaml
     get:
       $ref: ./paths/configReadAgreement.yaml
     put:
       $ref: ./paths/configUpdateAgreement.yaml
+    delete:
+      $ref: ./paths/configDeleteAgreement.yaml
   /config/data-agreements:
     get:
       $ref: ./paths/configListAgreement.yaml
-    post:
-      $ref: ./paths/configListAgreementFilter.yaml
-  /config/policies:
-    get:
-      $ref: ./paths/configListPolicy.yaml
   /config/policy:
     post:
       $ref: ./paths/configCreatePolicy.yaml
   /config/policy/{policyId}:
-    delete:
-      $ref: ./paths/configDeletePolicy.yaml
     get:
-      $ref: ./paths/configReadPolicy.yaml
+        $ref: ./paths/configReadPolicy.yaml
     put:
       $ref: ./paths/configUpdatePolicy.yaml
+    delete:
+      $ref: ./paths/configDeletePolicy.yaml
+  /config/policies:
+    get:
+      $ref: ./paths/configListPolicy.yaml
   /config/policy/{policyId}/revisions:
     get:
       $ref: ./paths/configListPolicyRevisions.yaml

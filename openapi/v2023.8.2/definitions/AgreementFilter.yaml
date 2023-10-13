@@ -1,6 +1,6 @@
 type: object
 title: AgreementFilter
-description: "Query filter for API endpoint listing Agreement objects"
+description: "Query filter for API endpoint listing DataAgreement objects"
 x-not-in-database: true
 
 required:

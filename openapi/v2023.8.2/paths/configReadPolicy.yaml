@@ -30,7 +30,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a policy + latest revision
+summary: READ - Read policy
 tags:
 - config
 x-specification-crudl-model: Policy

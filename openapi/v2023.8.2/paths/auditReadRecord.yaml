@@ -12,7 +12,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ../definitions/Agreement.yaml
+          $ref: ../definitions/DataAgreement.yaml
     description: ''
   '400':
     description: bad input parameter

@@ -1,5 +1,5 @@
 description: READ - Fetch the latest version of a Policy and the presented revisionId
-  of an associated Agreement
+  of an associated DataAgreement
 operationId: servicePolicyRead
 parameters:
 - description: Unique ID of an object
@@ -30,7 +30,7 @@ responses:
 security:
   - BearerAuth: []
 summary: READ - Fetch the latest version of a Policy and the presented revisionId
-  of an associated Agreement
+  of an associated DataAgreement
 tags:
 - service
 x-specification-crudl-model: Policy

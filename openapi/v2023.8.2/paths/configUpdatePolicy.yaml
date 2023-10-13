@@ -1,6 +1,6 @@
 description: UPDATE - Update an existing policy, returning the updated version
-  and a new revision. Updating a Policy does not affect existing references in Agreement,
-  the new revision should be specified for Agreement.
+  and a new revision. Updating a Policy does not affect existing references in DataAgreement,
+  the new revision should be specified for DataAgreement.
 operationId: configUpdatePolicy
 parameters:
   - description: Unique ID of an object
@@ -36,7 +36,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update an existing policy, returning the updated version and a new revision.
+summary: UPDATE - Update policy
 tags:
   - config
 x-specification-crudl-model: Policy

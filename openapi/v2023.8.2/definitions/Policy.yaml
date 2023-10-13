@@ -1,6 +1,6 @@
 type: object
 title: Policy
-description: 'A policy governs data and Agreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.'
+description: 'A policy governs data and DataAgreement in the realm of an organisation that is refered to as "data controller" (GDPR) and owner of referencing Agreements.'
 x-not-in-database: false
 
 required:

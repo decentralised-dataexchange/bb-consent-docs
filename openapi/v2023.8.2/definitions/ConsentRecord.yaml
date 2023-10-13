@@ -1,6 +1,6 @@
 type: object
 title: ConsentRecord
-description: "A Consent Record expresses consent (as defined in this building block's specification) to a single Agreement. There must be a UNIQUE constraint on (agreementRevision, individual)"
+description: "A Consent Record expresses consent (as defined in this building block's specification) to a single DataAgreement. There must be a UNIQUE constraint on (agreementRevision, individual)"
 x-not-in-database: false
 
 required:
@@ -15,9 +15,9 @@ properties:
     description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
 
   agreement:
-    $ref: "./Agreement.yaml"
-    x-fk-model: "Agreement"
-    description: "The Agreement to which consent has been given"
+    $ref: "./DataAgreement.yaml"
+    x-fk-model: "DataAgreement"
+    description: "The DataAgreement to which consent has been given"
 
   agreementRevision:
     $ref: "./Revision.yaml"

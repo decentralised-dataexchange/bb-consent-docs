@@ -18,10 +18,10 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Delete a data agreement
+summary: DELETE - Delete data agreement
 tags:
 - config
-x-specification-crudl-model: Agreement
+x-specification-crudl-model: DataAgreement
 x-specification-pii-or-sensitive: 'False'
 x-specification-scenario: ''
 x-specification-usecase: UC-C-PIC-A-004

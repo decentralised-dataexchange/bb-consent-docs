@@ -1,5 +1,5 @@
 description: DELETE - Cascading delete operation for Right To Be Forgotten, deletes
-  all data agreement records that shall not be retained and have a "forgettable" Agreement.
+  all data agreement records that shall not be retained and have a "forgettable" DataAgreement.
   May also delete an unsigned data agreement record, for instance in cases where the user
   exits the signing process. Individual ID supplied as HTTP header.
 operationId: serviceDeleteAllRecords

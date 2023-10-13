@@ -1,6 +1,6 @@
 description: DELETE - Deletes an existing policy, returning the updated version
   and a new revision. Deleting a policy is not possible if it's associated with active
-  Agreement.
+  DataAgreement.
 operationId: configDeletePolicy
 parameters:
   - description: Unique ID of an object
@@ -20,7 +20,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Deletes an existing policy
+summary: DELETE - Deletes policy
 tags:
   - config
 x-specification-crudl-model: Policy

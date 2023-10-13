@@ -35,7 +35,7 @@ responses:
         schema:
           items:
             oneOf:
-              - $ref: ../definitions/Agreement.yaml
+              - $ref: ../definitions/DataAgreement.yaml
           type: array
     description: ""
   "400":

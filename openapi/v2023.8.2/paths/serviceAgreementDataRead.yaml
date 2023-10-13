@@ -1,5 +1,5 @@
 description: READ - Fetch all latest versions of AgreementData associated
-  with an Agreement and the presented revisionId of that Agreement
+  with an DataAgreement and the presented revisionId of that DataAgreement
 operationId: serviceAgreementDataRead
 parameters:
 - description: Unique ID of an object
@@ -29,7 +29,7 @@ responses:
 security:
   - BearerAuth: []
 summary: READ - Fetch all latest versions of AgreementData associated with
-  an Agreement and the presented revisionId of that Agreement
+  an DataAgreement and the presented revisionId of that DataAgreement
 tags:
 - service
 x-specification-crudl-model: AgreementData

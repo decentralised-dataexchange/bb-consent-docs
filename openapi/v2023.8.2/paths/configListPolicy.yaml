@@ -28,7 +28,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all policies
+summary: LIST - List all policies
 tags:
   - config
 x-specification-crudl-model: Policy

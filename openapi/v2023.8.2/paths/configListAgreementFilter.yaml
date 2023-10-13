@@ -33,7 +33,7 @@ responses:
         schema:
           items:
             oneOf:
-            - $ref: ../definitions/Agreement.yaml
+            - $ref: ../definitions/DataAgreement.yaml
           type: array
     description: ''
   '400':
@@ -43,7 +43,7 @@ security:
 summary: LIST - Fetch all data agreements matching the data agreement filter
 tags:
 - config
-x-specification-crudl-model: Agreement
+x-specification-crudl-model: DataAgreement
 x-specification-pii-or-sensitive: 'False'
 x-specification-scenario: ''
 x-specification-usecase: UC-C-PIC-A-003

@@ -12,20 +12,21 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/Agreement.yaml
-            - $ref: ../definitions/Revision.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreement:
+              $ref: ../definitions/DataAgreement.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch the latest version of a data agreement
+summary: READ - Read data agreement
 tags:
 - config
-x-specification-crudl-model: Agreement
+x-specification-crudl-model: DataAgreement
 x-specification-pii-or-sensitive: 'False'
 x-specification-scenario: ''
 x-specification-usecase: UC-C-PIC-A-003

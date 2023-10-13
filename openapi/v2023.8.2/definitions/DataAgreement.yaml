@@ -1,0 +1,126 @@
+type: object
+title: DataAgreement
+description: >
+  An agreement contains the specification of a single purpose that can be consented to. 
+  An DataAgreement is universal and can be consented to by *many* individuals through a DataAgreementRecord"
+x-not-in-database: false
+required:
+  - purpose
+  - purposeDescription
+  - controllerUrl
+  - controllerName
+  - policy
+  - lawfulBasis
+  - methodOfUse
+  - active
+  - forgettable
+  - lifecycle
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+
+  version:
+    type: string
+    format: ""
+    example: ""
+    description: "The version of this specification to which a receipt conforms"
+
+  controllerId:
+    type: string
+    description: ID of the controller
+
+  controllerUrl:
+    type: string
+    description: URL of data controller (may be omitted if no data involved)
+
+  controllerName:
+    type: string
+    description: Name of data controller (may be omitted if no data involved)
+
+  policy:
+    $ref: "./Policy.yaml"
+    description: >
+      Policy under which this DataAgreement shall be governed. 
+      When creating a data agreement, the latest policy can be used to fill the default value, 
+      and organisation admin can decide to change it in data agreement level
+
+  purpose:
+    type: string
+    description: Name of purpose
+
+  purposeDescription:
+    type: string
+    description: Description of purpose
+
+  lawfulBasis:
+    type: string
+    format: ""
+    example: ""
+    description: "Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest"
+    enum:
+      - consent
+      - legal_obligation
+      - contract
+      - vital_interest
+      - public_task
+      - legitimate_interest
+
+  methodOfUse:
+    type: string
+    format: ""
+    example: ""
+    description: "null/data_source/data_using_service"
+    enum:
+      - null
+      - data_source
+      - data_using_service
+
+  dpiaDate:
+    type: string
+    format: ""
+    example: ""
+    description: The date on which the DPIA report is generated after a DPIA
+
+  dpiaSummaryUrl:
+    type: string
+    description: The URl providing the DPIA result reports, summary etc that can be verified by any interested parties
+
+  signature:
+    $ref: "./Signature.yaml"
+    x-fk-model: "Signature"
+    description: >
+      Signature of authorizing party of DataAgreement. 
+      Note: Signatures may be chained in case of multiple signatures.
+
+  active:
+    type: boolean
+    format: ""
+    example: ""
+    description: "DataAgreement is active and new DataAgreementRecords can be created."
+
+  forgettable:
+    type: boolean
+    format: ""
+    example: ""
+    description: "DataAgreementRecord may be deleted when consent is withdrawn, as its existence is not necessary for auditability."
+
+  compatibleWithVersionId:
+    type: string
+    format: ""
+    x-fk-model: "DataAgreement"
+    description: >
+      WIP: This field indicates that Data Agreement Records may be transferred from this 
+      compatible previous revision of the same DataAgreement.
+
+  lifecycle:
+    type: string
+    description: >
+      WIP: Current Lifecycle state of the DataAgreement. 
+      Lifecycle states are used to manage internal workflows and 
+      should not be assigned semantic meanings for active Data Agreement Records.
+    enum:
+      - draft
+      - complete

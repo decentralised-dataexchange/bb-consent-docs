@@ -33,7 +33,7 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "A URL receiving a callback with the Agreement object + Revision + AuditEventType"
+    description: "A URL receiving a callback with the DataAgreement object + Revision + AuditEventType"
 
   callbackConsentRecord:
     type: string

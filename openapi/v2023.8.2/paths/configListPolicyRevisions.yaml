@@ -30,7 +30,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Returns all the revisions for the policy
+summary: LIST - List all policy revisions
 tags:
   - config
 x-specification-crudl-model: Revision

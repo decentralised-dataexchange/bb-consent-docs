@@ -1,10 +1,12 @@
 type: object
 title: Signature
-description: "A generic signature contains a cryptographic hash of some value, together with a signature created by some private key in another system. Required signing methods: Revision object or another Signature object."
+description: >
+  A generic signature contains a cryptographic hash of some value, 
+  together with a signature created by some private key in another system. 
+  Required signing methods: Revision object or another Signature object.
 x-not-in-database: false
 
 required:
-  - id
   - payload
   - signature
   - verificationMethod
@@ -90,6 +92,9 @@ properties:
     format: ""
     example: ""
     description: 'Name of the schema model that objectReference points to. Values: "signature" or "revision"'
+    enum:
+      - revision
+      - signature
 
   objectReference:
     type: string

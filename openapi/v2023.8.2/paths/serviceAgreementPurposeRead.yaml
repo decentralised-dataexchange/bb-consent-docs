@@ -1,5 +1,5 @@
 description: READ - fetches the latest version of an AgreementPurpose and the presented
-  revisionId of that Agreement
+  revisionId of that DataAgreement
 operationId: serviceAgreementPurposeRead
 parameters:
 - description: Unique ID of an object
@@ -30,7 +30,7 @@ responses:
 security:
   - BearerAuth: []
 summary: READ - fetches the latest version of an AgreementPurpose and the presented
-  revisionId of that Agreement
+  revisionId of that DataAgreement
 tags:
 - service
 x-specification-crudl-model: AgreementPurpose

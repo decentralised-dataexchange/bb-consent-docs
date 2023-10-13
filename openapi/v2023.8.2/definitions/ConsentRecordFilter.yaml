@@ -13,8 +13,8 @@ properties:
     description: ""
 
   agreement:
-    $ref: "./Agreement.yaml"
-    x-fk-model: "Agreement"
+    $ref: "./DataAgreement.yaml"
+    x-fk-model: "DataAgreement"
     description: ""
 
   agreementRevision:
