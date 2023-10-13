@@ -9,7 +9,6 @@ parameters:
       type: string
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-  - $ref: "../parameters/page.yaml"
 responses:
   "200":
     content:

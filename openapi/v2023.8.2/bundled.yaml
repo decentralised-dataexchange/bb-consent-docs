@@ -1067,7 +1067,6 @@ paths:
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-        - $ref: '#/paths/~1config~1policies/get/parameters/3'
       responses:
         '200':
           content:
@@ -1268,13 +1267,6 @@ paths:
           schema:
             type: integer
             default: 10
-        - name: page
-          in: query
-          description: Page number
-          required: false
-          schema:
-            type: integer
-            default: 1
       responses:
         '200':
           content:
@@ -1313,7 +1305,6 @@ paths:
             type: string
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-        - $ref: '#/paths/~1config~1policies/get/parameters/3'
       responses:
         '200':
           content:
@@ -1682,7 +1673,6 @@ paths:
             type: string
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-        - $ref: '#/paths/~1config~1policies/get/parameters/3'
       responses:
         '200':
           description: OK
