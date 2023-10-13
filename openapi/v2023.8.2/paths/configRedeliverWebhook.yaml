@@ -1,0 +1,31 @@
+operationId: configRedeliverWebhook
+summary: Redeliver a webhook payload by delivery ID
+description: Redeliver a webhook payload by delivery ID
+tags:
+  - config
+parameters:
+  - name: organizationId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+  - name: webhookId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+  - name: deliveryId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+responses:
+  "200":
+    description: OK
+    content: {}
+deprecated: false
+security:
+  - BearerAuth: []

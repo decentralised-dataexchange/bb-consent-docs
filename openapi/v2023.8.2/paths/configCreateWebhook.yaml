@@ -1,0 +1,21 @@
+operationId: configCreateWebhook
+summary: CREATE - Create webhook
+description: Create webhook
+tags:
+  - config
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../definitions/Webhook.yaml"
+  required: true
+responses:
+  "201":
+    description: Created
+    content:
+      application/json:
+        schema:
+          $ref: "../definitions/Webhook.yaml"
+deprecated: false
+security:
+  - BearerAuth: []

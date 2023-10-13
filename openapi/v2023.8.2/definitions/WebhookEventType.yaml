@@ -1,0 +1,14 @@
+type: string
+title: WebhookEventType
+enum:
+  - data.update.initiated
+  - data.update.cancelled
+  - consent.allowed
+  - consent.disallowed
+  - consent.auto_expiry
+  - org.unsubscribed
+  - data.delete.initiated
+  - data.download.initiated
+  - data.delete.cancelled
+  - data.download.cancelled
+  - org.subscribed

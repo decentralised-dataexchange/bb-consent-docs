@@ -1,5 +1,36 @@
 components:
   schemas:
+    Webhook:
+      required:
+        - payloadUrl
+        - contentType
+        - subscribedEvents
+        - disabled
+        - secretKey
+        - skipSslVerification
+        - timestamp
+      type: object
+      properties:
+        id:
+          type: string
+        orgId:
+          type: string
+        payloadUrl:
+          type: string
+        contentType:
+          type: string
+        subscribedEvents:
+          type: array
+          items:
+            type: string
+        disabled:
+          type: boolean
+        secretKey:
+          type: string
+        skipSslVerification:
+          type: boolean
+        timestamp:
+          type: string
     Pagination:
       type: object
       title: Pagination
@@ -1310,6 +1341,587 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /config/webhooks/event-types:
+    get:
+      operationId: configReadWebhookEventTypes
+      description: Get webhook event types
+      summary: READ - Read webhook event types
+      tags:
+        - config
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - eventTypes
+                type: object
+                properties:
+                  eventTypes:
+                    type: array
+                    items:
+                      type: string
+                      title: WebhookEventType
+                      enum:
+                        - data.update.initiated
+                        - data.update.cancelled
+                        - consent.allowed
+                        - consent.disallowed
+                        - consent.auto_expiry
+                        - org.unsubscribed
+                        - data.delete.initiated
+                        - data.download.initiated
+                        - data.delete.cancelled
+                        - data.download.cancelled
+                        - org.subscribed
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /config/webhooks/payload/content-types:
+    get:
+      operationId: getWebhookPayloadContentTypes.yaml
+      summary: Get webhook payload content types
+      description: Get webhook payload content types
+      tags:
+        - config
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ContentTypes
+                type: object
+                properties:
+                  ContentTypes:
+                    type: array
+                    items:
+                      type: string
+                      enum:
+                        - application/json
+                        - application/x-www-form-urlencoded
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /config/webhook:
+    post:
+      operationId: configCreateWebhook
+      summary: CREATE - Create webhook
+      description: Create webhook
+      tags:
+        - config
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Webhook'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /config/webhooks:
+    get:
+      operationId: configListWebhooks
+      summary: Get all webhooks for an organisation
+      description: Get all webhooks for an organisation
+      tags:
+        - config
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  required:
+                    - ID
+                    - PayloadURL
+                    - Disabled
+                    - TimeStamp
+                    - IsLastDeliverySuccess
+                  type: object
+                  properties:
+                    ID:
+                      type: string
+                    PayloadURL:
+                      type: string
+                    Disabled:
+                      type: boolean
+                    TimeStamp:
+                      type: string
+                    IsLastDeliverySuccess:
+                      type: boolean
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/config/webhook/{webhookId}':
+    get:
+      operationId: configReadWebhook
+      summary: READ - Read webhook
+      description: Get a webhook by ID
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - OrgID
+                  - PayloadURL
+                  - ContentType
+                  - SubscribedEvents
+                  - Disabled
+                  - SecretKey
+                  - SkipSSLVerification
+                  - TimeStamp
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  OrgID:
+                    type: string
+                  PayloadURL:
+                    type: string
+                  ContentType:
+                    type: string
+                  SubscribedEvents:
+                    type: array
+                    items:
+                      type: string
+                  Disabled:
+                    type: boolean
+                  SecretKey:
+                    type: string
+                  SkipSSLVerification:
+                    type: boolean
+                  TimeStamp:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+    delete:
+      operationId: configDeleteWebhook
+      summary: DELETE - Delete webhook
+      description: Delete webhook
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+    put:
+      operationId: configUpdateWebhook
+      summary: UPDATE - Update webhook
+      description: UPDATE - Update webhook
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - payloadurl
+                - subscribedevents
+                - contenttype
+                - secretkey
+                - disabled
+                - skipsslverification
+              type: object
+              properties:
+                payloadurl:
+                  type: string
+                subscribedevents:
+                  type: array
+                  items:
+                    type: string
+                contenttype:
+                  type: string
+                secretkey:
+                  type: string
+                disabled:
+                  type: boolean
+                skipsslverification:
+                  type: boolean
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - OrgID
+                  - PayloadURL
+                  - ContentType
+                  - SubscribedEvents
+                  - Disabled
+                  - SecretKey
+                  - SkipSSLVerification
+                  - TimeStamp
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  OrgID:
+                    type: string
+                  PayloadURL:
+                    type: string
+                  ContentType:
+                    type: string
+                  SubscribedEvents:
+                    type: array
+                    items:
+                      type: string
+                  Disabled:
+                    type: boolean
+                  SecretKey:
+                    type: string
+                  SkipSSLVerification:
+                    type: boolean
+                  TimeStamp:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/config/webhook/{webhookId}/ping':
+    post:
+      operationId: configPingWebhook
+      summary: Ping webhook
+      description: Ping webhook
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ResponseStatusCode
+                  - ResponseStatusStr
+                  - ExecutionStartTimeStamp
+                  - ExecutionEndTimeStamp
+                  - Status
+                  - StatusDescription
+                type: object
+                properties:
+                  ResponseStatusCode:
+                    type: integer
+                    format: int32
+                  ResponseStatusStr:
+                    type: string
+                  ExecutionStartTimeStamp:
+                    type: string
+                  ExecutionEndTimeStamp:
+                    type: string
+                  Status:
+                    type: string
+                  StatusDescription:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/config/webhooks/{webhookId}/deliveries':
+    get:
+      operationId: configListAllRecentWebhookDeliveries
+      summary: Get recent webhook deliveries
+      description: Get recent webhook deliveries
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - $ref: '#/paths/~1config~1policies/get/parameters/3'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - webhookDeliveries
+                  - pagination
+                type: object
+                properties:
+                  webhookDeliveries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        webhookId:
+                          type: string
+                        responseStatusCode:
+                          type: integer
+                          format: int32
+                        responseStatusStr:
+                          type: string
+                        timestamp:
+                          type: string
+                        status:
+                          type: string
+                        statusDescription:
+                          type: string
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/config/webhooks/{webhookId}/delivery/{deliveryId}':
+    get:
+      operationId: configReadRecentWebhookDelivery
+      summary: Get recent webhook delivery by ID
+      description: Get recent webhook delivery by ID
+      tags:
+        - config
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: deliveryId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - ID
+                  - RequestHeaders
+                  - RequestPayload
+                  - ResponseHeaders
+                  - ResponseBody
+                  - ResponseStatusCode
+                  - ResponseStatusStr
+                  - ExecutionStartTimeStamp
+                  - ExecutionEndTimeStamp
+                  - Status
+                  - StatusDescription
+                type: object
+                properties:
+                  ID:
+                    type: string
+                  RequestHeaders:
+                    required:
+                      - Accept
+                      - Content-Type
+                      - User-Agent
+                      - X-Igrant-Signature
+                    type: object
+                    properties:
+                      Accept:
+                        type: array
+                        items:
+                          type: string
+                      Content-Type:
+                        type: array
+                        items:
+                          type: string
+                      User-Agent:
+                        type: array
+                        items:
+                          type: string
+                      X-Igrant-Signature:
+                        type: array
+                        items:
+                          type: string
+                  RequestPayload:
+                    required:
+                      - data
+                      - deliveryid
+                      - timestamp
+                      - type
+                      - webhookid
+                    type: object
+                    properties:
+                      data:
+                        required:
+                          - attribute
+                          - consentID
+                          - days
+                          - organisationID
+                          - purposeID
+                          - timestamp
+                          - userID
+                        type: object
+                        properties:
+                          attribute:
+                            type: array
+                            items:
+                              type: string
+                          consentID:
+                            type: string
+                          days:
+                            type: integer
+                            format: int32
+                          organisationID:
+                            type: string
+                          purposeID:
+                            type: string
+                          timestamp:
+                            type: string
+                          userID:
+                            type: string
+                      deliveryid:
+                        type: string
+                      timestamp:
+                        type: string
+                      type:
+                        type: string
+                      webhookid:
+                        type: string
+                  ResponseHeaders:
+                    ResponseHeaders: null
+                    title: ResponseHeaders
+                    required:
+                      - Cache-Control
+                      - Content-Type
+                      - Date
+                      - Server
+                      - Vary
+                      - X-Request-Id
+                      - X-Token-Id
+                    type: object
+                    properties:
+                      Cache-Control:
+                        type: array
+                        items:
+                          type: string
+                      Content-Type:
+                        type: array
+                        items:
+                          type: string
+                      Date:
+                        type: array
+                        items:
+                          type: string
+                      Server:
+                        type: array
+                        items:
+                          type: string
+                      Vary:
+                        type: array
+                        items:
+                          type: string
+                      X-Request-Id:
+                        type: array
+                        items:
+                          type: string
+                      X-Token-Id:
+                        type: array
+                        items:
+                          type: string
+                  ResponseBody:
+                    type: string
+                  ResponseStatusCode:
+                    type: integer
+                    format: int32
+                  ResponseStatusStr:
+                    type: string
+                  ExecutionStartTimeStamp:
+                    type: string
+                  ExecutionEndTimeStamp:
+                    type: string
+                  Status:
+                    type: string
+                  StatusDescription:
+                    type: string
+      deprecated: false
+      security:
+        - BearerAuth: []
+  '/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+    post:
+      operationId: configRedeliverWebhook
+      summary: Redeliver a webhook payload by delivery ID
+      description: Redeliver a webhook payload by delivery ID
+      tags:
+        - config
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: webhookId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: deliveryId
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
   /onboard/admin/login:
     post:
       tags:
@@ -1806,6 +2418,7 @@ paths:
       tags:
         - onboard
       description: For OTP verification of the given phone number
+      summary: Verify phone
       parameters: []
       requestBody:
         content:

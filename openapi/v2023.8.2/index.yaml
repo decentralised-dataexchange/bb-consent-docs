@@ -1,5 +1,7 @@
 components:
   schemas:
+    Webhook:
+      $ref: "./definitions/Webhook.yaml"
     Pagination:
       $ref: "./definitions/Pagination.yaml"
     DataAgreement:
@@ -92,7 +94,7 @@ paths:
       $ref: ./paths/configCreatePolicy.yaml
   /config/policy/{policyId}:
     get:
-        $ref: ./paths/configReadPolicy.yaml
+      $ref: ./paths/configReadPolicy.yaml
     put:
       $ref: ./paths/configUpdatePolicy.yaml
     delete:
@@ -103,6 +105,37 @@ paths:
   /config/policy/{policyId}/revisions:
     get:
       $ref: ./paths/configListPolicyRevisions.yaml
+  /config/webhooks/event-types:
+    get:
+      $ref: "./paths/configReadWebhookEventTypes.yaml"
+  /config/webhooks/payload/content-types:
+    get:
+      $ref: "./paths/getWebhookPayloadContentTypes.yaml"
+  /config/webhook:
+    post:
+      $ref: "./paths/configCreateWebhook.yaml"
+  /config/webhooks:
+    get:
+      $ref: "./paths/configListWebhooks.yaml"
+  /config/webhook/{webhookId}:
+    get:
+      $ref: "./paths/configReadWebhook.yaml"
+    delete:
+      $ref: "./paths/configDeleteWebhook.yaml"
+    put:
+      $ref: "./paths/configUpdateWebhook.yaml"
+  /config/webhook/{webhookId}/ping:
+    post:
+      $ref: "./paths/configPingWebhook.yaml"
+  /config/webhooks/{webhookId}/deliveries:
+    get:
+      $ref: "./paths/configListAllRecentWebhookDeliveries.yaml"
+  /config/webhooks/{webhookId}/delivery/{deliveryId}:
+    get:
+      $ref: "./paths/configReadRecentWebhookDelivery.yaml"
+  /config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
+    post:
+      $ref: "./paths/configRedeliverWebhook.yaml"
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml

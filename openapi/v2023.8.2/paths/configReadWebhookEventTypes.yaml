@@ -1,0 +1,22 @@
+operationId: configReadWebhookEventTypes
+description: Get webhook event types
+summary: READ - Read webhook event types
+tags:
+  - config
+responses:
+  '200':
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - eventTypes
+          type: object
+          properties:
+            eventTypes:
+              type: array
+              items:
+                $ref: "../definitions/WebhookEventType.yaml"
+deprecated: false
+security:
+  - BearerAuth: []

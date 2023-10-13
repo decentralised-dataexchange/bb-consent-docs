@@ -1,0 +1,53 @@
+operationId: configReadWebhook
+summary: READ - Read webhook
+description: Get a webhook by ID
+tags:
+  - config
+parameters:
+  - name: webhookId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - ID
+            - OrgID
+            - PayloadURL
+            - ContentType
+            - SubscribedEvents
+            - Disabled
+            - SecretKey
+            - SkipSSLVerification
+            - TimeStamp
+          type: object
+          properties:
+            ID:
+              type: string
+            OrgID:
+              type: string
+            PayloadURL:
+              type: string
+            ContentType:
+              type: string
+            SubscribedEvents:
+              type: array
+              items:
+                type: string
+            Disabled:
+              type: boolean
+            SecretKey:
+              type: string
+            SkipSSLVerification:
+              type: boolean
+            TimeStamp:
+              type: string
+deprecated: false
+security:
+  - BearerAuth: []

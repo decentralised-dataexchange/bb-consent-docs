@@ -1,0 +1,30 @@
+required:
+  - payloadUrl
+  - contentType
+  - subscribedEvents
+  - disabled
+  - secretKey
+  - skipSslVerification
+  - timestamp
+type: object
+properties:
+  id:
+    type: string
+  orgId:
+    type: string
+  payloadUrl:
+    type: string
+  contentType:
+    type: string
+  subscribedEvents:
+    type: array
+    items:
+      type: string
+  disabled:
+    type: boolean
+  secretKey:
+    type: string
+  skipSslVerification:
+    type: boolean
+  timestamp:
+    type: string

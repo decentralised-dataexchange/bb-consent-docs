@@ -1,0 +1,25 @@
+operationId: getWebhookPayloadContentTypes.yaml
+summary: Get webhook payload content types
+description: Get webhook payload content types
+tags:
+  - config
+responses:
+  '200':
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - ContentTypes
+          type: object
+          properties:
+            ContentTypes:
+              type: array
+              items:
+                type: string
+                enum:
+                  - application/json
+                  - application/x-www-form-urlencoded
+deprecated: false
+security:
+  - BearerAuth: []

@@ -1,0 +1,51 @@
+operationId: configListAllRecentWebhookDeliveries
+summary: Get recent webhook deliveries
+description: Get recent webhook deliveries
+tags:
+  - config
+parameters:
+  - name: webhookId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/page.yaml"
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          required:
+            - webhookDeliveries
+            - pagination
+          type: object
+          properties:
+            webhookDeliveries:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  webhookId:
+                    type: string
+                  responseStatusCode:
+                    type: integer
+                    format: int32
+                  responseStatusStr:
+                    type: string
+                  timestamp:
+                    type: string
+                  status:
+                    type: string
+                  statusDescription:
+                    type: string
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+deprecated: false
+security:
+  - BearerAuth: []

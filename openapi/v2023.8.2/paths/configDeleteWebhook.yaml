@@ -1,0 +1,19 @@
+operationId: configDeleteWebhook
+summary: DELETE - Delete webhook
+description: Delete webhook
+tags:
+  - config
+parameters:
+  - name: webhookId
+    in: path
+    required: true
+    style: simple
+    schema:
+      type: string
+responses:
+  "204":
+    description: No Content
+    content: {}
+deprecated: false
+security:
+  - BearerAuth: []

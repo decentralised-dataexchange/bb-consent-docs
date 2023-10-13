@@ -2,6 +2,7 @@ operationId: verifyPhone
 tags:
   - onboard
 description: For OTP verification of the given phone number
+summary: Verify phone
 parameters: []
 requestBody:
   content:
