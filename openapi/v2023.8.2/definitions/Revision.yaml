@@ -7,6 +7,7 @@ required:
   - id
   - schemaName
   - objectId
+  - objectData
   - serizalizedSnapshot
   - serializedHash
   - timestamp
@@ -32,6 +33,12 @@ properties:
     format: ""
     example: ""
     description: "The PK of the object that was serialized."
+  
+  objectData:
+    type: string
+    format: ""
+    example: ""
+    description: "The object that is serialised."
 
   signedWithoutObjectId:
     type: boolean
@@ -43,8 +50,10 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "Revisioned data (serialized as JSON) as a dict.Apply JSON Canonicalization Scheme as per IETF RFC 8785. It contains all the fields of the schema except id, successor, predecessorHash and predecessorSignature."
-
+    description: >
+      Revisioned data (serialized as JSON) as a dict.
+      Apply JSON Canonicalization Scheme as per IETF RFC 8785. 
+      It contains all the fields of the schema except sucessorId, serializedHash, serializedSnapshot.
   serializedHash:
     type: string
     format: ""
