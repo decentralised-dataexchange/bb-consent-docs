@@ -1,0 +1,27 @@
+description: READ - Fetch the latest version of a data attribute
+operationId: configReadDataAttribute
+parameters:
+  - $ref: "../parameters/dataAttributeId.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            dataAttribute:
+              $ref: ../definitions/DataAttribute.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - Read data attribute
+tags:
+  - config
+x-specification-crudl-model: DataAttribute
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-003

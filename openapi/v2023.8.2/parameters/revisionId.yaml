@@ -1,0 +1,6 @@
+description: An object with id revisionId
+in: query
+name: revisionId
+required: false
+schema:
+  type: string

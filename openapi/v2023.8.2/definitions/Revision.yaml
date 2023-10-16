@@ -16,7 +16,7 @@ properties:
     type: string
     format: ""
     example: ""
-    description: ""
+    description: "Revision Id"
 
   schemaName:
     type: string

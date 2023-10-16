@@ -1,0 +1,22 @@
+description: DELETE - Delete a data attribute
+operationId: configDeleteDataAttribute
+parameters:
+  - $ref: "../parameters/dataAttributeId.yaml"
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/Revision.yaml
+    description: ''
+  '400':
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - Delete data attribute
+tags:
+- config
+x-specification-crudl-model: DataAttribute
+x-specification-pii-or-sensitive: 'False'
+x-specification-scenario: ''
+x-specification-usecase: UC-C-PIC-A-004

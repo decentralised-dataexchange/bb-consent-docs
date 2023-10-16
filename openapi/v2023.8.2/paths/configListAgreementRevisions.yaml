@@ -1,7 +1,7 @@
-description: LIST - Fetch all data agreements
-operationId: configListAgreement
+description: LIST - Returns all the revisions for the data agreement
+operationId: configListAgreementRevisions
 parameters:
-  - $ref: "../parameters/revisionId.yaml"
+  - $ref: "../parameters/dataAgreementId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
 responses:
@@ -11,10 +11,12 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreements:
-              items:
-                  $ref: ../definitions/DataAgreement.yaml
+            dataAgreement:
+              $ref: ../definitions/DataAgreement.yaml
+            revisions:
               type: array
+              items:
+                $ref: ../definitions/Revision.yaml
             pagination:
               $ref: "../definitions/Pagination.yaml"
     description: ""
@@ -22,10 +24,10 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all data agreements
+summary: LIST - List all data agreement revisions
 tags:
   - config
-x-specification-crudl-model: DataAgreement
+x-specification-crudl-model: Revision
 x-specification-pii-or-sensitive: "False"
 x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-A-003

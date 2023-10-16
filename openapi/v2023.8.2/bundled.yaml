@@ -551,7 +551,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: ''
+          description: Revision Id
         schemaName:
           type: string
           format: ''
@@ -1072,6 +1072,12 @@ paths:
       description: LIST - Fetch all data agreements
       operationId: configListAgreement
       parameters:
+        - description: An object with id revisionId
+          in: query
+          name: revisionId
+          required: false
+          schema:
+            type: string
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
       responses:
@@ -1096,6 +1102,325 @@ paths:
       tags:
         - config
       x-specification-crudl-model: DataAgreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/config/data-agreement/{dataAgreementId}/revisions':
+    get:
+      description: LIST - Returns all the revisions for the data agreement
+      operationId: configListAgreementRevisions
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreement:
+                    $ref: '#/components/schemas/DataAgreement'
+                  revisions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Revision'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List all data agreement revisions
+      tags:
+        - config
+      x-specification-crudl-model: Revision
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/config/data-agreement/{dataAgreementId}/data-attributes':
+    get:
+      description: LIST - Fetch all data attributes for the data agreement
+      operationId: configListDataAttribute
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreement:
+                    $ref: '#/components/schemas/DataAgreement'
+                  dataAttributes:
+                    items:
+                      $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List all data attributes for the data agreement
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  /config/data-agreements/data-attribute:
+    post:
+      description: CREATE - Create a new data attribute and returned together with revision
+      operationId: configCreateDataAttribute
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dataAttribute:
+                  $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  description: An object of type DataAttribute
+              required:
+                - dataAttribute
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttribute:
+                    type: object
+                    description: Data attribute contains specifications of exactly what is collected.
+                    x-not-in-database: false
+                    required:
+                      - name
+                      - description
+                    properties:
+                      id:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: Data attribute Id
+                      version:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: Version of the data attribute
+                      agreementIds:
+                        type: array
+                        items:
+                          type: string
+                        description: Data agreement Ids
+                      name:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: 'Name of the attribute, for instance "name" or "age"'
+                      description:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: Description of the attribute
+                      sensitivity:
+                        type: boolean
+                        format: ''
+                        example: ''
+                        description: Sensitivity of data attribute
+                      category:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: Category for data attribute
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Create data attribute
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-001
+  '/config/data-agreements/data-attribute/{dataAttributeId}':
+    get:
+      description: READ - Fetch the latest version of a data attribute
+      operationId: configReadDataAttribute
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAttributeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttribute:
+                    $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read data attribute
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: UPDATE - Update an existing data attribute and returned together with revision
+      operationId: configUpdateDataAttribute
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/get/parameters/0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                dataAttribute:
+                  $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  description: An object of type DataAttribute
+              required:
+                - dataAttribute
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttribute:
+                    $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Update data attribute
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+    delete:
+      description: DELETE - Delete a data attribute
+      operationId: configDeleteDataAttribute
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - Delete data attribute
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-004
+  /config/data-agreements/data-attributes:
+    get:
+      description: LIST - Fetch all data attributes
+      operationId: configListDataAttribute
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttributes:
+                    items:
+                      $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List all data attributes
+      tags:
+        - config
+      x-specification-crudl-model: DataAttribute
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/config/data-agreements/data-attribute/{dataAttributeId}/revisions':
+    get:
+      description: LIST - Returns all the revisions for the data attribute
+      operationId: configListDataAttributeRevisions
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttribute:
+                    $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  revisions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Revision'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List all data attribute revisions
+      tags:
+        - config
+      x-specification-crudl-model: Revision
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003

@@ -1,0 +1,49 @@
+type: object
+description: "Data attribute contains specifications of exactly what is collected."
+x-not-in-database: false
+
+required:
+  - name
+  - description
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: "Data attribute Id"
+
+  version:
+    type: string
+    format: ""
+    example: ""
+    description: "Version of the data attribute"
+
+  agreementIds:
+    type: array
+    items:
+      type: string
+    description: "Data agreement Ids"
+
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: 'Name of the attribute, for instance "name" or "age"'
+
+  description:
+    type: string
+    format: ""
+    example: ""
+    description: "Description of the attribute"
+
+  sensitivity:
+    type: boolean
+    format: ""
+    example: ""
+    description: "Sensitivity of data attribute"
+
+  category:
+    type: string
+    format: ""
+    example: ""
+    description: "Category for data attribute"
