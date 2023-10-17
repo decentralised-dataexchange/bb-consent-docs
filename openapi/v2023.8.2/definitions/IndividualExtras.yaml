@@ -1,58 +1,20 @@
 type: object
 title: IndividualExtras
+required:
+  - name
+  - email
+  - phone
 properties:
   name:
     type: string
+    description: "Name of the individual"
   iamId:
     type: string
+    description: "Create a user in keycloak and save the `id` as `iamId`"
   email:
     type: string
+    description: "Email Id"
   phone:
     type: string
-  imageId:
-    type: string
-  imageUrl:
-    type: string
-  lastVisit:
-    type: string
-  orgs:
-    type: array
-    items:
-      required:
-        - id
-        - name
-        - location
-        - type
-        - typeId
-        - eulaAccepted
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        location:
-          type: string
-        type:
-          type: string
-        typeId:
-          type: string
-        eulaAccepted:
-          type: boolean
-  apiKey:
-    type: string
-  roles:
-    type: array
-    items:
-      required:
-        - roleId
-        - orgId
-      type: object
-      properties:
-        roleId:
-          type: integer
-          format: int32
-        orgId:
-          type: string
-  incompleteProfile:
-    type: boolean
+    description: "Phone"
+

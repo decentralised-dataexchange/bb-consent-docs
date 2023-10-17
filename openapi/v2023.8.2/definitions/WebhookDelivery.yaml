@@ -1,0 +1,25 @@
+type: object
+title: WebhookDelivery
+properties:
+  id:
+    type: string
+    description: "Webhook delivery Id"
+  webhookId:
+    type: string
+    description: "Webhook Id"
+  responseStatusCode:
+    type: integer
+    format: int32
+    description: "Response status code"
+  responseStatusStr:
+    type: string
+    description: "Response status string"
+  timestamp:
+    type: string
+    description: "Response timestamp"
+  status:
+    type: string
+    description: "Webhook delivery status"
+  statusDescription:
+    type: string
+    description: "Webhook delivery status description"

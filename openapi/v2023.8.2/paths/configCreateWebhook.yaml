@@ -7,7 +7,10 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../definitions/Webhook.yaml"
+        type: object
+        properties:
+          webhook:
+            $ref: "../definitions/Webhook.yaml"
   required: true
 responses:
   "201":
@@ -15,7 +18,10 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../definitions/Webhook.yaml"
+          type: object
+          properties:
+            webhook:
+              $ref: "../definitions/Webhook.yaml"
 deprecated: false
 security:
   - BearerAuth: []

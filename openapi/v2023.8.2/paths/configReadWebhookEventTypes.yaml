@@ -1,6 +1,6 @@
 operationId: configReadWebhookEventTypes
 description: Get webhook event types
-summary: READ - Read webhook event types
+summary: LIST - List all webhook event types
 tags:
   - config
 responses:

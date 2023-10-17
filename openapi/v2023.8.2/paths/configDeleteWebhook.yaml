@@ -11,9 +11,15 @@ parameters:
     schema:
       type: string
 responses:
-  "204":
-    description: No Content
-    content: {}
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            webhook:
+              $ref: "../definitions/Webhook.yaml"
 deprecated: false
 security:
   - BearerAuth: []

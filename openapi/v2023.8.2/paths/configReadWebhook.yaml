@@ -16,38 +16,10 @@ responses:
     content:
       application/json:
         schema:
-          required:
-            - ID
-            - OrgID
-            - PayloadURL
-            - ContentType
-            - SubscribedEvents
-            - Disabled
-            - SecretKey
-            - SkipSSLVerification
-            - TimeStamp
           type: object
           properties:
-            ID:
-              type: string
-            OrgID:
-              type: string
-            PayloadURL:
-              type: string
-            ContentType:
-              type: string
-            SubscribedEvents:
-              type: array
-              items:
-                type: string
-            Disabled:
-              type: boolean
-            SecretKey:
-              type: string
-            SkipSSLVerification:
-              type: boolean
-            TimeStamp:
-              type: string
+            webhook:
+              $ref: "../definitions/Webhook.yaml"
 deprecated: false
 security:
   - BearerAuth: []

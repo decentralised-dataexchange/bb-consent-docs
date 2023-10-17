@@ -26,23 +26,9 @@ responses:
             webhookDeliveries:
               type: array
               items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  webhookId:
-                    type: string
-                  responseStatusCode:
-                    type: integer
-                    format: int32
-                  responseStatusStr:
-                    type: string
-                  timestamp:
-                    type: string
-                  status:
-                    type: string
-                  statusDescription:
-                    type: string
+                oneOf:
+                  - $ref: "../definitions/WebhookDelivery.yaml"
+              description: WebhookDelivery
             pagination:
               $ref: "../definitions/Pagination.yaml"
 deprecated: false

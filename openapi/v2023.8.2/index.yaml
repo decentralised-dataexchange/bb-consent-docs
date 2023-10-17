@@ -127,25 +127,32 @@ paths:
   /config/policy/{policyId}/revisions:
     get:
       $ref: ./paths/configListPolicyRevisions.yaml
-  /config/webhooks/event-types:
+  /config/individual:
+    post:
+      $ref: ./paths/configCreateIndividual.yaml
+  /config/individual/{individualId}:
     get:
-      $ref: "./paths/configReadWebhookEventTypes.yaml"
-  /config/webhooks/payload/content-types:
+      $ref: ./paths/configReadIndividual.yaml
+    put:
+      $ref: ./paths/configUpdateIndividual.yaml
+    delete:
+      $ref: ./paths/configDeleteIndividual.yaml
+  /config/individuals:
     get:
-      $ref: "./paths/getWebhookPayloadContentTypes.yaml"
+      $ref: ./paths/configListIndividuals.yaml
   /config/webhook:
     post:
       $ref: "./paths/configCreateWebhook.yaml"
-  /config/webhooks:
-    get:
-      $ref: "./paths/configListWebhooks.yaml"
   /config/webhook/{webhookId}:
     get:
       $ref: "./paths/configReadWebhook.yaml"
-    delete:
-      $ref: "./paths/configDeleteWebhook.yaml"
     put:
       $ref: "./paths/configUpdateWebhook.yaml"
+    delete:
+      $ref: "./paths/configDeleteWebhook.yaml"
+  /config/webhooks:
+    get:
+      $ref: "./paths/configListWebhooks.yaml"
   /config/webhook/{webhookId}/ping:
     post:
       $ref: "./paths/configPingWebhook.yaml"
@@ -158,6 +165,12 @@ paths:
   /config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver:
     post:
       $ref: "./paths/configRedeliverWebhook.yaml"
+  /config/webhooks/event-types:
+    get:
+      $ref: "./paths/configReadWebhookEventTypes.yaml"
+  /config/webhooks/payload/content-types:
+    get:
+      $ref: "./paths/getWebhookPayloadContentTypes.yaml"
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml

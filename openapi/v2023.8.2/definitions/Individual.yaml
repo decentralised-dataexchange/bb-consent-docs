@@ -2,11 +2,7 @@ type: object
 title: Individual
 description: "Shallowly models an Individual which may reference some instance in an external system (registration system, functional ID, foundational ID etc). An Individual instance of this model is not to be mistaken with a unique natural individual. It is up to the system owner to decide if this record permits mapping to a natural individual and/or if a single Individual row can map to several consent agreements."
 x-not-in-database: false
-
-required:
-      - id
 properties:
-
   id:
     type: string
     format: ""
@@ -23,7 +19,7 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "External id type specifier. A string. For instance \"email\" or \"foundational id\". Can be used in later queries."
+    description: 'External id type specifier. A string. For instance "email" or "foundational id". Can be used in later queries.'
 
   identityProviderId:
     type: string

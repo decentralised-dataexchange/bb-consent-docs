@@ -23,7 +23,7 @@ parameters:
     schema:
       type: string
 responses:
-  "200":
+  "204":
     description: OK
     content: {}
 deprecated: false

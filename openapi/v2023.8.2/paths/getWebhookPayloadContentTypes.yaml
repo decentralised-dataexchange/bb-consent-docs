@@ -1,5 +1,5 @@
 operationId: getWebhookPayloadContentTypes.yaml
-summary: Get webhook payload content types
+summary: LIST - List all webhook payload content types
 description: Get webhook payload content types
 tags:
   - config

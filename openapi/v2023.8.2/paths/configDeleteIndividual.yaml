@@ -1,0 +1,35 @@
+tags:
+  - config
+summary: "DELETE - Delete an individual"
+operationId: "configDeleteIndividual"
+description: "DELETE - entirely removes an individual from the system and cascades necessary actions to related DataAgreementRecord objects"
+parameters:
+  - in: path
+    name: "individualId"
+    description: "Unique ID of an object"
+    required: true
+    schema:
+      type: string
+
+x-specification-usecase: ""
+x-specification-scenario: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-crudl-model: "Individual"
+responses:
+  "200":
+    description: ""
+
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            individual:
+              allOf:
+                - $ref: "../definitions/Individual.yaml"
+                - $ref: "../definitions/IndividualExtras.yaml"
+
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []

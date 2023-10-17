@@ -7,6 +7,7 @@ required:
   - skipSslVerification
   - timestamp
 type: object
+title: Webhook
 properties:
   id:
     type: string

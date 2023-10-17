@@ -1,0 +1,29 @@
+type: object
+title: WebhookPing
+required:
+  - responseStatusCode
+  - responseStatusStr
+  - executionStartTimeStamp
+  - executionEndTimeStamp
+  - status
+  - statusDescription
+properties:
+  responseStatusCode:
+    type: integer
+    format: int32
+    description: "Response status code"
+  responseStatusStr:
+    type: string
+    description: "Response status string"
+  executionStartTimestamp:
+    type: string
+    description: "Execution start timestamp"
+  executionEndTimestamp:
+    type: string
+    description: "Execution end timestamp"
+  status:
+    type: string
+    description: "Status of webhook"
+  statusDescription:
+    type: string
+    description: "Status description"
