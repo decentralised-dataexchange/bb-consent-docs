@@ -1,0 +1,23 @@
+description: DELETE - Deletes an API key
+  DataAgreement.
+operationId: configDeletePolicy
+parameters:
+  - $ref: "../parameters/apiKeyId.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/ApiKey.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - Deletes an API key
+tags:
+  - config
+x-specification-crudl-model: ApiKey
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-004

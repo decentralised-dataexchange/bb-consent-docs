@@ -181,6 +181,14 @@ paths:
       $ref: "./paths/configUpdateIdp.yaml"
     delete:
       $ref: "./paths/configDeleteIdp.yaml"
+  /config/admin/apikey:
+    post:
+      $ref: "./paths/configCreateApikey.yaml"
+  /config/admin/apikey/{apiKeyId}:
+    put:
+      $ref: "./paths/configUpdateApiKey.yaml"
+    delete:
+      $ref: "./paths/configDeleteApiKey.yaml"
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml

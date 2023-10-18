@@ -1,0 +1,6 @@
+description: Unique ID of an object
+in: path
+name: apiKeyId
+required: true
+schema:
+  type: string

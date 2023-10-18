@@ -1,0 +1,36 @@
+type: object
+title: ApiKey
+description: "Api key"
+x-not-in-database: false
+
+required:
+  - scopes
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: "API key Id"
+
+  scopes:
+    type: array
+    items:
+      type: string
+      enum:
+        - config
+        - audit
+        - service
+        - onboard
+    description: "Scopes for API key"
+
+  apiKey:
+    type: string
+    format: ""
+    example: ""
+    description: "API key"
+
+  expiryInDays:
+    type: integer
+    format: ""
+    default: 30
+    description: "Expiry in days. If expiry is 0, then default to 30 days"
