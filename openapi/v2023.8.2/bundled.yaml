@@ -2269,6 +2269,178 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  /config/idp/open-id:
+    post:
+      description: CREATE - Create an IDP
+      operationId: configCreateIdp
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                idp:
+                  $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+                  description: An object of type IDP
+              required:
+                - idp
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idp:
+                    $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Create an IDP
+      tags:
+        - config
+      x-specification-crudl-model: IDP
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  '/config/idp/open-id/{idpId}':
+    get:
+      description: READ - Read an IDP
+      operationId: configReadIdp
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: idpId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idp:
+                    $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read an IDP
+      tags:
+        - config
+      x-specification-crudl-model: IDP
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+    put:
+      description: UPDATE - Update an IDP
+      operationId: configUpdatePolicy
+      parameters:
+        - $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/get/parameters/0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                idp:
+                  $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+                  description: An object of type IDP
+              required:
+                - idp
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idp:
+                    $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Update an IDP
+      tags:
+        - config
+      x-specification-crudl-model: IDP
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+    delete:
+      description: DELETE - Delete an IDP
+      operationId: configDeleteIdp
+      parameters:
+        - $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                title: IDP
+                description: Identity Provider
+                x-not-in-database: false
+                required:
+                  - id
+                  - authorisationUrl
+                  - tokenUrl
+                  - logoutUrl
+                  - userInfoUrl
+                  - jwksUrl
+                  - clientId
+                  - clientSecret
+                  - defaultScope
+                properties:
+                  id:
+                    type: string
+                    format: ''
+                    example: ''
+                    description: IDP Id
+                  authorisationUrl:
+                    type: string
+                    description: Authorisation Url
+                  tokenUrl:
+                    type: string
+                    description: Token Url
+                  logoutUrl:
+                    type: string
+                    description: Logout Url
+                  userInfoUrl:
+                    type: string
+                    description: User info Url
+                  jwksUrl:
+                    type: string
+                    description: JWKS Url
+                  clientId:
+                    type: string
+                    description: Client Id
+                  clientSecret:
+                    type: string
+                    description: Client secret
+                  defaultScope:
+                    type: string
+                    description: Default scope
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - Delete an IDP
+      tags:
+        - config
+      x-specification-crudl-model: IDP
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-004
   /onboard/admin/login:
     post:
       tags:

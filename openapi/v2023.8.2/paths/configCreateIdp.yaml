@@ -1,0 +1,35 @@
+description: CREATE - Create an IDP
+operationId: configCreateIdp
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          idp:
+            $ref: ../definitions/IDP.yaml
+            description: An object of type IDP
+        required:
+          - idp
+        type: object
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            idp:
+              $ref: ../definitions/IDP.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: CREATE - Create an IDP
+tags:
+  - config
+x-specification-crudl-model: IDP
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: ""

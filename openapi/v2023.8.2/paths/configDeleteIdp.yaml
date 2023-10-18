@@ -1,0 +1,22 @@
+description: DELETE - Delete an IDP
+operationId: configDeleteIdp
+parameters:
+  - $ref: "../parameters/idpId.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          $ref: ../definitions/IDP.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: DELETE - Delete an IDP
+tags:
+  - config
+x-specification-crudl-model: IDP
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-004

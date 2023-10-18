@@ -171,6 +171,16 @@ paths:
   /config/webhooks/payload/content-types:
     get:
       $ref: "./paths/getWebhookPayloadContentTypes.yaml"
+  /config/idp/open-id:
+    post:
+      $ref: "./paths/configCreateIdp.yaml"
+  /config/idp/open-id/{idpId}:
+    get:
+      $ref: "./paths/configReadIdp.yaml"
+    put:
+      $ref: "./paths/configUpdateIdp.yaml"
+    delete:
+      $ref: "./paths/configDeleteIdp.yaml"
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml

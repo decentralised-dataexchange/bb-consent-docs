@@ -1,0 +1,44 @@
+type: object
+title: IDP
+description: "Identity Provider"
+x-not-in-database: false
+required:
+  - id
+  - authorisationUrl
+  - tokenUrl
+  - logoutUrl
+  - userInfoUrl
+  - jwksUrl
+  - clientId
+  - clientSecret
+  - defaultScope
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: "IDP Id"
+  authorisationUrl:
+    type: string
+    description: "Authorisation Url"
+  tokenUrl:
+    type: string
+    description: "Token Url"
+  logoutUrl:
+    type: string
+    description: "Logout Url"
+  userInfoUrl:
+    type: string
+    description: "User info Url"
+  jwksUrl:
+    type: string
+    description: "JWKS Url"
+  clientId:
+    type: string
+    description: "Client Id"
+  clientSecret:
+    type: string
+    description: "Client secret"
+  defaultScope:
+    type: string
+    description: "Default scope"
