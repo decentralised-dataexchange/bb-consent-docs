@@ -6,7 +6,6 @@ required:
   - id
   - authorisationUrl
   - tokenUrl
-  - logoutUrl
   - userInfoUrl
   - jwksUrl
   - clientId
