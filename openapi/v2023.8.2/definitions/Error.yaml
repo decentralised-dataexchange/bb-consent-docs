@@ -4,6 +4,6 @@ required:
 type: object
 properties:
   errorCode:
-    type: string
+    type: int
   errorDescription:
     type: string

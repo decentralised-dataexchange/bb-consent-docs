@@ -2636,7 +2636,7 @@ paths:
                 type: object
                 properties:
                   errorCode:
-                    type: string
+                    type: int
                   errorDescription:
                     type: string
       deprecated: false
