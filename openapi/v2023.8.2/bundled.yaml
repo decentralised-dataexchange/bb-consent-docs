@@ -2890,6 +2890,51 @@ paths:
       security: []
       tags:
         - onboard
+  /onboard/token/exchange:
+    post:
+      deprecated: false
+      description: Exchange authorisation code for access token
+      operationId: exchangeCodeForToken
+      parameters:
+        - description: Unique ID of an object
+          in: query
+          name: redirectUri
+          required: true
+          schema:
+            type: string
+        - description: Unique ID of an object
+          in: query
+          name: authorisationCode
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userInfo:
+                    required:
+                      - subject
+                    type: object
+                    title: Token
+                    properties:
+                      subject:
+                        type: string
+                      profile:
+                        type: string
+                      email:
+                        type: string
+                      emailVerified:
+                        type: boolean
+                  token:
+                    $ref: '#/paths/~1onboard~1admin~1login/post/responses/200/content/application~1json/schema'
+          description: OK
+      security: []
+      tags:
+        - onboard
   /onboard/validate/email:
     post:
       operationId: validateEmail

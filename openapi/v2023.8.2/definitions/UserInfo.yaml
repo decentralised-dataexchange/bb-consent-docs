@@ -1,0 +1,13 @@
+required:
+  - subject
+type: object
+title: Token
+properties:
+  subject:
+    type: string
+  profile:
+    type: string
+  email:
+    type: string
+  emailVerified:
+    type: boolean

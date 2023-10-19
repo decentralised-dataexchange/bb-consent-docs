@@ -213,6 +213,9 @@ paths:
   /onboard/token/refresh:
     post:
       $ref: ./paths/refreshToken.yaml
+  /onboard/token/exchange:
+    post:
+      $ref: ./paths/exchangeCodeForToken.yaml
   /onboard/validate/email:
     post:
       $ref: ./paths/validateEmail.yaml
