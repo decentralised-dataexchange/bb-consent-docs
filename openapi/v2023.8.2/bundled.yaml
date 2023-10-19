@@ -2411,6 +2411,9 @@ paths:
                   tokenUrl:
                     type: string
                     description: Token Url
+                  issuerUrl:
+                    type: string
+                    description: Issuer Url
                   logoutUrl:
                     type: string
                     description: Logout Url
