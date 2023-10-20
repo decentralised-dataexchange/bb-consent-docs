@@ -1,0 +1,28 @@
+type: object
+title: UMA2 /.well-known configuration
+required:
+  - issuer
+  - grant_types_supported
+  - response_types_supported
+  - jwks_uri
+  - token_endpoint
+  - permission_endpoint
+properties:
+  issuer:
+    type: string
+    description: "Issuer endpoint"
+  grant_types_supported:
+    type: string
+    description: "Grant types supported"
+  response_types_supported:
+    type: string
+    description: "Response types supported"
+  jwks_uri:
+    type: string
+    description: "JWKS endpoint"
+  token_endpoint:
+    type: string
+    description: "Token endpoint"
+  permission_endpoint:
+    type: string
+    description: "Permission endpoint"
