@@ -770,162 +770,6 @@ info:
   version: 2023.8.2
 openapi: 3.1.0
 paths:
-  '/audit/data-agreement-record/{dataAgreementRecordId}':
-    get:
-      description: READ - Fetch a single data agreement record
-      operationId: auditConsentRecordRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementRecordId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConsentRecord'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch a single data agreement record
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-  /audit/data-agreement-records:
-    post:
-      description: LIST - Fetch all consent records
-      operationId: auditConsentRecordList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                consentRecordFilter:
-                  $ref: '#/components/schemas/ConsentRecordFilter'
-                  description: An object of type ConsentRecordFilter
-              required:
-                - consentRecordFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetch all consent records
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-AT-003
-  '/audit/data-agreement/{dataAgreementId}':
-    get:
-      description: READ - Fetch a single data agreement.
-      operationId: auditReadRecord
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataAgreement'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch a single data agreement.
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
-  /audit/data-agreements/:
-    post:
-      description: LIST - Fetch all data agreements stored in the system
-      operationId: auditAgreementList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                agreementFilter:
-                  $ref: '#/components/schemas/AgreementFilter'
-                  description: An object of type AgreementFilter
-              required:
-                - agreementFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/DataAgreement'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetch all data agreements stored in the system
-      tags:
-        - auditor
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   /config/data-agreement:
     post:
       description: CREATE - Create a new data agreement and returned together with revision
@@ -3517,7 +3361,7 @@ paths:
                   dataAgreementRecords:
                     type: array
                     items:
-                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                      $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
           description: ''
@@ -3546,7 +3390,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   revision:
                     $ref: '#/components/schemas/Revision'
           description: ''
@@ -3578,7 +3422,7 @@ paths:
                   dataAgreementRecords:
                     type: array
                     items:
-                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                      $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
           description: ''
@@ -3614,7 +3458,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   revision:
                     $ref: '#/components/schemas/Revision'
           description: ''
@@ -3642,7 +3486,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
           description: ''
         '400':
           description: bad input parameter
@@ -3686,7 +3530,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   signature:
                     $ref: '#/components/schemas/Signature'
           description: ''
@@ -3712,7 +3556,7 @@ paths:
             schema:
               properties:
                 dataAgreementRecord:
-                  $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   description: An object of type DataAgreementRecord
                 signature:
                   $ref: '#/components/schemas/Signature'
@@ -3729,72 +3573,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    type: object
-                    title: DataAgreementRecord
-                    description: 'A data agreement record expresses consent (as defined in this building block''s specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)'
-                    x-not-in-database: false
-                    required:
-                      - id
-                      - agreementRevisionHash
-                      - state
-                    properties:
-                      id:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
-                      dataAgreementId:
-                        type: string
-                        x-fk-model: DataAgreement
-                        description: The DataAgreement to which consent has been given
-                      dataAgreementRevisionId:
-                        type: string
-                        x-fk-model: Revision
-                        description: The Revision of the data agreement which consent has been given to
-                      dataAgreementRevisionHash:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement.
-                      dataAttributes:
-                        type: array
-                        items:
-                          type: object
-                          title: DataAttributeIntegrity
-                          properties:
-                            dataAttributeId:
-                              type: string
-                              description: Data attribute id
-                            dataAttributeRevisionId:
-                              type: string
-                              x-fk-model: Revision
-                              description: The Revision of the data attribute which consent has been given to
-                            dataAttributeRevisionHash:
-                              type: string
-                              format: ''
-                              example: ''
-                              description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original data attribute.
-                      individualId:
-                        type: string
-                        x-fk-model: Individual
-                        description: The Individual who has signed this data agreement record
-                      optIn:
-                        type: boolean
-                        format: ''
-                        example: ''
-                        description: 'True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent).'
-                      state:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: 'The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed'
-                        enum:
-                          - unsigned
-                          - signed
-                      signatureId:
-                        type: string
-                        x-fk-model: Signature
-                        description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   revision:
                     $ref: '#/components/schemas/Revision'
                   signature:
@@ -3844,7 +3623,7 @@ paths:
                 properties:
                   dataAgreementRecords:
                     items:
-                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                      $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
@@ -3908,7 +3687,7 @@ paths:
                 type: object
                 properties:
                   dataAgreementRecord:
-                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                   revision:
                     $ref: '#/components/schemas/Revision'
           description: ''
@@ -4014,7 +3793,7 @@ paths:
                 properties:
                   dataAgreementRecords:
                     items:
-                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                      $ref: '#/paths/~1audit~1data-agreement-record~1%7BdataAgreementRecordId%7D/get/responses/200/content/application~1json/schema'
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
@@ -4083,6 +3862,129 @@ paths:
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
+  '/audit/data-agreement-record/{dataAgreementRecordId}':
+    get:
+      description: READ - Fetch a single data agreement record
+      operationId: auditConsentRecordRead
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementRecordId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                title: DataAgreementRecord
+                description: 'A data agreement record expresses consent (as defined in this building block''s specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)'
+                x-not-in-database: false
+                required:
+                  - id
+                  - agreementRevisionHash
+                  - state
+                properties:
+                  id:
+                    type: string
+                    format: ''
+                    example: ''
+                    description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
+                  dataAgreementId:
+                    type: string
+                    x-fk-model: DataAgreement
+                    description: The DataAgreement to which consent has been given
+                  dataAgreementRevisionId:
+                    type: string
+                    x-fk-model: Revision
+                    description: The Revision of the data agreement which consent has been given to
+                  dataAgreementRevisionHash:
+                    type: string
+                    format: ''
+                    example: ''
+                    description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement.
+                  dataAttributes:
+                    type: array
+                    items:
+                      type: object
+                      title: DataAttributeIntegrity
+                      properties:
+                        dataAttributeId:
+                          type: string
+                          description: Data attribute id
+                        dataAttributeRevisionId:
+                          type: string
+                          x-fk-model: Revision
+                          description: The Revision of the data attribute which consent has been given to
+                        dataAttributeRevisionHash:
+                          type: string
+                          format: ''
+                          example: ''
+                          description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original data attribute.
+                  individualId:
+                    type: string
+                    x-fk-model: Individual
+                    description: The Individual who has signed this data agreement record
+                  optIn:
+                    type: boolean
+                    format: ''
+                    example: ''
+                    description: 'True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent).'
+                  state:
+                    type: string
+                    format: ''
+                    example: ''
+                    description: 'The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed'
+                    enum:
+                      - unsigned
+                      - signed
+                  signatureId:
+                    type: string
+                    x-fk-model: Signature
+                    description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch a single data agreement record
+      tags:
+        - audit
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: ''
+  '/audit/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch a single data agreement.
+      operationId: auditReadRecord
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: dataAgreementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAgreement'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch a single data agreement.
+      tags:
+        - audit
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
 servers:
   - description: Development server
     url: 'https://api.bb-consent.dev/v2'

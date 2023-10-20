@@ -64,18 +64,6 @@ info:
   version: 2023.8.2
 openapi: 3.1.0
 paths:
-  /audit/data-agreement-record/{dataAgreementRecordId}:
-    get:
-      $ref: ./paths/auditConsentRecordRead.yaml
-  /audit/data-agreement-records:
-    post:
-      $ref: ./paths/auditConsentRecordList.yaml
-  /audit/data-agreement/{dataAgreementId}:
-    get:
-      $ref: ./paths/auditReadRecord.yaml
-  /audit/data-agreements/:
-    post:
-      $ref: ./paths/auditAgreementList.yaml
   /config/data-agreement:
     post:
       $ref: ./paths/configCreateAgreement.yaml
@@ -311,6 +299,12 @@ paths:
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml
+  /audit/data-agreement-record/{dataAgreementRecordId}:
+    get:
+      $ref: ./paths/auditConsentRecordRead.yaml
+  /audit/data-agreement/{dataAgreementId}:
+    get:
+      $ref: ./paths/auditReadRecord.yaml
 servers:
   - description: Development server
     url: https://api.bb-consent.dev/v2

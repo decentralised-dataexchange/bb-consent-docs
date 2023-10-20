@@ -20,7 +20,7 @@ security:
   - BearerAuth: []
 summary: READ - Fetch a single data agreement.
 tags:
-- auditor
+- audit
 x-specification-crudl-model: ''
 x-specification-pii-or-sensitive: 'False'
 x-specification-scenario: ''

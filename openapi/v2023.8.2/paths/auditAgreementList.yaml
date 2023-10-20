@@ -44,7 +44,7 @@ security:
   - BearerAuth: []
 summary: LIST - Fetch all data agreements stored in the system
 tags:
-  - auditor
+  - audit
 x-specification-crudl-model: ""
 x-specification-pii-or-sensitive: "False"
 x-specification-scenario: ""

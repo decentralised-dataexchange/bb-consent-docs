@@ -42,7 +42,7 @@ security:
   - BearerAuth: []
 summary: LIST - Fetch all consent records
 tags:
-- auditor
+- audit
 x-specification-crudl-model: ''
 x-specification-pii-or-sensitive: 'False'
 x-specification-scenario: ''
