@@ -1,0 +1,28 @@
+type: object
+title: OrganisationAdmin
+x-not-in-database: false
+
+required:
+  - name
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: ""
+  
+  email:
+    type: string
+    description: "Email"
+  
+  name:
+    type: string
+    description: "Name"
+  
+  avatarImageId:
+    type: string
+    description: "Avatar image Id"
+
+  avatarImageUrl:
+    type: string
+    description: "Avatar image Url"

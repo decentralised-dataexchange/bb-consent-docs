@@ -1,0 +1,5 @@
+description: Unique ID of an object
+in: query
+name: methodOfUse
+schema:
+  type: string

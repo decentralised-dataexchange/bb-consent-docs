@@ -4,6 +4,7 @@ parameters:
   - $ref: "../parameters/revisionId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/active.yaml"
 responses:
   "200":
     content:
@@ -13,7 +14,7 @@ responses:
           properties:
             dataAgreements:
               items:
-                  $ref: ../definitions/DataAgreement.yaml
+                $ref: ../definitions/DataAgreement.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"

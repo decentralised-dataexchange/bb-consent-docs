@@ -1,0 +1,24 @@
+deprecated: false
+description: CREATE - Create individuals in bulk from CSV file
+summary: CREATE - Create individuals in bulk from CSV file
+operationId: configUploadIndividuals
+requestBody:
+  content:
+    multipart/form-data:
+      encoding: {}
+      schema:
+        properties:
+          individuals:
+            format: binary
+            type: string
+        required:
+        - individuals
+        type: object
+  required: false
+responses:
+  '200':
+    content: {}
+security:
+- BearerAuth: []
+tags:
+- config

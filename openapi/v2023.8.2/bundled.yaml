@@ -1079,6 +1079,11 @@ paths:
             type: string
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - description: Filtering data agreements by draft/completed status
+          in: query
+          name: lifecycle
+          schema:
+            type: string
       responses:
         '200':
           content:
@@ -1220,6 +1225,15 @@ paths:
                         format: ''
                         example: ''
                         description: Version of the data attribute
+                      agreements:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            purpose:
+                              type: string
                       agreementIds:
                         type: array
                         items:
@@ -1363,6 +1377,11 @@ paths:
         - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - description: Unique ID of an object
+          in: query
+          name: methodOfUse
+          schema:
+            type: string
       responses:
         '200':
           content:
@@ -1870,6 +1889,32 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
+  /config/individual/upload:
+    post:
+      deprecated: false
+      description: CREATE - Create individuals in bulk from CSV file
+      summary: CREATE - Create individuals in bulk from CSV file
+      operationId: configUploadIndividuals
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              properties:
+                individuals:
+                  format: binary
+                  type: string
+              required:
+                - individuals
+              type: object
+        required: false
+      responses:
+        '200':
+          content: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - config
   /config/webhook:
     post:
       operationId: configCreateWebhook
@@ -2311,12 +2356,7 @@ paths:
       description: READ - Read an IDP
       operationId: configReadIdp
       parameters:
-        - description: Unique ID of an object
-          in: path
-          name: idpId
-          required: true
-          schema:
-            type: string
+        - $ref: '#/paths/~1service~1idp~1open-id/get/parameters/0'
       responses:
         '200':
           content:
@@ -2342,7 +2382,7 @@ paths:
       description: UPDATE - Update an IDP
       operationId: configUpdatePolicy
       parameters:
-        - $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/get/parameters/0'
+        - $ref: '#/paths/~1service~1idp~1open-id/get/parameters/0'
       requestBody:
         content:
           application/json:
@@ -2379,7 +2419,7 @@ paths:
       description: DELETE - Delete an IDP
       operationId: configDeleteIdp
       parameters:
-        - $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/get/parameters/0'
+        - $ref: '#/paths/~1service~1idp~1open-id/get/parameters/0'
       responses:
         '200':
           content:
@@ -2485,12 +2525,7 @@ paths:
       description: UPDATE - Update an API key
       operationId: configUpdateApiKey
       parameters:
-        - description: Unique ID of an object
-          in: path
-          name: apiKeyId
-          required: true
-          schema:
-            type: string
+        - $ref: '#/paths/~1onboard~1admin/put/parameters/0'
       requestBody:
         content:
           application/json:
@@ -2527,7 +2562,7 @@ paths:
       description: DELETE - Deletes an API key DataAgreement.
       operationId: configDeletePolicy
       parameters:
-        - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/put/parameters/0'
+        - $ref: '#/paths/~1onboard~1admin/put/parameters/0'
       responses:
         '200':
           content:
@@ -2577,6 +2612,183 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
+  /onboard/admin:
+    put:
+      description: UPDATE - Update organisation admin
+      operationId: onboardUpdateAdmin
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: apiKeyId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                organisationAdmin:
+                  $ref: '#/paths/~1onboard~1admin/put/responses/200/content/application~1json/schema/properties/organisationAdmin'
+                  description: An object of type OrganisationAdmin
+              required:
+                - organisationAdmin
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  organisationAdmin:
+                    type: object
+                    title: OrganisationAdmin
+                    x-not-in-database: false
+                    required:
+                      - name
+                    properties:
+                      id:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: ''
+                      email:
+                        type: string
+                        description: Email
+                      name:
+                        type: string
+                        description: Name
+                      avatarImageId:
+                        type: string
+                        description: Avatar image Id
+                      avatarImageUrl:
+                        type: string
+                        description: Avatar image Url
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: UPDATE - Update organisation admin
+      tags:
+        - onboard
+      x-specification-crudl-model: OrganisationAdmin
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-002
+    get:
+      deprecated: false
+      description: READ - Read organisation admin
+      operationId: onboardGetAdmin
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  organisationAdmin:
+                    $ref: '#/paths/~1onboard~1admin/put/responses/200/content/application~1json/schema/properties/organisationAdmin'
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+  /onboard/admin/avatarimage:
+    put:
+      deprecated: false
+      description: UPDATE - Update organisation admin avatar image
+      summary: UPDATE - Update organisation admin avatar image
+      operationId: onboardUpdateAdminAvatar
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              properties:
+                avatarimage:
+                  format: binary
+                  type: string
+              required:
+                - avatarimage
+              type: object
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  organisationAdmin:
+                    $ref: '#/paths/~1onboard~1admin/put/responses/200/content/application~1json/schema/properties/organisationAdmin'
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+    get:
+      deprecated: false
+      description: READ - Read organisation admin avatar image
+      operationId: onboardGetAdminAvatar
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - onboard
+  /onboard/password/reset:
+    put:
+      tags:
+        - onboard
+      description: UPDATE - Reset Password
+      operationId: onboardResetPassword
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - currentPassword
+                - newPassword
+              type: object
+              properties:
+                currentPassword:
+                  type: string
+                newPassword:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: {}
+      deprecated: false
+      security:
+        - BearerAuth: []
+  /onboard/password/forgot:
+    put:
+      tags:
+        - onboard
+      description: UPDATE - Forgot Password
+      operationId: onboardForgotPassword
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+              type: object
+              properties:
+                username:
+                  type: string
+        required: true
+      responses:
+        '200':
+          content: {}
+      deprecated: false
   /onboard/admin/login:
     post:
       tags:
@@ -3096,6 +3308,55 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  /service/idp/open-id:
+    get:
+      description: READ - Read an IDP
+      operationId: serviceReadIdp
+      parameters:
+        - description: Unique ID of an object
+          in: path
+          name: idpId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idp:
+                    type: object
+                    x-not-in-database: false
+                    required:
+                      - id
+                      - logoutUrl
+                      - clientId
+                    properties:
+                      id:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: IDP Id
+                      logoutUrl:
+                        type: string
+                        description: Logout Url
+                      clientId:
+                        type: string
+                        description: Client Id
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read an IDP
+      tags:
+        - service
+      x-specification-crudl-model: IDP
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}':
     get:
       description: READ - Fetches the latest version of an DataAgreement
@@ -3877,6 +4138,59 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: '1.1'
       x-specification-usecase: UC-C-PIC-A-003
+  /audit/admin/logs:
+    get:
+      operationId: auditAdminLogs
+      tags:
+        - audit
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - name: logType
+          in: query
+          description: Type of the log
+          required: false
+          schema:
+            type: integer
+      description: LIST - List all organisation admin logs
+      summary: LIST - List all organisation admin logs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs:
+                    items:
+                      description: A human readable log
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          ID:
+                            type: string
+                            description: ID for organisation log
+                          Type:
+                            type: integer
+                            description: Type integer for organisation log
+                          TypeStr:
+                            type: string
+                            description: Type string for organisation log
+                          UserID:
+                            type: string
+                            description: User ID
+                          UserName:
+                            type: string
+                          TimeStamp:
+                            type: string
+                          Log:
+                            type: string
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
 servers:
   - description: Development server
     url: 'https://api.bb-consent.dev/v2'

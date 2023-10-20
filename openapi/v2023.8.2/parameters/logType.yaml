@@ -1,0 +1,6 @@
+name: logType
+in: query
+description: Type of the log
+required: false
+schema:
+  type: integer

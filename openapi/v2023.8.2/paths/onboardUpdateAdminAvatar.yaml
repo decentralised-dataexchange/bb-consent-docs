@@ -1,0 +1,31 @@
+deprecated: false
+description: UPDATE - Update organisation admin avatar image
+summary: UPDATE - Update organisation admin avatar image
+operationId: onboardUpdateAdminAvatar
+requestBody:
+  content:
+    multipart/form-data:
+      encoding: {}
+      schema:
+        properties:
+          avatarimage:
+            format: binary
+            type: string
+        required:
+          - avatarimage
+        type: object
+  required: false
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          properties:
+            organisationAdmin:
+              $ref: ../definitions/OrganisationAdmin.yaml
+          type: object
+    description: OK
+security:
+  - BearerAuth: []
+tags:
+  - onboard

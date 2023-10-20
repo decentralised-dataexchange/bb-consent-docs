@@ -1,0 +1,36 @@
+description: UPDATE - Update organisation admin
+operationId: onboardUpdateAdmin
+parameters:
+  - $ref: "../parameters/apiKeyId.yaml"
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          organisationAdmin:
+            $ref: ../definitions/OrganisationAdmin.yaml
+            description: An object of type OrganisationAdmin
+        required:
+          - organisationAdmin
+        type: object
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            organisationAdmin:
+              $ref: ../definitions/OrganisationAdmin.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: UPDATE - Update organisation admin
+tags:
+  - onboard
+x-specification-crudl-model: OrganisationAdmin
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-002

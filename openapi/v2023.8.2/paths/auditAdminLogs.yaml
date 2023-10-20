@@ -1,0 +1,24 @@
+operationId: auditAdminLogs
+tags:
+  - audit
+security:
+  - BearerAuth: []
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/logType.yaml"
+description: LIST - List all organisation admin logs
+summary: LIST - List all organisation admin logs
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            logs:
+              items:
+                $ref: "../definitions/OrganisationAdminLog.yaml"
+              type: array
+            pagination:
+              $ref: "../definitions/Pagination.yaml"

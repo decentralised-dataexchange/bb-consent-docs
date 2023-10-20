@@ -1,0 +1,17 @@
+deprecated: false
+description: READ - Read organisation admin
+operationId: onboardGetAdmin
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          properties:
+            organisationAdmin:
+              $ref: ../definitions/OrganisationAdmin.yaml
+          type: object
+    description: OK
+security:
+  - BearerAuth: []
+tags:
+  - onboard

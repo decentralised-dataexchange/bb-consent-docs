@@ -4,6 +4,7 @@ parameters:
   - $ref: "../parameters/revisionId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/methodOfUse.yaml"
 responses:
   "200":
     content:

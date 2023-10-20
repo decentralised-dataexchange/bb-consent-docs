@@ -1,0 +1,5 @@
+description: Filtering data agreements by draft/completed status
+in: query
+name: lifecycle
+schema:
+  type: string

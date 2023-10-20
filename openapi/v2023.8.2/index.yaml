@@ -140,6 +140,9 @@ paths:
   /config/individuals:
     get:
       $ref: ./paths/configListIndividuals.yaml
+  /config/individual/upload:
+    post:
+      $ref: ./paths/configUploadIndividuals.yaml
   /config/webhook:
     post:
       $ref: "./paths/configCreateWebhook.yaml"
@@ -189,6 +192,23 @@ paths:
       $ref: "./paths/configUpdateApiKey.yaml"
     delete:
       $ref: "./paths/configDeleteApiKey.yaml"
+  /onboard/admin:
+    put:
+      $ref: "./paths/onboardUpdateAdmin.yaml"
+    get:
+      $ref: "./paths/onboardGetAdmin.yaml"
+  /onboard/admin/avatarimage:
+    put:
+      $ref: "./paths/onboardUpdateAdminAvatar.yaml"
+    get:
+      $ref: "./paths/onboardGetAdminAvatar.yaml"
+  /onboard/password/reset:
+    put:
+      $ref: "./paths/onboardResetPassword.yaml"
+  /onboard/password/forgot:
+    put:
+      $ref: "./paths/onboardForgotPassword.yaml"
+
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml
@@ -228,6 +248,9 @@ paths:
   /onboard/verify/phone:
     post:
       $ref: ./paths/verifyPhone.yaml
+  /service/idp/open-id:
+    get:
+      $ref: ./paths/serviceReadIdp.yaml
   /service/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceAgreementRead.yaml
@@ -285,6 +308,9 @@ paths:
       $ref: ./paths/serviceVerificationAgreementList.yaml
     post:
       $ref: ./paths/serviceVerificationAgreementListFilter.yaml
+  /audit/admin/logs:
+    get:
+      $ref: ./paths/auditAdminLogs.yaml
 servers:
   - description: Development server
     url: https://api.bb-consent.dev/v2

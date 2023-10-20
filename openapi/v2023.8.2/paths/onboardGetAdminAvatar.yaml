@@ -1,0 +1,10 @@
+deprecated: false
+description: READ - Read organisation admin avatar image
+operationId: onboardGetAdminAvatar
+responses:
+  '200':
+    headers: {}
+security:
+- BearerAuth: []
+tags:
+- onboard

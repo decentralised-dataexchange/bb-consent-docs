@@ -1,0 +1,18 @@
+type: object
+x-not-in-database: false
+required:
+  - id
+  - logoutUrl
+  - clientId
+properties:
+  id:
+    type: string
+    format: ""
+    example: ""
+    description: "IDP Id"
+  logoutUrl:
+    type: string
+    description: "Logout Url"
+  clientId:
+    type: string
+    description: "Client Id"

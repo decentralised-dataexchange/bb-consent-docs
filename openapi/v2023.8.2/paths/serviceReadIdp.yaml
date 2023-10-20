@@ -1,0 +1,25 @@
+description: READ - Read an IDP
+operationId: serviceReadIdp
+parameters:
+  - $ref: "../parameters/idpId.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            idp:
+              $ref: ../definitions/IDPExtras.yaml
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: READ - Read an IDP
+tags:
+  - service
+x-specification-crudl-model: IDP
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-003
