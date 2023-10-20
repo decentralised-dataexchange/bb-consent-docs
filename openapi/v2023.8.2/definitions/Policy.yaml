@@ -35,28 +35,34 @@ properties:
     type: string
     format: ""
     example: ""
-    description: ""
+    description: "Jurisdiction"
 
   industrySector:
     type: string
     format: ""
     example: ""
-    description: ""
+    description: "Industry sector"
 
   dataRetentionPeriodDays:
     type: integer
     format: ""
     example: ""
-    description: ""
+    description: "Data retention period in days"
 
   geographicRestriction:
     type: string
     format: ""
     example: ""
-    description: ""
+    description: "Geographic restriction"
 
   storageLocation:
     type: string
     format: ""
     example: ""
-    description: ""
+    description: "Storage location"
+
+  thirdPartyDataSharing:
+    type: string
+    format: ""
+    example: ""
+    description: "Third party data sharing"
