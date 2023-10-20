@@ -1,0 +1,108 @@
+/uma/.well-known/uma2-configuration:
+    get:
+      deprecated: true
+      tags:
+       - UMA Configuration
+      description: Endpoint for discovering information about the UMA provider configuration.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "./definitions/Uma2WellknownConfiguration.yaml"
+/uma/jwk_uri:
+  get:
+    deprecated: true
+    tags:
+      - UMA Configuration
+    description: Endpoint for jwks_uri
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json: {}
+/uma/permission_request:
+  post:
+    deprecated: true
+    tags:
+      - UMA Grant Flow
+    description: >-
+      The resource server contacts the authorization server to acquire a
+      permission ticket. The permission ticket associates a request for a
+      particular resource with the corresponding scopes.
+        The PAT bearer token of the resource owner obtaine in Step 1 is used to map the request to the correct identity.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              resource_id: '{{UMA_resource_ID}}'
+              resource_scopes:
+                - download
+    security:
+      - bearerAuth: []
+    responses:
+      '201':
+        description: Successful response
+        content:
+          application/json: {}
+/uma/access_token:
+  post:
+    deprecated: true
+    tags:
+      - UMA Grant Flow
+    description: Acquire a RPT on behalf of the resource owner.
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            properties:
+              grant_type:
+                type: string
+                example: urn:ietf:params:oauth:grant-type:uma-ticket
+              ticket:
+                type: string  
+                example: Permission ticket obtained from /uma/permission_request end point
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json: {}
+/uma/revoke:
+  post:
+    deprecated: true
+    tags:
+      - UMA Grant Flow
+    description: Endpoint for revoking token
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            properties:
+              token:
+                type: string
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json: {}
+/uma/introspect:
+  post:
+    deprecated: true
+    tags:
+      - UMA Grant Flow
+    description: Endpoint for introspecting token
+    requestBody:
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            properties:
+              token:
+                type: string
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json: {}
