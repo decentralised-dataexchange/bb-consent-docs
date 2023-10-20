@@ -1,51 +1,30 @@
-description: LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter,
-  query if consent exists.
+description: LIST - Fetch data agreement records (latest revision).
 operationId: serviceVerificationConsentRecordList
 parameters:
-- description: Requested index for start of resources to be provided in response requested
-    by client
-  in: query
-  name: offset
-  required: false
-  schema:
-    type: integer
-- description: Requested number of resources to be provided in response requested
-    by client
-  in: query
-  name: limit
-  required: false
-  schema:
-    type: integer
-requestBody:
-  content:
-    application/json:
-      schema:
-        properties:
-          consentRecordFilter:
-            $ref: ../definitions/ConsentRecordFilter.yaml
-            description: An object of type ConsentRecordFilter
-        required:
-        - consentRecordFilter
-        type: object
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-          type: array
-    description: ''
-  '400':
+          type: object
+          properties:
+            dataAgreementRecords:
+              type: array
+              items:
+                $ref: ../definitions/DataAgreementRecord.yaml
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter,
-  query if consent exists.
+summary: LIST - Fetch data agreement records (latest revision)
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
 x-specification-scenario: 3.1, 1.2
 x-specification-usecase: UC-C-PIC-A-003

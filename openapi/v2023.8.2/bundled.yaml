@@ -1156,7 +1156,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/config/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      description: LIST - Fetch all data attributes for the data agreement
+      description: READ - Read all data attributes for the data agreement
       operationId: configListDataAttribute
       parameters:
         - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
@@ -1182,7 +1182,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all data attributes for the data agreement
+      summary: READ - Read all data attributes for the data agreement
       tags:
         - config
       x-specification-crudl-model: DataAttribute
@@ -3362,9 +3362,42 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /service/data-agreements:
+    get:
+      description: LIST - List active data agreements
+      operationId: serviceAgreementList
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreements:
+                    items:
+                      $ref: '#/components/schemas/DataAgreement'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List active data agreements
+      tags:
+        - service
+      x-specification-crudl-model: DataAgreement
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetches the latest version of an DataAgreement
+      description: READ - Read data agreement
       operationId: serviceAgreementRead
       parameters:
         - description: Unique ID of an object
@@ -3378,17 +3411,20 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/DataAgreement'
-                    - $ref: '#/components/schemas/Revision'
                 type: array
+                items:
+                  type: object
+                  properties:
+                    dataAgreement:
+                      $ref: '#/components/schemas/DataAgreement'
+                    revision:
+                      $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetches the latest version of an DataAgreement
+      summary: READ - Read data agreement
       tags:
         - service
       x-specification-crudl-model: DataAgreement
@@ -3397,11 +3433,241 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/service/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      description: READ - Fetch all latest versions of AgreementData associated with an DataAgreement and the presented revisionId of that DataAgreement
+      description: READ - Fetch all latest versions of data attribute associated with an DataAgreement and the presented revisionId of that DataAgreement
       operationId: serviceAgreementDataRead
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAttributes:
+                    items:
+                      $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch all data attributes for data agreement
+      tags:
+        - service
+      x-specification-crudl-model: AgreementData
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/policy/{policyId}':
+    get:
+      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
+      operationId: servicePolicyRead
       parameters:
         - description: Unique ID of an object
           in: path
+          name: policyId
+          required: true
+          schema:
+            type: string
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  policy:
+                    $ref: '#/components/schemas/Policy'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read policy
+      tags:
+        - service
+      x-specification-crudl-model: Policy
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
+  /service/verification/data-agreements:
+    get:
+      description: LIST - Fetch all data agreement records
+      operationId: serviceVerificationAgreementList
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreementRecords:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetch all data agreement records
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: '1.1'
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/verification/data-agreement/{dataAgreementId}':
+    get:
+      description: READ - Fetch a data agreement record (latest revision). The individualId is supplied as HTTP header.
+      operationId: serviceVerificationAgreementConsentRecordRead
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Fetch a data agreement record (latest revision)
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-A-003
+  /service/verification/data-agreement-records:
+    get:
+      description: LIST - Fetch data agreement records (latest revision).
+      operationId: serviceVerificationConsentRecordList
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreementRecords:
+                    type: array
+                    items:
+                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - Fetch data agreement records (latest revision)
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '3.1, 1.2'
+      x-specification-usecase: UC-C-PIC-A-003
+  '/service/individual/record/data-agreement/{dataAgreementId}':
+    post:
+      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement.'
+      operationId: serviceCreateIndividualConsentRecord
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+        - description: Unique ID of an object
+          in: path
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: CREATE - Create a data agreement record
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+    get:
+      description: READ - Read data agreement record. There should be one unambiguous DataAgreementRecord for an Individual and an DataAgreement.
+      operationId: serviceReadIndividualRecordRead
+      parameters:
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Read data agreement record
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-001
+  /service/individual/record/data-agreement-record/draft:
+    post:
+      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
+      operationId: serviceCreateIndividualConsentRecordDraft
+      parameters:
+        - description: An object with id individualId
+          in: query
+          name: individualId
+          required: true
+          schema:
+            type: string
+        - description: An object with id dataAgreementId
+          in: query
           name: dataAgreementId
           required: true
           schema:
@@ -3417,59 +3683,136 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/AgreementData'
-                type: array
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  signature:
+                    $ref: '#/components/schemas/Signature'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch all latest versions of AgreementData associated with an DataAgreement and the presented revisionId of that DataAgreement
+      summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       tags:
         - service
-      x-specification-crudl-model: AgreementData
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
-  /service/individual:
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
+  /service/individual/record/data-agreement-record:
     post:
-      description: CREATE - Create an individual in the consent system
-      operationId: serviceIndividualCreate
+      description: CREATE - Create a paired data agreement record and signature object. Returns the same objects with the PK defined.
+      operationId: serviceCreateIndividualConsentRecordAndSignature
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
               properties:
-                individual:
-                  $ref: '#/components/schemas/Individual'
-                  description: An object of type Individual
+                dataAgreementRecord:
+                  $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  description: An object of type DataAgreementRecord
+                signature:
+                  $ref: '#/components/schemas/Signature'
+                  description: An object of type Signature
               required:
-                - individual
+                - dataAgreementRecord
+                - signature
               type: object
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Individual'
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    type: object
+                    title: DataAgreementRecord
+                    description: 'A data agreement record expresses consent (as defined in this building block''s specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)'
+                    x-not-in-database: false
+                    required:
+                      - id
+                      - agreementRevisionHash
+                      - state
+                    properties:
+                      id:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
+                      dataAgreementId:
+                        type: string
+                        x-fk-model: DataAgreement
+                        description: The DataAgreement to which consent has been given
+                      dataAgreementRevisionId:
+                        type: string
+                        x-fk-model: Revision
+                        description: The Revision of the data agreement which consent has been given to
+                      dataAgreementRevisionHash:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement.
+                      dataAttributes:
+                        type: array
+                        items:
+                          type: object
+                          title: DataAttributeIntegrity
+                          properties:
+                            dataAttributeId:
+                              type: string
+                              description: Data attribute id
+                            dataAttributeRevisionId:
+                              type: string
+                              x-fk-model: Revision
+                              description: The Revision of the data attribute which consent has been given to
+                            dataAttributeRevisionHash:
+                              type: string
+                              format: ''
+                              example: ''
+                              description: Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original data attribute.
+                      individualId:
+                        type: string
+                        x-fk-model: Individual
+                        description: The Individual who has signed this data agreement record
+                      optIn:
+                        type: boolean
+                        format: ''
+                        example: ''
+                        description: 'True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent).'
+                      state:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: 'The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed'
+                        enum:
+                          - unsigned
+                          - signed
+                      signatureId:
+                        type: string
+                        x-fk-model: Signature
+                        description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
+                  signature:
+                    $ref: '#/components/schemas/Signature'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create an individual in the consent system
+      summary: CREATE - Create a paired data agreement record and signature object
       tags:
         - service
-      x-specification-crudl-model: Individual
+      x-specification-crudl-model: ''
       x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-  /service/individual/data-agreement-records:
+      x-specification-scenario: '1.2'
+      x-specification-usecase: UC-C-PIC-I-002
     delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process. Individual ID supplied as HTTP header.'
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process.'
       operationId: serviceDeleteAllRecords
       parameters: []
       responses:
@@ -3479,7 +3822,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - Delete all data agreement records
+      summary: DELETE - Delete all data agreement records for an individual
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3487,30 +3830,24 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-003
     get:
-      description: LIST - Fetch all current unambiguous data agreement records stored for individualId supplied as HTTP header.
+      description: LIST - Fetch all current unambiguous data agreement records stored for individual
       operationId: serviceListIndividualConsentRecordList
       parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
+                type: object
+                properties:
+                  dataAgreementRecords:
+                    items:
+                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
           description: ''
         '400':
           description: bad input parameter
@@ -3523,52 +3860,9 @@ paths:
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-001
-  /service/individual/record/data-agreement-record:
-    post:
-      description: CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
-      operationId: serviceCreateIndividualConsentRecordAndSignature
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                consentRecord:
-                  $ref: '#/components/schemas/ConsentRecord'
-                  description: An object of type ConsentRecord
-                signature:
-                  $ref: '#/components/schemas/Signature'
-                  description: An object of type Signature
-              required:
-                - consentRecord
-                - signature
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Revision'
-                    - $ref: '#/components/schemas/Signature'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: CREATE - Create a paired consent record and signature object
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
   '/service/individual/record/data-agreement-record/{dataAgreementRecordId}':
     put:
-      description: UPDATE* - Update a particular data agreement record. The individualId supplied as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+      description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
       operationId: serviceUpdateIndividualConsentRecord
       parameters:
         - description: Unique ID of an object
@@ -3595,22 +3889,34 @@ paths:
           required: false
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                optIn:
+                  type: boolean
+                  format: ''
+                  example: ''
+                  description: 'True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent).'
+              type: object
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
+                type: object
+                properties:
+                  dataAgreementRecord:
+                    $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                  revision:
+                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE* - Update a particular data agreement record
+      summary: UPDATE* - Update a data agreement record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3633,7 +3939,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Signature'
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/Signature'
           description: ''
         '400':
           description: bad input parameter
@@ -3647,7 +3956,7 @@ paths:
       x-specification-scenario: ''
       x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
     put:
-      description: UPDATE - Updates a Signature object for a Consent Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Consent Record state.
+      description: UPDATE - Updates a Signature object for a Data Agreement Record. This is used to add a signature to an existing unsigned Signature object. Consent BB is responsible for updating the Data Agreement Record state.
       operationId: serviceUpdateIndividualConsentRecordSignature
       parameters:
         - description: Unique ID of an object
@@ -3672,477 +3981,55 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Signature'
+                type: object
+                properties:
+                  signature:
+                    $ref: '#/components/schemas/Signature'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Updates a Signature object for a Consent Record
+      summary: UPDATE - Updates a Signature object for a Data Agreement Record
       tags:
         - service
       x-specification-crudl-model: ''
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
-  '/service/individual/record/data-agreement/{dataAgreementId}':
-    get:
-      description: READ - Fetch the current record for data agreement. There should be one unambiguous ConsentRecord for an Individual and an DataAgreement. The individualId is supplied as HTTP header.
-      operationId: serviceReadIndividualRecordRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConsentRecord'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch the current record for data agreement
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-001
-    post:
-      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header.'
-      operationId: serviceCreateIndividualConsentRecord
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-        - description: An object with id individualId
-          in: query
-          name: individualId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: CREATE - Create a data agreement record
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
   '/service/individual/record/data-agreement/{dataAgreementId}/all':
     get:
-      description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
+      description: LIST - Fetch data agreement records given to a data agreement.
       operationId: serviceListIndividualAgreementConsentRecordList
       parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
+        - $ref: '#/paths/~1config~1data-agreement~1%7BdataAgreementId%7D~1revisions/get/parameters/0'
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
       responses:
         '200':
           content:
             application/json:
               schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
+                type: object
+                properties:
+                  dataAgreementRecords:
+                    items:
+                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                    type: array
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetches all data agreement records given to a data agreement
+      summary: LIST - Fetch data agreement records given to a data agreement
       tags:
         - service
       x-specification-crudl-model: ''
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-001
-  '/service/individual/{individualId}':
-    delete:
-      description: DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
-      operationId: serviceIndividualDelete
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: individualId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Individual'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: DELETE - Entirely removes an individual from the system and cascades necessary actions to related ConsentRecord objects
-      tags:
-        - service
-      x-specification-crudl-model: Individual
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-    get:
-      description: READ - Fetch an Individual in the Consent system
-      operationId: serviceIndividualRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: individualId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Individual'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch an Individual in the Consent system
-      tags:
-        - service
-      x-specification-crudl-model: Individual
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-    put:
-      description: UPDATE - Updates an Individual in the Consent system
-      operationId: serviceIndividualUpdate
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: individualId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                individual:
-                  $ref: '#/components/schemas/Individual'
-                  description: An object of type Individual
-              required:
-                - individual
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Individual'
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: UPDATE - Updates an Individual in the Consent system
-      tags:
-        - service
-      x-specification-crudl-model: Individual
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-  /service/individuals:
-    get:
-      description: LIST - List all individuals in the system
-      operationId: serviceIndividualList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Individual'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - List all individuals in the system
-      tags:
-        - service
-      x-specification-crudl-model: Individual
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
-  '/service/policy/{policyId}':
-    get:
-      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
-      operationId: servicePolicyRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: policyId
-          required: true
-          schema:
-            type: string
-        - description: An object with id revisionId
-          in: query
-          name: revisionId
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Policy'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
-      tags:
-        - service
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
-  /service/verification/data-agreement-records:
-    post:
-      description: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
-      operationId: serviceVerificationConsentRecordList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                consentRecordFilter:
-                  $ref: '#/components/schemas/ConsentRecordFilter'
-                  description: An object of type ConsentRecordFilter
-              required:
-                - consentRecordFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: 'LIST - Fetch consent records (latest revision). For a given ConsentRecordFilter, query if consent exists.'
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '3.1, 1.2'
-      x-specification-usecase: UC-C-PIC-A-003
-  '/service/verification/data-agreement/{dataAgreementId}':
-    get:
-      description: READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
-      operationId: serviceVerificationAgreementConsentRecordRead
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: dataAgreementId
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                    - $ref: '#/components/schemas/Revision'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: READ - Fetch a specific data agreement record (latest revision)
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-A-003
-  /service/verification/data-agreements:
-    get:
-      description: LIST - Fetch all consent records
-      operationId: serviceVerificationAgreementList
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetch all consent records
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: '1.1'
-      x-specification-usecase: UC-C-PIC-A-003
-    post:
-      description: LIST - Fetch consent records for supplied AgreementFilter
-      operationId: serviceVerificationAgreementListFilter
-      parameters:
-        - description: Requested index for start of resources to be provided in response requested by client
-          in: query
-          name: offset
-          required: false
-          schema:
-            type: integer
-        - description: Requested number of resources to be provided in response requested by client
-          in: query
-          name: limit
-          required: false
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                agreementFilter:
-                  $ref: '#/components/schemas/AgreementFilter'
-                  description: An object of type AgreementFilter
-              required:
-                - agreementFilter
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/ConsentRecord'
-                type: array
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: LIST - Fetch consent records for supplied AgreementFilter
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: '1.1'
-      x-specification-usecase: UC-C-PIC-A-003
   /audit/admin/logs:
     get:
       operationId: auditAdminLogs

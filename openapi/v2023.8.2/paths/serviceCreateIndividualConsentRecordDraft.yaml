@@ -25,11 +25,12 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-            - $ref: ../definitions/Signature.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: ../definitions/DataAgreementRecord.yaml
+            signature:
+              $ref: ../definitions/Signature.yaml
     description: ''
   '400':
     description: bad input parameter

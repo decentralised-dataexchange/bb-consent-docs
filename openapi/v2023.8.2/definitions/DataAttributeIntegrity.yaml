@@ -1,0 +1,18 @@
+type: object
+title: DataAttributeIntegrity
+properties:
+  dataAttributeId:
+    type: string
+    description: "Data attribute id"
+
+  dataAttributeRevisionId:
+    type: string
+    x-fk-model: "Revision"
+    description: "The Revision of the data attribute which consent has been given to"
+
+  dataAttributeRevisionHash:
+    type: string
+    format: ""
+    example: ""
+    description: "Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original data attribute."
+  

@@ -12,7 +12,10 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ../definitions/Signature.yaml
+          type: object
+          properties:
+            signature:
+              $ref: ../definitions/Signature.yaml
     description: ''
   '400':
     description: bad input parameter

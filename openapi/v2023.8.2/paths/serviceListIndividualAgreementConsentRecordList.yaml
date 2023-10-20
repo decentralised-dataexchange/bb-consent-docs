@@ -1,44 +1,31 @@
-description: LIST - Fetches all data agreement records given to a data agreement. The individualId is supplied as header.
+description: LIST - Fetch data agreement records given to a data agreement.
 operationId: serviceListIndividualAgreementConsentRecordList
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
-- description: Requested index for start of resources to be provided in response requested
-    by client
-  in: query
-  name: offset
-  required: false
-  schema:
-    type: integer
-- description: Requested number of resources to be provided in response requested
-    by client
-  in: query
-  name: limit
-  required: false
-  schema:
-    type: integer
+  - $ref: "../parameters/dataAgreementId.yaml"
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-          type: array
-    description: ''
-  '400':
+          type: object
+          properties:
+            dataAgreementRecords:
+              items:
+                $ref: ../definitions/DataAgreementRecord.yaml
+              type: array
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetches all data agreement records given to a data agreement
+summary: LIST - Fetch data agreement records given to a data agreement
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-I-001

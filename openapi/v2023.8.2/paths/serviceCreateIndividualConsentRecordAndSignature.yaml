@@ -1,4 +1,4 @@
-description: CREATE - Create a paired consent record and signature object. Returns
+description: CREATE - Create a paired data agreement record and signature object. Returns
   the same objects with the PK defined.
 operationId: serviceCreateIndividualConsentRecordAndSignature
 parameters: []
@@ -7,14 +7,14 @@ requestBody:
     application/json:
       schema:
         properties:
-          consentRecord:
-            $ref: ../definitions/ConsentRecord.yaml
-            description: An object of type ConsentRecord
+          dataAgreementRecord:
+            $ref: ../definitions/DataAgreementRecord.yaml
+            description: An object of type DataAgreementRecord
           signature:
             $ref: ../definitions/Signature.yaml
             description: An object of type Signature
         required:
-        - consentRecord
+        - dataAgreementRecord
         - signature
         type: object
 responses:
@@ -22,18 +22,20 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-            - $ref: ../definitions/Revision.yaml
-            - $ref: ../definitions/Signature.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: ../definitions/DataAgreementRecord.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
+            signature:
+              $ref: ../definitions/Signature.yaml
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a paired consent record and signature object
+summary: CREATE - Create a paired data agreement record and signature object
 tags:
 - service
 x-specification-crudl-model: ''

@@ -1,14 +1,15 @@
-description: UPDATE - Updates a Signature object for a Consent Record. This is used
+description:
+  UPDATE - Updates a Signature object for a Data Agreement Record. This is used
   to add a signature to an existing unsigned Signature object. Consent BB is responsible
-  for updating the Consent Record state.
+  for updating the Data Agreement Record state.
 operationId: serviceUpdateIndividualConsentRecordSignature
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementRecordId
-  required: true
-  schema:
-    type: string
+  - description: Unique ID of an object
+    in: path
+    name: dataAgreementRecordId
+    required: true
+    schema:
+      type: string
 requestBody:
   content:
     application/json:
@@ -18,23 +19,26 @@ requestBody:
             $ref: ../definitions/Signature.yaml
             description: An object of type Signature
         required:
-        - signature
+          - signature
         type: object
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          $ref: ../definitions/Signature.yaml
-    description: ''
-  '400':
+          type: object
+          properties:
+            signature:
+              $ref: ../definitions/Signature.yaml
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Updates a Signature object for a Consent Record
+summary: UPDATE - Updates a Signature object for a Data Agreement Record
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: ""
 x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare

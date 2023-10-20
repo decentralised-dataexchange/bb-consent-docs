@@ -1,13 +1,7 @@
-description: UPDATE* - Update a particular data agreement record. The individualId supplied
-  as HTTP header. Note that updating a signed Consent Record invalidates its signature.
+description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementRecordId
-  required: true
-  schema:
-    type: string
+- $ref: "../parameters/dataAgreementRecordId.yaml"
 - description: An object with id individualId
   in: query
   name: individualId
@@ -26,22 +20,34 @@ parameters:
   required: false
   schema:
     type: string
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          optIn:
+            type: boolean
+            format: ""
+            example: ""
+            description: "True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent)."
+        type: object
 responses:
   '200':
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-            - $ref: ../definitions/Revision.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: ../definitions/DataAgreementRecord.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE* - Update a particular data agreement record
+summary: UPDATE* - Update a data agreement record
 tags:
 - service
 x-specification-crudl-model: ''

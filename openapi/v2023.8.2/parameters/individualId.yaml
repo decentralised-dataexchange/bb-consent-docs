@@ -1,0 +1,6 @@
+description: Unique ID of an object
+in: path
+name: individualId
+required: true
+schema:
+  type: string

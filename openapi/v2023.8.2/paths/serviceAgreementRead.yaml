@@ -1,4 +1,4 @@
-description: READ - Fetches the latest version of an DataAgreement
+description: READ - Read data agreement
 operationId: serviceAgreementRead
 parameters:
 - description: Unique ID of an object
@@ -12,17 +12,20 @@ responses:
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/DataAgreement.yaml
-            - $ref: ../definitions/Revision.yaml
           type: array
+          items:
+            type: object
+            properties:
+              dataAgreement:
+                $ref: ../definitions/DataAgreement.yaml
+              revision:
+                $ref: ../definitions/Revision.yaml
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetches the latest version of an DataAgreement
+summary: READ - Read data agreement
 tags:
 - service
 x-specification-crudl-model: DataAgreement

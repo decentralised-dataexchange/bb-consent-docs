@@ -1,35 +1,27 @@
-description: LIST - Fetch all consent records
+description: LIST - Fetch all data agreement records
 operationId: serviceVerificationAgreementList
 parameters:
-- description: Requested index for start of resources to be provided in response requested
-    by client
-  in: query
-  name: offset
-  required: false
-  schema:
-    type: integer
-- description: Requested number of resources to be provided in response requested
-    by client
-  in: query
-  name: limit
-  required: false
-  schema:
-    type: integer
+- $ref: "../parameters/offset.yaml"
+- $ref: "../parameters/limit.yaml"
 responses:
   '200':
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecords:
+              type: array
+              items:
+                $ref: ../definitions/DataAgreementRecord.yaml
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all consent records
+summary: LIST - Fetch all data agreement records
 tags:
 - service
 x-specification-crudl-model: ''

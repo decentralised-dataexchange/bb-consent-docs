@@ -1,7 +1,7 @@
 description: DELETE - Cascading delete operation for Right To Be Forgotten, deletes
   all data agreement records that shall not be retained and have a "forgettable" DataAgreement.
   May also delete an unsigned data agreement record, for instance in cases where the user
-  exits the signing process. Individual ID supplied as HTTP header.
+  exits the signing process.
 operationId: serviceDeleteAllRecords
 parameters: []
 responses:
@@ -11,7 +11,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Delete all data agreement records
+summary: DELETE - Delete all data agreement records for an individual
 tags:
 - service
 x-specification-crudl-model: ''

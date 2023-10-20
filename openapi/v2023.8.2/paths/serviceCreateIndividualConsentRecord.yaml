@@ -1,36 +1,22 @@
 description:
   CREATE - For a particular individual and a particular data agreement, create
-  a new data agreement record pointing to the current revision of a given data agreement. The individualId supplied as HTTP header.
+  a new data agreement record pointing to the current revision of a given data agreement.
 operationId: serviceCreateIndividualConsentRecord
 parameters:
-  - description: Unique ID of an object
-    in: path
-    name: dataAgreementId
-    required: true
-    schema:
-      type: string
-  - description: An object with id individualId
-    in: query
-    name: individualId
-    required: true
-    schema:
-      type: string
-  - description: An object with id revisionId
-    in: query
-    name: revisionId
-    required: false
-    schema:
-      type: string
+  - $ref: "../parameters/dataAgreementId.yaml"
+  - $ref: "../parameters/individualId.yaml"
+  - $ref: "../parameters/revisionId.yaml"
 responses:
   "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-              - $ref: ../definitions/ConsentRecord.yaml
-              - $ref: ../definitions/Revision.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: ../definitions/DataAgreementRecord.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
     description: ""
   "400":
     description: bad input parameter

@@ -1,31 +1,21 @@
-description: LIST - Fetch all current unambiguous data agreement records stored for individualId supplied as HTTP header.
+description: LIST - Fetch all current unambiguous data agreement records stored for individual
 operationId: serviceListIndividualConsentRecordList
 parameters:
-  - description:
-      Requested index for start of resources to be provided in response requested
-      by client
-    in: query
-    name: offset
-    required: false
-    schema:
-      type: integer
-  - description:
-      Requested number of resources to be provided in response requested
-      by client
-    in: query
-    name: limit
-    required: false
-    schema:
-      type: integer
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
 responses:
   "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-              - $ref: ../definitions/ConsentRecord.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecords:
+              items:
+                $ref: ../definitions/DataAgreementRecord.yaml
+              type: array
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
     description: ""
   "400":
     description: bad input parameter

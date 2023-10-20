@@ -1,39 +1,28 @@
-description: READ - Fetch the latest version of a Policy and the presented revisionId
-  of an associated DataAgreement
+description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
 operationId: servicePolicyRead
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: policyId
-  required: true
-  schema:
-    type: string
-- description: An object with id revisionId
-  in: query
-  name: revisionId
-  required: false
-  schema:
-    type: string
+  - $ref: "../parameters/policyId.yaml"
+  - $ref: "../parameters/revisionId.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/Policy.yaml
-            - $ref: ../definitions/Revision.yaml
-          type: array
-    description: ''
-  '400':
+          type: object
+          properties:
+            policy:
+              $ref: ../definitions/Policy.yaml
+            revision:
+              $ref: ../definitions/Revision.yaml
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch the latest version of a Policy and the presented revisionId
-  of an associated DataAgreement
+summary: READ - Read policy
 tags:
-- service
+  - service
 x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-A-003

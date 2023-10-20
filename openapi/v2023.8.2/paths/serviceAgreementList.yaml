@@ -1,7 +1,7 @@
-description: READ - Read all data attributes for the data agreement
-operationId: configListDataAttribute
+description: LIST - List active data agreements
+operationId: serviceAgreementList
 parameters:
-  - $ref: "../parameters/dataAgreementId.yaml"
+  - $ref: "../parameters/revisionId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
 responses:
@@ -11,11 +11,9 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreement:
-              $ref: ../definitions/DataAgreement.yaml
-            dataAttributes:
+            dataAgreements:
               items:
-                $ref: ../definitions/DataAttribute.yaml
+                $ref: ../definitions/DataAgreement.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"
@@ -24,10 +22,10 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read all data attributes for the data agreement
+summary: LIST - List active data agreements
 tags:
-  - config
-x-specification-crudl-model: DataAttribute
+  - service
+x-specification-crudl-model: DataAgreement
 x-specification-pii-or-sensitive: "False"
 x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-A-003

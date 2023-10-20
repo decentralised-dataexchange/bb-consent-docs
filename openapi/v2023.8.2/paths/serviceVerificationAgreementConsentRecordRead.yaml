@@ -1,28 +1,24 @@
-description: READ - Fetch a specific data agreement record (latest revision). The individualId is supplied as HTTP header.
+description: READ - Fetch a data agreement record (latest revision). The individualId is supplied as HTTP header.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
+- $ref: "../parameters/dataAgreementId.yaml"
 responses:
   '200':
     content:
       application/json:
         schema:
-          items:
-            oneOf:
-            - $ref: ../definitions/ConsentRecord.yaml
-            - $ref: ../definitions/Revision.yaml
-          type: array
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: "../definitions/DataAgreementRecord.yaml"
+            revision:
+              $ref: "../definitions/Revision.yaml"
     description: ''
   '400':
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a specific data agreement record (latest revision)
+summary: READ - Fetch a data agreement record (latest revision)
 tags:
 - service
 x-specification-crudl-model: ''

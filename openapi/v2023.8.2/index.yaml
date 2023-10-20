@@ -251,63 +251,63 @@ paths:
   /service/idp/open-id:
     get:
       $ref: ./paths/serviceReadIdp.yaml
+  /service/data-agreements:
+    get:
+      $ref: ./paths/serviceAgreementList.yaml
   /service/data-agreement/{dataAgreementId}:
     get:
       $ref: ./paths/serviceAgreementRead.yaml
   /service/data-agreement/{dataAgreementId}/data-attributes:
     get:
-      $ref: ./paths/serviceAgreementDataRead.yaml
-  /service/individual:
+      $ref: ./paths/serviceListDataAttributesForDataAgreement.yaml
+  /service/policy/{policyId}:
+    get:
+      $ref: ./paths/servicePolicyRead.yaml
+
+  /service/verification/data-agreements:
+    get:
+      $ref: ./paths/serviceVerificationAgreementList.yaml
+  /service/verification/data-agreement/{dataAgreementId}:
+    get:
+      $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml
+
+  /service/verification/data-agreement-records:
+    get:
+      $ref: ./paths/serviceVerificationConsentRecordList.yaml
+
+  /service/individual/record/data-agreement/{dataAgreementId}:
     post:
-      $ref: ./paths/serviceIndividualCreate.yaml
-  /service/individual/data-agreement-records:
+      $ref: ./paths/serviceCreateIndividualConsentRecord.yaml
+    get:
+      $ref: ./paths/serviceReadIndividualRecordRead.yaml
+  
+  /service/individual/record/data-agreement-record/draft:
+    post:
+      $ref: ./paths/serviceCreateIndividualConsentRecordDraft.yaml
+
+  /service/individual/record/data-agreement-record:
+    post:
+      $ref: ./paths/serviceCreateIndividualConsentRecordAndSignature.yaml
     delete:
       $ref: ./paths/serviceDeleteAllRecords.yaml
     get:
       $ref: ./paths/serviceListIndividualConsentRecordList.yaml
-  /service/individual/record/data-agreement-record:
-    post:
-      $ref: ./paths/serviceCreateIndividualConsentRecordAndSignature.yaml
+
   /service/individual/record/data-agreement-record/{dataAgreementRecordId}:
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecord.yaml
+  
   /service/individual/record/data-agreement-record/{dataAgreementRecordId}/signature:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordSignature.yaml
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecordSignature.yaml
-  /service/individual/record/data-agreement/{dataAgreementId}:
-    get:
-      $ref: ./paths/serviceReadIndividualRecordRead.yaml
-    post:
-      $ref: ./paths/serviceCreateIndividualConsentRecord.yaml
+  
   /service/individual/record/data-agreement/{dataAgreementId}/all:
     get:
       $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
-  /service/individual/{individualId}:
-    delete:
-      $ref: ./paths/serviceIndividualDelete.yaml
-    get:
-      $ref: ./paths/serviceIndividualRead.yaml
-    put:
-      $ref: ./paths/serviceIndividualUpdate.yaml
-  /service/individuals:
-    get:
-      $ref: ./paths/serviceIndividualList.yaml
-  /service/policy/{policyId}:
-    get:
-      $ref: ./paths/servicePolicyRead.yaml
-  /service/verification/data-agreement-records:
-    post:
-      $ref: ./paths/serviceVerificationConsentRecordList.yaml
-  /service/verification/data-agreement/{dataAgreementId}:
-    get:
-      $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml
-  /service/verification/data-agreements:
-    get:
-      $ref: ./paths/serviceVerificationAgreementList.yaml
-    post:
-      $ref: ./paths/serviceVerificationAgreementListFilter.yaml
+  
+
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml
