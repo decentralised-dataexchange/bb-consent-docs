@@ -2700,22 +2700,34 @@ paths:
                     properties:
                       id:
                         type: string
+                        description: Organisation Id
                       name:
                         type: string
+                        description: Name of the organisation
                       description:
                         type: string
+                        description: Overview for the organisation
+                      sector:
+                        type: string
+                        description: Sector
                       location:
                         type: string
+                        description: Location
                       policyUrl:
                         type: string
+                        description: Policy Url
                       coverImageId:
                         type: string
+                        description: Cover image Id
                       coverImageUrl:
                         type: string
+                        description: Cover image Url
                       logoImageId:
                         type: string
+                        description: Logo image Id
                       logoImageUrl:
                         type: string
+                        description: Logo image Url
                 required:
                   - organisation
                 type: object
