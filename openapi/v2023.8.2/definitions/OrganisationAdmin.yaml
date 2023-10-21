@@ -26,3 +26,7 @@ properties:
   avatarImageUrl:
     type: string
     description: "Avatar image Url"
+
+  lastVisited:
+    type: string
+    description: "Last visited date time"

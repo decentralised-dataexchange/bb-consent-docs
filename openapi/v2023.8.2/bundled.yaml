@@ -2514,6 +2514,9 @@ paths:
                       avatarImageUrl:
                         type: string
                         description: Avatar image Url
+                      lastVisited:
+                        type: string
+                        description: Last visited date time
           description: ''
         '400':
           description: bad input parameter
