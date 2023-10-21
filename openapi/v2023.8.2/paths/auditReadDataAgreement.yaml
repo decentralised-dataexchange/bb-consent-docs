@@ -1,27 +1,25 @@
 description: READ - Fetch a single data agreement.
 operationId: auditReadRecord
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
+  - $ref: "../parameters/dataAgreementId.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
-          $ref: ../definitions/DataAgreement.yaml
-    description: ''
-  '400':
+          type: object
+          properties:
+            dataAgreement:
+              $ref: ../definitions/DataAgreement.yaml
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: READ - Fetch a single data agreement.
 tags:
-- audit
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
+  - audit
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-AT-001, UC-C-PIC-AT-003

@@ -1,0 +1,13 @@
+description: Unique ID of an object
+in: query
+name: lawfulBasis
+schema:
+  type: string
+  description: "Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest"
+  enum:
+    - consent
+    - legal_obligation
+    - contract
+    - vital_interest
+    - public_task
+    - legitimate_interest

@@ -1,18 +1,16 @@
 description: READ - Fetch a single data agreement record
 operationId: auditConsentRecordRead
 parameters:
-  - description: Unique ID of an object
-    in: path
-    name: dataAgreementRecordId
-    required: true
-    schema:
-      type: string
+  - $ref: "../parameters/dataAgreementRecordId.yaml"
 responses:
   "200":
     content:
       application/json:
         schema:
-          $ref: ../definitions/DataAgreementRecord.yaml
+          type: object
+          properties:
+            dataAgreementRecord:
+              $ref: ../definitions/DataAgreementRecord.yaml
     description: ""
   "400":
     description: bad input parameter

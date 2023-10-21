@@ -1,0 +1,29 @@
+required:
+  - id
+  - organisationId
+  - dataAgreementId
+  - log
+  - timestamp
+type: object
+properties:
+  id:
+    type: string
+    description: Data agreement record history Id
+  organisationId:
+    type: string
+    description: Organisation Id
+  dataAgreementId:
+    type: string
+    description: Data agreement Id
+  log:
+    type: string
+    description: Log string
+  timestamp:
+    type: string
+    description: Timestamp in ISO 8601 date time format
+example:
+  id: 64e91591e2f6a8000142c665
+  organisationId: 603e683c69dd720001c74f93
+  dataAgreementId: 61e183127c81650001f97d43
+  log: Updated consent value to <Allow> for the purpose <Customer Loyalty Card Issuance> in organization <The Retail Company (Germany)>
+  timestamp: '2023-08-25T20:56:49Z'

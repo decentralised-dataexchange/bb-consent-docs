@@ -1,0 +1,34 @@
+description: LIST - Fetch all data agreement records
+operationId: auditDataAgreementRecordsList
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/lawfulBasisQueryParam.yaml"
+  - $ref: "../parameters/individualIdQueryParam.yaml"
+  - $ref: "../parameters/dataAgreementIdQueryParam.yaml"
+  - $ref: "../parameters/dataAgreementRecordIdQueryParam.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            dataAgreementRecords:
+              items:
+                $ref: ../definitions/DataAgreementRecord.yaml
+              type: array
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - Fetch all data agreement records
+tags:
+  - audit
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-AT-003

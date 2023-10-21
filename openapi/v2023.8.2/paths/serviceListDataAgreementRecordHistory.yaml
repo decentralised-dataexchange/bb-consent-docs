@@ -1,0 +1,23 @@
+operationId: serviceListDataAgreementRecordHistory
+tags:
+  - service
+description: LIST - Fetch all data agreement record history
+summary: LIST - Fetch all data agreement record history
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            dataAgreementRecordHistory:
+              $ref: "../definitions/DataAgreementRecordHistory.yaml"
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+deprecated: false
+security:
+  - BearerAuth: []

@@ -268,7 +268,7 @@ paths:
       $ref: ./paths/serviceCreateIndividualConsentRecord.yaml
     get:
       $ref: ./paths/serviceReadIndividualRecordRead.yaml
-  
+
   /service/individual/record/data-agreement-record/draft:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordDraft.yaml
@@ -284,27 +284,34 @@ paths:
   /service/individual/record/data-agreement-record/{dataAgreementRecordId}:
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecord.yaml
-  
+
   /service/individual/record/data-agreement-record/{dataAgreementRecordId}/signature:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordSignature.yaml
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecordSignature.yaml
-  
+
   /service/individual/record/data-agreement/{dataAgreementId}/all:
     get:
       $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
-  
-
+  /service/individual/record/data-agreement-record/history':
+    get:
+      $ref: "./paths/serviceListDataAgreementRecordHistory.yaml"
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml
+  /audit/data-agreement-records:
+    get:
+      $ref: "./paths/auditDataAgreementRecordsList.yaml"
   /audit/data-agreement-record/{dataAgreementRecordId}:
     get:
-      $ref: ./paths/auditConsentRecordRead.yaml
+      $ref: ./paths/auditDataAgreementRecordRead.yaml
+  /audit/data-agreements:
+    get:
+      $ref: "./paths/auditDataAgreementList.yaml"
   /audit/data-agreement/{dataAgreementId}:
     get:
-      $ref: ./paths/auditReadRecord.yaml
+      $ref: ./paths/auditReadDataAgreement.yaml
 servers:
   - description: Development server
     url: https://api.bb-consent.dev/v2
