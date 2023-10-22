@@ -21,7 +21,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all consent records for individual
+summary: LIST - Fetch all data agreement records for individual
 tags:
   - service
 x-specification-crudl-model: ""

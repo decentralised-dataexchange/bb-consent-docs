@@ -1,4 +1,4 @@
-description: LIST - Fetch consent records for supplied AgreementFilter
+description: LIST - Fetch data agreement records for supplied AgreementFilter
 operationId: serviceVerificationAgreementListFilter
 parameters:
 - description: Requested index for start of resources to be provided in response requested
@@ -40,7 +40,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch consent records for supplied AgreementFilter
+summary: LIST - Fetch data agreement records for supplied AgreementFilter
 tags:
 - service
 x-specification-crudl-model: ''

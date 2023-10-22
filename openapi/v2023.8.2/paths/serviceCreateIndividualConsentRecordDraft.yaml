@@ -1,4 +1,4 @@
-description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
+description: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without
   a PK) for a given dataAgreementId.
 operationId: serviceCreateIndividualConsentRecordDraft
 parameters:
@@ -36,7 +36,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
+summary: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without
   a PK) for a given dataAgreementId.
 tags:
 - service

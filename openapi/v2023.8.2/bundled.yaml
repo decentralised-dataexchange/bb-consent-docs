@@ -358,7 +358,7 @@ components:
         individual:
           $ref: '#/components/schemas/Individual'
           x-fk-model: Individual
-          description: The Individual who has signed this consent record
+          description: The Individual who has signed this data agreement record
         optIn:
           type: boolean
           format: ''
@@ -372,7 +372,7 @@ components:
         signature:
           $ref: '#/components/schemas/Signature'
           x-fk-model: Signature
-          description: 'A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+          description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
     ConsentRecordFilter:
       type: object
       title: ConsentRecordFilter
@@ -705,7 +705,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: 'A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)'
+          description: 'A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a data agreement record, an agreement, policy etc)'
     StatusReadiness:
       type: object
       description: This model is not stored in a database. It describes the status of the Building Block while running. Returns immediately. API should not be public.
@@ -3499,7 +3499,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/data-agreement-record/draft:
     post:
-      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
+      description: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without a PK) for a given dataAgreementId.
       operationId: serviceCreateIndividualConsentRecordDraft
       parameters:
         - description: An object with id individualId
@@ -3536,7 +3536,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
+      summary: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without a PK) for a given dataAgreementId.
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3695,7 +3695,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all consent records for individual
+      summary: LIST - Fetch all data agreement records for individual
       tags:
         - service
       x-specification-crudl-model: ''
