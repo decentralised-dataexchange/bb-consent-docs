@@ -5,6 +5,7 @@ required:
   - log
   - timestamp
 type: object
+title: "DataAgreementRecordHistory"
 properties:
   id:
     type: string
@@ -26,4 +27,4 @@ example:
   organisationId: 603e683c69dd720001c74f93
   dataAgreementId: 61e183127c81650001f97d43
   log: Updated consent value to <Allow> for the purpose <Customer Loyalty Card Issuance> in organization <The Retail Company (Germany)>
-  timestamp: '2023-08-25T20:56:49Z'
+  timestamp: "2023-08-25T20:56:49Z"
