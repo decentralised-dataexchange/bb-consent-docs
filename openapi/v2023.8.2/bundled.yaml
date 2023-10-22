@@ -3441,12 +3441,6 @@ paths:
       operationId: serviceCreateIndividualConsentRecord
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
-        - description: Unique ID of an object
-          in: path
-          name: individualId
-          required: true
-          schema:
-            type: string
         - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
       responses:
         '200':
