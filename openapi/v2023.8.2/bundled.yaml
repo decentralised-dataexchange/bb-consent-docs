@@ -1069,15 +1069,6 @@ paths:
                         format: ''
                         example: ''
                         description: Version of the data attribute
-                      agreements:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                            purpose:
-                              type: string
                       agreementIds:
                         type: array
                         items:
@@ -1235,7 +1226,19 @@ paths:
                 properties:
                   dataAttributes:
                     items:
-                      $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                      allOf:
+                        - $ref: '#/paths/~1config~1data-agreements~1data-attribute/post/responses/200/content/application~1json/schema/properties/dataAttribute'
+                        - type: object
+                          properties:
+                            dataAgreements:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  purpose:
+                                    type: string
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'

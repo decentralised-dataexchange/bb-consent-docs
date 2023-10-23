@@ -14,7 +14,12 @@ responses:
           properties:
             dataAttributes:
               items:
-                $ref: ../definitions/DataAttribute.yaml
+                allOf:
+                  - $ref: ../definitions/DataAttribute.yaml
+                  - type: object
+                    properties:
+                      dataAgreements:
+                        $ref: ../definitions/DataAttributeExtras.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"
