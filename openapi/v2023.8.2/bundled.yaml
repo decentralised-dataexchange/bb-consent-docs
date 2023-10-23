@@ -2330,6 +2330,39 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
+  /config/idp/open-ids:
+    post:
+      tags:
+        - config
+      summary: LIST - List IDP
+      operationId: configListIdp
+      description: LIST - List IDP
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      x-specification-usecase: ''
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-crudl-model: IDP
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idps:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/paths/~1config~1idp~1open-id~1%7BidpId%7D/delete/responses/200/content/application~1json/schema'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
   /config/admin/apikey:
     post:
       description: CREATE - Create an API key

@@ -1,0 +1,34 @@
+tags:
+  - config
+summary: "LIST - List IDP"
+operationId: "configListIdp"
+description: "LIST - List IDP"
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+
+x-specification-usecase: ""
+x-specification-scenario: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-crudl-model: "IDP"
+responses:
+  "200":
+    description: ""
+
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            idps:
+              type: array
+              items:
+                allOf:
+                  - $ref: "../definitions/IDP.yaml"
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
