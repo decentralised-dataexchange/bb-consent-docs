@@ -2372,7 +2372,12 @@ paths:
       description: UPDATE - Update an API key
       operationId: configUpdateApiKey
       parameters:
-        - $ref: '#/paths/~1onboard~1admin/put/parameters/0'
+        - description: Unique ID of an object
+          in: path
+          name: apiKeyId
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -2409,7 +2414,7 @@ paths:
       description: DELETE - Deletes an API key DataAgreement.
       operationId: configDeletePolicy
       parameters:
-        - $ref: '#/paths/~1onboard~1admin/put/parameters/0'
+        - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/put/parameters/0'
       responses:
         '200':
           content:
@@ -2463,13 +2468,6 @@ paths:
     put:
       description: UPDATE - Update organisation admin
       operationId: onboardUpdateAdmin
-      parameters:
-        - description: Unique ID of an object
-          in: path
-          name: apiKeyId
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           application/json:

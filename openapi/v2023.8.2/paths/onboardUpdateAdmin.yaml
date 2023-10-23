@@ -1,7 +1,5 @@
 description: UPDATE - Update organisation admin
 operationId: onboardUpdateAdmin
-parameters:
-  - $ref: "../parameters/apiKeyId.yaml"
 requestBody:
   content:
     application/json:
