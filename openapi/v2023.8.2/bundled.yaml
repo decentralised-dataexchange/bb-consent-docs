@@ -2363,6 +2363,36 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
+  /config/admin/apikeys:
+    get:
+      description: LIST - List all api keys
+      operationId: configListApiKey
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apiKeys:
+                    $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: LIST - List all api keys
+      tags:
+        - config
+      x-specification-crudl-model: ApiKey
+      x-specification-pii-or-sensitive: 'False'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-A-003
   /config/admin/apikey:
     post:
       description: CREATE - Create an API key

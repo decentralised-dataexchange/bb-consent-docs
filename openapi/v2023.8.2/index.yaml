@@ -175,6 +175,9 @@ paths:
   /config/idp/open-ids:
     post:
       $ref: "./paths/configListIdp.yaml"
+  /config/admin/apikeys:
+    get:
+      $ref: "./paths/configListApiKey.yaml"
   /config/admin/apikey:
     post:
       $ref: "./paths/configCreateApikey.yaml"

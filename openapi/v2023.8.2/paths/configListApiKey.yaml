@@ -1,0 +1,28 @@
+description: LIST - List all api keys
+operationId: configListApiKey
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            apiKeys:
+              $ref: ../definitions/ApiKey.yaml
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+    description: ""
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
+summary: LIST - List all api keys
+tags:
+  - config
+x-specification-crudl-model: ApiKey
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: ""
+x-specification-usecase: UC-C-PIC-A-003
