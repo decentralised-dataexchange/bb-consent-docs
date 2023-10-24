@@ -3981,23 +3981,23 @@ paths:
                       items:
                         type: object
                         properties:
-                          ID:
+                          id:
                             type: string
                             description: ID for organisation log
-                          Type:
+                          type:
                             type: integer
                             description: Type integer for organisation log
-                          TypeStr:
+                          typeStr:
                             type: string
                             description: Type string for organisation log
-                          UserID:
+                          userId:
                             type: string
                             description: User ID
-                          UserName:
+                          username:
                             type: string
-                          TimeStamp:
+                          timestamp:
                             type: string
-                          Log:
+                          log:
                             type: string
                     type: array
                   pagination:
