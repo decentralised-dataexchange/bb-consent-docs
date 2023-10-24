@@ -16,7 +16,9 @@ responses:
           properties:
             dataAgreementRecords:
               items:
-                $ref: ../definitions/DataAgreementRecord.yaml
+                allOf:
+                  - $ref: ../definitions/DataAgreementRecord.yaml
+                  - $ref: "../definitions/ListDataAgreementRecordExtras.yaml"
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"

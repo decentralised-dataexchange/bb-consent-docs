@@ -1,0 +1,23 @@
+type: object
+properties:
+  timestamp:
+    type: string
+  dataAgreement:
+    type: object
+    properties:
+      purpose:
+        type: string
+        description: Name of purpose
+
+      lawfulBasis:
+        type: string
+        format: ""
+        example: ""
+        description: "Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest"
+        enum:
+          - consent
+          - legal_obligation
+          - contract
+          - vital_interest
+          - public_task
+          - legitimate_interest

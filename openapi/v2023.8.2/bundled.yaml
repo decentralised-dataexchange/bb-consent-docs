@@ -4046,7 +4046,30 @@ paths:
                 properties:
                   dataAgreementRecords:
                     items:
-                      $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                      allOf:
+                        - $ref: '#/paths/~1service~1individual~1record~1data-agreement-record/post/responses/200/content/application~1json/schema/properties/dataAgreementRecord'
+                        - type: object
+                          properties:
+                            timestamp:
+                              type: string
+                            dataAgreement:
+                              type: object
+                              properties:
+                                purpose:
+                                  type: string
+                                  description: Name of purpose
+                                lawfulBasis:
+                                  type: string
+                                  format: ''
+                                  example: ''
+                                  description: Lawful basis of the agreement - consent / legal_obligation / contract / vital_interest / public_task / legitimate_interest
+                                  enum:
+                                    - consent
+                                    - legal_obligation
+                                    - contract
+                                    - vital_interest
+                                    - public_task
+                                    - legitimate_interest
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
