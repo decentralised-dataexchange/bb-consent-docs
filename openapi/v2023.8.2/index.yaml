@@ -186,6 +186,9 @@ paths:
       $ref: "./paths/configUpdateApiKey.yaml"
     delete:
       $ref: "./paths/configDeleteApiKey.yaml"
+  /config/privacy-dashboard:
+    get:
+      $ref: "./paths/configReadPrivacyDashboard.yaml"
   /onboard/admin:
     put:
       $ref: "./paths/onboardUpdateAdmin.yaml"
@@ -242,6 +245,12 @@ paths:
   /onboard/verify/phone:
     post:
       $ref: ./paths/verifyPhone.yaml
+  /service/organisation/coverimage:
+    get:
+      $ref: ./paths/serviceReadOrganisationCoverImage.yaml
+  /service/organisation/logoimage:
+    get:
+      $ref: ./paths/serviceReadOrganisationLogoImage.yaml
   /service/idp/open-id:
     get:
       $ref: ./paths/serviceReadIdp.yaml

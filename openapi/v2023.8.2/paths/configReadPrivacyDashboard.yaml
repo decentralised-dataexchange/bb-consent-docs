@@ -1,0 +1,25 @@
+deprecated: false
+description: Read privacy dashboard
+operationId: readPrivacyDashboard
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          properties:
+            hostName: 
+              type: string      
+            version:
+              type: string
+            state:
+              type: int
+            stateStr:
+              type: string
+          required:
+          - privacydashboard
+          type: object
+    description: OK
+security:
+- BearerAuth: []
+tags:
+- config
