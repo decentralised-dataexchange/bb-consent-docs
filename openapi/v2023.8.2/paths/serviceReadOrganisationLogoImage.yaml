@@ -1,0 +1,10 @@
+deprecated: false
+description: Read organization logo image
+operationId: serviceReadOrganisationLogoImage
+responses:
+  '200':
+    headers: {}
+security:
+- BearerAuth: []
+tags:
+- service

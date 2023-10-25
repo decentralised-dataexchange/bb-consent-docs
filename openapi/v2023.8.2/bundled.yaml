@@ -2527,6 +2527,33 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-004
+  /config/privacy-dashboard:
+    get:
+      deprecated: false
+      description: Read privacy dashboard
+      operationId: readPrivacyDashboard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  hostName:
+                    type: string
+                  version:
+                    type: string
+                  state:
+                    type: int
+                  stateStr:
+                    type: string
+                required:
+                  - privacydashboard
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - config
   /onboard/admin:
     put:
       description: UPDATE - Update organisation admin
@@ -3219,6 +3246,30 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+  /service/organisation/coverimage:
+    get:
+      deprecated: false
+      description: Read organization cover image
+      operationId: serviceReadOrganisationCoverImage
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - service
+  /service/organisation/logoimage:
+    get:
+      deprecated: false
+      description: Read organization logo image
+      operationId: serviceReadOrganisationLogoImage
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - service
   /service/idp/open-id:
     get:
       description: READ - Read an IDP
