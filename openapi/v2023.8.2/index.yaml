@@ -245,6 +245,9 @@ paths:
   /service/idp/open-id:
     get:
       $ref: ./paths/serviceReadIdp.yaml
+  /service/organisation:
+    get:
+      $ref: ./paths/serviceReadOrganisation.yaml
   /service/data-agreements:
     get:
       $ref: ./paths/serviceAgreementList.yaml

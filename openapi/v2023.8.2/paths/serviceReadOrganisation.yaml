@@ -1,0 +1,19 @@
+deprecated: false
+description: Read organization
+operationId: serviceReadOrganisation
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          properties:
+            organisation:
+              $ref: ../definitions/Organisation.yaml
+          required:
+          - organisation
+          type: object
+    description: OK
+security:
+- BearerAuth: []
+tags:
+- service
