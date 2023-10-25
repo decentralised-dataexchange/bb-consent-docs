@@ -3268,6 +3268,27 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-A-003
+  /service/organisation:
+    get:
+      deprecated: false
+      description: Read organization
+      operationId: readOrganisation
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  organisation:
+                    $ref: '#/paths/~1onboard~1organisation/get/responses/200/content/application~1json/schema/properties/organisation'
+                required:
+                  - organisation
+                type: object
+          description: OK
+      security:
+        - BearerAuth: []
+      tags:
+        - service
   /service/data-agreements:
     get:
       description: LIST - List active data agreements
