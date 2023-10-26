@@ -245,6 +245,9 @@ paths:
   /onboard/verify/phone:
     post:
       $ref: ./paths/verifyPhone.yaml
+  /onboard/status:
+    get:
+      $ref: ./paths/onboardReadStatus.yaml
   /service/organisation/coverimage:
     get:
       $ref: ./paths/serviceReadOrganisationCoverImage.yaml

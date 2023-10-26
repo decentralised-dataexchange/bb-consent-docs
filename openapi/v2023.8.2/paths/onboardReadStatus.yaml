@@ -1,0 +1,22 @@
+deprecated: false
+description: READ - Read status
+operationId: onboardReadStatus
+responses:
+  "200":
+    content:
+      application/json:
+        schema:
+          properties:
+            applicationMode: 
+              type: string      
+            version:
+              type: string
+            candidate:
+              type: string
+            revision:
+              type: string
+    description: OK
+security:
+  - BearerAuth: []
+tags:
+  - onboard
