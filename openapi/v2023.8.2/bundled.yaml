@@ -2538,7 +2538,7 @@ paths:
             application/json:
               schema:
                 properties:
-                  hostName:
+                  hostname:
                     type: string
                   version:
                     type: string
