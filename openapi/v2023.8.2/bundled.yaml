@@ -1212,7 +1212,7 @@ paths:
         - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-        - description: Unique ID of an object
+        - description: null/data_source/data_using_service
           in: query
           name: methodOfUse
           schema:
