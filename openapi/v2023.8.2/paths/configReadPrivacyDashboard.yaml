@@ -13,8 +13,16 @@ responses:
               type: string
             state:
               type: int
+              enum:
+                  - 0
+                  - 1
+                  - 2
             stateStr:
               type: string
+              enum:
+                  - Not Configured
+                  - Requested
+                  - Deployed
           required:
           - privacydashboard
           type: object
