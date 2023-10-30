@@ -4,9 +4,7 @@ parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
   - $ref: "../parameters/lawfulBasisQueryParam.yaml"
-  - $ref: "../parameters/individualIdQueryParam.yaml"
-  - $ref: "../parameters/dataAgreementIdQueryParam.yaml"
-  - $ref: "../parameters/dataAgreementRecordIdQueryParam.yaml"
+  - $ref: "../parameters/idQueryParam.yaml"
 responses:
   "200":
     content:

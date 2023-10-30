@@ -1,0 +1,5 @@
+description: ID contains indivitual id, data agreement id or data agreement record id
+in: query
+name: id
+schema:
+  type: string
