@@ -123,8 +123,6 @@ paths:
       $ref: ./paths/configReadIndividual.yaml
     put:
       $ref: ./paths/configUpdateIndividual.yaml
-    delete:
-      $ref: ./paths/configDeleteIndividual.yaml
   /config/individuals:
     get:
       $ref: ./paths/configListIndividuals.yaml
@@ -318,6 +316,17 @@ paths:
   /service/individual/record/data-agreement-record/history':
     get:
       $ref: "./paths/serviceListDataAgreementRecordHistory.yaml"
+  /service/individual:
+    post:
+      $ref: ./paths/serviceCreateIndividual.yaml
+  /service/individual/{individualId}:
+    get:
+      $ref: ./paths/serviceReadIndividual.yaml
+    put:
+      $ref: ./paths/serviceUpdateIndividual.yaml
+  /service/individuals:
+    get:
+      $ref: ./paths/serviceListIndividuals.yaml
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml
