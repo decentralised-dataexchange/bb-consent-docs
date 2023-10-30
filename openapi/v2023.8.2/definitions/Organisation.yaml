@@ -23,16 +23,4 @@ properties:
   policyUrl:
     type: string
     description: Policy Url
-  coverImageId:
-    type: string
-    description: Cover image Id
-  coverImageUrl:
-    type: string
-    description: Cover image Url
-  logoImageId:
-    type: string
-    description: Logo image Id
-  logoImageUrl:
-    type: string
-    description: Logo image Url
   

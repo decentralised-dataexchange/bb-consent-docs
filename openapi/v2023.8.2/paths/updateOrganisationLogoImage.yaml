@@ -16,18 +16,6 @@ requestBody:
   required: false
 responses:
   '200':
-    content:
-      application/json:
-        schema:
-          properties:
-            logoImageId:
-              type: string
-            logoImageUrl:
-              type: string
-          required:
-          - logoImageId
-          - logoImageUrl
-          type: object
     description: OK
 security:
 - BearerAuth: []
