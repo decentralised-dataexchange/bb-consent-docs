@@ -16,18 +16,6 @@ requestBody:
   required: false
 responses:
   '200':
-    content:
-      application/json:
-        schema:
-          properties:
-            coverImageId:
-              type: string
-            coverImageUrl:
-              type: string
-          required:
-          - coverImageId
-          - coverImageUrl
-          type: object
     description: OK
 security:
 - BearerAuth: []

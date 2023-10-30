@@ -2874,18 +2874,6 @@ paths:
                       policyUrl:
                         type: string
                         description: Policy Url
-                      coverImageId:
-                        type: string
-                        description: Cover image Id
-                      coverImageUrl:
-                        type: string
-                        description: Cover image Url
-                      logoImageId:
-                        type: string
-                        description: Logo image Id
-                      logoImageUrl:
-                        type: string
-                        description: Logo image Url
                 required:
                   - organisation
                 type: object
@@ -2965,18 +2953,6 @@ paths:
         required: false
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  coverImageId:
-                    type: string
-                  coverImageUrl:
-                    type: string
-                required:
-                  - coverImageId
-                  - coverImageUrl
-                type: object
           description: OK
       security:
         - BearerAuth: []
@@ -3013,18 +2989,6 @@ paths:
         required: false
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  logoImageId:
-                    type: string
-                  logoImageUrl:
-                    type: string
-                required:
-                  - logoImageId
-                  - logoImageUrl
-                type: object
           description: OK
       security:
         - BearerAuth: []
