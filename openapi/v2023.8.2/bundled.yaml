@@ -1669,39 +1669,6 @@ paths:
                   description: An object of type Individual
               required:
                 - individual
-    delete:
-      tags:
-        - config
-      summary: DELETE - Delete an individual
-      operationId: configDeleteIndividual
-      description: DELETE - entirely removes an individual from the system and cascades necessary actions to related DataAgreementRecord objects
-      parameters:
-        - in: path
-          name: individualId
-          description: Unique ID of an object
-          required: true
-          schema:
-            type: string
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: Individual
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  individual:
-                    allOf:
-                      - $ref: '#/components/schemas/Individual'
-                      - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
   /config/individuals:
     get:
       tags:
@@ -4045,6 +4012,162 @@ paths:
                   pagination:
                     $ref: '#/components/schemas/Pagination'
       deprecated: false
+      security:
+        - BearerAuth: []
+  /service/individual:
+    post:
+      tags:
+        - service
+      summary: CREATE - Create an individual
+      operationId: configCreatePolicy
+      description: CREATE - Creates an Individual in the Consent system
+      parameters: []
+      x-specification-usecase: ''
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-crudl-model: Individual
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  individual:
+                    allOf:
+                      - $ref: '#/components/schemas/Individual'
+                      - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+                    description: An object of type Individual
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                individual:
+                  allOf:
+                    - $ref: '#/components/schemas/Individual'
+                    - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+                  description: An object of type Individual
+              required:
+                - individual
+  '/service/individual/{individualId}':
+    get:
+      tags:
+        - service
+      summary: READ - Read an individual
+      operationId: configReadIndividual
+      description: READ - Fetch an Individual in the Consent system
+      parameters:
+        - in: path
+          name: individualId
+          description: Unique ID of an object
+          required: true
+          schema:
+            type: string
+      x-specification-usecase: ''
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-crudl-model: Individual
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  individual:
+                    allOf:
+                      - $ref: '#/components/schemas/Individual'
+                      - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+    put:
+      tags:
+        - service
+      summary: UPDATE - Update an individual
+      operationId: configUpdateIndividual
+      description: UPDATE - Updates an Individual in the Consent system
+      parameters:
+        - in: path
+          name: individualId
+          description: Unique ID of an object
+          required: true
+          schema:
+            type: string
+      x-specification-usecase: ''
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-crudl-model: Individual
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  individual:
+                    allOf:
+                      - $ref: '#/components/schemas/Individual'
+                      - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                individual:
+                  allOf:
+                    - $ref: '#/components/schemas/Individual'
+                    - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+                  description: An object of type Individual
+              required:
+                - individual
+  /service/individuals:
+    get:
+      tags:
+        - service
+      summary: LIST - List all individuals
+      operationId: configListIndividuals
+      description: LIST - lists individuals in the system
+      parameters:
+        - $ref: '#/paths/~1config~1policies/get/parameters/1'
+        - $ref: '#/paths/~1config~1policies/get/parameters/2'
+      x-specification-usecase: ''
+      x-specification-scenario: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-crudl-model: Individual
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  individuals:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/Individual'
+                        - $ref: '#/paths/~1config~1individual/post/requestBody/content/application~1json/schema/properties/individual/allOf/1'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          description: bad input parameter
       security:
         - BearerAuth: []
   /audit/admin/logs:

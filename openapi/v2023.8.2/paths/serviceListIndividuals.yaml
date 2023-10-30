@@ -1,0 +1,35 @@
+tags:
+  - service
+summary: "LIST - List all individuals"
+operationId: "configListIndividuals"
+description: "LIST - lists individuals in the system"
+parameters:
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+
+x-specification-usecase: ""
+x-specification-scenario: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-crudl-model: "Individual"
+responses:
+  "200":
+    description: ""
+
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            individuals:
+              type: array
+              items:
+                allOf:
+                  - $ref: "../definitions/Individual.yaml"
+                  - $ref: "../definitions/IndividualExtras.yaml"
+            pagination:
+              $ref: "../definitions/Pagination.yaml"
+
+  "400":
+    description: bad input parameter
+security:
+  - BearerAuth: []
