@@ -4120,19 +4120,9 @@ paths:
               - vital_interest
               - public_task
               - legitimate_interest
-        - description: Unique ID of an object
+        - description: 'ID contains indivitual id, data agreement id or data agreement record id'
           in: query
-          name: individualId
-          schema:
-            type: string
-        - description: Unique ID of an object
-          in: query
-          name: dataAgreementId
-          schema:
-            type: string
-        - description: Unique ID of an object
-          in: query
-          name: dataAgreementRecordId
+          name: id
           schema:
             type: string
       responses:
