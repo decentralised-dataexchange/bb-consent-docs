@@ -1,4 +1,4 @@
-description: LIST - Fetch data agreement records given to a data agreement.
+description: LIST - Fetch consent records given to a data agreement.
 operationId: serviceListIndividualAgreementConsentRecordList
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -11,9 +11,9 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecords:
+            consentRecords:
               items:
-                $ref: ../definitions/DataAgreementRecord.yaml
+                $ref: ../definitions/consentRecord.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"

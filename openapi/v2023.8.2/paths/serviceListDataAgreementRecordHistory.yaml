@@ -14,8 +14,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecordHistory:
-              $ref: "../definitions/DataAgreementRecordHistory.yaml"
+            consentRecordHistory:
+              $ref: "../definitions/ConsentRecordHistory.yaml"
             pagination:
               $ref: "../definitions/Pagination.yaml"
 deprecated: false

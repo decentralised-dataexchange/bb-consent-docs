@@ -12,8 +12,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: ../definitions/DataAgreementRecord.yaml
+            consentRecord:
+              $ref: ../definitions/consentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
     description: ""
@@ -21,7 +21,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a data agreement record
+summary: CREATE - Create a consent record
 tags:
   - service
 x-specification-crudl-model: ""

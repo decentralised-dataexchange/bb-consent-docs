@@ -1,7 +1,7 @@
 description: READ - Fetch a single data agreement record
 operationId: auditConsentRecordRead
 parameters:
-  - $ref: "../parameters/dataAgreementRecordId.yaml"
+  - $ref: "../parameters/consentRecordId.yaml"
 responses:
   "200":
     content:
@@ -9,8 +9,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: ../definitions/DataAgreementRecord.yaml
+            consentRecord:
+              $ref: ../definitions/consentRecord.yaml
     description: ""
   "400":
     description: bad input parameter

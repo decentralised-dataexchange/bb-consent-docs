@@ -5,7 +5,7 @@ required:
   - log
   - timestamp
 type: object
-title: "DataAgreementRecordHistory"
+title: "ConsentRecordHistory"
 properties:
   id:
     type: string

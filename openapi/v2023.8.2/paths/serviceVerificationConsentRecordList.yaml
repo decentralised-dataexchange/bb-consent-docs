@@ -10,10 +10,10 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecords:
+            consentRecords:
               type: array
               items:
-                $ref: ../definitions/DataAgreementRecord.yaml
+                $ref: ../definitions/consentRecord.yaml
             pagination:
               $ref: "../definitions/Pagination.yaml"
     description: ""

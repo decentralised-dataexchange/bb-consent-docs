@@ -278,7 +278,7 @@ paths:
     get:
       $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml
 
-  /service/verification/data-agreement-records:
+  /service/verification/consent-records:
     get:
       $ref: ./paths/serviceVerificationConsentRecordList.yaml
 
@@ -288,11 +288,11 @@ paths:
     get:
       $ref: ./paths/serviceReadIndividualRecordRead.yaml
 
-  /service/individual/record/data-agreement-record/draft:
+  /service/individual/record/consent-record/draft:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordDraft.yaml
 
-  /service/individual/record/data-agreement-record:
+  /service/individual/record/consent-record:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordAndSignature.yaml
     delete:
@@ -300,11 +300,11 @@ paths:
     get:
       $ref: ./paths/serviceListIndividualConsentRecordList.yaml
 
-  /service/individual/record/data-agreement-record/{dataAgreementRecordId}:
+  /service/individual/record/consent-record/{consentRecordId}:
     put:
       $ref: ./paths/serviceUpdateIndividualConsentRecord.yaml
 
-  /service/individual/record/data-agreement-record/{dataAgreementRecordId}/signature:
+  /service/individual/record/consent-record/{consentRecordId}/signature:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordSignature.yaml
     put:
@@ -313,7 +313,7 @@ paths:
   /service/individual/record/data-agreement/{dataAgreementId}/all:
     get:
       $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
-  /service/individual/record/data-agreement-record/history':
+  /service/individual/record/consent-record/history':
     get:
       $ref: "./paths/serviceListDataAgreementRecordHistory.yaml"
   /service/individual:
@@ -330,10 +330,10 @@ paths:
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml
-  /audit/data-agreement-records:
+  /audit/consent-records:
     get:
       $ref: "./paths/auditDataAgreementRecordsList.yaml"
-  /audit/data-agreement-record/{dataAgreementRecordId}:
+  /audit/consent-record/{consentRecordId}:
     get:
       $ref: ./paths/auditDataAgreementRecordRead.yaml
   /audit/data-agreements:

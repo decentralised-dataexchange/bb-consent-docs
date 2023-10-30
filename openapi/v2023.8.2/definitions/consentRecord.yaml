@@ -1,6 +1,6 @@
 type: object
-title: DataAgreementRecord
-description: "A data agreement record expresses consent (as defined in this building block's specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)"
+title: ConsentRecord
+description: "A consent record expresses consent (as defined in this building block's specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)"
 x-not-in-database: false
 
 required:
@@ -29,11 +29,6 @@ properties:
     format: ""
     example: ""
     description: "Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement."
-
-  dataAttributes:
-    type: array
-    items:
-      $ref: "./DataAttributeIntegrity.yaml"
 
   individualId:
     type: string

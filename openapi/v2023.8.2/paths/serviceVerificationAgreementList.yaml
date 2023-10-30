@@ -1,4 +1,4 @@
-description: LIST - Fetch all data agreement records
+description: LIST - Fetch all consent records
 operationId: serviceVerificationAgreementList
 parameters:
 - $ref: "../parameters/offset.yaml"
@@ -10,10 +10,10 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecords:
+            consentRecords:
               type: array
               items:
-                $ref: ../definitions/DataAgreementRecord.yaml
+                $ref: ../definitions/consentRecord.yaml
             pagination:
               $ref: "../definitions/Pagination.yaml"
     description: ''
@@ -21,7 +21,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all data agreement records
+summary: LIST - Fetch all consent records
 tags:
 - service
 x-specification-crudl-model: ''

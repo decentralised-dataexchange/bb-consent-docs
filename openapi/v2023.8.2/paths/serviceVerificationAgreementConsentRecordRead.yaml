@@ -9,8 +9,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: "../definitions/DataAgreementRecord.yaml"
+            consentRecord:
+              $ref: "../definitions/consentRecord.yaml"
             revision:
               $ref: "../definitions/Revision.yaml"
     description: ''
@@ -18,7 +18,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a data agreement record (latest revision)
+summary: READ - Fetch a consent record (latest revision)
 tags:
 - service
 x-specification-crudl-model: ''
