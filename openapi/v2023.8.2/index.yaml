@@ -83,22 +83,12 @@ paths:
   /config/data-agreement/{dataAgreementId}/data-attributes:
     get:
       $ref: ./paths/configListDataAttributesForDataAgreement.yaml
-  /config/data-agreements/data-attribute:
-    post:
-      $ref: ./paths/configCreateDataAttribute.yaml
   /config/data-agreements/data-attribute/{dataAttributeId}:
-    get:
-      $ref: ./paths/configReadDataAttribute.yaml
     put:
       $ref: ./paths/configUpdateDataAttribute.yaml
-    delete:
-      $ref: ./paths/configDeleteDataAttribute.yaml
   /config/data-agreements/data-attributes:
     get:
       $ref: ./paths/configListDataAttribute.yaml
-  /config/data-agreements/data-attribute/{dataAttributeId}/revisions:
-    get:
-      $ref: ./paths/configListDataAttributeRevisions.yaml
   /config/policy:
     post:
       $ref: ./paths/configCreatePolicy.yaml

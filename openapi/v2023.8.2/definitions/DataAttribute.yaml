@@ -12,18 +12,6 @@ properties:
     example: ""
     description: "Data attribute Id"
 
-  version:
-    type: string
-    format: ""
-    example: ""
-    description: "Version of the data attribute"
-
-  agreementIds:
-    type: array
-    items:
-      type: string
-    description: "Data agreement Ids"
-
   name:
     type: string
     format: ""
