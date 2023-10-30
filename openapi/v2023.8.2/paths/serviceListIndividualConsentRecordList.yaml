@@ -10,9 +10,9 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecords:
+            consentRecords:
               items:
-                $ref: ../definitions/DataAgreementRecord.yaml
+                $ref: ../definitions/consentRecord.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"
@@ -21,7 +21,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all data agreement records for individual
+summary: LIST - Fetch all consent records for individual
 tags:
   - service
 x-specification-crudl-model: ""

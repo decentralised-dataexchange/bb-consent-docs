@@ -1,7 +1,7 @@
 description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
-- $ref: "../parameters/dataAgreementRecordId.yaml"
+- $ref: "../parameters/consentRecordId.yaml"
 - description: An object with id individualId
   in: query
   name: individualId
@@ -38,8 +38,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: ../definitions/DataAgreementRecord.yaml
+            consentRecord:
+              $ref: ../definitions/consentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
     description: ''
@@ -47,7 +47,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE* - Update a data agreement record
+summary: UPDATE* - Update a consent record
 tags:
 - service
 x-specification-crudl-model: ''

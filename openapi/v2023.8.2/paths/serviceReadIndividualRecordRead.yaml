@@ -11,8 +11,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: ../definitions/DataAgreementRecord.yaml
+            consentRecord:
+              $ref: ../definitions/consentRecord.yaml
     description: ""
   "400":
     description: bad input parameter

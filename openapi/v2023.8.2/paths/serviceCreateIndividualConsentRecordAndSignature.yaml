@@ -7,14 +7,14 @@ requestBody:
     application/json:
       schema:
         properties:
-          dataAgreementRecord:
-            $ref: ../definitions/DataAgreementRecord.yaml
+          consentRecord:
+            $ref: ../definitions/consentRecord.yaml
             description: An object of type DataAgreementRecord
           signature:
             $ref: ../definitions/Signature.yaml
             description: An object of type Signature
         required:
-        - dataAgreementRecord
+        - consentRecord
         - signature
         type: object
 responses:
@@ -24,8 +24,8 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreementRecord:
-              $ref: ../definitions/DataAgreementRecord.yaml
+            consentRecord:
+              $ref: ../definitions/consentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
             signature:
@@ -35,7 +35,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a paired data agreement record and signature object
+summary: CREATE - Create a paired consent record and signature object
 tags:
 - service
 x-specification-crudl-model: ''

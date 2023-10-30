@@ -11,7 +11,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Delete all data agreement records for an individual
+summary: DELETE - Delete all consent records for an individual
 tags:
 - service
 x-specification-crudl-model: ''

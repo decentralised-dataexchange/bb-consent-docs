@@ -3,7 +3,7 @@ operationId: serviceCreateIndividualConsentRecordSignature
 parameters:
 - description: Unique ID of an object
   in: path
-  name: dataAgreementRecordId
+  name: consentRecordId
   required: true
   schema:
     type: string
