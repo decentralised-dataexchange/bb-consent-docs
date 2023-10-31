@@ -95,11 +95,43 @@ components:
           $ref: '#/components/schemas/Policy'
           description: |
             Policy under which this DataAgreement shall be governed.  When creating a data agreement, the latest policy can be used to fill the default value,  and organisation admin can decide to change it in data agreement level
-        dataAttribute:
-          $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/put/responses/200/content/application~1json/schema/properties/dataAttribute'
+        dataAttributes:
+          type: array
+          items:
+            type: object
+            description: Data attribute contains specifications of exactly what is collected.
+            x-not-in-database: false
+            required:
+              - name
+              - description
+            properties:
+              id:
+                type: string
+                format: ''
+                example: ''
+                description: Data attribute Id
+              name:
+                type: string
+                format: ''
+                example: ''
+                description: 'Name of the attribute, for instance "name" or "age"'
+              description:
+                type: string
+                format: ''
+                example: ''
+                description: Description of the attribute
+              sensitivity:
+                type: boolean
+                format: ''
+                example: ''
+                description: Sensitivity of data attribute
+              category:
+                type: string
+                format: ''
+                example: ''
+                description: Category for data attribute
           description: |
             "Data attribute contains specifications of exactly what is collected."
-          type: array
         purpose:
           type: string
           description: Name of purpose
@@ -1017,7 +1049,7 @@ paths:
                     $ref: '#/components/schemas/DataAgreement'
                   dataAttributes:
                     items:
-                      $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/put/responses/200/content/application~1json/schema/properties/dataAttribute'
+                      $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
@@ -1050,7 +1082,7 @@ paths:
             schema:
               properties:
                 dataAttribute:
-                  $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/put/responses/200/content/application~1json/schema/properties/dataAttribute'
+                  $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                   description: An object of type DataAttribute
               required:
                 - dataAttribute
@@ -1063,38 +1095,7 @@ paths:
                 type: object
                 properties:
                   dataAttribute:
-                    type: object
-                    description: Data attribute contains specifications of exactly what is collected.
-                    x-not-in-database: false
-                    required:
-                      - name
-                      - description
-                    properties:
-                      id:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: Data attribute Id
-                      name:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: 'Name of the attribute, for instance "name" or "age"'
-                      description:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: Description of the attribute
-                      sensitivity:
-                        type: boolean
-                        format: ''
-                        example: ''
-                        description: Sensitivity of data attribute
-                      category:
-                        type: string
-                        format: ''
-                        example: ''
-                        description: Category for data attribute
+                    $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                   revision:
                     $ref: '#/components/schemas/Revision'
           description: ''
@@ -1132,7 +1133,7 @@ paths:
                   dataAttributes:
                     items:
                       allOf:
-                        - $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/put/responses/200/content/application~1json/schema/properties/dataAttribute'
+                        - $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                         - type: object
                           properties:
                             dataAgreements:
@@ -3260,7 +3261,7 @@ paths:
                 properties:
                   dataAttributes:
                     items:
-                      $ref: '#/paths/~1config~1data-agreements~1data-attribute~1%7BdataAttributeId%7D/put/responses/200/content/application~1json/schema/properties/dataAttribute'
+                      $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'

@@ -46,8 +46,10 @@ properties:
       Policy under which this DataAgreement shall be governed. 
       When creating a data agreement, the latest policy can be used to fill the default value, 
       and organisation admin can decide to change it in data agreement level
-  dataAttribute:
-    $ref: "./DataAttribute.yaml"
+  dataAttributes:
+    type: array
+    items:
+      $ref: "./DataAttribute.yaml"
     description: >
       "Data attribute contains specifications of exactly what is collected."
 
