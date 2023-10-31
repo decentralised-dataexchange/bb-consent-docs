@@ -11,11 +11,14 @@ responses:
         schema:
           type: object
           properties:
-            dataAgreement:
-              $ref: ../definitions/DataAgreement.yaml
             dataAttributes:
               items:
-                $ref: ../definitions/DataAttribute.yaml
+                allOf:
+                  - $ref: ../definitions/DataAttribute.yaml
+                  - type: object
+                    properties:
+                      dataAgreement:
+                        $ref: ../definitions/DataAttributeExtras.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"

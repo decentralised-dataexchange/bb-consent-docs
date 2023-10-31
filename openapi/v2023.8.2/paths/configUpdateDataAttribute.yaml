@@ -22,8 +22,6 @@ responses:
           properties:
             dataAttribute:
               $ref: ../definitions/DataAttribute.yaml
-            revision:
-              $ref: ../definitions/Revision.yaml
     description: ""
   "400":
     description: bad input parameter

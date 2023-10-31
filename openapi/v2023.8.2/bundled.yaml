@@ -1045,11 +1045,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  dataAgreement:
-                    $ref: '#/components/schemas/DataAgreement'
                   dataAttributes:
                     items:
-                      $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
+                      allOf:
+                        - $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
+                        - type: object
+                          properties:
+                            dataAgreement:
+                              $ref: '#/paths/~1config~1data-agreements~1data-attributes/get/responses/200/content/application~1json/schema/properties/dataAttributes/items/allOf/1/properties/dataAgreement'
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
@@ -1096,8 +1099,6 @@ paths:
                 properties:
                   dataAttribute:
                     $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
-                  revision:
-                    $ref: '#/components/schemas/Revision'
           description: ''
         '400':
           description: bad input parameter
@@ -1136,7 +1137,7 @@ paths:
                         - $ref: '#/components/schemas/DataAgreement/properties/dataAttributes/items'
                         - type: object
                           properties:
-                            dataAgreements:
+                            dataAgreement:
                               type: array
                               items:
                                 type: object

@@ -18,7 +18,7 @@ responses:
                   - $ref: ../definitions/DataAttribute.yaml
                   - type: object
                     properties:
-                      dataAgreements:
+                      dataAgreement:
                         $ref: ../definitions/DataAttributeExtras.yaml
               type: array
             pagination:
