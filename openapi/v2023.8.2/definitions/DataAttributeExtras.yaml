@@ -1,7 +1,5 @@
-type: array
-items:
-  type: object
-  properties:
+type: object
+properties:
     id:
       type: string
     purpose:
