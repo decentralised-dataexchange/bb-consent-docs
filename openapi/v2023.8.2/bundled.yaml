@@ -14,24 +14,39 @@ components:
       properties:
         id:
           type: string
+          description: Webhook Id
         orgId:
           type: string
+          description: Organisation Id
         payloadUrl:
           type: string
+          description: Webhook payload Url
         contentType:
           type: string
+          description: Webhook payload content type
+          enum:
+            - application/json
+            - application/x-www-form-urlencoded
         subscribedEvents:
           type: array
           items:
             type: string
+            description: Subscribed event
+            enum:
+              - consent.allowed
+              - consent.disallowed
         disabled:
           type: boolean
+          description: Is webhook disabled or not
         secretKey:
           type: string
+          description: Secret key for checking authenticity of the source
         skipSslVerification:
           type: boolean
+          description: Skip SSL verification for webhook Url
         timestamp:
           type: string
+          description: Creation timestamp
     Pagination:
       type: object
       title: Pagination
