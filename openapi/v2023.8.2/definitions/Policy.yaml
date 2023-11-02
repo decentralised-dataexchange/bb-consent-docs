@@ -62,7 +62,7 @@ properties:
     description: "Storage location"
 
   thirdPartyDataSharing:
-    type: string
+    type: bool
     format: ""
     example: ""
     description: "Third party data sharing"
