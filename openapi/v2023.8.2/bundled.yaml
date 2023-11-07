@@ -3179,7 +3179,24 @@ paths:
               schema:
                 properties:
                   organisation:
-                    $ref: '#/paths/~1onboard~1organisation/get/responses/200/content/application~1json/schema/properties/organisation'
+                    items:
+                      allOf:
+                        - $ref: '#/paths/~1onboard~1organisation/get/responses/200/content/application~1json/schema/properties/organisation'
+                        - type: object
+                          title: OrganisationExtras
+                          properties:
+                            coverImageId:
+                              type: string
+                              description: id of cover image
+                            coverImageUrl:
+                              type: string
+                              description: Cover image url
+                            logoImageId:
+                              type: string
+                              description: Logo image id
+                            logoImageUrl:
+                              type: string
+                              description: Logo image url
                 required:
                   - organisation
                 type: object
@@ -3990,6 +4007,18 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
+  '/service/image/{imageId}':
+    get:
+      deprecated: false
+      description: Get organization image
+      operationId: serviceReadOrganisationImage
+      responses:
+        '200':
+          headers: {}
+      security:
+        - BearerAuth: []
+      tags:
+        - service
   /audit/admin/logs:
     get:
       operationId: auditAdminLogs

@@ -317,6 +317,9 @@ paths:
   /service/individuals:
     get:
       $ref: ./paths/serviceListIndividuals.yaml
+  /service/image/{imageId}:
+    get:
+      $ref: ./paths/serviceReadOrganisationImage.yaml
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml

@@ -1,0 +1,10 @@
+deprecated: false
+description: Get organization image
+operationId: serviceReadOrganisationImage
+responses:
+  '200':
+    headers: {}
+security:
+- BearerAuth: []
+tags:
+- service

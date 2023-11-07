@@ -8,7 +8,10 @@ responses:
         schema:
           properties:
             organisation:
-              $ref: ../definitions/Organisation.yaml
+              items:
+                allOf:
+                  - $ref: ../definitions/Organisation.yaml
+                  - $ref: "../definitions/OrganisationExtras.yaml"
           required:
           - organisation
           type: object
