@@ -1,0 +1,16 @@
+type: object
+title: OrganisationExtras
+properties:
+  coverImageId:
+    type: string
+    description: "Cover image id"
+  coverImageUrl:
+    type: string
+    description: "Cover image url"
+  logoImageId:
+    type: string
+    description: "Logo image id"
+  logoImageUrl:
+    type: string
+    description: "Logo image url"
+
