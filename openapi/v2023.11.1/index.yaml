@@ -61,7 +61,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   title: Consent Building Block APIs
-  version: 2023.8.2
+  version: 2023.11.1
 openapi: 3.1.0
 paths:
   /config/data-agreement:
