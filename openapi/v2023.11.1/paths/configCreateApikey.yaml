@@ -17,10 +17,14 @@ responses:
     content:
       application/json:
         schema:
-          type: object
           properties:
             apiKey:
-              $ref: ../definitions/ApiKey.yaml
+                allOf:
+                  - $ref: ../definitions/ApiKey.yaml
+                  - $ref: "../definitions/ApiKeyExtras.yaml"
+          required:
+          - apiKey
+          type: object
     description: A set consisting of the new ApiKey object created, together with
       the initial Revision object.
   '400':

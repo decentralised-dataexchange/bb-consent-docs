@@ -5,6 +5,9 @@ properties:
   dataAgreement:
     type: object
     properties:
+      version:
+        type: string
+        description: Version of data agreement
       purpose:
         type: string
         description: Name of purpose

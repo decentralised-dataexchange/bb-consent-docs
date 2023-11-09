@@ -11,7 +11,10 @@ responses:
           type: object
           properties:
             apiKeys:
-              $ref: ../definitions/ApiKey.yaml
+              items:
+                allOf:
+                  - $ref: ../definitions/ApiKey.yaml
+                  - $ref: "../definitions/ApiKeyExtras.yaml"
             pagination:
               $ref: "../definitions/Pagination.yaml"
     description: ""

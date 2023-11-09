@@ -2230,7 +2230,10 @@ paths:
                 type: object
                 properties:
                   apiKeys:
-                    $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                    items:
+                      allOf:
+                        - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
+                        - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/1'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
           description: ''
@@ -2256,7 +2259,7 @@ paths:
             schema:
               properties:
                 apiKey:
-                  $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                  $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
                   description: An object of type ApiKey
               required:
                 - apiKey
@@ -2266,10 +2269,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
                   apiKey:
-                    $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                    allOf:
+                      - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
+                      - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/1'
+                required:
+                  - apiKey
+                type: object
           description: 'A set consisting of the new ApiKey object created, together with the initial Revision object.'
         '400':
           description: bad input parameter
@@ -2299,7 +2306,7 @@ paths:
             schema:
               properties:
                 apiKey:
-                  $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                  $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
                   description: An object of type ApiKey
               required:
                 - apiKey
@@ -2309,10 +2316,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
                   apiKey:
-                    $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema'
+                    allOf:
+                      - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
+                      - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/1'
           description: ''
         '400':
           description: bad input parameter
@@ -2335,38 +2343,51 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                title: ApiKey
-                description: Api key
-                x-not-in-database: false
-                required:
-                  - scopes
-                properties:
-                  id:
-                    type: string
-                    format: ''
-                    example: ''
-                    description: API key Id
-                  scopes:
-                    type: array
-                    items:
-                      type: string
-                      enum:
-                        - config
-                        - audit
-                        - service
-                        - onboard
-                    description: Scopes for API key
-                  apiKey:
-                    type: string
-                    format: ''
-                    example: ''
-                    description: API key
-                  expiryInDays:
-                    type: integer
-                    format: ''
-                    default: 30
-                    description: 'Expiry in days. If expiry is 0, then default to 30 days'
+                allOf:
+                  - type: object
+                    title: ApiKey
+                    description: Api key
+                    x-not-in-database: false
+                    required:
+                      - scopes
+                    properties:
+                      id:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: API key Id
+                      name:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: API key name
+                      scopes:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                            - config
+                            - audit
+                            - service
+                            - onboard
+                        description: Scopes for API key
+                      apiKey:
+                        type: string
+                        format: ''
+                        example: ''
+                        description: API key
+                      expiryInDays:
+                        type: integer
+                        format: ''
+                        default: 30
+                        description: 'Expiry in days. If expiry is 0, then default to 30 days'
+                  - type: object
+                    title: ApiKeyExtras
+                    properties:
+                      expiryTimestamp:
+                        type: string
+                      timestamp:
+                        type: string
           description: ''
         '400':
           description: bad input parameter
@@ -4138,6 +4159,9 @@ paths:
                             dataAgreement:
                               type: object
                               properties:
+                                version:
+                                  type: string
+                                  description: Version of data agreement
                                 purpose:
                                   type: string
                                   description: Name of purpose

@@ -8,7 +8,9 @@ responses:
     content:
       application/json:
         schema:
-          $ref: ../definitions/ApiKey.yaml
+          allOf:
+            - $ref: ../definitions/ApiKey.yaml
+            - $ref: "../definitions/ApiKeyExtras.yaml"
     description: ""
   "400":
     description: bad input parameter
