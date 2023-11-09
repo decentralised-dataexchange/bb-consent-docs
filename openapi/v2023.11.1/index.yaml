@@ -285,10 +285,11 @@ paths:
   /service/individual/record/consent-record:
     post:
       $ref: ./paths/serviceCreateIndividualConsentRecordAndSignature.yaml
-    delete:
-      $ref: ./paths/serviceDeleteAllRecords.yaml
     get:
       $ref: ./paths/serviceListIndividualConsentRecordList.yaml
+  /service/individual/record:
+    delete:
+      $ref: ./paths/serviceDeleteAllRecords.yaml
 
   /service/individual/record/consent-record/{consentRecordId}:
     put:
