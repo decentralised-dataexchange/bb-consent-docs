@@ -3583,24 +3583,6 @@ paths:
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: '1.2'
       x-specification-usecase: UC-C-PIC-I-002
-    delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process.'
-      operationId: serviceDeleteAllRecords
-      parameters: []
-      responses:
-        '200':
-          description: ''
-        '400':
-          description: bad input parameter
-      security:
-        - BearerAuth: []
-      summary: DELETE - Delete all consent records for an individual
-      tags:
-        - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-003
     get:
       description: LIST - Fetch all current unambiguous data agreement records stored for individual
       operationId: serviceListIndividualConsentRecordList
@@ -3632,6 +3614,25 @@ paths:
       x-specification-pii-or-sensitive: 'True'
       x-specification-scenario: ''
       x-specification-usecase: UC-C-PIC-I-001
+  /service/individual/record:
+    delete:
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process.'
+      operationId: serviceDeleteAllRecords
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: DELETE - Delete all consent records for an individual
+      tags:
+        - service
+      x-specification-crudl-model: ''
+      x-specification-pii-or-sensitive: 'True'
+      x-specification-scenario: ''
+      x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/consent-record/{consentRecordId}':
     put:
       description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
