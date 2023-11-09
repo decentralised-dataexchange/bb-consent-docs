@@ -11,6 +11,11 @@ properties:
     format: ""
     example: ""
     description: "API key Id"
+  name:
+    type: string
+    format: ""
+    example: ""
+    description: "API key name"
 
   scopes:
     type: array

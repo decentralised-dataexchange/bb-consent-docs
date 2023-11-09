@@ -1,0 +1,7 @@
+type: object
+title: ApiKeyExtras
+properties:
+    expiryTimestamp:
+      type: string
+    timestamp:
+      type: string
