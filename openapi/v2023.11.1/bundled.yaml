@@ -2689,6 +2689,28 @@ paths:
                   token:
                     $ref: '#/paths/~1onboard~1admin~1login/post/responses/200/content/application~1json/schema'
       deprecated: false
+  /onboard/logout:
+    post:
+      tags:
+        - onboard
+      description: Logout
+      operationId: logout
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - refreshToken
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+      deprecated: false
   /onboard/organisation:
     get:
       deprecated: false

@@ -1,0 +1,20 @@
+tags:
+  - onboard
+description: Logout
+operationId: logout
+parameters: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        required:
+          - refreshToken
+        type: object
+        properties:
+          refreshToken:
+            type: string
+  required: true
+responses:
+  "200":
+    description: OK
+deprecated: false

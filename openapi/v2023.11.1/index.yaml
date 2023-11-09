@@ -200,6 +200,9 @@ paths:
   /onboard/individual/login:
     post:
       $ref: ./paths/loginIndividual.yaml
+  /onboard/logout:
+    post:
+      $ref: ./paths/logout.yaml
   /onboard/organisation:
     get:
       $ref: ./paths/getOrganisation.yaml
