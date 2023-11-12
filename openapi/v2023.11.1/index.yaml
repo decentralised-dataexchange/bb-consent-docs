@@ -324,6 +324,9 @@ paths:
   /service/image/{imageId}:
     get:
       $ref: ./paths/serviceReadOrganisationImage.yaml
+  /service/data-sharing:
+    get:
+      $ref: ./paths/serviceReadDataSharingUi.yaml
   /audit/admin/logs:
     get:
       $ref: ./paths/auditAdminLogs.yaml

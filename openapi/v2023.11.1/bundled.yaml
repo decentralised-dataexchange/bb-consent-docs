@@ -4063,6 +4063,75 @@ paths:
         - BearerAuth: []
       tags:
         - service
+  /service/data-sharing:
+    get:
+      description: READ - Data sharing UI
+      operationId: serviceReadDataSharingUi
+      parameters:
+        - name: dataAgreementId
+          in: query
+          description: ID for data agreement
+          required: true
+          schema:
+            type: string
+        - name: accessToken
+          in: query
+          description: Access token for authentication
+          required: false
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          description: API key for authorization
+          required: false
+          schema:
+            type: string
+        - name: individualId
+          in: query
+          description: ID for the individual
+          required: false
+          schema:
+            type: string
+        - name: thirdPartyOrgName
+          in: query
+          description: Name of the third-party organization
+          required: true
+          schema:
+            type: string
+        - name: thirdPartyOrgLogoImageUrl
+          in: query
+          description: URL for the third-party organization's logo image
+          required: false
+          schema:
+            type: string
+        - name: dataSharingUiRedirectUrl
+          in: query
+          description: Redirect URL for data sharing UI
+          required: true
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: Authorization code
+          required: false
+          schema:
+            type: string
+        - name: authorisationRedirectUrl
+          in: query
+          description: Redirect URL for authorization
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+        '400':
+          description: bad input parameter
+      security:
+        - BearerAuth: []
+      summary: READ - Data sharing UI
+      tags:
+        - service
   /audit/admin/logs:
     get:
       operationId: auditAdminLogs
