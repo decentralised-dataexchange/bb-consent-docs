@@ -2,8 +2,16 @@ deprecated: false
 description: Exchange authorisation code for access token
 operationId: exchangeCodeForToken
 parameters:
-  - $ref: "../parameters/redirectUri.yaml"
   - $ref: "../parameters/authorisationCode.yaml"
+requestBody:
+  content:
+    application/json:
+      schema:
+        properties:
+          redirectUri:
+            type: string
+            description: Redirect URI as configured in OIDC client
+        type: object
 responses:
   "200":
     content:

@@ -2927,16 +2927,19 @@ paths:
       parameters:
         - description: Unique ID of an object
           in: query
-          name: redirectUri
-          required: true
-          schema:
-            type: string
-        - description: Unique ID of an object
-          in: query
           name: authorisationCode
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                redirectUri:
+                  type: string
+                  description: Redirect URI as configured in OIDC client
+              type: object
       responses:
         '200':
           content:
