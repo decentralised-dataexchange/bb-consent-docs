@@ -267,7 +267,7 @@ paths:
   /service/verification/data-agreements:
     get:
       $ref: ./paths/serviceVerificationAgreementList.yaml
-  /service/verification/data-agreement/{dataAgreementId}:
+  /service/verification/consent-record/{consentRecordId}:
     get:
       $ref: ./paths/serviceVerificationAgreementConsentRecordRead.yaml
 

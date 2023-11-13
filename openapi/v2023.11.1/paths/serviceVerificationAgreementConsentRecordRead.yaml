@@ -1,7 +1,7 @@
 description: READ - Fetch a data agreement record (latest revision). The individualId is supplied as HTTP header.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
-- $ref: "../parameters/dataAgreementId.yaml"
+- $ref: "../parameters/consentRecordId.yaml"
 responses:
   '200':
     content:
