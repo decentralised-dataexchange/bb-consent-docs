@@ -3418,12 +3418,12 @@ paths:
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: '1.1'
       x-specification-usecase: UC-C-PIC-A-003
-  '/service/verification/data-agreement/{dataAgreementId}':
+  '/service/verification/consent-record/{consentRecordId}':
     get:
       description: READ - Fetch a data agreement record (latest revision). The individualId is supplied as HTTP header.
       operationId: serviceVerificationAgreementConsentRecordRead
       parameters:
-        - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
+        - $ref: '#/paths/~1audit~1consent-record~1%7BconsentRecordId%7D/get/parameters/0'
       responses:
         '200':
           content:
