@@ -1,5 +1,5 @@
 <h1 align="center">
-    GovStack Consent BB Developer Documentations
+    GovStack Consent BB Documentations
 </h1>
 
 <p align="center">
