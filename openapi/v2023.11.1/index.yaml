@@ -224,18 +224,6 @@ paths:
   /onboard/token/exchange:
     post:
       $ref: ./paths/exchangeCodeForToken.yaml
-  /onboard/validate/email:
-    post:
-      $ref: ./paths/validateEmail.yaml
-  /onboard/validate/phone:
-    post:
-      $ref: ./paths/validatePhone.yaml
-  /onboard/verify/otp:
-    post:
-      $ref: ./paths/verifyOtp.yaml
-  /onboard/verify/phone:
-    post:
-      $ref: ./paths/verifyPhone.yaml
   /onboard/status:
     get:
       $ref: ./paths/onboardReadStatus.yaml
