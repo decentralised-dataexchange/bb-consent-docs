@@ -21,7 +21,7 @@ This repository hosts all documentation for the developers of the [GovtStack con
 
 ## Release Status
 
-Work is ongoing towards [Govstack](https://www.govstack.global/). The details status of all workpackages can be found at the [WP and Deliverables page](https://github.com/decentralised-dataexchange/bb-consent-docs/wiki/wps-and-deliverables).
+Released. Refer to the [wiki page](https://github.com/decentralised-dataexchange/bb-consent-docs/wiki/wps-and-deliverables) for the latest status of the deliverables.
 
 ## Other resources
 
