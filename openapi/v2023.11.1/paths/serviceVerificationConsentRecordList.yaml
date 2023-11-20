@@ -1,4 +1,4 @@
-description: LIST - Fetch data agreement records (latest revision).
+description: LIST - Fetch consent records (latest revision).
 operationId: serviceVerificationConsentRecordList
 parameters:
   - $ref: "../parameters/offset.yaml"
@@ -22,7 +22,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch data agreement records (latest revision)
+summary: LIST - Fetch consent records (latest revision)
 tags:
   - service
 x-specification-crudl-model: ""

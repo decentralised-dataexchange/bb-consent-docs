@@ -5,6 +5,7 @@ operationId: serviceReadIndividualRecordRead
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
   - $ref: "../parameters/individualIdHeader.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:

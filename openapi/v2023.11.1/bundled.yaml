@@ -3316,7 +3316,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   /service/verification/consent-records:
     get:
-      description: LIST - Fetch data agreement records (latest revision).
+      description: LIST - Fetch consent records (latest revision).
       operationId: serviceVerificationConsentRecordList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3340,7 +3340,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch data agreement records (latest revision)
+      summary: LIST - Fetch consent records (latest revision)
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3383,6 +3383,7 @@ paths:
       operationId: serviceReadIndividualRecordRead
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
+        - $ref: '#/paths/~1service~1individuals/get/parameters/2'
         - $ref: '#/paths/~1service~1individuals/get/parameters/2'
       responses:
         '200':
@@ -3499,7 +3500,7 @@ paths:
       x-specification-scenario: '1.2'
       x-specification-usecase: UC-C-PIC-I-002
     get:
-      description: LIST - Fetch all current unambiguous data agreement records stored for individual
+      description: LIST - Fetch all current unambiguous consent records stored for individual
       operationId: serviceListIndividualConsentRecordList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3532,7 +3533,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record:
     delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned consent record, for instance in cases where the user exits the signing process.'
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all consent records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned consent record, for instance in cases where the user exits the signing process.'
       operationId: serviceDeleteAllRecords
       parameters:
         - $ref: '#/paths/~1service~1individuals/get/parameters/2'
@@ -3712,7 +3713,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch data agreement records given to a data agreement
+      summary: LIST - Fetch consent records given to a data agreement
       tags:
         - service
       x-specification-crudl-model: ''
@@ -4076,7 +4077,7 @@ paths:
                     $ref: '#/components/schemas/Pagination'
   /audit/consent-records:
     get:
-      description: LIST - Fetch all data agreement records
+      description: LIST - Fetch all consent records
       operationId: auditDataAgreementRecordsList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'

@@ -1,4 +1,4 @@
-description: LIST - Fetch all data agreement records
+description: LIST - Fetch all consent records
 operationId: auditDataAgreementRecordsList
 parameters:
   - $ref: "../parameters/offset.yaml"
