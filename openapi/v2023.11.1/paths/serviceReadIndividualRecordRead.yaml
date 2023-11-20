@@ -1,5 +1,5 @@
 description:
-  READ - Read data agreement record. There should be one unambiguous DataAgreementRecord for an Individual
+  READ - Read consent record. There should be one unambiguous DataAgreementRecord for an Individual
   and an DataAgreement.
 operationId: serviceReadIndividualRecordRead
 parameters:
@@ -18,7 +18,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read data agreement record
+summary: READ - Read consent record
 tags:
   - service
 x-specification-crudl-model: ""

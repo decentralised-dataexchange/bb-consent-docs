@@ -410,7 +410,7 @@ components:
         individual:
           $ref: '#/components/schemas/Individual'
           x-fk-model: Individual
-          description: The Individual who has signed this data agreement record
+          description: The Individual who has signed this consent record
         optIn:
           type: boolean
           format: ''
@@ -424,7 +424,7 @@ components:
         signature:
           $ref: '#/components/schemas/Signature'
           x-fk-model: Signature
-          description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+          description: 'A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
     ConsentRecordFilter:
       type: object
       title: ConsentRecordFilter
@@ -757,7 +757,7 @@ components:
           type: string
           format: ''
           example: ''
-          description: 'A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a data agreement record, an agreement, policy etc)'
+          description: 'A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)'
     StatusReadiness:
       type: object
       description: This model is not stored in a database. It describes the status of the Building Block while running. Returns immediately. API should not be public.
@@ -3274,7 +3274,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/service/verification/consent-record/{consentRecordId}':
     get:
-      description: READ - Fetch a data agreement record (latest revision). The individualId is supplied as HTTP header.
+      description: READ - Fetch a consent record (latest revision). The individualId is supplied as HTTP header.
       operationId: serviceVerificationAgreementConsentRecordRead
       parameters:
         - $ref: '#/paths/~1audit~1consent-record~1%7BconsentRecordId%7D/get/parameters/0'
@@ -3335,7 +3335,7 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   '/service/individual/record/data-agreement/{dataAgreementId}':
     post:
-      description: 'CREATE - For a particular individual and a particular data agreement, create a new data agreement record pointing to the current revision of a given data agreement.'
+      description: 'CREATE - For a particular individual and a particular data agreement, create a new consent record pointing to the current revision of a given data agreement.'
       operationId: serviceCreateIndividualConsentRecord
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3364,7 +3364,7 @@ paths:
       x-specification-scenario: '1.2'
       x-specification-usecase: UC-C-PIC-I-002
     get:
-      description: READ - Read data agreement record. There should be one unambiguous DataAgreementRecord for an Individual and an DataAgreement.
+      description: READ - Read consent record. There should be one unambiguous DataAgreementRecord for an Individual and an DataAgreement.
       operationId: serviceReadIndividualRecordRead
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3382,7 +3382,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Read data agreement record
+      summary: READ - Read consent record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3391,7 +3391,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/consent-record/draft:
     post:
-      description: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without a PK) for a given dataAgreementId.
+      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       operationId: serviceCreateIndividualConsentRecordDraft
       parameters:
         - description: An object with id individualId
@@ -3428,7 +3428,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create a DRAFT (unsaved) data agreement record and signature objects (without a PK) for a given dataAgreementId.
+      summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3437,7 +3437,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-002
   /service/individual/record/consent-record:
     post:
-      description: CREATE - Create a paired data agreement record and signature object. Returns the same objects with the PK defined.
+      description: CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
       operationId: serviceCreateIndividualConsentRecordAndSignature
       parameters: []
       requestBody:
@@ -3513,7 +3513,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record:
     delete:
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned data agreement record, for instance in cases where the user exits the signing process.'
+      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all data agreement records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned consent record, for instance in cases where the user exits the signing process.'
       operationId: serviceDeleteAllRecords
       parameters: []
       responses:
@@ -3532,7 +3532,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/consent-record/{consentRecordId}':
     put:
-      description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
+      description: UPDATE* - Update a consent record. Note that updating a signed consent record invalidates its signature.
       operationId: serviceUpdateIndividualConsentRecord
       parameters:
         - $ref: '#/paths/~1audit~1consent-record~1%7BconsentRecordId%7D/get/parameters/0'
@@ -3590,7 +3590,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/consent-record/{consentRecordId}/signature':
     post:
-      description: CREATE - Creates and returns a blank Signature object for the data agreement record
+      description: CREATE - Creates and returns a blank Signature object for the consent record
       operationId: serviceCreateIndividualConsentRecordSignature
       parameters:
         - description: Unique ID of an object
@@ -3613,7 +3613,7 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Creates and returns a blank Signature object for the data agreement record
+      summary: CREATE - Creates and returns a blank Signature object for the consent record
       tags:
         - service
       x-specification-crudl-model: ''
@@ -3700,8 +3700,8 @@ paths:
       operationId: serviceListDataAgreementRecordHistory
       tags:
         - service
-      description: LIST - Fetch all data agreement record history
-      summary: LIST - Fetch all data agreement record history
+      description: LIST - Fetch all consent record history
+      summary: LIST - Fetch all consent record history
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
@@ -4059,7 +4059,7 @@ paths:
               - vital_interest
               - public_task
               - legitimate_interest
-        - description: 'ID contains indivitual id, data agreement id or data agreement record id'
+        - description: 'ID contains indivitual id, data agreement id or consent record id'
           in: query
           name: id
           schema:
@@ -4117,7 +4117,7 @@ paths:
       x-specification-usecase: UC-C-PIC-AT-003
   '/audit/consent-record/{consentRecordId}':
     get:
-      description: READ - Fetch a single data agreement record
+      description: READ - Fetch a single consent record
       operationId: auditConsentRecordRead
       parameters:
         - description: Unique ID of an object
@@ -4164,7 +4164,7 @@ paths:
                       individualId:
                         type: string
                         x-fk-model: Individual
-                        description: The Individual who has signed this data agreement record
+                        description: The Individual who has signed this consent record
                       optIn:
                         type: boolean
                         format: ''
@@ -4181,13 +4181,13 @@ paths:
                       signatureId:
                         type: string
                         x-fk-model: Signature
-                        description: 'A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
+                        description: 'A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?'
           description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch a single data agreement record
+      summary: READ - Fetch a single consent record
       tags:
         - audit
       x-specification-crudl-model: ''

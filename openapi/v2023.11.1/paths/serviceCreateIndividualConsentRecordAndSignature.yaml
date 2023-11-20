@@ -1,4 +1,4 @@
-description: CREATE - Create a paired data agreement record and signature object. Returns
+description: CREATE - Create a paired consent record and signature object. Returns
   the same objects with the PK defined.
 operationId: serviceCreateIndividualConsentRecordAndSignature
 parameters: []

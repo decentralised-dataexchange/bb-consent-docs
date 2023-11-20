@@ -1,4 +1,4 @@
-description: UPDATE* - Update a data agreement record. Note that updating a signed data agreement record invalidates its signature.
+description: UPDATE* - Update a consent record. Note that updating a signed consent record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
 - $ref: "../parameters/consentRecordId.yaml"

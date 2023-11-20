@@ -1,8 +1,8 @@
 operationId: serviceListDataAgreementRecordHistory
 tags:
   - service
-description: LIST - Fetch all data agreement record history
-summary: LIST - Fetch all data agreement record history
+description: LIST - Fetch all consent record history
+summary: LIST - Fetch all consent record history
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"

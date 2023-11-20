@@ -100,4 +100,4 @@ properties:
     type: string
     format: ""
     example: ""
-    description: "A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a data agreement record, an agreement, policy etc)"
+    description: "A symmetric relation / back reference to the objectType that was signed. We are currently just modelling signing another signature (a chain) or signing a Revision (which can be a revision of a consent record, an agreement, policy etc)"

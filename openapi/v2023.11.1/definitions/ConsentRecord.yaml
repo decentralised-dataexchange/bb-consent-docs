@@ -33,7 +33,7 @@ properties:
   individual:
     $ref: "./Individual.yaml"
     x-fk-model: "Individual"
-    description: "The Individual who has signed this data agreement record"
+    description: "The Individual who has signed this consent record"
 
   optIn:
     type: boolean
@@ -50,4 +50,4 @@ properties:
   signature:
     $ref: "./Signature.yaml"
     x-fk-model: "Signature"
-    description: "A signature that hashes all the values of the data agreement record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?"
+    description: "A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?"

@@ -1,4 +1,4 @@
-description: ID contains indivitual id, data agreement id or data agreement record id
+description: ID contains indivitual id, data agreement id or consent record id
 in: query
 name: id
 schema:

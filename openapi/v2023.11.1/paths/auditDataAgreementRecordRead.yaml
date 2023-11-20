@@ -1,4 +1,4 @@
-description: READ - Fetch a single data agreement record
+description: READ - Fetch a single consent record
 operationId: auditConsentRecordRead
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"
@@ -16,7 +16,7 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a single data agreement record
+summary: READ - Fetch a single consent record
 tags:
   - audit
 x-specification-crudl-model: ""
