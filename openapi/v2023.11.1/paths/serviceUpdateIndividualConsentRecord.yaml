@@ -1,25 +1,26 @@
 description: UPDATE* - Update a consent record. Note that updating a signed consent record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
-- $ref: "../parameters/consentRecordId.yaml"
-- description: An object with id individualId
-  in: query
-  name: individualId
-  required: true
-  schema:
-    type: string
-- description: An object with id dataAgreementId
-  in: query
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
-- description: An object with id revisionId
-  in: query
-  name: revisionId
-  required: false
-  schema:
-    type: string
+  - $ref: "../parameters/consentRecordId.yaml"
+  - description: An object with id individualId
+    in: query
+    name: individualId
+    required: true
+    schema:
+      type: string
+  - description: An object with id dataAgreementId
+    in: query
+    name: dataAgreementId
+    required: true
+    schema:
+      type: string
+  - description: An object with id revisionId
+    in: query
+    name: revisionId
+    required: false
+    schema:
+      type: string
+  - $ref: "../parameters/individualIdHeader.yaml"
 requestBody:
   content:
     application/json:
@@ -32,7 +33,7 @@ requestBody:
             description: "True: The individual has positively opted in. False: The individual has explicitly said no (or withdrawn a previous consent)."
         type: object
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
@@ -42,15 +43,15 @@ responses:
               $ref: ../definitions/consentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: UPDATE* - Update a consent record
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: ""
 x-specification-usecase: UC-C-PIC-I-003

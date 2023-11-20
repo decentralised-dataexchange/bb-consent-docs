@@ -1,0 +1,6 @@
+in: header
+name: X-ConsentBB-IndividualId
+required: true
+schema:
+  type: string
+description: Individual Id

@@ -1,27 +1,29 @@
-description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
+description:
+  CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
   a PK) for a given dataAgreementId.
 operationId: serviceCreateIndividualConsentRecordDraft
 parameters:
-- description: An object with id individualId
-  in: query
-  name: individualId
-  required: true
-  schema:
-    type: string
-- description: An object with id dataAgreementId
-  in: query
-  name: dataAgreementId
-  required: true
-  schema:
-    type: string
-- description: An object with id revisionId
-  in: query
-  name: revisionId
-  required: false
-  schema:
-    type: string
+  - description: An object with id individualId
+    in: query
+    name: individualId
+    required: true
+    schema:
+      type: string
+  - description: An object with id dataAgreementId
+    in: query
+    name: dataAgreementId
+    required: true
+    schema:
+      type: string
+  - description: An object with id revisionId
+    in: query
+    name: revisionId
+    required: false
+    schema:
+      type: string
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
@@ -31,16 +33,17 @@ responses:
               $ref: ../definitions/consentRecord.yaml
             signature:
               $ref: ../definitions/Signature.yaml
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
+summary:
+  CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
   a PK) for a given dataAgreementId.
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: '1.2'
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: "1.2"
 x-specification-usecase: UC-C-PIC-I-002

@@ -1,14 +1,15 @@
 description: CREATE - Creates and returns a blank Signature object for the consent record
 operationId: serviceCreateIndividualConsentRecordSignature
 parameters:
-- description: Unique ID of an object
-  in: path
-  name: consentRecordId
-  required: true
-  schema:
-    type: string
+  - description: Unique ID of an object
+    in: path
+    name: consentRecordId
+    required: true
+    schema:
+      type: string
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
@@ -16,15 +17,15 @@ responses:
           properties:
             signature:
               $ref: ../definitions/Signature.yaml
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: CREATE - Creates and returns a blank Signature object for the consent record
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "True"
+x-specification-scenario: ""
 x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare

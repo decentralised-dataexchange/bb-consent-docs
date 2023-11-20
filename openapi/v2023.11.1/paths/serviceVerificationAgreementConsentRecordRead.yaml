@@ -1,9 +1,10 @@
 description: READ - Fetch a consent record (latest revision). The individualId is supplied as HTTP header.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
-- $ref: "../parameters/consentRecordId.yaml"
+  - $ref: "../parameters/consentRecordId.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
@@ -13,15 +14,15 @@ responses:
               $ref: "../definitions/consentRecord.yaml"
             revision:
               $ref: "../definitions/Revision.yaml"
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: READ - Fetch a consent record (latest revision)
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: '1.2'
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: "1.2"
 x-specification-usecase: UC-C-PIC-A-003

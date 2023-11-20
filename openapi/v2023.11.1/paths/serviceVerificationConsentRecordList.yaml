@@ -3,6 +3,7 @@ operationId: serviceVerificationConsentRecordList
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:

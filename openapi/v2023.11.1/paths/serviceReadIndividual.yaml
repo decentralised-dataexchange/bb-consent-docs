@@ -10,7 +10,7 @@ parameters:
     required: true
     schema:
       type: string
-
+  - $ref: "../parameters/individualIdHeader.yaml"
 x-specification-usecase: ""
 x-specification-scenario: ""
 x-specification-pii-or-sensitive: "True"

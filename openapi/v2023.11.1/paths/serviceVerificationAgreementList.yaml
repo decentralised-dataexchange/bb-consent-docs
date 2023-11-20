@@ -1,10 +1,11 @@
 description: LIST - Fetch all consent records
 operationId: serviceVerificationAgreementList
 parameters:
-- $ref: "../parameters/offset.yaml"
-- $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/offset.yaml"
+  - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
-  '200':
+  "200":
     content:
       application/json:
         schema:
@@ -16,15 +17,15 @@ responses:
                 $ref: ../definitions/consentRecord.yaml
             pagination:
               $ref: "../definitions/Pagination.yaml"
-    description: ''
-  '400':
+    description: ""
+  "400":
     description: bad input parameter
 security:
   - BearerAuth: []
 summary: LIST - Fetch all consent records
 tags:
-- service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: '1.1'
+  - service
+x-specification-crudl-model: ""
+x-specification-pii-or-sensitive: "False"
+x-specification-scenario: "1.1"
 x-specification-usecase: UC-C-PIC-A-003

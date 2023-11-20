@@ -1,7 +1,8 @@
 description: CREATE - Create a paired consent record and signature object. Returns
   the same objects with the PK defined.
 operationId: serviceCreateIndividualConsentRecordAndSignature
-parameters: []
+parameters:
+  - $ref: "../parameters/individualIdHeader.yaml"
 requestBody:
   content:
     application/json:

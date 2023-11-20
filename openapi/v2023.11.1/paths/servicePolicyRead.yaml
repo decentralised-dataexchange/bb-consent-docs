@@ -3,6 +3,7 @@ operationId: servicePolicyRead
 parameters:
   - $ref: "../parameters/policyId.yaml"
   - $ref: "../parameters/revisionId.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:

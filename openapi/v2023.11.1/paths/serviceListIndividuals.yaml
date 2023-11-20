@@ -6,7 +6,7 @@ description: "LIST - lists individuals in the system"
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-
+  - $ref: "../parameters/individualIdHeader.yaml"
 x-specification-usecase: ""
 x-specification-scenario: ""
 x-specification-pii-or-sensitive: "True"

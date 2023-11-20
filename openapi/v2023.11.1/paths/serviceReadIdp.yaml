@@ -2,6 +2,7 @@ description: READ - Read an IDP
 operationId: serviceReadIdp
 parameters:
   - $ref: "../parameters/idpId.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:

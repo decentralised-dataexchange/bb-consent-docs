@@ -5,6 +5,7 @@ operationId: serviceCreateIndividualConsentRecord
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
   - $ref: "../parameters/revisionId.yaml"
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:

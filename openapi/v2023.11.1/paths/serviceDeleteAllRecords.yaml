@@ -3,7 +3,8 @@ description: DELETE - Cascading delete operation for Right To Be Forgotten, dele
   May also delete an unsigned consent record, for instance in cases where the user
   exits the signing process.
 operationId: serviceDeleteAllRecords
-parameters: []
+parameters:
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   '200':
     description: ''

@@ -1,6 +1,8 @@
 deprecated: false
 description: Get organization image
 operationId: serviceReadOrganisationImage
+parameters:
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   '200':
     headers: {}

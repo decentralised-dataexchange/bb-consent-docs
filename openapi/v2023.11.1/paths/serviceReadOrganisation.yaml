@@ -1,6 +1,8 @@
 deprecated: false
 description: Read organization
 operationId: serviceReadOrganisation
+parameters:
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   '200':
     content:

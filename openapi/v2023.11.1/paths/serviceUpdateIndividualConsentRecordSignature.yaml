@@ -10,6 +10,7 @@ parameters:
     required: true
     schema:
       type: string
+  - $ref: "../parameters/individualIdHeader.yaml"
 requestBody:
   content:
     application/json:

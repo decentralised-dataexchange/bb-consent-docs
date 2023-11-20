@@ -1,6 +1,8 @@
 deprecated: false
 description: Read organization cover image
 operationId: serviceReadOrganisationCoverImage
+parameters:
+  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   '200':
     headers: {}
