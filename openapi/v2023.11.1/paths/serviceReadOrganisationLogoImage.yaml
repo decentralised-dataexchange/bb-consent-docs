@@ -1,8 +1,7 @@
-deprecated: false
-description: Read organization logo image
+summary: READ - Read organisation logo image
+description: Read organisation logo image
 operationId: serviceReadOrganisationLogoImage
-parameters:
-  - $ref: "../parameters/individualIdHeader.yaml"
+deprecated: false
 responses:
   "200":
     headers: {}

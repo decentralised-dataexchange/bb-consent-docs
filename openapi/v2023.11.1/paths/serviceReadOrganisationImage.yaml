@@ -1,12 +1,11 @@
-deprecated: false
-description: Get organization image
+summary: READ - Read organisation image
+description: READ - Read organisation image
 operationId: serviceReadOrganisationImage
-parameters:
-  - $ref: "../parameters/individualIdHeader.yaml"
+deprecated: false
 responses:
-  '200':
+  "200":
     headers: {}
 security:
-- BearerAuth: []
+  - BearerAuth: []
 tags:
-- service
+  - service

@@ -1,4 +1,5 @@
-description: LIST - Fetch consent records given to a data agreement.
+summary: LIST - List all consent records for data agreement
+description: LIST - List all consent records for data agreement
 operationId: serviceListIndividualAgreementConsentRecordList
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -23,7 +24,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch consent records given to a data agreement
 tags:
   - service
 x-specification-crudl-model: ""

@@ -1,9 +1,9 @@
-description: LIST - Fetch consent records (latest revision).
+summary: LIST - List all consent records
+description: LIST - List all consent records
 operationId: serviceVerificationConsentRecordList
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:
@@ -22,7 +22,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch consent records (latest revision)
 tags:
   - service
 x-specification-crudl-model: ""

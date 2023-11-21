@@ -1,3 +1,4 @@
+summary: READ - Read data agreement
 description: READ - Read data agreement
 operationId: serviceAgreementRead
 parameters:
@@ -7,7 +8,6 @@ parameters:
     required: true
     schema:
       type: string
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:
@@ -26,10 +26,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read data agreement
 tags:
   - service
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

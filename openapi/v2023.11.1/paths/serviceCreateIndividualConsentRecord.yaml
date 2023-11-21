@@ -1,3 +1,4 @@
+summary: CREATE - Create consent record
 description:
   CREATE - For a particular individual and a particular data agreement, create
   a new consent record pointing to the current revision of a given data agreement.
@@ -22,7 +23,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create a consent record
 tags:
   - service
 x-specification-crudl-model: ""

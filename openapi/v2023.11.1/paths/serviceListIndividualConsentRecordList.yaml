@@ -1,4 +1,5 @@
-description: LIST - Fetch all current unambiguous consent records stored for individual
+summary: LIST - List all consent records for individual
+description: LIST - List all current unambiguous consent records stored for individual
 operationId: serviceListIndividualConsentRecordList
 parameters:
   - $ref: "../parameters/offset.yaml"
@@ -22,7 +23,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all consent records for individual
 tags:
   - service
 x-specification-crudl-model: ""

@@ -1,3 +1,4 @@
+summary: CREATE - Creates blank signature
 description: CREATE - Creates and returns a blank Signature object for the consent record
 operationId: serviceCreateIndividualConsentRecordSignature
 parameters:
@@ -22,7 +23,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Creates and returns a blank Signature object for the consent record
 tags:
   - service
 x-specification-crudl-model: ""

@@ -1,13 +1,20 @@
-tags:
-  - service
-summary: "CREATE - Create an individual"
+summary: CREATE - Create individual
+description: "CREATE - Creates Individual in the Consent system"
 operationId: "configCreatePolicy"
-description: "CREATE - Creates an Individual in the Consent system"
-parameters: []
-x-specification-usecase: ""
-x-specification-scenario: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-crudl-model: "Individual"
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          individual:
+            allOf:
+              - $ref: "../definitions/Individual.yaml"
+              - $ref: "../definitions/IndividualExtras.yaml"
+            description: An object of type Individual
+
+        required:
+          - individual
 responses:
   "200":
     description: ""
@@ -27,18 +34,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-
-requestBody:
-  content:
-    application/json:
-      schema:
-        type: object
-        properties:
-          individual:
-            allOf:
-              - $ref: "../definitions/Individual.yaml"
-              - $ref: "../definitions/IndividualExtras.yaml"
-            description: An object of type Individual
-
-        required:
-          - individual
+tags:
+  - service

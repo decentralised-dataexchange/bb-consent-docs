@@ -1,8 +1,6 @@
-tags:
-  - service
-summary: "READ - Read an individual"
+summary: READ - Read individual
+description: READ - Read individual in the Consent system
 operationId: "configReadIndividual"
-description: "READ - Fetch an Individual in the Consent system"
 parameters:
   - in: path
     name: "individualId"
@@ -10,11 +8,6 @@ parameters:
     required: true
     schema:
       type: string
-  - $ref: "../parameters/individualIdHeader.yaml"
-x-specification-usecase: ""
-x-specification-scenario: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-crudl-model: "Individual"
 responses:
   "200":
     description: ""
@@ -28,8 +21,9 @@ responses:
               allOf:
                 - $ref: "../definitions/Individual.yaml"
                 - $ref: "../definitions/IndividualExtras.yaml"
-
   "400":
     description: bad input parameter
 security:
   - BearerAuth: []
+tags:
+  - service

@@ -1,4 +1,5 @@
-description: UPDATE* - Update a consent record. Note that updating a signed consent record invalidates its signature.
+summary: UPDATE - Update consent record
+description: UPDATE - Update consent record. Note that updating a signed consent record invalidates its signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"
@@ -48,7 +49,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE* - Update a consent record
 tags:
   - service
 x-specification-crudl-model: ""

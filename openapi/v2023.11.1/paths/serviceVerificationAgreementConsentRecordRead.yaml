@@ -1,8 +1,8 @@
-description: READ - Fetch a consent record (latest revision). The individualId is supplied as HTTP header.
+summary: READ - Read latest consent record
+description: READ - Read latest consent record.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:
@@ -19,7 +19,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a consent record (latest revision)
 tags:
   - service
 x-specification-crudl-model: ""

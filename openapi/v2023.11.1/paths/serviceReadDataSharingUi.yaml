@@ -1,4 +1,5 @@
-description: READ - Data sharing UI
+summary: READ - Read data sharing UI
+description: READ - Read data sharing UI
 operationId: serviceReadDataSharingUi
 parameters:
   - name: dataAgreementId
@@ -62,6 +63,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Data sharing UI
 tags:
   - service

@@ -1,9 +1,9 @@
+summary: READ - Read policy
 description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
 operationId: servicePolicyRead
 parameters:
   - $ref: "../parameters/policyId.yaml"
   - $ref: "../parameters/revisionId.yaml"
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:
@@ -20,7 +20,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read policy
 tags:
   - service
 x-specification-crudl-model: Policy

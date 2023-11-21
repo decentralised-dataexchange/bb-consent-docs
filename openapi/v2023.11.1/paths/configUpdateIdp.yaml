@@ -1,3 +1,4 @@
+summary: UPDATE - Update IDP
 description: UPDATE - Update an IDP
 operationId: configUpdatePolicy
 parameters:
@@ -27,7 +28,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update an IDP
 tags:
   - config
 x-specification-crudl-model: IDP

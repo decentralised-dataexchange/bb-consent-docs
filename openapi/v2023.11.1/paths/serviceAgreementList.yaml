@@ -1,10 +1,10 @@
+summary: LIST - List all active data agreements
 description: LIST - List active data agreements
 operationId: serviceAgreementList
 parameters:
   - $ref: "../parameters/revisionId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   "200":
     content:
@@ -23,10 +23,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List active data agreements
 tags:
   - service
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

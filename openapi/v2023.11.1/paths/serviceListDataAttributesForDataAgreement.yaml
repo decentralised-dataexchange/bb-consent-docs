@@ -1,11 +1,11 @@
-description: READ - Fetch all latest versions of data attribute associated with an DataAgreement and the presented revisionId of that DataAgreement
+summary: LIST - List all data attributes for data agreement
+description: LIST - List all latest versions of data attribute associated with an DataAgreement and the presented revisionId of that DataAgreement
 operationId: serviceAgreementDataRead
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
   - $ref: "../parameters/revisionId.yaml"
-  - $ref: "../parameters/individualIdHeader.yaml"
 responses:
   '200':
     content:
@@ -24,10 +24,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch all data attributes for data agreement
 tags:
 - service
-x-specification-crudl-model: AgreementData
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-A-003

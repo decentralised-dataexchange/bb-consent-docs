@@ -35,7 +35,8 @@
             if (
               apiInfoElement &&
               labelOperationPathElements &&
-              mainContentElement
+              mainContentElement &&
+              sidebar
             ) {
               mainContentElement.style.padding = "10px";
               apiInfoElement.style.marginLeft = "0";
@@ -56,6 +57,42 @@
             applyStyleToApiInfo(); // Try applying the style immediately in case the element is already there
           }
         } else {
+          // Function to apply the style when the element is available
+          const applyStyleToApiInfo = () => {
+            const sidebar = rapiDocElement.shadowRoot.querySelector(
+              "[part*='section-navbar']"
+            );
+            const post = rapiDocElement.shadowRoot.querySelectorAll(
+              ".nav-method.as-colored-block.post"
+            );
+            const method = rapiDocElement.shadowRoot.querySelectorAll(
+              ".nav-method.as-colored-block"
+            );
+
+            if (sidebar && post) {
+              sidebar.style.minWidth = "385px";
+              post.forEach(function (element) {
+                element.innerHTML = "POST";
+              });
+              method.forEach(function (element) {
+                element.style.borderRadius = "4px 4px 4px 4px";
+                element.style.minWidth = "35px";
+                element.style.display = "flex";
+                element.style.justifyContent = "center";
+                element.style.alignItems = "center";
+              });
+
+              observer.disconnect(); // Stop observing once style is applied
+            }
+          };
+          const observer = new MutationObserver(applyStyleToApiInfo);
+          if (rapiDocElement.shadowRoot) {
+            observer.observe(rapiDocElement.shadowRoot, {
+              childList: true,
+              subtree: true,
+            });
+            applyStyleToApiInfo(); // Try applying the style immediately in case the element is already there
+          }
           rapiDocElement.setAttribute("render-style", "read"); // for sizes greater than a tablet
         }
       });

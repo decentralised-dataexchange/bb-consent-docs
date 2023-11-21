@@ -294,7 +294,7 @@ paths:
   /service/individual/record/data-agreement/{dataAgreementId}/all:
     get:
       $ref: ./paths/serviceListIndividualAgreementConsentRecordList.yaml
-  /service/individual/record/consent-record/history':
+  /service/individual/record/consent-record/history:
     get:
       $ref: "./paths/serviceListDataAgreementRecordHistory.yaml"
   /service/individual:
