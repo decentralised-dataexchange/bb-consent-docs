@@ -1,16 +1,11 @@
-tags:
-  - config
-summary: "LIST - List all individuals"
+summary: LIST - List all individuals
+description: 
+  This endpoint is used to list all individuals in the organisation 
+  defined in the consent building block.
 operationId: "configListIndividuals"
-description: "LIST - lists individuals in the system"
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-
-x-specification-usecase: ""
-x-specification-scenario: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-crudl-model: "Individual"
 responses:
   "200":
     description: ""
@@ -28,8 +23,9 @@ responses:
                   - $ref: "../definitions/IndividualExtras.yaml"
             pagination:
               $ref: "../definitions/Pagination.yaml"
-
   "400":
     description: bad input parameter
 security:
   - BearerAuth: []
+tags:
+  - config

@@ -1,4 +1,7 @@
-description: READ - Fetch a single consent record
+summary: READ - Get consent record
+description: 
+  This endpoint is used to get a single consent record by ID in an 
+  organisation defined in the consent building block.
 operationId: auditConsentRecordRead
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"
@@ -16,10 +19,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Fetch a single consent record
 tags:
   - audit
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: ""

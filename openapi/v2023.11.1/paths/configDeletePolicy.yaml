@@ -1,6 +1,6 @@
-description: DELETE - Deletes an existing policy, returning the updated version
-  and a new revision. Deleting a policy is not possible if it's associated with active
-  DataAgreement.
+summary: DELETE - Delete data policy
+description:
+  This endpoint is used to delete an existing data policy.
 operationId: configDeletePolicy
 parameters:
   - description: Unique ID of an object
@@ -20,10 +20,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Deletes policy
 tags:
   - config
-x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-004

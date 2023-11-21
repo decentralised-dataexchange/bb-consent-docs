@@ -1,4 +1,7 @@
-description: UPDATE - Update an existing data attribute and returned together with revision
+summary: UPDATE - Update data attribute
+description: 
+  This endpoint updates an existing data attribute defined in a data agreement.
+  If updated, the associated data agreement revision is incremented automatically. 
 operationId: configUpdateDataAttribute
 parameters:
   - $ref: "../parameters/dataAttributeId.yaml"
@@ -27,10 +30,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update data attribute
 tags:
   - config
-x-specification-crudl-model: DataAttribute
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-002

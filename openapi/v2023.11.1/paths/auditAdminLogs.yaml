@@ -1,14 +1,14 @@
+summary: LIST - Fetch all organisational logs
+description: 
+  This endpoint is used to list all logs with pagination for an 
+  organisation defined in the consent building block.
 operationId: auditAdminLogs
-tags:
-  - audit
 security:
   - BearerAuth: []
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
   - $ref: "../parameters/logType.yaml"
-description: LIST - List all organisation admin logs
-summary: LIST - List all organisation admin logs
 responses:
   "200":
     content:
@@ -22,3 +22,6 @@ responses:
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"
+tags:
+  - audit
+

@@ -1,5 +1,6 @@
-description: READ - Fetch a policy + latest revision. If a policy filter is supplied
-  and contains a `revisionId`, then this specific revision is returned.
+summary: READ - Read data policy
+description: READ - 
+  This endpoint reads a data policy with the latest revision info.
 operationId: configReadPolicy
 parameters:
 - description: Unique ID of an object
@@ -30,10 +31,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read policy
 tags:
 - config
-x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-A-003

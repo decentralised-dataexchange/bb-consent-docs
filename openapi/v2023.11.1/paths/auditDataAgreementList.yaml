@@ -1,4 +1,7 @@
-description: LIST - Fetch all data agreements stored in the system
+summary: LIST - Fetch all data agreements
+description: 
+  This endpoint is used to fetch all data agreements defined
+  in the consent building block.
 operationId: auditDataAgreementList
 parameters:
   - $ref: "../parameters/offset.yaml"
@@ -21,10 +24,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all data agreements stored in the system
 tags:
   - audit
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-AT-001, UC-C-PIC-AT-003

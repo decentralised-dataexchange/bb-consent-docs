@@ -1,4 +1,7 @@
-description: LIST - Fetch all consent records
+summary: LIST - Fetch all consent records
+description: 
+  This endpoint is used to fetch all consent records with pagination 
+  for individuals in an organisation defined in the consent building block.
 operationId: auditDataAgreementRecordsList
 parameters:
   - $ref: "../parameters/offset.yaml"
@@ -25,10 +28,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - Fetch all consent records
 tags:
   - audit
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-AT-003

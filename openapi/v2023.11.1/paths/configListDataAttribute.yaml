@@ -1,4 +1,7 @@
-description: LIST - Fetch all data attributes
+summary: LIST - List all data attributes
+description:
+  This endpoint reads all data attrinbutes defined in a data agreement
+  with pagination. 
 operationId: configListDataAttribute
 parameters:
   - $ref: "../parameters/revisionId.yaml"
@@ -28,10 +31,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all data attributes
 tags:
   - config
-x-specification-crudl-model: DataAttribute
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

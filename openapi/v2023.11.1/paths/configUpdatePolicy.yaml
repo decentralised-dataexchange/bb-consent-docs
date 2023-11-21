@@ -1,6 +1,8 @@
-description: UPDATE - Update an existing policy, returning the updated version
-  and a new revision. Updating a Policy does not affect existing references in DataAgreement,
-  the new revision should be specified for DataAgreement.
+summary: UPDATE - Update data policy
+description: 
+  This endpoint is used to update and existing data policy. It updates 
+  the existing and returns the updated version info. Updating a data 
+  policy does not affect existing data agreements.
 operationId: configUpdatePolicy
 parameters:
   - description: Unique ID of an object
@@ -36,10 +38,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update policy
 tags:
   - config
-x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-002

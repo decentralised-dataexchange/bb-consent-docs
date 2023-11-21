@@ -1,16 +1,11 @@
-tags:
-  - config
-summary: "LIST - List IDP"
+summary: LIST - List all IdPs
+description:
+  This endpoint read all IdPs configured for the organisation in 
+  the consent building block.
 operationId: "configListIdp"
-description: "LIST - List IDP"
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
-
-x-specification-usecase: ""
-x-specification-scenario: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-crudl-model: "IDP"
 responses:
   "200":
     description: ""
@@ -32,3 +27,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
+tags:
+  - config

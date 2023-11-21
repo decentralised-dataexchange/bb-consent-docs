@@ -1,8 +1,8 @@
-operationId: configPingWebhook
 summary: Ping webhook
-description: Ping webhook
-tags:
-  - config
+description: 
+  This endpoint is used to ping a webhook that was defined to trigger 
+  events from the consent building block to an external IT system. 
+operationId: configPingWebhook
 parameters:
   - name: webhookId
     in: path
@@ -23,3 +23,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config

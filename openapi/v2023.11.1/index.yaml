@@ -193,7 +193,6 @@ paths:
   /onboard/password/forgot:
     put:
       $ref: "./paths/onboardForgotPassword.yaml"
-
   /onboard/admin/login:
     post:
       $ref: ./paths/loginOrganisationAdmin.yaml
@@ -339,21 +338,26 @@ servers:
     url: https://demo-consent-bb-api.igrant.io/v2
 tags:
   - description:
-      Operations for external auditing systems to query detailed data from
-      the system and subscribe to notifications.
+      This consists of endpoints for an external auditing systems or for organisational to query 
+      consent record from consent building block.
     name: audit
     x-tag-expanded: false
-  - description: Secured operations available to organization API integration
+  - description: 
+      This consists of ndpoints available to organisation admins to manage data agreements, 
+      data agreement records, consents and consent records. It also provides mechanisms 
+      onboard the organisation to consent building block. 
     name: config
     x-tag-expanded: false
   - description:
-      Secured operations for individuals, data consumers and applications
-      to record and verify consent
+      This consists of endpoints towards individuals, data consumers and applications
+      to view, sign/record their agreement to the processing of personal data. In cases
+      where the data agreement is of legal basis consent and for legitimate interest, 
+      the individual can opt-in and opt-out at any stage. 
     name: service
     x-tag-expanded: false
   - description:
-      These are used for onboard the organisation, organisation admin and
-      individual users to the system.  It also deals with all authentication and authorisation
-      APIs that can be configured towards external IDPs.
+      This consists of endpoints towards organisation admin to onboard to consent building block. 
+      It also deals with all authentication and authorisation APIs that can be configured 
+      towards external IDPs (e.g. using OpenID Connect).
     name: onboard
     x-tag-expanded: false

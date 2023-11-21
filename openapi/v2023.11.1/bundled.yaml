@@ -827,7 +827,7 @@ openapi: 3.1.0
 paths:
   /config/data-agreement:
     post:
-      summary: CREATE - Create a data agreement
+      summary: CREATE - Create data agreement
       description: |
         This endpoint creates a data agreement for an organisation. 
         It also returns the latest revision of the created data agreement.
@@ -862,13 +862,12 @@ paths:
         - BearerAuth: []
       tags:
         - config
-      x-specification-crudl-model: DataAgreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-001
   '/config/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetch the latest version of a data agreement
+      summary: READ - Read data agreement
+      description: |
+        This endpoint allows the admin to view the latest data agreement defined
+        earlier in an organisation. It also returns the latest revision number.
       operationId: configReadAgreement
       parameters:
         - description: Unique ID of an object
@@ -893,15 +892,11 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Read data agreement
       tags:
         - config
-      x-specification-crudl-model: DataAgreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
     put:
-      description: UPDATE - Update an existing data agreement and returned together with revision
+      summary: UPDATE - Update data agreement
+      description: This endpoint allows the admin to update the latest data agreement defined earlier in an organisation. It also returns the updated revision number.
       operationId: configUpdateAgreement
       parameters:
         - description: Unique ID of an object
@@ -937,15 +932,11 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Update data agreement
       tags:
         - config
-      x-specification-crudl-model: DataAgreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
     delete:
-      description: DELETE - Delete a data agreement
+      summary: DELETE - Delete data agreement
+      description: This endpoint allows the admin to delete all revisions of a chosen data agreement defined earlier in an organisation.
       operationId: configDeleteAgreement
       parameters:
         - description: Unique ID of an object
@@ -965,16 +956,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - Delete data agreement
       tags:
         - config
-      x-specification-crudl-model: DataAgreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-004
   /config/data-agreements:
     get:
-      description: LIST - Fetch all data agreements
+      summary: LIST - List all data agreements
+      description: This endpoint allows the admin to read all data agreements and their revisions defined earlier in an organisation.
       operationId: configListAgreement
       parameters:
         - description: An object with id revisionId
@@ -1008,16 +995,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all data agreements
       tags:
         - config
-      x-specification-crudl-model: DataAgreement
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   '/config/data-agreement/{dataAgreementId}/revisions':
     get:
-      description: LIST - Returns all the revisions for the data agreement
+      summary: LIST - List data agreement revisions
+      description: This endpoint lists all revisions of a data agreement defined earlier in an organisation.
       operationId: configListAgreementRevisions
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -1043,16 +1026,15 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all data agreement revisions
       tags:
         - config
       x-specification-crudl-model: Revision
       x-specification-pii-or-sensitive: 'False'
       x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   '/config/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      description: READ - Read all data attributes for the data agreement
+      summary: READ - Read data attributes
+      description: This endpoint reads all data attrinbutes defined in a data agreement.
       operationId: configListDataAttribute
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -1081,16 +1063,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Read all data attributes for the data agreement
       tags:
         - config
-      x-specification-crudl-model: DataAttribute
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   '/config/data-agreements/data-attribute/{dataAttributeId}':
     put:
-      description: UPDATE - Update an existing data attribute and returned together with revision
+      summary: UPDATE - Update data attribute
+      description: 'This endpoint updates an existing data attribute defined in a data agreement. If updated, the associated data agreement revision is incremented automatically.'
       operationId: configUpdateDataAttribute
       parameters:
         - description: Unique ID of an object
@@ -1124,16 +1102,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Update data attribute
       tags:
         - config
-      x-specification-crudl-model: DataAttribute
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
   /config/data-agreements/data-attributes:
     get:
-      description: LIST - Fetch all data attributes
+      summary: LIST - List all data attributes
+      description: This endpoint reads all data attrinbutes defined in a data agreement with pagination.
       operationId: configListDataAttribute
       parameters:
         - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
@@ -1172,16 +1146,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all data attributes
       tags:
         - config
-      x-specification-crudl-model: DataAttribute
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   /config/policy:
     post:
-      description: CREATE - Create a new policy and returned together with revision
+      summary: CREATE - Create data policy
+      description: This endpoint creates a new data policy that can be reused as global parameter across all newly crearted data agremements.
       operationId: configCreatePolicy
       parameters: []
       requestBody:
@@ -1211,16 +1181,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create policy
       tags:
         - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-001
   '/config/policy/{policyId}':
     get:
-      description: 'READ - Fetch a policy + latest revision. If a policy filter is supplied and contains a `revisionId`, then this specific revision is returned.'
+      summary: READ - Read data policy
+      description: READ - This endpoint reads a data policy with the latest revision info.
       operationId: configReadPolicy
       parameters:
         - description: Unique ID of an object
@@ -1251,15 +1217,11 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Read policy
       tags:
         - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
     put:
-      description: 'UPDATE - Update an existing policy, returning the updated version and a new revision. Updating a Policy does not affect existing references in DataAgreement, the new revision should be specified for DataAgreement.'
+      summary: UPDATE - Update data policy
+      description: This endpoint is used to update and existing data policy. It updates the existing and returns the updated version info. Updating a data policy does not affect existing data agreements.
       operationId: configUpdatePolicy
       parameters:
         - description: Unique ID of an object
@@ -1295,15 +1257,11 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Update policy
       tags:
         - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
     delete:
-      description: 'DELETE - Deletes an existing policy, returning the updated version and a new revision. Deleting a policy is not possible if it''s associated with active DataAgreement.'
+      summary: DELETE - Delete data policy
+      description: This endpoint is used to delete an existing data policy.
       operationId: configDeletePolicy
       parameters:
         - description: Unique ID of an object
@@ -1323,16 +1281,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - Deletes policy
       tags:
         - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-004
   /config/policies:
     get:
-      description: LIST - Fetch all policies
+      summary: LIST - List all data policies
+      description: This endpoint reads all data policies defined in the consent building block.
       operationId: configListPolicy
       parameters:
         - description: An object with id revisionId
@@ -1372,16 +1326,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all policies
       tags:
         - config
-      x-specification-crudl-model: Policy
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-A-001, UC-C-PIC-A-002'
   '/config/policy/{policyId}/revisions':
     get:
-      description: LIST - Returns all the revisions for the policy
+      summary: LIST - List data policy revisions
+      description: This endpoint reads all data policy revisions defined in the consent building block.
       operationId: configListPolicyRevisions
       parameters:
         - description: Unique ID of an object
@@ -1412,25 +1362,13 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all policy revisions
       tags:
         - config
-      x-specification-crudl-model: Revision
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   /config/individual:
     post:
-      tags:
-        - config
-      summary: CREATE - Create an individual
+      summary: CREATE - Create individual
+      description: This endpoint creates an individual for an organisation in the consent block system. This is used to onboard existing or new users.
       operationId: configCreatePolicy
-      description: CREATE - Creates an Individual in the Consent system
-      parameters: []
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: Individual
       responses:
         '200':
           description: ''
@@ -1479,13 +1417,13 @@ paths:
                   description: An object of type Individual
               required:
                 - individual
-  '/config/individual/{individualId}':
-    get:
       tags:
         - config
-      summary: READ - Read an individual
+  '/config/individual/{individualId}':
+    get:
+      summary: READ - Read individual
+      description: This endpoint is used to read an individual info defined for an organisation in the consent building block.
       operationId: configReadIndividual
-      description: READ - Fetch an Individual in the Consent system
       parameters:
         - in: path
           name: individualId
@@ -1493,10 +1431,6 @@ paths:
           required: true
           schema:
             type: string
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: Individual
       responses:
         '200':
           description: ''
@@ -1513,12 +1447,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-    put:
       tags:
         - config
-      summary: UPDATE - Update an individual
+    put:
+      summary: UPDATE - Update individual
+      description: This endpoint is used to udpated an individual for an organisation defined in the consent building block.
       operationId: configUpdateIndividual
-      description: UPDATE - Updates an Individual in the Consent system
       parameters:
         - in: path
           name: individualId
@@ -1526,10 +1460,6 @@ paths:
           required: true
           schema:
             type: string
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: Individual
       responses:
         '200':
           description: ''
@@ -1559,20 +1489,16 @@ paths:
                   description: An object of type Individual
               required:
                 - individual
-  /config/individuals:
-    get:
       tags:
         - config
+  /config/individuals:
+    get:
       summary: LIST - List all individuals
+      description: This endpoint is used to list all individuals in the organisation defined in the consent building block.
       operationId: configListIndividuals
-      description: LIST - lists individuals in the system
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: Individual
       responses:
         '200':
           description: ''
@@ -1593,11 +1519,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
+      tags:
+        - config
   /config/individual/upload:
     post:
-      deprecated: false
-      description: CREATE - Create individuals in bulk from CSV file
-      summary: CREATE - Create individuals in bulk from CSV file
+      summary: CREATE - Create individual(s) via csv
+      description: This endpoint is used to onboard existing individual users defined in the organisation to consent building block using a .csv file.
       operationId: configUploadIndividuals
       requestBody:
         content:
@@ -1617,15 +1544,14 @@ paths:
           content: {}
       security:
         - BearerAuth: []
+      deprecated: false
       tags:
         - config
   /config/webhook:
     post:
-      operationId: configCreateWebhook
       summary: CREATE - Create webhook
-      description: Create webhook
-      tags:
-        - config
+      description: This endpoint is used to create a webhook to trigger events from consent building block to an external IT system.
+      operationId: configCreateWebhook
       requestBody:
         content:
           application/json:
@@ -1648,13 +1574,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/config/webhook/{webhookId}':
-    get:
-      operationId: configReadWebhook
-      summary: READ - Read webhook
-      description: Get a webhook by ID
       tags:
         - config
+  '/config/webhook/{webhookId}':
+    get:
+      summary: READ - Read webhook
+      description: This endpoint is used to read a webhook to by its ID defined in the consent building block.
+      operationId: configReadWebhook
       parameters:
         - name: webhookId
           in: path
@@ -1675,12 +1601,12 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-    put:
-      operationId: configUpdateWebhook
-      summary: UPDATE - Update webhook
-      description: UPDATE - Update webhook
       tags:
         - config
+    put:
+      summary: UPDATE - Update webhook
+      description: This endpoint is used to update an existing webhook to trigger events from consent building block to an external IT system.
+      operationId: configUpdateWebhook
       parameters:
         - name: webhookId
           in: path
@@ -1710,12 +1636,12 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-    delete:
-      operationId: configDeleteWebhook
-      summary: DELETE - Delete webhook
-      description: Delete webhook
       tags:
         - config
+    delete:
+      summary: DELETE - Delete webhook
+      description: This endpoint is used to delete an existing webhook that was defined to trigger events from the consent building block to an external IT system.
+      operationId: configDeleteWebhook
       parameters:
         - name: webhookId
           in: path
@@ -1736,13 +1662,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /config/webhooks:
-    get:
-      operationId: configListWebhooks
-      summary: LIST - List all webhooks
-      description: Get all webhooks for an organisation
       tags:
         - config
+  /config/webhooks:
+    get:
+      summary: LIST - List all webhooks
+      description: This endpoint is used to get all webhooks that was defined to trigger events from the consent building block to an external IT system.
+      operationId: configListWebhooks
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
@@ -1765,13 +1691,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/config/webhook/{webhookId}/ping':
-    post:
-      operationId: configPingWebhook
-      summary: Ping webhook
-      description: Ping webhook
       tags:
         - config
+  '/config/webhook/{webhookId}/ping':
+    post:
+      summary: Ping webhook
+      description: This endpoint is used to ping a webhook that was defined to trigger events from the consent building block to an external IT system.
+      operationId: configPingWebhook
       parameters:
         - name: webhookId
           in: path
@@ -1820,13 +1746,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/config/webhooks/{webhookId}/deliveries':
-    get:
-      operationId: configListAllRecentWebhookDeliveries
-      summary: Get recent webhook deliveries
-      description: Get recent webhook deliveries
       tags:
         - config
+  '/config/webhooks/{webhookId}/deliveries':
+    get:
+      summary: LIST - List all webhook deliveries
+      description: This endpoint is used to read recent webhook deliveries with pagination from the consent building block that were sent to an external IT system.
+      operationId: configListAllRecentWebhookDeliveries
       parameters:
         - name: webhookId
           in: path
@@ -1882,13 +1808,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/config/webhooks/{webhookId}/delivery/{deliveryId}':
-    get:
-      operationId: configReadRecentWebhookDelivery
-      summary: Get recent webhook delivery by ID
-      description: Get recent webhook delivery by ID
       tags:
         - config
+  '/config/webhooks/{webhookId}/delivery/{deliveryId}':
+    get:
+      summary: READ - Read webhook delivery
+      description: This endpint is used to get the recent webhook deliveries for a webhook defined in the consent building block.
+      operationId: configReadRecentWebhookDelivery
       parameters:
         - name: webhookId
           in: path
@@ -1921,13 +1847,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  '/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
-    post:
-      operationId: configRedeliverWebhook
-      summary: Redeliver a webhook payload by delivery ID
-      description: Redeliver a webhook payload by delivery ID
       tags:
         - config
+  '/config/webhooks/{webhookId}/delivery/{deliveryId}/redeliver':
+    post:
+      summary: Re-deliver a webhook event
+      description: This endpoint is used to re-deliver a webhook payload by delivery ID.
+      operationId: configRedeliverWebhook
       parameters:
         - name: organizationId
           in: path
@@ -1954,13 +1880,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /config/webhooks/event-types:
-    get:
-      operationId: configReadWebhookEventTypes
-      description: Get webhook event types
-      summary: LIST - List all webhook event types
       tags:
         - config
+  /config/webhooks/event-types:
+    get:
+      summary: READ - Read webhook event types
+      description: This endpoint is used to list all webhook event types defined in the consent building block.
+      operationId: configReadWebhookEventTypes
       responses:
         '200':
           description: OK
@@ -1991,13 +1917,13 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
-  /config/webhooks/payload/content-types:
-    get:
-      operationId: getWebhookPayloadContentTypes.yaml
-      summary: LIST - List all webhook payload content types
-      description: Get webhook payload content types
       tags:
         - config
+  /config/webhooks/payload/content-types:
+    get:
+      summary: LIST - List all webhook content types
+      description: This endpoint is used to get webhook content types.
+      operationId: getWebhookPayloadContentTypes.yaml
       responses:
         '200':
           description: OK
@@ -2018,9 +1944,12 @@ paths:
       deprecated: false
       security:
         - BearerAuth: []
+      tags:
+        - config
   /config/idp/open-id:
     post:
-      description: CREATE - Create an IDP
+      summary: CREATE - Create IDP
+      description: This endpoint is used to configure an IdP (e.g. OIDC based) used by the organisation in the consent building block.
       operationId: configCreateIdp
       parameters: []
       requestBody:
@@ -2048,16 +1977,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create an IDP
       tags:
         - config
-      x-specification-crudl-model: IDP
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
   '/config/idp/open-id/{idpId}':
     get:
-      description: READ - Read an IDP
+      summary: READ - Read IdP details
+      description: This endpoint is used to read the IdP details configured by the organisation in the consent building block.
       operationId: configReadIdp
       parameters:
         - $ref: '#/paths/~1service~1idp~1open-id/get/parameters/0'
@@ -2075,13 +2000,8 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Read an IDP
       tags:
         - config
-      x-specification-crudl-model: IDP
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
     put:
       description: UPDATE - Update an IDP
       operationId: configUpdatePolicy
@@ -2189,18 +2109,12 @@ paths:
       x-specification-usecase: UC-C-PIC-A-004
   /config/idp/open-ids:
     post:
-      tags:
-        - config
-      summary: LIST - List IDP
+      summary: LIST - List all IdPs
+      description: This endpoint read all IdPs configured for the organisation in the consent building block.
       operationId: configListIdp
-      description: LIST - List IDP
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
-      x-specification-usecase: ''
-      x-specification-scenario: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-crudl-model: IDP
       responses:
         '200':
           description: ''
@@ -2220,9 +2134,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
+      tags:
+        - config
   /config/admin/apikeys:
     get:
-      description: LIST - List all api keys
+      summary: LIST - List all api keys
+      description: This endpoint lists all API keys created in consent building block with pagination.
       operationId: configListApiKey
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -2246,16 +2163,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - List all api keys
       tags:
         - config
-      x-specification-crudl-model: ApiKey
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-003
   /config/admin/apikey:
     post:
-      description: CREATE - Create an API key
+      summary: CREATE - Create API key
+      description: 'This endpoint is used to create an API key for accessing endpoints in the consent building block. It can created for a specific scope. E.g. Config, Onboard, Audit, Service.'
       operationId: configCreateApikey
       parameters: []
       requestBody:
@@ -2265,7 +2178,7 @@ paths:
               properties:
                 apiKey:
                   $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
-                  description: An object of type ApiKey
+                  description: An object of type APIKey
               required:
                 - apiKey
               type: object
@@ -2282,21 +2195,17 @@ paths:
                 required:
                   - apiKey
                 type: object
-          description: 'A set consisting of the new ApiKey object created, together with the initial Revision object.'
+          description: ''
         '400':
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: CREATE - Create an API key
       tags:
         - config
-      x-specification-crudl-model: ApiKey
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-001
   '/config/admin/apikey/{apiKeyId}':
     put:
-      description: UPDATE - Update an API key
+      summary: UPDATE - Update API key
+      description: 'This endpoint is used to update an existing API key for accessing endpoints in the consent building block. It can be updated for a specific scope. E.g. Config, Onboard, Audit, Service.'
       operationId: configUpdateApiKey
       parameters:
         - description: Unique ID of an object
@@ -2312,7 +2221,7 @@ paths:
               properties:
                 apiKey:
                   $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/delete/responses/200/content/application~1json/schema/allOf/0'
-                  description: An object of type ApiKey
+                  description: An object of type APIKey
               required:
                 - apiKey
               type: object
@@ -2331,15 +2240,11 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: UPDATE - Update an API key
       tags:
         - config
-      x-specification-crudl-model: ApiKey
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-002
     delete:
-      description: DELETE - Deletes an API key DataAgreement.
+      summary: DELETE - Delete API key
+      description: This endpoint is used to delete an existing API key for  accessing endpoints in the consent building block.
       operationId: configDeletePolicy
       parameters:
         - $ref: '#/paths/~1config~1admin~1apikey~1%7BapiKeyId%7D/put/parameters/0'
@@ -2398,17 +2303,13 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: DELETE - Deletes an API key
       tags:
         - config
-      x-specification-crudl-model: ApiKey
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-A-004
+      x-specification-crudl-model: ApiK
   /config/privacy-dashboard:
     get:
-      deprecated: false
-      description: Read privacy dashboard
+      summary: GET - Read privacy dashboard
+      description: This endpoint is used to read the deployed privacy board for the organiastion as per the data agreement defined in the consent building block.
       operationId: readPrivacyDashboard
       responses:
         '200':
@@ -2436,6 +2337,7 @@ paths:
                   - privacydashboard
                 type: object
           description: OK
+      deprecated: false
       security:
         - BearerAuth: []
       tags:
@@ -4028,9 +3930,9 @@ paths:
         - service
   /audit/admin/logs:
     get:
+      summary: LIST - Fetch all organisational logs
+      description: This endpoint is used to list all logs with pagination for an organisation defined in the consent building block.
       operationId: auditAdminLogs
-      tags:
-        - audit
       security:
         - BearerAuth: []
       parameters:
@@ -4042,8 +3944,6 @@ paths:
           required: false
           schema:
             type: integer
-      description: LIST - List all organisation admin logs
-      summary: LIST - List all organisation admin logs
       responses:
         '200':
           content:
@@ -4079,9 +3979,12 @@ paths:
                     type: array
                   pagination:
                     $ref: '#/components/schemas/Pagination'
+      tags:
+        - audit
   /audit/consent-records:
     get:
-      description: LIST - Fetch all consent records
+      summary: LIST - Fetch all consent records
+      description: This endpoint is used to fetch all consent records with pagination for individuals in an organisation defined in the consent building block.
       operationId: auditDataAgreementRecordsList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -4148,16 +4051,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all consent records
       tags:
         - audit
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-AT-003
   '/audit/consent-record/{consentRecordId}':
     get:
-      description: READ - Fetch a single consent record
+      summary: READ - Get consent record
+      description: This endpoint is used to get a single consent record by ID in an organisation defined in the consent building block.
       operationId: auditConsentRecordRead
       parameters:
         - description: Unique ID of an object
@@ -4180,16 +4079,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch a single consent record
       tags:
         - audit
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: ''
   /audit/data-agreements:
     get:
-      description: LIST - Fetch all data agreements stored in the system
+      summary: LIST - Fetch all data agreements
+      description: This endpoint is used to fetch all data agreements defined in the consent building block.
       operationId: auditDataAgreementList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -4212,16 +4107,12 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: LIST - Fetch all data agreements stored in the system
       tags:
         - audit
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
   '/audit/data-agreement/{dataAgreementId}':
     get:
-      description: READ - Fetch a single data agreement.
+      summary: READ - Get data agreement
+      description: 'This endpoint is used to fetch a single data agreement for audit purposes, for e.g., by an external third party.'
       operationId: auditReadRecord
       parameters:
         - description: Unique ID of an object
@@ -4244,13 +4135,8 @@ paths:
           description: bad input parameter
       security:
         - BearerAuth: []
-      summary: READ - Fetch a single data agreement.
       tags:
         - audit
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: ''
-      x-specification-usecase: 'UC-C-PIC-AT-001, UC-C-PIC-AT-003'
 servers:
   - description: Development server
     url: 'https://api.bb-consent.dev/v2'
@@ -4259,15 +4145,15 @@ servers:
   - description: Demo server
     url: 'https://demo-consent-bb-api.igrant.io/v2'
 tags:
-  - description: Operations for external auditing systems to query detailed data from the system and subscribe to notifications.
+  - description: This consists of endpoints for an external auditing systems or for organisational to query consent record from consent building block.
     name: audit
     x-tag-expanded: false
-  - description: Secured operations available to organization API integration
+  - description: 'This consists of ndpoints available to organisation admins to manage data agreements, data agreement records, consents and consent records. It also provides mechanisms onboard the organisation to consent building block.'
     name: config
     x-tag-expanded: false
-  - description: 'Secured operations for individuals, data consumers and applications to record and verify consent'
+  - description: 'This consists of endpoints towards individuals, data consumers and applications to view, sign/record their agreement to the processing of personal data. In cases where the data agreement is of legal basis consent and for legitimate interest, the individual can opt-in and opt-out at any stage.'
     name: service
     x-tag-expanded: false
-  - description: 'These are used for onboard the organisation, organisation admin and individual users to the system.  It also deals with all authentication and authorisation APIs that can be configured towards external IDPs.'
+  - description: This consists of endpoints towards organisation admin to onboard to consent building block. It also deals with all authentication and authorisation APIs that can be configured towards external IDPs (e.g. using OpenID Connect).
     name: onboard
     x-tag-expanded: false

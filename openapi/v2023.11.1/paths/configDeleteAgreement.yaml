@@ -1,4 +1,7 @@
-description: DELETE - Delete a data agreement
+summary: DELETE - Delete data agreement
+description: 
+  This endpoint allows the admin to delete all revisions of a chosen 
+  data agreement defined earlier in an organisation. 
 operationId: configDeleteAgreement
 parameters:
 - description: Unique ID of an object
@@ -18,10 +21,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Delete data agreement
 tags:
 - config
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-A-004

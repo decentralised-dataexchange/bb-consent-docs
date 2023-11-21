@@ -1,8 +1,8 @@
+summary: READ - Read webhook event types
+description: 
+  This endpoint is used to list all webhook event types defined in 
+  the consent building block.
 operationId: configReadWebhookEventTypes
-description: Get webhook event types
-summary: LIST - List all webhook event types
-tags:
-  - config
 responses:
   '200':
     description: OK
@@ -20,3 +20,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config

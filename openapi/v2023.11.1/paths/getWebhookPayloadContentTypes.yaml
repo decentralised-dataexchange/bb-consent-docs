@@ -1,8 +1,7 @@
+summary: LIST - List all webhook content types
+description: 
+  This endpoint is used to get webhook content types.
 operationId: getWebhookPayloadContentTypes.yaml
-summary: LIST - List all webhook payload content types
-description: Get webhook payload content types
-tags:
-  - config
 responses:
   '200':
     description: OK
@@ -23,3 +22,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config

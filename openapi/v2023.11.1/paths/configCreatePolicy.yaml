@@ -1,4 +1,7 @@
-description: CREATE - Create a new policy and returned together with revision
+summary: CREATE - Create data policy
+description:
+    This endpoint creates a new data policy that can be reused as global
+    parameter across all newly crearted data agremements. 
 operationId: configCreatePolicy
 parameters: []
 requestBody:
@@ -29,10 +32,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create policy
 tags:
 - config
-x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-A-001

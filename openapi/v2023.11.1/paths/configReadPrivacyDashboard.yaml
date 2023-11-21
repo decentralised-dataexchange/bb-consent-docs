@@ -1,5 +1,7 @@
-deprecated: false
-description: Read privacy dashboard
+summary: GET - Read privacy dashboard
+description: 
+  This endpoint is used to read the deployed privacy board for the organiastion 
+  as per the data agreement defined in the consent building block. 
 operationId: readPrivacyDashboard
 responses:
   '200':
@@ -27,6 +29,7 @@ responses:
           - privacydashboard
           type: object
     description: OK
+deprecated: false
 security:
 - BearerAuth: []
 tags:

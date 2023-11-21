@@ -1,4 +1,7 @@
-description: UPDATE - Update an existing data agreement and returned together with revision
+summary: UPDATE - Update data agreement
+description: 
+  This endpoint allows the admin to update the latest data agreement defined
+  earlier in an organisation. It also returns the updated revision number.
 operationId: configUpdateAgreement
 parameters:
 - description: Unique ID of an object
@@ -34,10 +37,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update data agreement
+
 tags:
 - config
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: 'False'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-A-002

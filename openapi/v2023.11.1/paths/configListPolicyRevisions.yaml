@@ -1,4 +1,7 @@
-description: LIST - Returns all the revisions for the policy
+summary: LIST - List data policy revisions
+description:
+  This endpoint reads all data policy revisions defined in the 
+  consent building block.
 operationId: configListPolicyRevisions
 parameters:
   - description: Unique ID of an object
@@ -29,10 +32,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all policy revisions
 tags:
   - config
-x-specification-crudl-model: Revision
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

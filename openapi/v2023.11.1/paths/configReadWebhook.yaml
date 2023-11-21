@@ -1,8 +1,8 @@
-operationId: configReadWebhook
 summary: READ - Read webhook
-description: Get a webhook by ID
-tags:
-  - config
+description: 
+    This endpoint is used to read a webhook to by its ID defined in 
+    the consent building block. 
+operationId: configReadWebhook
 parameters:
   - name: webhookId
     in: path
@@ -23,3 +23,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config

@@ -1,4 +1,7 @@
-description: LIST - List all api keys
+summary: LIST - List all api keys
+description: 
+  This endpoint lists all API keys created in consent building block
+  with pagination.
 operationId: configListApiKey
 parameters:
   - $ref: "../parameters/offset.yaml"
@@ -22,10 +25,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all api keys
 tags:
   - config
-x-specification-crudl-model: ApiKey
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

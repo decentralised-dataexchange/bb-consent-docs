@@ -1,4 +1,7 @@
-description: LIST - Fetch all data agreements
+summary: LIST - List all data agreements
+description:
+  This endpoint allows the admin to read all data agreements and their 
+  revisions defined earlier in an organisation. 
 operationId: configListAgreement
 parameters:
   - $ref: "../parameters/revisionId.yaml"
@@ -23,10 +26,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all data agreements
 tags:
   - config
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

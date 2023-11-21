@@ -1,4 +1,6 @@
-description: LIST - Returns all the revisions for the data agreement
+summary: LIST - List data agreement revisions
+description:
+  This endpoint lists all revisions of a data agreement defined earlier in an organisation.
 operationId: configListAgreementRevisions
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -24,10 +26,8 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all data agreement revisions
 tags:
   - config
 x-specification-crudl-model: Revision
 x-specification-pii-or-sensitive: "False"
 x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

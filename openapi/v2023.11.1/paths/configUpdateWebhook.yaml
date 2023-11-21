@@ -1,8 +1,8 @@
-operationId: configUpdateWebhook
 summary: UPDATE - Update webhook
-description: UPDATE - Update webhook
-tags:
-  - config
+description:
+    This endpoint is used to update an existing webhook to 
+    trigger events from consent building block to an external IT system. 
+operationId: configUpdateWebhook
 parameters:
   - name: webhookId
     in: path
@@ -32,3 +32,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config

@@ -1,5 +1,7 @@
-description: DELETE - Deletes an API key
-  DataAgreement.
+summary: DELETE - Delete API key
+description: 
+  This endpoint is used to delete an existing API key for  accessing 
+  endpoints in the consent building block.
 operationId: configDeletePolicy
 parameters:
   - $ref: "../parameters/apiKeyId.yaml"
@@ -16,10 +18,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: DELETE - Deletes an API key
 tags:
   - config
-x-specification-crudl-model: ApiKey
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-004
+x-specification-crudl-model: ApiK

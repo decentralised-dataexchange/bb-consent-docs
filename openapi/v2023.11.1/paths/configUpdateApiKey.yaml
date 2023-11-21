@@ -1,4 +1,8 @@
-description: UPDATE - Update an API key
+summary: UPDATE - Update API key
+description: 
+  This endpoint is used to update an existing API key for accessing endpoints 
+  in the consent building block. It can be updated for a specific scope. 
+  E.g. Config, Onboard, Audit, Service.
 operationId: configUpdateApiKey
 parameters:
   - $ref: "../parameters/apiKeyId.yaml"
@@ -9,7 +13,7 @@ requestBody:
         properties:
           apiKey:
             $ref: ../definitions/ApiKey.yaml
-            description: An object of type ApiKey
+            description: An object of type APIKey
         required:
           - apiKey
         type: object
@@ -28,10 +32,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: UPDATE - Update an API key
 tags:
   - config
-x-specification-crudl-model: ApiKey
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-002

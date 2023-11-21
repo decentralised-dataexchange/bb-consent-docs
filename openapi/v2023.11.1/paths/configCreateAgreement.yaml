@@ -1,4 +1,4 @@
-summary: CREATE - Create a data agreement
+summary: CREATE - Create data agreement
 description: |
   This endpoint creates a data agreement for an organisation. 
   It also returns the latest revision of the created data agreement.
@@ -33,7 +33,3 @@ security:
   - BearerAuth: []
 tags:
   - config
-x-specification-crudl-model: DataAgreement
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-001

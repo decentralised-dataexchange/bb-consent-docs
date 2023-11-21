@@ -1,6 +1,7 @@
-deprecated: false
-description: CREATE - Create individuals in bulk from CSV file
-summary: CREATE - Create individuals in bulk from CSV file
+summary: CREATE - Create individual(s) via csv
+description: 
+  This endpoint is used to onboard existing individual users defined 
+  in the organisation to consent building block using a .csv file.
 operationId: configUploadIndividuals
 requestBody:
   content:
@@ -20,5 +21,6 @@ responses:
     content: {}
 security:
 - BearerAuth: []
+deprecated: false
 tags:
 - config

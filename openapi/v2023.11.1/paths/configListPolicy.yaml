@@ -1,4 +1,6 @@
-description: LIST - Fetch all policies
+summary: LIST - List all data policies
+description:
+  This endpoint reads all data policies defined in the consent building block.
 operationId: configListPolicy
 parameters:
   - description: An object with id revisionId
@@ -27,10 +29,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: LIST - List all policies
 tags:
   - config
-x-specification-crudl-model: Policy
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-001, UC-C-PIC-A-002

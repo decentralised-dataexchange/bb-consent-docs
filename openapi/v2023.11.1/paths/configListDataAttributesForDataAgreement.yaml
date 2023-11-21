@@ -1,4 +1,6 @@
-description: READ - Read all data attributes for the data agreement
+summary: READ - Read data attributes
+description:
+  This endpoint reads all data attrinbutes defined in a data agreement.
 operationId: configListDataAttribute
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -27,10 +29,5 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: READ - Read all data attributes for the data agreement
 tags:
   - config
-x-specification-crudl-model: DataAttribute
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-A-003

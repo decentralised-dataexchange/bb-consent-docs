@@ -1,8 +1,8 @@
+summary: LIST - List all webhook deliveries
+description:
+  This endpoint is used to read recent webhook deliveries with pagination 
+  from the consent building block that were sent to an external IT system. 
 operationId: configListAllRecentWebhookDeliveries
-summary: Get recent webhook deliveries
-description: Get recent webhook deliveries
-tags:
-  - config
 parameters:
   - name: webhookId
     in: path
@@ -34,3 +34,5 @@ responses:
 deprecated: false
 security:
   - BearerAuth: []
+tags:
+  - config
