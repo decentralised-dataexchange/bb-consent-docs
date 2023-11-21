@@ -13,7 +13,7 @@ responses:
           properties:
             consentRecords:
               items:
-                $ref: ../definitions/consentRecord.yaml
+                $ref: ../definitions/ConsentRecord.yaml
               type: array
             pagination:
               $ref: "../definitions/Pagination.yaml"

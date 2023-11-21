@@ -10,7 +10,7 @@ responses:
           type: object
           properties:
             consentRecord:
-              $ref: ../definitions/consentRecord.yaml
+              $ref: ../definitions/ConsentRecord.yaml
     description: ""
   "400":
     description: bad input parameter

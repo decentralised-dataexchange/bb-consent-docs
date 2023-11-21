@@ -15,7 +15,7 @@ responses:
             consentRecords:
               items:
                 allOf:
-                  - $ref: ../definitions/consentRecord.yaml
+                  - $ref: ../definitions/ConsentRecord.yaml
                   - $ref: "../definitions/ListDataAgreementRecordExtras.yaml"
               type: array
             pagination:

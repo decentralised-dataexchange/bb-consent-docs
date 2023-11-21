@@ -9,7 +9,7 @@ requestBody:
       schema:
         properties:
           consentRecord:
-            $ref: ../definitions/consentRecord.yaml
+            $ref: ../definitions/ConsentRecord.yaml
             description: An object of type DataAgreementRecord
           signature:
             $ref: ../definitions/Signature.yaml
@@ -26,7 +26,7 @@ responses:
           type: object
           properties:
             consentRecord:
-              $ref: ../definitions/consentRecord.yaml
+              $ref: ../definitions/ConsentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
             signature:

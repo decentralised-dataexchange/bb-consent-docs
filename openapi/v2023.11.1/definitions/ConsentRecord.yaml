@@ -1,6 +1,6 @@
 type: object
 title: ConsentRecord
-description: "A Consent Record expresses consent (as defined in this building block's specification) to a single DataAgreement. There must be a UNIQUE constraint on (agreementRevision, individual)"
+description: "A consent record expresses consent (as defined in this building block's specification) to a single DataAgreement. There must be a UNIQUE constraint on (data agreement revision, individual)"
 x-not-in-database: false
 
 required:
@@ -14,24 +14,24 @@ properties:
     example: ""
     description: 'Objects may be passed back by some API endpoints without an id (PK), denoting that they are a "draft", i.e. a ConsentRecord that is not yet stored in the database and only exist in transit. Draft ConsentRecords do not have a Revision, but if paired up with a Signature, a valid Revision should be generated.'
 
-  agreement:
-    $ref: "./DataAgreement.yaml"
+  dataAgreementId:
+    type: string
     x-fk-model: "DataAgreement"
     description: "The DataAgreement to which consent has been given"
 
-  agreementRevision:
-    $ref: "./Revision.yaml"
+  dataAgreementRevisionId:
+    type: string
     x-fk-model: "Revision"
-    description: "The Revision of the agreement which consent has been given to"
+    description: "The Revision of the data agreement which consent has been given to"
 
-  agreementRevisionHash:
+  dataAgreementRevisionHash:
     type: string
     format: ""
     example: ""
     description: "Copy of the revision hash. The hash is the included in the signature and ensures against tampering with the original agreement."
 
-  individual:
-    $ref: "./Individual.yaml"
+  individualId:
+    type: string
     x-fk-model: "Individual"
     description: "The Individual who has signed this consent record"
 
@@ -46,8 +46,11 @@ properties:
     format: ""
     example: ""
     description: "The state field is used to record state changes after-the-fact. It is maintained by the Consent BB itself. Valid states: unsigned/pending more signatures/signed"
+    enum:
+      - unsigned
+      - signed
 
-  signature:
-    $ref: "./Signature.yaml"
+  signatureId:
+    type: string
     x-fk-model: "Signature"
     description: "A signature that hashes all the values of the consent record and has signed it with the key of the Invidiual, making it verifiable and tamper-proof. TBD: Relation to a Signature schema?"

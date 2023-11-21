@@ -14,7 +14,7 @@ responses:
           type: object
           properties:
             consentRecord:
-              $ref: ../definitions/consentRecord.yaml
+              $ref: ../definitions/ConsentRecord.yaml
             revision:
               $ref: ../definitions/Revision.yaml
     description: ""
