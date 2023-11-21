@@ -1,5 +1,8 @@
 summary: READ - Read data sharing UI
-description: READ - Read data sharing UI
+description:
+  This endpoint is used to render the data sharing UI during 
+  a data exchange as defined by a (data source) organisation in the consent 
+  building block.
 operationId: serviceReadDataSharingUi
 parameters:
   - name: dataAgreementId

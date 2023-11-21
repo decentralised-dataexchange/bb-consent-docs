@@ -1,6 +1,7 @@
 summary: CREATE - Create consent record and signature
-description: CREATE - Create a paired consent record and signature object. Returns
-  the same objects with the PK defined.
+description:
+  This endpoint is used to create a consent record and signature object. This 
+  returns the same objects with the PK defined.
 operationId: serviceCreateIndividualConsentRecordAndSignature
 parameters:
   - $ref: "../parameters/individualIdHeader.yaml"

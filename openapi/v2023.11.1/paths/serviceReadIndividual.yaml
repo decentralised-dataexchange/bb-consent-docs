@@ -1,5 +1,8 @@
-summary: READ - Read individual
-description: READ - Read individual in the Consent system
+summary: READ - Read individual 
+description:
+  This endpoint is used to read the individual's information as defined by the organisation 
+  in the consent building block. This is used in privacy dashboard where the individuals can 
+  mark their consents, sign data agreement etc.
 operationId: "configReadIndividual"
 parameters:
   - in: path

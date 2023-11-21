@@ -1,5 +1,8 @@
-description: READ - Read organisation
 summary: READ - Read organisation
+description: 
+  This endpoint is used to read the organisation information as configured by the 
+  organisation in the consent building block. This is used, for e.g., in the privacy
+  dashboard.
 operationId: serviceReadOrganisation
 deprecated: false
 responses:

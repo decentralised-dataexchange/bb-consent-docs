@@ -1,5 +1,7 @@
 summary: LIST - List all consent records
-description: LIST - List all consent records
+description: 
+  This endpoint is used to list all consent records available for an organisation 
+  defined in the consent building block. The results are paginated. 
 operationId: serviceVerificationAgreementList
 parameters:
   - $ref: "../parameters/offset.yaml"

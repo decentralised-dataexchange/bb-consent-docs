@@ -1,5 +1,8 @@
 summary: UPDATE - Update consent record
-description: UPDATE - Update consent record. Note that updating a signed consent record invalidates its signature.
+description: 
+  This endpoint is used to update an existing consent record for a given data agreement
+  for an organiation defined in the consent building block. Note that updating a signed 
+  consent record invalidates its earlier signature.
 operationId: serviceUpdateIndividualConsentRecord
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"
@@ -51,7 +54,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-I-003

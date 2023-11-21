@@ -1,7 +1,7 @@
 summary: UPDATE - Updates signature for consent record
-description: UPDATE - Updates signature for consent record. This is used
-  to add a signature to an existing unsigned consent record. Consent BB is responsible
-  for updating the consent record state.
+description:
+  This endpoint is used to update a signature object for the consent record
+  for an individual in an organiation defined in the consent building block.
 operationId: serviceUpdateIndividualConsentRecordSignature
 parameters:
   - description: Unique ID of an object

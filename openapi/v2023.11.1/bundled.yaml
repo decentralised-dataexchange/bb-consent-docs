@@ -1367,7 +1367,7 @@ paths:
   /config/individual:
     post:
       summary: CREATE - Create individual
-      description: This endpoint creates an individual for an organisation in the consent block system. This is used to onboard existing or new users.
+      description: This endpoint creates an individual for an organisation in the consent building block. This is used to onboard existing or new users.
       operationId: configCreatePolicy
       responses:
         '200':
@@ -2900,8 +2900,8 @@ paths:
         - onboard
   /service/organisation/coverimage:
     get:
-      summary: READ - Read organization cover image
-      description: Read organization cover image
+      summary: READ - Read organisation cover image
+      description: This endpoint is used to retrieve the existing cover image for the organisation. The cover image is used to display in the privacy dashboard.
       operationId: serviceReadOrganisationCoverImage
       responses:
         '200':
@@ -2914,7 +2914,7 @@ paths:
   /service/organisation/logoimage:
     get:
       summary: READ - Read organisation logo image
-      description: Read organisation logo image
+      description: Read organisation logo image This endpoint is used to retrieve the existing logo image for the organisation. The logo image is used to display in the privacy dashboard as well in data sharing UIs.
       operationId: serviceReadOrganisationLogoImage
       deprecated: false
       responses:
@@ -2926,8 +2926,8 @@ paths:
         - service
   /service/idp/open-id:
     get:
-      summary: READ - Read IdP
-      description: READ - Read IdP
+      summary: READ - Read IdP details
+      description: This endpoint is used to read the IdP details configured by the organisation in the consent building block.
       operationId: serviceReadIdp
       parameters:
         - description: Unique ID of an object
@@ -2971,8 +2971,8 @@ paths:
         - service
   /service/organisation:
     get:
-      description: READ - Read organisation
       summary: READ - Read organisation
+      description: 'This endpoint is used to read the organisation information as configured by the organisation in the consent building block. This is used, for e.g., in the privacy dashboard.'
       operationId: serviceReadOrganisation
       deprecated: false
       responses:
@@ -3011,7 +3011,7 @@ paths:
   /service/data-agreements:
     get:
       summary: LIST - List all active data agreements
-      description: LIST - List active data agreements
+      description: This endpoint is used to list all active data agreements by the organisation in consent building block. The results are returned with pagination.
       operationId: serviceAgreementList
       parameters:
         - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
@@ -3040,7 +3040,7 @@ paths:
   '/service/data-agreement/{dataAgreementId}':
     get:
       summary: READ - Read data agreement
-      description: READ - Read data agreement
+      description: This endpoint is used to read the data agreement defined by the organisation in consent building block.
       operationId: serviceAgreementRead
       parameters:
         - description: Unique ID of an object
@@ -3071,8 +3071,8 @@ paths:
         - service
   '/service/data-agreement/{dataAgreementId}/data-attributes':
     get:
-      summary: LIST - List all data attributes for data agreement
-      description: LIST - List all latest versions of data attribute associated with an DataAgreement and the presented revisionId of that DataAgreement
+      summary: LIST - List data attributes
+      description: This endpoint is used to read the data attributes defined in a particular data agreement revision.
       operationId: serviceAgreementDataRead
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3101,8 +3101,8 @@ paths:
         - service
   '/service/policy/{policyId}':
     get:
-      summary: READ - Read policy
-      description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
+      summary: READ - Read data policy
+      description: This endpoint is used to read latest version of data policy defined in the organisation in the consent building block.
       operationId: servicePolicyRead
       parameters:
         - description: Unique ID of an object
@@ -3137,7 +3137,7 @@ paths:
   /service/verification/data-agreements:
     get:
       summary: LIST - List all consent records
-      description: LIST - List all consent records
+      description: This endpoint is used to list all consent records available for an organisation defined in the consent building block. The results are paginated.
       operationId: serviceVerificationAgreementList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3169,7 +3169,7 @@ paths:
   '/service/verification/consent-record/{consentRecordId}':
     get:
       summary: READ - Read latest consent record
-      description: READ - Read latest consent record.
+      description: This endpoint is used to read the latest consent record for an organisation in the consent building block.
       operationId: serviceVerificationAgreementConsentRecordRead
       parameters:
         - $ref: '#/paths/~1audit~1consent-record~1%7BconsentRecordId%7D/get/parameters/0'
@@ -3198,7 +3198,7 @@ paths:
   /service/verification/consent-records:
     get:
       summary: LIST - List all consent records
-      description: LIST - List all consent records
+      description: This endpoint is used to list all consent records available for an organisation defined in the consent building block. The results are paginated.
       operationId: serviceVerificationConsentRecordList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3230,7 +3230,7 @@ paths:
   '/service/individual/record/data-agreement/{dataAgreementId}':
     post:
       summary: CREATE - Create consent record
-      description: 'CREATE - For a particular individual and a particular data agreement, create a new consent record pointing to the current revision of a given data agreement.'
+      description: This endpoint is used to create a consent record when an individial records their consent (e.g. in the privacy dashboard) against a data agreement.
       operationId: serviceCreateIndividualConsentRecord
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3254,13 +3254,9 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
     get:
       summary: READ - Read consent record
-      description: READ - Read consent record. There should be one unambiguous DataAgreementRecord for an Individual and an DataAgreement.
+      description: This endpoint is used to read a consent record for an individial for a chosen data agreement. There should be one unambiguous consent record for an individual.
       operationId: serviceReadIndividualRecordRead
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3281,14 +3277,10 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/consent-record/draft:
     post:
-      summary: CREATE - Create DRAFT consent record
-      description: CREATE - Create a DRAFT (unsaved) consent record and signature objects (without a PK) for a given dataAgreementId.
+      summary: CREATE - Create draft consent record
+      description: This endpoint is used to create a draft (unsaved) consent record and signature object (without a PKI) for a data agreement.
       operationId: serviceCreateIndividualConsentRecordDraft
       parameters:
         - description: An object with id individualId
@@ -3328,14 +3320,10 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: '1.2'
-      x-specification-usecase: UC-C-PIC-I-002
   /service/individual/record/consent-record:
     post:
       summary: CREATE - Create consent record and signature
-      description: CREATE - Create a paired consent record and signature object. Returns the same objects with the PK defined.
+      description: This endpoint is used to create a consent record and signature object. This returns the same objects with the PK defined.
       operationId: serviceCreateIndividualConsentRecordAndSignature
       parameters:
         - $ref: '#/paths/~1service~1individual~1record/delete/parameters/0'
@@ -3380,7 +3368,7 @@ paths:
       x-specification-usecase: UC-C-PIC-I-002
     get:
       summary: LIST - List all consent records for individual
-      description: LIST - List all current unambiguous consent records stored for individual
+      description: This endpoint is used to list all consent records for an individual belonging to an organiation defined in the consent building block.
       operationId: serviceListIndividualConsentRecordList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3412,8 +3400,8 @@ paths:
       x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record:
     delete:
-      summary: DELETE - Delete all consent records for an individual
-      description: 'DELETE - Cascading delete operation for Right To Be Forgotten, deletes all consent records that shall not be retained and have a "forgettable" DataAgreement. May also delete an unsigned consent record, for instance in cases where the user exits the signing process.'
+      summary: DELETE - Delete all consent records
+      description: 'This endpoint is used to delete all consent records for an individual belonging to an organiation defined in the consent building block. This could be used, for example to exercise digital rights (Right to be forgotten) and deletes all consent records that shall not be retained and have a "forgettable" data agreement. This may also delete an unsigned consent record, for instance in cases where the user exits the signing process.'
       operationId: serviceDeleteAllRecords
       parameters:
         - in: header
@@ -3431,14 +3419,10 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/consent-record/{consentRecordId}':
     put:
       summary: UPDATE - Update consent record
-      description: UPDATE - Update consent record. Note that updating a signed consent record invalidates its signature.
+      description: This endpoint is used to update an existing consent record for a given data agreement for an organiation defined in the consent building block. Note that updating a signed consent record invalidates its earlier signature.
       operationId: serviceUpdateIndividualConsentRecord
       parameters:
         - $ref: '#/paths/~1audit~1consent-record~1%7BconsentRecordId%7D/get/parameters/0'
@@ -3490,14 +3474,10 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-003
   '/service/individual/record/consent-record/{consentRecordId}/signature':
     post:
       summary: CREATE - Creates blank signature
-      description: CREATE - Creates and returns a blank Signature object for the consent record
+      description: This endpoint is used to create a blank signature object for the consent record for an individual in an organiation defined in the consent building block. CREATE - Creates and returns a blank Signature object for the consent record.
       operationId: serviceCreateIndividualConsentRecordSignature
       parameters:
         - description: Unique ID of an object
@@ -3523,13 +3503,9 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare
     put:
       summary: UPDATE - Updates signature for consent record
-      description: UPDATE - Updates signature for consent record. This is used to add a signature to an existing unsigned consent record. Consent BB is responsible for updating the consent record state.
+      description: This endpoint is used to update a signature object for the consent record for an individual in an organiation defined in the consent building block.
       operationId: serviceUpdateIndividualConsentRecordSignature
       parameters:
         - description: Unique ID of an object
@@ -3568,8 +3544,8 @@ paths:
         - service
   '/service/individual/record/data-agreement/{dataAgreementId}/all':
     get:
-      summary: LIST - List all consent records for data agreement
-      description: LIST - List all consent records for data agreement
+      summary: LIST - List all consent records
+      description: This endpoint is used to list all consent records existing for a data agreement for an organisation defined in the consent building block. The response is paginated.
       operationId: serviceListIndividualAgreementConsentRecordList
       parameters:
         - $ref: '#/paths/~1audit~1data-agreement~1%7BdataAgreementId%7D/get/parameters/0'
@@ -3596,14 +3572,10 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'True'
-      x-specification-scenario: ''
-      x-specification-usecase: UC-C-PIC-I-001
   /service/individual/record/consent-record/history:
     get:
-      summary: LIST - List all consent record history
-      description: LIST - List all consent record history
+      summary: LIST - List consent record history
+      description: This endpoint is used to list all consent record history existing for an individual in an organisation defined in the consent building block. The response is paginated.
       operationId: serviceListDataAgreementRecordHistory
       tags:
         - service
@@ -3658,7 +3630,7 @@ paths:
   /service/individual:
     post:
       summary: CREATE - Create individual
-      description: CREATE - Creates Individual in the Consent system
+      description: This endpoint creates an individual for an organisation in the consent building block. This is used to onboard existing or new users.
       operationId: configCreatePolicy
       requestBody:
         content:
@@ -3695,7 +3667,7 @@ paths:
   '/service/individual/{individualId}':
     get:
       summary: READ - Read individual
-      description: READ - Read individual in the Consent system
+      description: 'This endpoint is used to read the individual''s information as defined by the organisation in the consent building block. This is used in privacy dashboard where the individuals can mark their consents, sign data agreement etc.'
       operationId: configReadIndividual
       parameters:
         - in: path
@@ -3724,7 +3696,7 @@ paths:
         - service
     put:
       summary: UPDATE - Update individual
-      description: UPDATE - Updates individual in the Consent system
+      description: This endpoint is used to udpated an individual for an organisation defined in the consent building block.
       operationId: configUpdateIndividual
       parameters:
         - in: path
@@ -3767,7 +3739,7 @@ paths:
   /service/individuals:
     get:
       summary: LIST - List all individuals
-      description: LIST - lists individuals in the system
+      description: LIST - lists individuals in the system This endpoint is used to list all individuals in the organisation defined in the consent building block.
       operationId: configListIndividuals
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
@@ -3797,7 +3769,7 @@ paths:
   '/service/image/{imageId}':
     get:
       summary: READ - Read organisation image
-      description: READ - Read organisation image
+      description: This endpoint is used to read an organisation image as defined in the consent building block.
       operationId: serviceReadOrganisationImage
       deprecated: false
       responses:
@@ -3810,7 +3782,7 @@ paths:
   /service/data-sharing:
     get:
       summary: READ - Read data sharing UI
-      description: READ - Read data sharing UI
+      description: This endpoint is used to render the data sharing UI during a data exchange as defined by a (data source) organisation in the consent building block.
       operationId: serviceReadDataSharingUi
       parameters:
         - name: dataAgreementId

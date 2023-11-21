@@ -1,5 +1,8 @@
-summary: LIST - List all consent records for data agreement
-description: LIST - List all consent records for data agreement
+summary: LIST - List all consent records
+description: 
+  This endpoint is used to list all consent records existing for a data 
+  agreement for an organisation defined in the consent building block. The
+  response is paginated. 
 operationId: serviceListIndividualAgreementConsentRecordList
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -26,7 +29,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-I-001

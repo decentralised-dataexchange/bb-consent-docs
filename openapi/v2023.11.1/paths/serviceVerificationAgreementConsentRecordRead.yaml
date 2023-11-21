@@ -1,5 +1,7 @@
 summary: READ - Read latest consent record
-description: READ - Read latest consent record.
+description:
+  This endpoint is used to read the latest consent record for an organisation 
+  in the consent building block.
 operationId: serviceVerificationAgreementConsentRecordRead
 parameters:
   - $ref: "../parameters/consentRecordId.yaml"

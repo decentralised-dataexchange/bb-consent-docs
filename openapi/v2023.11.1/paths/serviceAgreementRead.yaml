@@ -1,5 +1,7 @@
 summary: READ - Read data agreement
-description: READ - Read data agreement
+description:
+  This endpoint is used to read the data agreement defined by the 
+  organisation in consent building block.
 operationId: serviceAgreementRead
 parameters:
   - description: Unique ID of an object

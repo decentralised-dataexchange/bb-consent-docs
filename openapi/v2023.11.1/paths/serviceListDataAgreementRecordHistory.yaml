@@ -1,5 +1,8 @@
-summary: LIST - List all consent record history
-description: LIST - List all consent record history
+summary: LIST - List consent record history
+description:
+  This endpoint is used to list all consent record history existing for an 
+  individual in an organisation defined in the consent building block. The
+  response is paginated. 
 operationId: serviceListDataAgreementRecordHistory
 tags:
   - service

@@ -1,7 +1,7 @@
 summary: CREATE - Create consent record
 description:
-  CREATE - For a particular individual and a particular data agreement, create
-  a new consent record pointing to the current revision of a given data agreement.
+  This endpoint is used to create a consent record when an individial records 
+  their consent (e.g. in the privacy dashboard) against a data agreement. 
 operationId: serviceCreateIndividualConsentRecord
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -25,7 +25,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: "1.2"
-x-specification-usecase: UC-C-PIC-I-002

@@ -1,5 +1,7 @@
 summary: LIST - List all active data agreements
-description: LIST - List active data agreements
+description: 
+  This endpoint is used to list all active data agreements by the 
+  organisation in consent building block. The results are returned with pagination. 
 operationId: serviceAgreementList
 parameters:
   - $ref: "../parameters/revisionId.yaml"

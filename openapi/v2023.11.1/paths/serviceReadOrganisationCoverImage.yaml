@@ -1,5 +1,7 @@
-summary: READ - Read organization cover image
-description: Read organization cover image
+summary: READ - Read organisation cover image
+description: 
+  This endpoint is used to retrieve the existing cover image for the organisation. 
+  The cover image is used to display in the privacy dashboard. 
 operationId: serviceReadOrganisationCoverImage
 responses:
   '200':

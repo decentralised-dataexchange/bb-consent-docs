@@ -1,7 +1,7 @@
-summary: CREATE - Create DRAFT consent record
+summary: CREATE - Create draft consent record
 description:
-  CREATE - Create a DRAFT (unsaved) consent record and signature objects (without
-  a PK) for a given dataAgreementId.
+  This endpoint is used to create a draft (unsaved) consent record and signature 
+  object (without a PKI) for a data agreement.
 operationId: serviceCreateIndividualConsentRecordDraft
 parameters:
   - description: An object with id individualId
@@ -41,7 +41,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: "1.2"
-x-specification-usecase: UC-C-PIC-I-002

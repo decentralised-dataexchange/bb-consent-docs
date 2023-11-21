@@ -1,5 +1,6 @@
 summary: UPDATE - Update individual
-description: UPDATE - Updates individual in the Consent system
+description:
+  This endpoint is used to udpated an individual for an organisation defined in the consent building block.
 operationId: "configUpdateIndividual"
 parameters: 
   - in: path

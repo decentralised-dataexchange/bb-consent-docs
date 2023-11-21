@@ -1,5 +1,6 @@
-summary: READ - Read IdP
-description: READ - Read IdP
+summary: READ - Read IdP details
+description:
+  This endpoint is used to read the IdP details configured by the organisation in the consent building block.
 operationId: serviceReadIdp
 parameters:
   - $ref: "../parameters/idpId.yaml"

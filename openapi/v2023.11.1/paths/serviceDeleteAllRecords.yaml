@@ -1,7 +1,10 @@
-summary: DELETE - Delete all consent records for an individual
-description: DELETE - Cascading delete operation for Right To Be Forgotten, deletes
-  all consent records that shall not be retained and have a "forgettable" DataAgreement.
-  May also delete an unsigned consent record, for instance in cases where the user
+summary: DELETE - Delete all consent records
+description: 
+  This endpoint is used to delete all consent records for an individual belonging 
+  to an organiation defined in the consent building block. This could be used, for 
+  example to exercise digital rights (Right to be forgotten) and deletes
+  all consent records that shall not be retained and have a "forgettable" data agreement.
+  This may also delete an unsigned consent record, for instance in cases where the user
   exits the signing process.
 operationId: serviceDeleteAllRecords
 parameters:
@@ -15,7 +18,3 @@ security:
   - BearerAuth: []
 tags:
 - service
-x-specification-crudl-model: ''
-x-specification-pii-or-sensitive: 'True'
-x-specification-scenario: ''
-x-specification-usecase: UC-C-PIC-I-003

@@ -1,5 +1,7 @@
-summary: LIST - List all data attributes for data agreement
-description: LIST - List all latest versions of data attribute associated with an DataAgreement and the presented revisionId of that DataAgreement
+summary: LIST - List data attributes
+description: 
+  This endpoint is used to read the data attributes defined in a particular data agreement
+  revision.
 operationId: serviceAgreementDataRead
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"

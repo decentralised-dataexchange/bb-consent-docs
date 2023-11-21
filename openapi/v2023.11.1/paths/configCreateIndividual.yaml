@@ -1,7 +1,7 @@
 summary: CREATE - Create individual
 description: 
   This endpoint creates an individual for an organisation in the 
-  consent block system. This is used to onboard existing or new users.
+  consent building block. This is used to onboard existing or new users.
 operationId: "configCreatePolicy"
 responses:
   "200":

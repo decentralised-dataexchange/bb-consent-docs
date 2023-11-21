@@ -1,5 +1,7 @@
 summary: LIST - List all consent records for individual
-description: LIST - List all current unambiguous consent records stored for individual
+description: 
+  This endpoint is used to list all consent records for an individual belonging 
+  to an organiation defined in the consent building block. 
 operationId: serviceListIndividualConsentRecordList
 parameters:
   - $ref: "../parameters/offset.yaml"

@@ -1,5 +1,7 @@
 summary: READ - Read organisation logo image
 description: Read organisation logo image
+  This endpoint is used to retrieve the existing logo image for the organisation. The 
+  logo image is used to display in the privacy dashboard as well in data sharing UIs. 
 operationId: serviceReadOrganisationLogoImage
 deprecated: false
 responses:

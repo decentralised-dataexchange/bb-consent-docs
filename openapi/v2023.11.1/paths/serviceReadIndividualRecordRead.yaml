@@ -1,7 +1,7 @@
 summary: READ - Read consent record
 description:
-  READ - Read consent record. There should be one unambiguous DataAgreementRecord for an Individual
-  and an DataAgreement.
+  This endpoint is used to read a consent record for an individial for a chosen
+  data agreement. There should be one unambiguous consent record for an individual.
 operationId: serviceReadIndividualRecordRead
 parameters:
   - $ref: "../parameters/dataAgreementId.yaml"
@@ -22,7 +22,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: ""
-x-specification-usecase: UC-C-PIC-I-001

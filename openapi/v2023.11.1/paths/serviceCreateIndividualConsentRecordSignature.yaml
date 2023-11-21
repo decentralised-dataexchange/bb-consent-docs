@@ -1,5 +1,8 @@
 summary: CREATE - Creates blank signature
-description: CREATE - Creates and returns a blank Signature object for the consent record
+description:
+  This endpoint is used to create a blank signature object for the consent record
+  for an individual in an organiation defined in the consent building block.
+  CREATE - Creates and returns a blank Signature object for the consent record.
 operationId: serviceCreateIndividualConsentRecordSignature
 parameters:
   - description: Unique ID of an object
@@ -25,7 +28,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "True"
-x-specification-scenario: ""
-x-specification-usecase: UC-Post-Partum-001-Registration_PostPartum_and_InfantCare

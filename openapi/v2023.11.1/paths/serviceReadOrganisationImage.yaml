@@ -1,5 +1,7 @@
 summary: READ - Read organisation image
-description: READ - Read organisation image
+description:
+  This endpoint is used to read an organisation image as defined 
+  in the consent building block. 
 operationId: serviceReadOrganisationImage
 deprecated: false
 responses:

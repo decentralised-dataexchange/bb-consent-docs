@@ -1,5 +1,7 @@
-summary: READ - Read policy
-description: READ - Fetch the latest version of a Policy and the presented revisionId of an associated DataAgreement
+summary: READ - Read data policy
+description:
+  This endpoint is used to read latest version of data policy defined in the
+  organisation in the consent building block.
 operationId: servicePolicyRead
 parameters:
   - $ref: "../parameters/policyId.yaml"

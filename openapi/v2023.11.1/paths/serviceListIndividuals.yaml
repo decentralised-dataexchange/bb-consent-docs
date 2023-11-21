@@ -1,5 +1,6 @@
 summary: LIST - List all individuals
 description: LIST - lists individuals in the system
+  This endpoint is used to list all individuals in the organisation defined in the consent building block.
 operationId: "configListIndividuals"
 parameters:
   - $ref: "../parameters/offset.yaml"
