@@ -1,4 +1,7 @@
-description: CREATE - Create a new data agreement and returned together with revision
+summary: CREATE - Create a data agreement
+description: |
+  This endpoint creates a data agreement for an organisation. 
+  It also returns the latest revision of the created data agreement.
 operationId: configCreateAgreement
 parameters: []
 requestBody:
@@ -28,7 +31,6 @@ responses:
     description: bad input parameter
 security:
   - BearerAuth: []
-summary: CREATE - Create data agreement
 tags:
   - config
 x-specification-crudl-model: DataAgreement
