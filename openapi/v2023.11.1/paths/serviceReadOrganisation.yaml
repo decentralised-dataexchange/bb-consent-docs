@@ -1,5 +1,5 @@
 description: READ - Read organisation
-summary: Read organisation
+summary: READ - Read organisation
 operationId: serviceReadOrganisation
 deprecated: false
 responses:
