@@ -1,4 +1,4 @@
-summary: UPDATE - Updates signature for consent record
+summary: UPDATE - Update consent record signature
 description:
   This endpoint is used to update a signature object for the consent record
   for an individual in an organiation defined in the consent building block.
