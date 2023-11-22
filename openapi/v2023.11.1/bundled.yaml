@@ -3136,12 +3136,13 @@ paths:
       x-specification-usecase: UC-C-PIC-A-003
   /service/verification/data-agreements:
     get:
-      summary: LIST - List all consent records
-      description: This endpoint is used to list all consent records available for an organisation defined in the consent building block. The results are paginated.
+      summary: LIST - List all data agreements
+      description: This endpoint is used to list all data agreements available for an organisation defined in the consent building block. The results are paginated.
       operationId: serviceVerificationAgreementList
       parameters:
         - $ref: '#/paths/~1config~1policies/get/parameters/1'
         - $ref: '#/paths/~1config~1policies/get/parameters/2'
+        - $ref: '#/paths/~1config~1data-agreements/get/parameters/0'
       responses:
         '200':
           content:
@@ -3149,10 +3150,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  consentRecords:
+                  dataAgreements:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ConsentRecord'
+                      $ref: '#/components/schemas/DataAgreement'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
           description: ''
@@ -3162,10 +3163,6 @@ paths:
         - BearerAuth: []
       tags:
         - service
-      x-specification-crudl-model: ''
-      x-specification-pii-or-sensitive: 'False'
-      x-specification-scenario: '1.1'
-      x-specification-usecase: UC-C-PIC-A-003
   '/service/verification/consent-record/{consentRecordId}':
     get:
       summary: READ - Read latest consent record
@@ -3504,7 +3501,7 @@ paths:
       tags:
         - service
     put:
-      summary: UPDATE - Updates signature for consent record
+      summary: UPDATE - Update consent record signature
       description: This endpoint is used to update a signature object for the consent record for an individual in an organiation defined in the consent building block.
       operationId: serviceUpdateIndividualConsentRecordSignature
       parameters:
