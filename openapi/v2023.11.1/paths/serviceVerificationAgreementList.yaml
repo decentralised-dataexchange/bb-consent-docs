@@ -1,11 +1,12 @@
-summary: LIST - List all consent records
+summary: LIST - List all data agreements
 description: 
-  This endpoint is used to list all consent records available for an organisation 
+  This endpoint is used to list all data agreements available for an organisation 
   defined in the consent building block. The results are paginated. 
 operationId: serviceVerificationAgreementList
 parameters:
   - $ref: "../parameters/offset.yaml"
   - $ref: "../parameters/limit.yaml"
+  - $ref: "../parameters/revisionId.yaml"
 responses:
   "200":
     content:
@@ -13,10 +14,10 @@ responses:
         schema:
           type: object
           properties:
-            consentRecords:
+            dataAgreements:
               type: array
               items:
-                $ref: ../definitions/ConsentRecord.yaml
+                $ref: ../definitions/DataAgreement.yaml
             pagination:
               $ref: "../definitions/Pagination.yaml"
     description: ""
@@ -26,7 +27,3 @@ security:
   - BearerAuth: []
 tags:
   - service
-x-specification-crudl-model: ""
-x-specification-pii-or-sensitive: "False"
-x-specification-scenario: "1.1"
-x-specification-usecase: UC-C-PIC-A-003
