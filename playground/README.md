@@ -17,6 +17,16 @@ This repository hosts docker compose files for setting up playground for Consent
 2. Execute `make down`. This stops the playground without deleting the data (volumes).
 3. Execute `make clean`. This stops the playground along with deleting the data (volumes).
 
+Note: To delete any conflicting containers or volumes before running, execute `make destroy`. This will delete all the docker containers and volumes in your machine.
+
+The servers are up and running. They are accessible at below addresses:
+
+| Name              | Server address                   |
+| ----------------- | -------------------------------- |
+| API               | https://api.bb-consent.dev       |
+| Admin dashboard   | https://dashboard.bb-consent.dev |
+| Privacy dashboard | https://privacy.bb-consent.dev   |
+
 ## Contributing
 
 Feel free to improve the plugin and send us a pull request. If you find any problems, please create an issue in this repo.
