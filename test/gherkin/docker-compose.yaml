@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  gherkin-tests:
+    image: gherkin-tests
+    build:
+      context: .
+
+    network_mode: host
