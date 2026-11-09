@@ -14,7 +14,7 @@ services:
       - ./../resources/ssl/development/scripts/docker-proxy/proxy.conf:/etc/nginx/proxy.conf:ro
 
   mongo:
-    image: bitnami/mongodb:7.0
+    image: soldevelo/mongodb:7.0
     container_name: mongo
     environment:
       - MONGODB_DATABASE=bb-consent-consentdb
